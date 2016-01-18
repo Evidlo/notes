@@ -1,4 +1,5 @@
 #!/bin/bash
+#Evan Widloski - 2015-01-17
+#Search for markdown files and build them
 
-# find . -not -path "*/\.*" -type f -exec 'find_call' \;
-find * -name "*.md" -exec "find_call" {} +
+find * -name "*.md" -exec "find_call" {} \;

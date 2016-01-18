@@ -1,6 +1,8 @@
 #!/bin/bash
+#put generated file in equivalent directory under out/
 
-outfile=$(cut -f 1 -d "." <<< $1).html
-pandoc -o $outfile $1
-echo $outfile
+outfile=out/$(dirname $1)/$(basename $1 .md).pdf
+mkdir -p "$(dirname $outfile)"
+pandoc -o "$outfile" "$1" --data-dir=$(dirname $1)
+echo "built $outfile"
 
