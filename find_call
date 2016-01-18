@@ -1,0 +1,6 @@
+#!/bin/bash
+
+outfile=$(cut -f 1 -d "." <<< $1).html
+pandoc -o $outfile $1
+echo $outfile
+
