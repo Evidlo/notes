@@ -37,7 +37,6 @@ Here's a forced page break.
 
 \pagebreak
 
-![Samwise Gamgee](https://upload.wikimedia.org/wikipedia/commons/d/d2/Vermeer_van_Utrecht_Man_eating_noodels.JPG)
 
 # LaTeX support
 

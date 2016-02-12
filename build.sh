@@ -2,4 +2,4 @@
 #Evan Widloski - 2015-01-17
 #Search for markdown files and build them
 
-find * -name "*.md" -exec "find_call" {} \;
+find `pwd` -name "*.md" -exec "find_call" {} \;

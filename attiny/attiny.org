@@ -1,7 +1,7 @@
 ATTINY Notes -*- mode: org -*-
 #+STARTUP: showall
 
-#+ATTR: :width 500
+#+ATTR.*: :width 500
 [[./attiny85.jpg]]
 
 * TIMSK - Timer Interrupt Mask Register

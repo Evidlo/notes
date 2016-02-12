@@ -1,8 +1,19 @@
 #!/bin/bash
 #put generated file in equivalent directory under out/
 
-outfile=out/$(dirname $1)/$(basename $1 .md).pdf
-mkdir -p "$(dirname $outfile)"
-pandoc -o "$outfile" "$1" --data-dir=$(dirname $1)
-echo "built $outfile"
+dir=$(dirname $1)
+file=$(basename $1)
+
+outdir=out/$dir
+outfile=$(basename $file .md).pdf
+echo $dir
+echo $file
+echo $outdir
+echo $outfile
+echo "#######"
+# mkdir -p "$outdir"
+# cd "$dir"
+# pwd
+# pandoc -o "$outfile".pdf "$outfile".md
+# echo "built $outfile"
 
