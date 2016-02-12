@@ -1,0 +1,42 @@
+Graph Theory -*- mode: org -*-
+
+
+*graph* - consists of vertices and edges
+
+[[./eulergraph.png]]
+
+*euler paths* - uses each edge once
+
+If G has an euler path, then
+ - all vertices must have even degree except for start and end
+ - start and end are either both odd or even
+:proof:
+If two points are odd and rest are even, delete 1 path which connects
+the two vertices.  Then all paths are even and you can find an euler circuit.
+Now use the deleted path to connect the odd vertices. 
+:END:
+
+*euler circuit* - uses each edge once and returns to start
+
+If G has an euler circuit, then
+ - it must be connected
+ - deg of every vertex is even
+
+If G has an even degree, then
+ - it can be seen as a union of circuits
+:HierHolzer:
+Start following circuit I until you reach circuit II
+Continue on circuit II until you reach III
+...
+Continue on circuit m until you reach n
+Finish m
+Finish n
+...
+Finish II
+Finish I
+:END:
+ 
+*euler circuit* ⇔ G has even degree
+
+*fluery algorithm*
+
