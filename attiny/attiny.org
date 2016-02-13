@@ -1,7 +1,8 @@
 ATTINY Notes -*- mode: org -*-
 #+STARTUP: showall
 
-#+ATTR.*: :width 500
+
+#+attr_html: :width 600
 [[./attiny85.jpg]]
 
 * TIMSK - Timer Interrupt Mask Register
@@ -13,7 +14,19 @@ ATTINY Notes -*- mode: org -*-
 |       | Calls ISR(TIMER0_OVF_vect){} when TCNT0 overflow |
 |-------+--------------------------------------------------|
 
-* TCCR0 - Timer Counter Control Register
+* DDRB - Port B Data Direction Register
+
+|------+------+------+------+------+------|
+| DDB5 | DDB4 | DDB3 | DDB2 | DDB1 | DDB0 |
+|------+------+------+------+------+------|
+
+* PORTB - Port B Data Register
+
+|--------+--------+--------+--------+--------+--------|
+| PORTB5 | PORTB4 | PORTB3 | PORTB2 | PORTB1 | PORTB0 |
+|--------+--------+--------+--------+--------+--------|
+
+* TCCR0 - Timer 0 Counter Control Register (8bit)
 ** Counter Select -  set timer prescaler
 
 |------+------+------+---------------|
@@ -39,9 +52,25 @@ ATTINY Notes -*- mode: org -*-
 |-------+-------+-------------------|
 
 TCNT0 - counter
-OCR0 - stationary threshold
+OCR0A - stationary threshold
 OC0A - output from compare
+OCR0B - stationary threshold
+OC0B - output from compare
+
+  
+* TCCR1 - Timer 1 Counter Control Register (16bit)
+TCNT1 - counter
+j
+
+
+
+
+
 * Timer modes
 ** Normal
+Timer counts up to max value.  Resets only at MAX.
+** CTC - Clear Timer to Compare Match
+Timer is cleared when TCNT* (timer count) passes 0CR* (output compare)
 ** Fast PWM
+Timer counts up to TOP then resets to BOTTOM.
 ** Waveform Generation
