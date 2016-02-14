@@ -3,10 +3,6 @@ Text-Width: 80
 
 Limits -*- mode: org -*-
 
-#+LaTeX_CLASS: org-article
-
-#+LaTeX_CLASS_OPTIONS: [koma,a5paper,DIV=15,landscape,utopia,10pt,listings-sv,microtype,paralist]
-
 
 <x-color><param>#FD971F</param>* Infimum and Supremum of sequences
 
@@ -66,7 +62,7 @@ so $x = \frac{1}{4}(2x + 3) \Rightarrow x = \frac{3}{2}$
 <x-color><param>#75715E</param>:END:</x-color>
 
 
-<x-color><param>#FD971F</param>* Subsequences and Bolzana-Wererstrauss
+<x-color><param>#FD971F</param>* Subsequences and Bolzana-Weierstrauss
 
 </x-color>*subsequence* - 
  Let $(x_n)$ be a sequence.
