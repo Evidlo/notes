@@ -59,12 +59,26 @@ OC0B - output from compare
 
   
 * TCCR1 - Timer 1 Counter Control Register (16bit)
+
+|------+-------+--------+--------+------+------+------+------|
+| CTC1 | PWM1A | COM1A1 | COM1A0 | CS13 | CS12 | CS11 | CS10 |
+|------+-------+--------+--------+------+------+------+------|
+
+CTC1 - clear TCNT1 on compare match with OCR1C
+PWM1A - enable PWM mode using OCR1A, reset on compare match with OCR1C
+COM1A1/COM1A0 - determine output behavior of OC1A on compare match with OCR1A
+:Settings:
+|--------+--------+-----------------------------------|
+| COM1A1 | COM1A0 | Mode                              |
+|--------+--------+-----------------------------------|
+|      0 |      0 | Comparator A disconnect from OC1A |
+|      0 |      1 | Toggle OC1A                       |
+|      1 |      0 | Clear 0C1A                        |
+|      1 |      1 | Set OC1A                          |
+|--------+--------+-----------------------------------|
+:END:
+
 TCNT1 - counter
-j
-
-
-
-
 
 * Timer modes
 ** Normal
