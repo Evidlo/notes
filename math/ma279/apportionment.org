@@ -1,8 +1,7 @@
-Apportionment Notes -*- mode: org -*-
-#+STARTUP: showall latexpreview inlineimages
+#+STARTUP latexpreview 
 
 * Apportionment Definition
-_apportionment_ - how to scale congress to population of states?
+*apportionment* - how to scale congress to population of states?
 \[A_1 ... A_N\] - states
 $N$ - number of states
 $P_i$ - population of a state
@@ -10,7 +9,7 @@ $M$ - seats available in congress
 $SD = \frac{P}{M}$ - standard divisor, people per seat
 $q_i = \frac{P_i}{SD}$ - fair share of seats for state
 
-_quota rule_ - every state should either get floor($q_i$) or ceil($q_i$)
+*quota rule* - every state should either get floor($q_i$) or ceil($q_i$)
 
 * Apportionment methods
 ** Hamilton's Method
@@ -50,5 +49,5 @@ Find the geometric mean of the ceiling and floor of the the fair shares for each
 If the fair share is greater than the geometric mean, use the ceiling.
 If the fair share is less than the geometric mean, use the floor.
 
-If $q_i \geq \sqrt{floor(q_i)ceil(q_i)}$, use $ceil(q_i)$
-If $q_i \leq \sqrt{floor(q_i)ceil(q_i)}$, use $floor(q_i)$
+If $q_i \geq \sqrt{\lfloor q_i \rfloor \lceil q_i \rceil}$, use $\lceil q_i \rceil$
+If $q_i \leq \sqrt{\lfloor q_i\rfloor \lceil q_i \rceil}$, use $\lfloor q_i \rfloor$
