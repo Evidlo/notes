@@ -1,0 +1,56 @@
+
+* Meiosis and Mitosis
+- _centromere_ - 
+
+** Haploid Cell
+- contains 1 set of all chromosomes (2 chromatids)
+- sex cells
+
+** Diploid Cell
+- contains 2 sets of all chromosomes (2 chromatids each)
+- all other cells
+
+** Mitosis
+- occurs in all organisms
+- produces 2 haploids
+- does not create genetic variation
+
+** Meiosis
+- occurs in the sex cells of certain organisms
+- produces 4 haploids
+- helps with genetic variation
+
+* Cells
+** Cellular Structures
+- _ribosomes_ - produce protein
+- _mitochondria_ - create ATP during cellular respiration
+
+** Cellular Respiration
+
+** Enzymes
+- help catalyze reactions
+
+
+** Binomial Nomenclature
+_genus species_
+
+ - kingdom > phylum > class > order > family > genus > species
+
+* Ecosystems
+
+** r/K Selection
+- _r selected_ - describes organisms with high growth rates, high mortality, fast sexual maturity
+- _K selected_ - describes organisms with low growth rates, low mortality, long parental care
+
+- _cofactor_ - inorganic substances which catalyze or assist with catalization
+
+- _catalyst_ - lowers activation energy for reaction
+- _endergomic reaction_ - absorbs energy from environment
+- _CAM photosynthesis_ - used by some plants in arid environments to reduce water loss
+
+* Plants
+** Tissue
+_phloem_ - carries nutrients
+_xylem_ - carries water
+** Behavior
+_calvin cycle_ - light independent reactions inside a plant
