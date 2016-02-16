@@ -2,4 +2,4 @@
 *.html
 *.pdf
 out/*
-*/ltxpng*
+**/ltxpng*
