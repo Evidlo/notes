@@ -57,16 +57,15 @@ OC0A - output from compare
 OCR0B - stationary threshold
 OC0B - output from compare
 
-  
 * TCCR1 - Timer 1 Counter Control Register (16bit)
 
 |------+-------+--------+--------+------+------+------+------|
 | CTC1 | PWM1A | COM1A1 | COM1A0 | CS13 | CS12 | CS11 | CS10 |
 |------+-------+--------+--------+------+------+------+------|
 
-CTC1 - clear TCNT1 on compare match with OCR1C
-PWM1A - enable PWM mode using OCR1A, reset on compare match with OCR1C
-COM1A1/COM1A0 - determine output behavior of OC1A on compare match with OCR1A
+*CTC1* - clear TCNT1 on compare match with OCR1C
+*PWM1A* - enable PWM mode using OCR1A, reset on compare match with OCR1C
+*COM1A1/COM1A0* - determine output behavior of OC1A on compare match with OCR1A
 :Settings:
 |--------+--------+-----------------------------------|
 | COM1A1 | COM1A0 | Mode                              |
@@ -81,10 +80,105 @@ COM1A1/COM1A0 - determine output behavior of OC1A on compare match with OCR1A
 TCNT1 - counter
 
 * Timer modes
+*BOTTOM* - always 0
+*MAX* - size of the counter
+*TOP* - can be either *MAX* or OCRxx, depending on mode
+
 ** Normal
-Timer counts up to max value.  Resets only at MAX.
+Timer counts up to TOP=0xFF then overflows and resets.
+Use OCRxx to either toggle output (OCxx) or trigger an interrupt
 ** CTC - Clear Timer to Compare Match
 Timer is cleared when TCNT* (timer count) passes 0CR* (output compare)
 ** Fast PWM
 Timer counts up to TOP then resets to BOTTOM.
 ** Waveform Generation
+
+* Interrupts
+*sei()* - enable interrupts
+** Hardware interrupts
+*** External interrupts
+Only available to certain pins (only INT0 on attiny85)
+Interrupts must be unmasked (enabled)
+*GIMSK* - set INT0 to enable interrupt
+*MCUCR* - set ISC01/ISC00 to interrupt on change/rising/falling edge
+#+BEGIN_SRC c
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+int main(void)
+{
+  DDRB |= 1 << PB1;             // enable output on PB1
+
+  GIMSK = 1<<INT0;              // unmask INT0 external interrupt
+  MCUCR = 0<<ISC01 | 1<<ISC00;  // enable interrupt on rise/fall
+
+  sei();                        // global interrupt enable
+
+  while(1) {}
+}
+
+// interrupt service routine (ISR) for timer 0 A compare match
+ISR(INT0_vect)
+{
+  PORTB ^= (1<<PB1);
+}
+#+END_SRC
+
+*** Pin change interrupt
+These are still technically 'external' to the chip.
+Only one interrupt per port, but any pin on the port can trigger it.
+Interrupts must be unmasked (enabled)
+
+*GIMSK* - set PCIE to unmask all PCI on port (only 1 port on attiny85)
+*PCMSK* - set PCINTx to enable PCI on PCINT0 pin
+#+BEGIN_SRC c
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+int main(void)
+{
+  DDRB = 1 << PB1;  // enable output on PB1
+
+  GIMSK = 1<<PCIE;   // turn on pin change interrupts
+  PCMSK = 1<<PCINT0; // unmask PCINT0 pin change interrupt
+
+  sei();             // global interrupt enable
+
+  while(1) {}
+}
+
+// interrupt service routine for PCINT0
+ISR(PCINT0_vect)
+{
+  PORTB ^= (1<<PB1);
+}
+#+END_SRC
+** Timer interrupts
+*TIMSK* - timer interrupt mask
+
+
+#+BEGIN_SRC c
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+void main() {
+    DDRB = (1<<PB1);  // set PB1 to output
+
+    // enable timer clock and set prescaler to 1
+    TCCR1 =  1<<CS10;
+
+    // run TIMER1_COMPA interrupt when there's a match on timer 1, comparator A
+    TIMSK |= 1<<OCIE1A;
+
+    OCR1A = 255; // TOP - when to toggle OC1A
+    OCR1C = 255; // when to reset TCINT1
+
+    sei(); //enable interrupts
+
+    while(1){}
+}
+
+ISR(TIMER1_COMPA_vect){
+    PORTB ^= 1<<PB1; // toggle output
+}
+#+END_SRC
