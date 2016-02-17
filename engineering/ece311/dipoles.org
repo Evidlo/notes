@@ -1,0 +1,20 @@
+Dipoles -*- mode: org -*-
+
+* Bound charges
+$\overrightarrow{E_D} = \frac{\overrightarrow{D} - \overrightarrow{P}}{\varepsilon_0}$
+
+\begin{align*}
+\overrightarrow{P} &= \varepsilon_0 x_e \overrightarrow{E} \\
+&= \varepsilon_0(1 + x_e)\overrightarrow{E}
+\end{align*}
+
+\begin{align*}
+\overrightarrow{D} & = \varepsilon_0 \overrightarrow{E} + \varepsilon_0 x_e \overrightarrow{E} \\
+& = \varepsilon_0 (1 + x_e) \overrightarrow{E} \\
+& = \varepsilon_0 \varepsilon_r \overrightarrow{E}
+\end{align*}
+
+* Coulomb's Law in Dielectric
+$\overrightarrow{D} &= \frac{q_2}{4\pi r^2} \hat{a_r}^2$
+$\overrightarrow{E} &= \frac{q_2}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2$
+$\overrightarrow{F_{1,2}} &= \frac{q_2 q_1}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2$

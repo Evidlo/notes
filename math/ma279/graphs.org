@@ -1,12 +1,12 @@
 Graph Theory -*- mode: org -*-
 
-_graph_ - consists of vertices and edges
+*graph* - consists of vertices and edges
 
 :img:
 [[./eulergraph.png]]
 :end:
 * Euler Paths
-_euler paths_ - uses each edge once
+*euler paths* - uses each edge once
 
 If G has an euler path, then
  - all vertices must have even degree except for start and end
@@ -17,7 +17,7 @@ If G has an euler path, then
  Now use the deleted path to connect the odd vertices. 
  :END:
 
-_euler circuit_ - uses each edge once and returns to start
+*euler circuit* - uses each edge once and returns to start
 
 If G has an euler circuit, then
  - it must be connected
@@ -37,9 +37,9 @@ If G has an even degree, then
  Finish I
  :END:
  
-_euler circuit_ ⇔ G has even degree
+*euler circuit* ⇔ G has even degree
 
-_fluery algorithm_
+*fluery algorithm*
 
 
 * Platonic Solids
@@ -52,7 +52,26 @@ _semiplatonic solids_
   - relax one of the rules for platonic solids
 
 * Bipartite Graphs
-_bipartite_ - elements can be grouped into two non touching groups
+*bipartite* - elements can be grouped into two non touching groups
 :img:
 [[./bipartite.png]]
 :end:
+* Traveling Salesman
+Given some locatoins, find a pth through them that is minimal.
+By giving each location a weight, we can give minimal a concrete meaning.
+
+2 Simplifications
+  - $\sum w(e) = 1$
+  - There are edges between all vertices
+ 
+* Hamilton Graphs
+*hamilton circuit* - a path that visits every vertex exactly once
+*hamilton graph* - a graph with a hamilton circuit
+
+|Let n be the number of vertices
+|If $\text{deg}(a) + \text{deg}(b) \geq n$ for all vertices a,b
+|then the graph is hamiltonian
+
+* P vs NP
+*P* - any problem with \[a_nn^{b_n} + a_{n-1}n^{b_{n-1}} + ... + a_0\] steps is class P
+*NP hard* - finding an algorithm for these problems proves P = NP

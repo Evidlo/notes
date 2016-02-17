@@ -78,9 +78,9 @@ So $\lim_{n\to\infty} = \inf(x_n)$
 <x-color><param>#75715E</param>:END:</x-color>
 
 
-<x-color><param>#FD971F</param>* Subsequences and Bolzana-Weierstrauss
+<x-color><param>#FD971F</param>* Subsequences
 
-</x-color>*subsequence*
+</x-color><x-color><param>deep sky blue</param>*subsequence*
 <x-color><param>#A6E22E</param>|Let $(y_n)$ be a sequence.</x-color>
 <x-color><param>#A6E22E</param>|If the sequence $(x_n) \subseteq (y_n)$</x-color>
 
@@ -126,5 +126,73 @@ So $x_n$ is divergent
 <x-color><param>#75715E</param>:END:</x-color>
 
 
-Let $(x_n)$ be a sequence.  Then
-$(x_n)$ does not converge
+<x-color><param>#A6E22E</param>|Similarly, if $(x_n)$ is a sequence and $(y_n)$ is a divergent subsequence</x-color>
+
+<x-color><param>#A6E22E</param>|then $(x_n)$ is divergent</x-color>
+<x-color><param>#75715E</param>:proof:</x-color>
+Let $(x_n)$ be a sequence.
+
+Then $(x_n)$ does not converge if we can find $\varepsilon_0 > 0$ s.t. $\forall K \geq 0, \exists n_K \geq K, |x_{n_K} - x| > \varepsilon_0$
+
+
+So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a subsequence $(x_m)$ s.t. $\forallk \in \mathbb{N}, | x_m - x | > \varepsilon_0$
+
+<x-color><param>#75715E</param>:END:</x-color>
+
+
+<x-color><param>#FD971F</param>* Bolzana-Weierstrauss
+</x-color><x-color><param>#A6E22E</param>|Let $(x_n)$ be a bounded sequence</x-color>
+
+<x-color><param>#A6E22E</param>|Then $\exists \text{subsequence} (x_m)$ that is convergent</x-color>
+<x-color><param>#75715E</param>:proof:</x-color>
+<x-color><param>#E6DB74</param>[[./bolzana.png]]</x-color>
+Let $a,b \in \mathbb{R} s.t. $\forall n \in \mathbb{N}, x_n \in [a,b]$
+Then either $[a,\frac{a+b}{2}]$ or $[\frac{a+b}{2},b]$ is infinite. call this $I_1$.
+By induction, construct $I_n$
+  - width of $I_n = \frac{b-a}{2}$
+
+  - $I_{n+1} \in I_n$
+
+  - $\{k \in \mathbb{N} | x_k \in I_n \}$ is infinite
+
+
+We know $intersect I_n$ is nonempty
+
+Let $x \in intersect I_n$
+
+We can construct subsequence $x_{n_k}$ such that $x_{n_k} \in I_k$
+Since $x \in I_k$ and $| x_{n_k} - x| \leq \frac{b-a}{2}$
+$\lim_{k \Rightarrow \infty} x_{n_k} = x$
+<x-color><param>#75715E</param>:END:</x-color>
+<x-color><param>#75715E</param>:examples:</x-color>
+1. $x_n = (-1)^n$
+
+   $x_{2n} \Rightarrow 1$
+
+   $x_{2n+1} \Rightarrow -1$
+
+
+2. Any subsequence of $(x_n) = \sin(n)$ can converge to any $x \in [-1,1]$
+<x-color><param>#75715E</param>:END:</x-color>
+
+<x-color><param>#A6E22E</param>|Let $(x_n)$ be a sequence.</x-color>
+
+<x-color><param>#A6E22E</param>|There exists a subsequence $(x_m)$ which is monotonic</x-color>
+<x-color><param>#75715E</param>:proof:</x-color>
+Define $x_m$ to be a peak if $x_n \leq x_m$ for $n \geq m$
+
+
+Two cases:
+
+1. $(x_n)$ has infinitely many peaks
+
+   Let  \[x_{n_1},x_{n_2},x_{n_3},...\] be a sequence of peaks.
+
+   Then \[x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq ...\]
+   So the subsequence is increasing
+3. $(x_n)$ has finite number of peaks
+
+   Then you can find $N$ s.t. $\foralln \geq N$ $x_n is not a peak$
+   Then the subsequence \[x_{n_N},x_{n_{N+1}},x_{n_{N+2}},...\] must be increasing (they are not peaks)
+<x-color><param>#75715E</param>:END:</x-color>
+</x-color>

@@ -1,0 +1,4 @@
+Limits -*- mode: org -*-
+
+* Routh-Hurwitz Stability Test
+Let $Q(s) = a_ns^n + a_{n-1}s^{n-1} + ... + a_0$ be the characteristic polynomial.
