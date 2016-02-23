@@ -1,12 +1,11 @@
-Limits -*- mode: org -*-
-#+OPTIONS: tex:dvipng
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/fancy.css" />
+#+INCLUDE: "~/resources/notes/header.html" html
+#+OPTIONS: author:nil email:nil creator:nil timestamp:nil
 
 * Infimum and Supremum of sequences
 #+begin_theorem
 Let $(x_n)$ be a monotonic sequence.  
 If $(x_n)$ is bounded then it is convergent
-and $\lim_{n\to\infty} x_n = \sup(x_n, n \in \mathbb{N})$ or $\inf(x_n, n \in \mathbb{N})$
+and $$\lim_{n\to\infty} x_n = \sup(x_n, n \in \mathbb{N})$$ or $\inf(x_n, n \in \mathbb{N})$
 #+end_theorem
 :proof:
 Let $(x_n)$ be increasing and bounded and $x = \sup(x_n, n \in \mathbb{N})$
@@ -18,8 +17,8 @@ You can find $N$ s.t. $x - \varepsilon < x_n \leq x$
 Since $(x_n)$ increasing, $x \geq x_N$
 
 Let $(-x_n)$ be increasing and bounded
-So $\lim_{n\to\infty} (-x_n) = \sup(-x_n) = -\inf(x_n)$
-So $\lim_{n\to\infty} = \inf(x_n)$
+So $$\lim_{n\to\infty} (-x_n) = \sup(-x_n) = -\inf(x_n)$$
+So $$\lim_{n\to\infty} = \inf(x_n)$$
 :END:
 #+begin_examples
 1. $x_n = \frac{1}{n}$
@@ -48,52 +47,68 @@ So $\lim_{n\to\infty} = \inf(x_n)$
 #+end_examples
 
 * Subsequences
-*subsequence*
+** Definition
 #+begin_definition
 Let $(y_n)$ be a sequence.
 If the sequence $(x_n) \subseteq (y_n)$
 Then $(x_n)$ is a subsequence of $(y_n)$
 #+end_definition
 #+begin_examples
- $(2,4,6,8,...)$ subsequence of $(1,2,3,4,...)$
+ $(2,4,6,8,...)$ is a subsequence of $(1,2,3,4,...)$
  
-
  $x_n = (-1)^n$     $(-1,1,-1,1,...)$
  $x_n = 1$        $(1,1,1,1,...)$
  $x_n = -1$       $(-1,-1,-1,-1,...)$  
 #+end_examples
-
+** Convergence
 #+begin_theorem
 Let $(x_n)$ be a convergent sequence
 Then all subsequences are also convergent and the limits are the same.
 #+end_theorem
-:proof:
-Let $x = \lim_{x\to \infty} x_n$
+#+begin_proof
+Let $$x = \lim_{x \to \infty} x_n$$
 Let $\varepsilon > 0$.  We can find $f(\varepsilon)$ s.t. $|x_n - x| \leq \varepsilon$ for $n \geq f(\varepsilon)$
 Since $n_k$ is strictly increasing, $n_k \geq k$
 For $k \geq f(\varepsilon), n_k \geq k \geq f(\varepsilon)$
-so $|x_{n_k} - x| \leq \varepsilon$ and $\lim_{k\to\infty} x_{n_k} = x$
-:END:
-:examples:
-$x_n = \frac{1}{n^4}$
-Since $$n^4 \in \mathbb{N}$$, $x_n$ is a subsequence of $\frac{1}{n}$.
-So $x_n$ must also converge to 0.
+so $|x_{n_k} - x| \leq \varepsilon$ and $$\lim_{k\to\infty} x_{n_k} = x$$
+#+end_proof
+#+begin_examples
+1.  $x_n = \frac{1}{n^4}$
+    Since $n^4 \in \mathbb{N}$, $x_n$ is a subsequence of $\frac{1}{n}$.
+    So $x_n$ must also converge to 0.
+2.  $x_n = (-1)^n$
+    $$x_{2n} = 1, \lim_{n\to\infty} = 1$$
+    $$x_{2n+1} = 1, \lim_{n\to\infty} = -1$$
+    So $x_n$ is divergent
+#+end_examples
 
-$x_n = (-1)^n$
-$x_{2n} = 1, \lim_{n\to\infty} = 1$
-$x_{2n+1} = 1, \lim_{n\to\infty} = -1$
-So $x_n$ is divergent
-:END:
-
+** Divergence
 #+begin_theorem
 Similarly, if $(x_n)$ is a sequence and $(y_n)$ is a divergent subsequence
 then $(x_n)$ is divergent
 #+end_theorem
-#+begin_proo
+#+begin_proof
 Let $(x_n)$ be a sequence.
 Then $(x_n)$ does not converge if we can find $\varepsilon_0 > 0$ s.t. $\forall K \geq 0, \exists n_K \geq K, |x_{n_K} - x| > \varepsilon_0$
 
-So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a subsequence $(x_m)$ s.t. $\forallk \in \mathbb{N}, | x_m - x | > \varepsilon_0$
+So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a subsequence $(x_m)$ s.t. $\forall k \in \mathbb{N}, | x_m - x | > \varepsilon_0$
+#+end_proof
+** Monotonicity
+#+begin_theorem
+Let $(x_n)$ be a sequence.
+There exists a subsequence $(x_m)$ which is monotonic
+#+end_theorem
+#+begin_proof
+Define $x_m$ to be a peak if $x_n \leq x_m$ for $n \geq m$
+
+Two cases:
+1. $(x_n)$ has infinitely many peaks
+   Let  \[x_{n_1},x_{n_2},x_{n_3},...\] be a sequence of peaks.
+   Then \[x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq ...\]
+   So the subsequence is increasing
+2. $(x_n)$ has finite number of peaks
+   Then you can find $N$ s.t. $\forall n \geq N$, $x_n$ is not a peak
+   Then the subsequence \[x_{n_N},x_{n_{N+1}},x_{n_{N+2}},...\] must be increasing (they are not peaks)
 #+end_proof
 
 * Bolzana-Weierstrauss
@@ -110,12 +125,12 @@ By induction, construct $I_n$
   - $I_{n+1} \in I_n$
   - $\{k \in \mathbb{N} | x_k \in I_n \}$ is infinite
 
-We know $intersect I_n$ is nonempty
-Let $x \in intersect I_n$
+We know $\cap I_n$ is nonempty
+Let $x \in \cap I_n$
 We can construct subsequence $x_{n_k}$ such that $x_{n_k} \in I_k$
 Since $x \in I_k$ and $| x_{n_k} - x| \leq \frac{b-a}{2}$
-$\lim_{k \Rightarrow \infty} x_{n_k} = x$
-#+end_proo
+$$\lim_{k \to \infty} x_{n_k} = x$$
+#+end_proof
 #+begin_examples
 1. $x_n = (-1)^n$
    $x_{2n} \Rightarrow 1$
@@ -124,25 +139,7 @@ $\lim_{k \Rightarrow \infty} x_{n_k} = x$
 2. Any subsequence of $(x_n) = \sin(n)$ can converge to any $x \in [-1,1]$
 #+end_examples
 
-#+begin_theorem
-Let $(x_n)$ be a sequence.
-There exists a subsequence $(x_m)$ which is monotonic
-#+end_theorem
-#+begin_proo
-Define $x_m$ to be a peak if $x_n \leq x_m$ for $n \geq m$
-
-Two cases:
-1. $(x_n)$ has infinitely many peaks
-   Let  \[x_{n_1},x_{n_2},x_{n_3},...\] be a sequence of peaks.
-   Then \[x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq ...\]
-   So the subsequence is increasing
-2. $(x_n)$ has finite number of peaks
-   Then you can find $N$ s.t. $\foralln \geq N$ $x_n is not a peak$
-   Then the subsequence \[x_{n_N},x_{n_{N+1}},x_{n_{N+2}},...\] must be increasing (they are not peaks)
-#+end_proo
-
 * Cauchy Sequence
-*cauchy sequence*
 ** Definition
 #+begin_definition
 Let $(x_n)$ be a sequence.
@@ -156,29 +153,30 @@ Let $(x_n)$ be a convergent sequence.
 Then it is a Cauchy sequence
 The inverse is not true
 #+end_theorem
-:proof:
-Let $\varepsilon > 0$.  Let $x = \lim_{n \Rightarrow \infty} x_n$
+#+begin_proof
+Let $\varepsilon > 0$.  
+Let $$x = \lim_{n \to \infty} x_n$$
 $\exists K(\varepsilon) \geq 0, \forall n \geq K(\varepsilon), |x_n - x| \leq \frac{\varepsilon}{2}$
-For 
+For $n,m \geq K(\varepsilon)$i,
 \begin{align*}
-n,m \geq K(\varepsilon), |x_n - x_m| & = |x_n - x + x - x_m| \\
+ |x_n - x_m| & = |x_n - x + x - x_m| \\
 & \leq |x_n + x| + |x - x_m| \\
 & \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \\
 \end{align*}
-:END:
-:examples:
-Not a Cauchy sequence
+#+end_proof
+#+begin_examples
+Not a Cauchy sequence:
 $(x_n) = \sqrt{n}$ since it is not bounded
-:END:
+#+end_examples
 
 #+begin_theorem - Convergence of Cauchy sequences
 Let $(x_n)$ be a Cauchy sequence
 Then $(x_n)$ is convergent
 #+end_theorem
-:proof:
+#+begin_proof
 Let $(x_n)$ be a Cauchy sequence.  Then $(x_n)$ is bounded and has a convergent subsequence $(x_{n_k})$
 
-s.t. $\lim (x_{n_k}) = x$
+s.t. $$\lim (x_{n_k}) = x$$
 
 Let $\varepsilon \geq 0$. 
 
@@ -191,20 +189,21 @@ For $n \geq K(\varepsilon)$
 & \leq |x_n - x_N| + |x_N - x| \\
 & \leq \varepsilon + \varepsilon = 2 \varepsilon
 \end{align*}
-:END:
-:examples:
+#+end_proof
+#+begin_examplesx
 $x_n = 1 + \frac{1}{2} + ... + \frac{1}{n}$
 $x_{2n} - x_n = \frac{1}{n+1} + \frac{1}{n+2} + ... + \frac{1}{2n} \geq \frac{1}{2n} + ... + \geq \frac{1}{2n}$
 So $x_{2n} - x_n$ does not converge to $0$ therefore $(x_n)$ is not a Cauchy sequence
-:END:
+#+end_examples
 * Contracting Sequences
-*contracting sequence*
+** Definition
 #+begin_definition
 Let $(x_n)$ be a sequence
 $(x_n)$ is contracting if
 \[\exists C > 0, \forall n \in \mathbb{N}, | x_{n+1} - x_n | \leq C | x_n - x_{n-1} |\]
 #+end_definition
 
+** Convergence
 #+begin_theorem
 Any contracting sequence is convergent
 #+end_theorem
@@ -226,7 +225,8 @@ Let $(x_n)$ be a contracting sequence
 & \leq C^{n-1} \frac{1-C^{n+1}}{1-C} |x_2 - x_1| \\
 & \leq \frac{C^{n-1}}{1-C} |x_2 - x_1| \\
 \end{align*}
-$\lim_{n \Rightarrow \infty} C^{n-1} = 0$
+$$\lim_{n \to \infty} C^{n-1} = 0$$
+
 So $(x_n)$ is a Cauchy sequence and is convergent
 #+end_proof
 #+begin_examples
@@ -238,10 +238,11 @@ So $(x_n)$ is a Cauchy sequence and is convergent
 3. $x_n = n^2 - n = n(n-1) \geq (n-1)^2$
 #+end_examples
 
+** Limits
 #+begin_theorem
-Let $(x_n)$ be increasing and not bounded. Then $\lim_{n \Rightarrow \infty} x_n = \infty$
+Let $(x_n)$ be increasing and not bounded. Then $$\lim_{n \to \infty} x_n = \infty$$
 
-Let $(x_n)$ be decreasing and not bounded. Then $\lim_{n \Rightarrow -\infty} x_n = -\infty$
+Let $(x_n)$ be decreasing and not bounded. Then $$\lim_{n \to -\infty} x_n = -\infty$$
 #+end_theorem
 #+begin_proof
 Let $(x_n)$ be increasing and not bounded
@@ -249,9 +250,9 @@ Let $M \geq 0$, Since $(x_n)$ is not bounded, you can find $n \geq 0$ s.t. $x_n 
 For $k \geq n, x_k \geq x_n$ so $x_k \geq x_n \geq M$
 
 If $(x_n)$ is decreasing and bounded, $(-x_n)$ is increasing and not bounded
-so $\lim_{n \Rightarrow \infty} -x_n = \infty$
-$\lim_{n \Rightarrow \infty} x_n = -\infty$
+so $$\lim_{n \to \infty} -x_n = \infty$$
+$$\lim_{n \to \infty} x_n = -\infty$$
 #+end_proof
 
 Let $(x_n),(y_n)$ be sequences s.t. $(x_n) \geq (y_n)$
-$\lim_{n \Rightarrow \infty} (y_n) = \infty$ implies $\lim_{n \Rightarrow \infty} (y_n) = \infty$
+$$\lim_{n \to \infty} (y_n) = \infty$$ implies $$\lim_{n \to \infty} (y_n) = \infty$$
