@@ -1,38 +1,94 @@
-/* draw some boxes */
+@font-face {
+    font-family: Terminus;
+    src: url(/Terminus.ttf);
+}
+
+/* ------------ theorems ------------ */
 
 .theorem {
     border: 1px dashed black;
-    max-width: 500px;
     padding: 20px;
     margin: 20px 0 20px 0;
 }
+
+/* ------------ examples ------------ */
 
 .examples {
-    max-width: 500px;
+    margin: 20px 0 20px 0;
+    padding: 20px 0 20px 0;
+}
+
+.examples::before {
+    content: "Examples";
+    border-bottom: 1px solid black;
+}
+
+/* ------------ definitions ------------ */
+
+.definition {
+    background-color: lightblue;
+    padding: 20px;
     margin: 20px 0 20px 0;
 }
 
-.definition {
+.definition::before {
     border: 1px solid black;
-    background-color: lightblue;
-    max-width: 500px;
+}
+
+/* ------------ proofs ------------ */
+
+.proof {
+    border: 1px solid black;
     padding: 20px;
-    margin: 20px 0 20px 0;
+}
+
+.proof::before {
+    content: "Proof";
+    border: 1px solid black;
 }
 
 body{
     white-space: no-wrap;
+    font-family: Terminus;
+    max-width: 600px;
+    padding: 20px;
 }
 p {
     white-space: pre-wrap;
     margin: 0;
 }
 
-li {
+.org-ol li {
     white-space: pre-wrap;
     margin: 10px;
 }
 
+/* ----------- figures -------------- */
+
+.figure img{
+    max-width:500px;
+}
+
 .figure p{
     text-align: left
+}
+
+/* ----------- headlines ------------- */
+h1 {
+    text-decoration: underline;
+}
+h2 {
+    text-decoration: underline;
+}
+h3 {
+    text-decoration: underline;
+}
+h4 {
+    text-decoration: underline;
+}
+h5 {
+    text-decoration: underline;
+}
+h6 {
+    text-decoration: underline;
 }
