@@ -1,10 +1,13 @@
 Limits -*- mode: org -*-
 #+OPTIONS: tex:dvipng
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/fancy.css" />
 
 * Infimum and Supremum of sequences
-|Let $(x_n)$ be a monotonic sequence.  
-|If $(x_n)$ is bounded then it is convergent
-|and $\lim_{n\to\infty} x_n = \sup(x_n, n \in \mathbb{N})$ or $\inf(x_n, n \in \mathbb{N})$
+#+begin_theorem
+Let $(x_n)$ be a monotonic sequence.  
+If $(x_n)$ is bounded then it is convergent
+and $\lim_{n\to\infty} x_n = \sup(x_n, n \in \mathbb{N})$ or $\inf(x_n, n \in \mathbb{N})$
+#+end_theorem
 :proof:
 Let $(x_n)$ be increasing and bounded and $x = \sup(x_n, n \in \mathbb{N})$
 
@@ -12,14 +15,13 @@ Let $\varepsilon > 0$
 then $x - \varepsilon$ is not upper bound.
 
 You can find $N$ s.t. $x - \varepsilon < x_n \leq x$
-Since $(x_n)$ increasing
-$x \geq x_N$
+Since $(x_n)$ increasing, $x \geq x_N$
 
 Let $(-x_n)$ be increasing and bounded
 So $\lim_{n\to\infty} (-x_n) = \sup(-x_n) = -\inf(x_n)$
 So $\lim_{n\to\infty} = \inf(x_n)$
 :END:
-:examples:
+#+begin_examples
 1. $x_n = \frac{1}{n}$
    $x_n$ is decreasing and bounded, so it converges to $\inf(\frac{1}{n}) = 0$
 
@@ -43,24 +45,28 @@ So $\lim_{n\to\infty} = \inf(x_n)$
    so $x_n$ is bounded.
    Now to find the limit. $x_n = x_{n+1}$
    so $x = \frac{1}{4}(2x + 3) \Rightarrow x = \frac{3}{2}$
-:END:
+#+end_examples
 
 * Subsequences
 *subsequence*
-|Let $(y_n)$ be a sequence.
-|If the sequence $(x_n) \subseteq (y_n)$
-|Then $(x_n)$ is a subsequence of $(y_n)$
-:examples:
+#+begin_definition
+Let $(y_n)$ be a sequence.
+If the sequence $(x_n) \subseteq (y_n)$
+Then $(x_n)$ is a subsequence of $(y_n)$
+#+end_definition
+#+begin_examples
  $(2,4,6,8,...)$ subsequence of $(1,2,3,4,...)$
  
 
  $x_n = (-1)^n$     $(-1,1,-1,1,...)$
  $x_n = 1$        $(1,1,1,1,...)$
  $x_n = -1$       $(-1,-1,-1,-1,...)$  
- :END:
+#+end_examples
 
-|Let $(x_n)$ be a convergent sequence
-|Then all subsequences are also convergent and the limits are the same.
+#+begin_theorem
+Let $(x_n)$ be a convergent sequence
+Then all subsequences are also convergent and the limits are the same.
+#+end_theorem
 :proof:
 Let $x = \lim_{x\to \infty} x_n$
 Let $\varepsilon > 0$.  We can find $f(\varepsilon)$ s.t. $|x_n - x| \leq \varepsilon$ for $n \geq f(\varepsilon)$
@@ -79,19 +85,23 @@ $x_{2n+1} = 1, \lim_{n\to\infty} = -1$
 So $x_n$ is divergent
 :END:
 
-|Similarly, if $(x_n)$ is a sequence and $(y_n)$ is a divergent subsequence
-|then $(x_n)$ is divergent
-:proof:
+#+begin_theorem
+Similarly, if $(x_n)$ is a sequence and $(y_n)$ is a divergent subsequence
+then $(x_n)$ is divergent
+#+end_theorem
+#+begin_proo
 Let $(x_n)$ be a sequence.
 Then $(x_n)$ does not converge if we can find $\varepsilon_0 > 0$ s.t. $\forall K \geq 0, \exists n_K \geq K, |x_{n_K} - x| > \varepsilon_0$
 
 So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a subsequence $(x_m)$ s.t. $\forallk \in \mathbb{N}, | x_m - x | > \varepsilon_0$
-:END:
+#+end_proof
 
 * Bolzana-Weierstrauss
-|Let $(x_n)$ be a bounded sequence
-|Then there exists a subsequence $(x_m)$ that is convergent
-:proof:
+#+begin_theorem
+Let $(x_n)$ be a bounded sequence
+Then there exists a subsequence $(x_m)$ that is convergent
+#+end_theorem
+#+begin_proof
 [[./bolzana.png]]
 Let $a,b \in \mathbb{R} s.t. $\forall n \in \mathbb{N}, x_n \in [a,b]$
 Then either $[a,\frac{a+b}{2}]$ or $[\frac{a+b}{2},b]$ is infinite. call this $I_1$.
@@ -105,17 +115,20 @@ Let $x \in intersect I_n$
 We can construct subsequence $x_{n_k}$ such that $x_{n_k} \in I_k$
 Since $x \in I_k$ and $| x_{n_k} - x| \leq \frac{b-a}{2}$
 $\lim_{k \Rightarrow \infty} x_{n_k} = x$
-:END:
-:examples:
+#+end_proo
+#+begin_examples
 1. $x_n = (-1)^n$
    $x_{2n} \Rightarrow 1$
    $x_{2n+1} \Rightarrow -1$
 
 2. Any subsequence of $(x_n) = \sin(n)$ can converge to any $x \in [-1,1]$
-:END:
-|Let $(x_n)$ be a sequence.
-|There exists a subsequence $(x_m)$ which is monotonic
-:proof:
+#+end_examples
+
+#+begin_theorem
+Let $(x_n)$ be a sequence.
+There exists a subsequence $(x_m)$ which is monotonic
+#+end_theorem
+#+begin_proo
 Define $x_m$ to be a peak if $x_n \leq x_m$ for $n \geq m$
 
 Two cases:
@@ -123,10 +136,10 @@ Two cases:
    Let  \[x_{n_1},x_{n_2},x_{n_3},...\] be a sequence of peaks.
    Then \[x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq ...\]
    So the subsequence is increasing
-3. $(x_n)$ has finite number of peaks
+2. $(x_n)$ has finite number of peaks
    Then you can find $N$ s.t. $\foralln \geq N$ $x_n is not a peak$
    Then the subsequence \[x_{n_N},x_{n_{N+1}},x_{n_{N+2}},...\] must be increasing (they are not peaks)
-:END:
+#+end_proo
 
 * Cauchy Sequence
 *cauchy sequence*
@@ -195,7 +208,7 @@ $(x_n)$ is contracting if
 #+begin_theorem
 Any contracting sequence is convergent
 #+end_theorem
-:proof:
+#+begin_proof
 Let $(x_n)$ be a contracting sequence
 \begin{align*}
 | x_{n+1} - x_n| & \leq C |x_n - x_{n-1}| \\
@@ -215,24 +228,22 @@ Let $(x_n)$ be a contracting sequence
 \end{align*}
 $\lim_{n \Rightarrow \infty} C^{n-1} = 0$
 So $(x_n)$ is a Cauchy sequence and is convergent
-:END:
-:examples:
+#+end_proof
+#+begin_examples
 1. x_n = n
    Let $M \geq 0$
    for $n \geq M, x_n \geq M$
    So $(x_n)$ goes to infinity
 2. $x_n = 1 - \frac{1}{n} + n \geq M$
 3. $x_n = n^2 - n = n(n-1) \geq (n-1)^2$
-:END:
+#+end_examples
 
 #+begin_theorem
------
 Let $(x_n)$ be increasing and not bounded. Then $\lim_{n \Rightarrow \infty} x_n = \infty$
 
 Let $(x_n)$ be decreasing and not bounded. Then $\lim_{n \Rightarrow -\infty} x_n = -\infty$
------
 #+end_theorem
-:proof:
+#+begin_proof
 Let $(x_n)$ be increasing and not bounded
 Let $M \geq 0$, Since $(x_n)$ is not bounded, you can find $n \geq 0$ s.t. $x_n \geq M$
 For $k \geq n, x_k \geq x_n$ so $x_k \geq x_n \geq M$
@@ -240,7 +251,7 @@ For $k \geq n, x_k \geq x_n$ so $x_k \geq x_n \geq M$
 If $(x_n)$ is decreasing and bounded, $(-x_n)$ is increasing and not bounded
 so $\lim_{n \Rightarrow \infty} -x_n = \infty$
 $\lim_{n \Rightarrow \infty} x_n = -\infty$
-:END:
+#+end_proof
 
 Let $(x_n),(y_n)$ be sequences s.t. $(x_n) \geq (y_n)$
 $\lim_{n \Rightarrow \infty} (y_n) = \infty$ implies $\lim_{n \Rightarrow \infty} (y_n) = \infty$
