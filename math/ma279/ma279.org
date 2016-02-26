@@ -1,0 +1,179 @@
+*graph* - consists of vertices and edges
+
+:img:
+[[./eulergraph.png]]
+:end:
+* Euler Paths
+*euler paths* - uses each edge once
+
+If G has an euler path, then
+ - all vertices must have even degree except for start and end
+ - start and end are either both odd or even
+ :proof:
+ If two points are odd and rest are even, delete 1 path which connects
+ the two vertices.  Then all paths are even and you can find an euler circuit.
+ Now use the deleted path to connect the odd vertices. 
+ :END:
+
+*euler circuit* - uses each edge once and returns to start
+
+If G has an euler circuit, then
+ - it must be connected
+ - deg of every vertex is even
+
+If G has an even degree, then
+ - it can be seen as a union of circuits
+ :HierHolzer:
+ Start following circuit I until you reach circuit II
+ Continue on circuit II until you reach III
+ ...
+ Continue on circuit m until you reach n
+ Finish m
+ Finish n
+ ...
+ Finish II
+ Finish I
+ :END:
+ 
+*euler circuit* ⇔ G has even degree
+
+*fluery algorithm*
+
+
+* Platonic Solids
+_platonic solids_
+  - regular polygon faces
+  - faces and edges all have same angles
+  - same number of faces and edges meet at every vertex
+
+_semiplatonic solids_
+  - relax one of the rules for platonic solids
+
+* Bipartite Graphs
+*bipartite* - elements can be grouped into two non touching groups
+:img:
+[[./bipartite.png]]
+:end:
+* Traveling Salesman
+Given some locatoins, find a pth through them that is minimal.
+By giving each location a weight, we can give minimal a concrete meaning.
+
+2 Simplifications
+  - $\sum w(e) = 1$
+  - There are edges between all vertices
+ 
+* Hamilton Graphs
+*hamilton circuit* - a path that visits every vertex exactly once
+*hamilton graph* - a graph with a hamilton circuit
+
+|Let n be the number of vertices
+|If $\text{deg}(a) + \text{deg}(b) \geq n$ for all vertices a,b
+|then the graph is hamiltonian
+
+* P vs NP
+*P* - any problem with \[a_nn^{b_n} + a_{n-1}n^{b_{n-1}} + ... + a_0\] steps is class P
+*NP hard* - finding an algorithm for these problems proves P = NP
+* Apportionment
+** Apportionment Definition
+*apportionment* - how to scale congress to population of states?
+\[A_1 ... A_N\] - states
+$N$ - number of states
+$P_i$ - population of a state
+$M$ - seats available in congress
+$SD = \frac{P}{M}$ - standard divisor, people per seat
+$q_i = \frac{P_i}{SD}$ - fair share of seats for state
+
+*quota rule* - every state should either get floor($q_i$) or ceil($q_i$)
+
+** Apportionment methods
+*** Hamilton's Method
+Give everyone the floor of their fair share.  Assign the remaining n seats to n states with highest remainder.
+:example:
+| State |     A |      B |    C |     D |    E |     F |   sum |
+|-------+-------+--------+------+-------+------+-------+-------|
+| $P_i$ |  1646 |   6936 |  154 |  2091 |  685 |   988 | 12500 |
+| $q_i$ | 32.92 | 138.71 | 3.08 | 41.82 | 13.7 | 19.76 |   250 |
+| floor |    32 |    138 |    3 |    41 |   13 |    19 |   246 |
+
+So remaining for seats are assigned to A,B,D,F
+:END:
+*** Adam's Method
+Modify $SD$ until the sum of the ceils of fair shares of seats is equal to the total seats available
+
+$\sum \lceil(q_i)\rceil = \sum \frac{P_i}{SD} \geq M$
+
+so $SD$ needs to be increased until
+
+$\sum \lceil(q_i)\rceil = \sum \frac{P_i}{SD} = M$
+
+*its possible to violate the quote rule*
+
+*** Webster's Method
+Same as Adam's method, but using rounding.
+
+$\sum \lceil(q_i)\rceil = \sum \frac{P_i}{SD} \approx M$
+
+so increase or decrease $SD$ until 
+
+$\sum \lceil(q_i)\rceil = \sum \frac{P_i}{SD} = M$
+*** Hunting-Hill Method
+This method is currently in use today.
+
+Find the geometric mean of the ceiling and floor of the the fair shares for each state.
+If the fair share is greater than the geometric mean, use the ceiling.
+If the fair share is less than the geometric mean, use the floor.
+
+If $q_i \geq \sqrt{\lfloor q_i \rfloor \lceil q_i \rceil}$, use $\lceil q_i \rceil$
+If $q_i \leq \sqrt{\lfloor q_i\rfloor \lceil q_i \rceil}$, use $\lfloor q_i \rfloor$
+
+* Trees
+#+begin_definition
+*tree* - a connected graph with no loops
+#+end_definition
+#+begin_definition
+*spanning tree* - a tree which contains all vertices of a graph
+#+end_definition
+
+#+begin_theorem
+_Properties of Trees_
+1. connected and no loops
+2. removing any edge disconnects graph
+3. edges = vertices - 1
+#+end_theorem
+
+#+begin_definition
+*leaf* - a vertex in a graph with degree one
+#+end_definition
+#+begin_theorem
+All trees must have at least one leaf
+#+end_theorem
+
+** Prüfer Sequence
+_Steps to create Prüfer Sequence from tree_
+1. find leaf with smallest index
+2. delete and record index that leaf was attached to
+
+#+begin_examples
+#+attr_html: width 200px
+[[./prufer1.png]]
+sequence: {4,4}
+
+#+attr_html: width 200px
+[[./prufer2.png]]
+sequence {2,3}
+#+end_examples
+
+#+begin_examples
+_Steps to recreate graph from Prüfer sequence_
+S = {3,3} - Prüfer sequence
+L = {1,2,3,4} - list of vertices
+1. S = {3}
+   L = {2,3,4}
+   edge 1-3
+2. S = {}
+   L = {3,4}
+   edge 2-3
+3. edge 3-4
+#+end_examples
+
+Spanning trees in $K_N$: $n^{n-2}$

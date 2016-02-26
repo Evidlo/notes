@@ -1,48 +1,71 @@
-#+INCLUDE: "~/resources/notes/header.html" html
-#+OPTIONS: author:nil email:nil creator:nil timestamp:nil
-
+#+TITLE: MA341 - Real Analysis - Spring 2016
 * Infimum and Supremum of sequences
 #+begin_theorem
 Let $(x_n)$ be a monotonic sequence.  
+
 If $(x_n)$ is bounded then it is convergent
+
 and $$\lim_{n\to\infty} x_n = \sup(x_n, n \in \mathbb{N})$$ or $\inf(x_n, n \in \mathbb{N})$
 #+end_theorem
-:proof:
+#+begin_proof
 Let $(x_n)$ be increasing and bounded and $x = \sup(x_n, n \in \mathbb{N})$
 
-Let $\varepsilon > 0$
+Let $\varepsilon > 0$,
+
 then $x - \varepsilon$ is not upper bound.
 
 You can find $N$ s.t. $x - \varepsilon < x_n \leq x$
-Since $(x_n)$ increasing, $x \geq x_N$
+
+Since $(x_n)$ increasing, 
+$x \geq x_N$
 
 Let $(-x_n)$ be increasing and bounded
+
 So $$\lim_{n\to\infty} (-x_n) = \sup(-x_n) = -\inf(x_n)$$
+
 So $$\lim_{n\to\infty} = \inf(x_n)$$
-:END:
+#+end_proof
 #+begin_examples
 1. $x_n = \frac{1}{n}$
+
    $x_n$ is decreasing and bounded, so it converges to $\inf(\frac{1}{n}) = 0$
 
 2. $x_n = 1 + \frac{1}{2} + ... + \frac{1}{n}$
+
    $(x_n)$ is increasing. We will show it is not bounded.
+
    $x_n = 1 + \frac{1}{2} + (\frac{1}{3} + \frac{1}{4}) + ... \\
+
    \geq 1 + \frac{1}{2} + (\frac{1}{4} + \frac{1}{4}) + ... = 1 + \frac{n}{2}$
+
    So $x_n$ is not bounded
 
 3. Let $x_n$ be defined
+
    $x_1 = 1$
+
    $x_{n+1} = \frac{1}{4}(2x + 3)$
+
    First prove that $x_n$ is increasing. (by induction)
+
    $x_1 < x_2$
+
    $\frac{1}{4}(2x_n + 3) \leq \frac{1}{4}(2x_{n+1} + 3)$
+
    so $x_n \leq x_{n+1}$
+
    *Show bounded* (by induction)
+
    $x_1 \leq 2$
+
    Assume $x_n \leq 2$, then
+
    $x_{n+1} = \frac{1}{4}(2x_n + 3) \leq \frac{7}{4} \leq 2$
+
    so $x_n$ is bounded.
+
    Now to find the limit. $x_n = x_{n+1}$
+
    so $x = \frac{1}{4}(2x + 3) \Rightarrow x = \frac{3}{2}$
 #+end_examples
 
@@ -50,45 +73,62 @@ So $$\lim_{n\to\infty} = \inf(x_n)$$
 ** Definition
 #+begin_definition
 Let $(y_n)$ be a sequence.
+
 If the sequence $(x_n) \subseteq (y_n)$
+
 Then $(x_n)$ is a subsequence of $(y_n)$
 #+end_definition
 #+begin_examples
  $(2,4,6,8,...)$ is a subsequence of $(1,2,3,4,...)$
  
  $x_n = (-1)^n$     $(-1,1,-1,1,...)$
+
  $x_n = 1$        $(1,1,1,1,...)$
+
  $x_n = -1$       $(-1,-1,-1,-1,...)$  
 #+end_examples
 ** Convergence
 #+begin_theorem
 Let $(x_n)$ be a convergent sequence
+
 Then all subsequences are also convergent and the limits are the same.
 #+end_theorem
 #+begin_proof
 Let $$x = \lim_{x \to \infty} x_n$$
+
 Let $\varepsilon > 0$.  We can find $f(\varepsilon)$ s.t. $|x_n - x| \leq \varepsilon$ for $n \geq f(\varepsilon)$
+
 Since $n_k$ is strictly increasing, $n_k \geq k$
+
 For $k \geq f(\varepsilon), n_k \geq k \geq f(\varepsilon)$
+
 so $|x_{n_k} - x| \leq \varepsilon$ and $$\lim_{k\to\infty} x_{n_k} = x$$
 #+end_proof
 #+begin_examples
 1.  $x_n = \frac{1}{n^4}$
+
     Since $n^4 \in \mathbb{N}$, $x_n$ is a subsequence of $\frac{1}{n}$.
+
     So $x_n$ must also converge to 0.
+
 2.  $x_n = (-1)^n$
-    $$x_{2n} = 1, \lim_{n\to\infty} = 1$$
-    $$x_{2n+1} = 1, \lim_{n\to\infty} = -1$$
+
+    $$\lim_{n\to\infty} x_{2n} = 1$$
+
+    $$\lim_{n\to\infty} x_{2n+1}= -1$$
+
     So $x_n$ is divergent
 #+end_examples
 
 ** Divergence
 #+begin_theorem
 Similarly, if $(x_n)$ is a sequence and $(y_n)$ is a divergent subsequence
+
 then $(x_n)$ is divergent
 #+end_theorem
 #+begin_proof
 Let $(x_n)$ be a sequence.
+
 Then $(x_n)$ does not converge if we can find $\varepsilon_0 > 0$ s.t. $\forall K \geq 0, \exists n_K \geq K, |x_{n_K} - x| > \varepsilon_0$
 
 So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a subsequence $(x_m)$ s.t. $\forall k \in \mathbb{N}, | x_m - x | > \varepsilon_0$
@@ -96,44 +136,62 @@ So if $(x_n)$ does not converge to $x$, we can find $\varepsilon_0 > 0$ and a su
 ** Monotonicity
 #+begin_theorem
 Let $(x_n)$ be a sequence.
+
 There exists a subsequence $(x_m)$ which is monotonic
 #+end_theorem
 #+begin_proof
 Define $x_m$ to be a peak if $x_n \leq x_m$ for $n \geq m$
 
 Two cases:
+
 1. $(x_n)$ has infinitely many peaks
+
    Let  \[x_{n_1},x_{n_2},x_{n_3},...\] be a sequence of peaks.
+
    Then \[x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq ...\]
+
    So the subsequence is increasing
+
 2. $(x_n)$ has finite number of peaks
+
    Then you can find $N$ s.t. $\forall n \geq N$, $x_n$ is not a peak
+
    Then the subsequence \[x_{n_N},x_{n_{N+1}},x_{n_{N+2}},...\] must be increasing (they are not peaks)
 #+end_proof
 
-* Bolzana-Weierstrauss
+* Bolzano-Weierstrauss
 #+begin_theorem
 Let $(x_n)$ be a bounded sequence
+
 Then there exists a subsequence $(x_m)$ that is convergent
 #+end_theorem
 #+begin_proof
 [[./bolzana.png]]
-Let $a,b \in \mathbb{R} s.t. $\forall n \in \mathbb{N}, x_n \in [a,b]$
-Then either $[a,\frac{a+b}{2}]$ or $[\frac{a+b}{2},b]$ is infinite. call this $I_1$.
+Let $a,b \in \mathbb{R}$ s.t. $\forall n \in \mathbb{N}, x_n \in [a,b]$
+
+Then either $[a,\frac{a+b}{2}]$ or $[\frac{a+b}{2},b]$ is contains an infinite subsequence of $(x_n)$. 
+Call this $I_1$.
+
 By induction, construct $I_n$
   - width of $I_n = \frac{b-a}{2}$
   - $I_{n+1} \in I_n$
   - $\{k \in \mathbb{N} | x_k \in I_n \}$ is infinite
 
 We know $\cap I_n$ is nonempty
+
 Let $x \in \cap I_n$
+
 We can construct subsequence $x_{n_k}$ such that $x_{n_k} \in I_k$
+
 Since $x \in I_k$ and $| x_{n_k} - x| \leq \frac{b-a}{2}$
+
 $$\lim_{k \to \infty} x_{n_k} = x$$
 #+end_proof
 #+begin_examples
 1. $x_n = (-1)^n$
+
    $x_{2n} \Rightarrow 1$
+
    $x_{2n+1} \Rightarrow -1$
 
 2. Any subsequence of $(x_n) = \sin(n)$ can converge to any $x \in [-1,1]$
@@ -143,34 +201,48 @@ $$\lim_{k \to \infty} x_{n_k} = x$$
 ** Definition
 #+begin_definition
 Let $(x_n)$ be a sequence.
+
 $(x_n)$ is a cauchy sequence if $\forall \varepsilon > 0$ $\exists K(\varepsilon) \geq 0$
+
 $\forall n,m \geq K(\varepsilon), | x_n - x_m | \leq \varepsilon$
 #+end_definition
 
 ** Cauchy and inverses
 #+begin_theorem
 Let $(x_n)$ be a convergent sequence.
+
 Then it is a Cauchy sequence
+
 The inverse is not true
 #+end_theorem
 #+begin_proof
 Let $\varepsilon > 0$.  
+
 Let $$x = \lim_{n \to \infty} x_n$$
-$\exists K(\varepsilon) \geq 0, \forall n \geq K(\varepsilon), |x_n - x| \leq \frac{\varepsilon}{2}$
-For $n,m \geq K(\varepsilon)$i,
+
+$\exists K(\varepsilon) \geq 0$ such that $\forall n \geq K(\varepsilon)$ $|x_n - x| \leq \frac{\varepsilon}{2}$
+
+For $n,m \geq K(\varepsilon)$,
+
 \begin{align*}
  |x_n - x_m| & = |x_n - x + x - x_m| \\
 & \leq |x_n + x| + |x - x_m| \\
 & \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \\
 \end{align*}
+
+So $(x_n)$ is a Cauchy sequence
 #+end_proof
 #+begin_examples
-Not a Cauchy sequence:
-$(x_n) = \sqrt{n}$ since it is not bounded
+1. Not a Cauchy sequence:
+
+   $(x_n) = \sqrt{n}$ 
+
+   $(x_n)$ is Cauchy, but does not converge
 #+end_examples
 
 #+begin_theorem - Convergence of Cauchy sequences
 Let $(x_n)$ be a Cauchy sequence
+
 Then $(x_n)$ is convergent
 #+end_theorem
 #+begin_proof
@@ -181,34 +253,40 @@ s.t. $$\lim (x_{n_k}) = x$$
 Let $\varepsilon \geq 0$. 
 
 There exists $K(\varepsilon) \geq 0$ s.t. $\forall n,m \geq K(\varepsilon), |x_n - x_m| \leq \varepsilon$
+
 there exists $N \geq K(\varepsilon), |x - x_n| \leq \varepsilon$
 
 For $n \geq K(\varepsilon)$
+
 \begin{align*}
 |x_n - x| & = |x_n - x_N + x_N - x| \\
 & \leq |x_n - x_N| + |x_N - x| \\
 & \leq \varepsilon + \varepsilon = 2 \varepsilon
 \end{align*}
 #+end_proof
-#+begin_examplesx
-$x_n = 1 + \frac{1}{2} + ... + \frac{1}{n}$
-$x_{2n} - x_n = \frac{1}{n+1} + \frac{1}{n+2} + ... + \frac{1}{2n} \geq \frac{1}{2n} + ... + \geq \frac{1}{2n}$
-So $x_{2n} - x_n$ does not converge to $0$ therefore $(x_n)$ is not a Cauchy sequence
+#+begin_examples
+1. $x_n = 1 + \frac{1}{2} + ... + \frac{1}{n}$
+
+   $x_{2n} - x_n = \frac{1}{n+1} + \frac{1}{n+2} + ... + \frac{1}{2n} \geq \frac{1}{2n} + ... + \geq \frac{1}{2n}$
+
+   So $x_{2n} - x_n$ does not converge to $0$ therefore $(x_n)$ is not a Cauchy sequence
 #+end_examples
 * Contracting Sequences
 ** Definition
 #+begin_definition
 Let $(x_n)$ be a sequence
+
 $(x_n)$ is contracting if
+
 \[\exists C > 0, \forall n \in \mathbb{N}, | x_{n+1} - x_n | \leq C | x_n - x_{n-1} |\]
 #+end_definition
-
 ** Convergence
 #+begin_theorem
 Any contracting sequence is convergent
 #+end_theorem
 #+begin_proof
 Let $(x_n)$ be a contracting sequence
+
 \begin{align*}
 | x_{n+1} - x_n| & \leq C |x_n - x_{n-1}| \\
 & \leq C^2 | x_{n-1} - x_{n-2} | \\
@@ -225,20 +303,24 @@ Let $(x_n)$ be a contracting sequence
 & \leq C^{n-1} \frac{1-C^{n+1}}{1-C} |x_2 - x_1| \\
 & \leq \frac{C^{n-1}}{1-C} |x_2 - x_1| \\
 \end{align*}
+
 $$\lim_{n \to \infty} C^{n-1} = 0$$
 
 So $(x_n)$ is a Cauchy sequence and is convergent
 #+end_proof
 #+begin_examples
 1. x_n = n
+
    Let $M \geq 0$
+
    for $n \geq M, x_n \geq M$
+
    So $(x_n)$ goes to infinity
 2. $x_n = 1 - \frac{1}{n} + n \geq M$
 3. $x_n = n^2 - n = n(n-1) \geq (n-1)^2$
 #+end_examples
 
-** Limits
+** Divergence
 #+begin_theorem
 Let $(x_n)$ be increasing and not bounded. Then $$\lim_{n \to \infty} x_n = \infty$$
 
@@ -249,10 +331,184 @@ Let $(x_n)$ be increasing and not bounded
 Let $M \geq 0$, Since $(x_n)$ is not bounded, you can find $n \geq 0$ s.t. $x_n \geq M$
 For $k \geq n, x_k \geq x_n$ so $x_k \geq x_n \geq M$
 
-If $(x_n)$ is decreasing and bounded, $(-x_n)$ is increasing and not bounded
+If $(x_n)$ is decreasing and bounded, $(-x_n)$ is increasing and not bounded,
+
 so $$\lim_{n \to \infty} -x_n = \infty$$
+
 $$\lim_{n \to \infty} x_n = -\infty$$
 #+end_proof
 
 Let $(x_n),(y_n)$ be sequences s.t. $(x_n) \geq (y_n)$
-$$\lim_{n \to \infty} (y_n) = \infty$$ implies $$\lim_{n \to \infty} (y_n) = \infty$$
+
+$$\lim_{n \to \infty} (y_n) = \infty$$ implies 
+
+$$\lim_{n \to \infty} (y_n) = \infty$$
+
+*** Proving divergence
+#+begin_proof
+Let $M \geq 0$
+
+We can find $N \geq 0$ s.t. for $n \geq N$, $x_n \geq M$
+
+So $y_n \geq M$
+
+$$\lim_{n \to \infty} y_n = \infty$$
+#+end_proof
+
+* Series
+_series_
+#+begin_definition
+Let $(x_n)$ be a sequence
+
+The series generated by $(x_n)$
+
+$s_1 = x_1$
+
+$s_2 = x_1 + x_2$
+
+...
+
+$s_n = x_1 + ... + x_n$
+#+end_definition
+
+_limit of series_
+#+begin_definition
+$$\lim_{n \to \infty} s_n = \sum_{k=1}^{\infty} x_k$$
+#+end_definition
+
+#+begin_examples
+1. Let $(x_n) = \frac{1}{n(n+1)}$
+
+   Then 
+
+   \begin{align*}
+   (s_n) & = \sum_{k=1}^{\infty} \frac{1}{k(k+1)} \\
+   & = \sum_{k=1}^{\infty} \frac{1}{k} - \sum_{k=1}^{\infty} \frac{1}{k+1} \\
+   & = \sum_{k=1}^{\infty} \frac{1}{k} - \sum_{k=2}^{\infty} \frac{1}{k} \\
+   & = 1 - \frac{1}{n+1}
+   \end{align*}
+   
+2. Let $(x_n) = r^{n-1}$
+
+   then
+
+   \begin{align*}
+   s_n & = \sum_{k=1}^{\infty} r^{n-1} \\
+   & = \frac{1-r^n}{1-r}
+   \end{align*}
+
+   case $|r| < 1$
+
+   $$\lim_{n \to \infty} r^n = 0$$
+
+   So
+   $$\sum_{k=1}^{\infty} r^{n-1} = \frac{1}{1-n}$$
+
+   and $(s_n)$ is convergent
+   
+   case $|r| = 1$
+
+   $$\sum_{k=1}^{\infty} x_k = \infty$$
+
+   $s_n = \frac{1}{2} (1 - (-1^n))$
+
+   So $(s_n)$ is divergent
+
+3. Let $x_n = \frac{1}{2^n}$
+
+   then $$\lim_{n \to \infty} s_n = \sum_{k=1}^{\infty} \frac{1}{2^k} = 2$$
+#+end_examples
+
+#+begin_theorem
+Let $(s_n)$ be a convergent sequence
+
+Then $(x_n)$ also converges
+#+end_theorem
+#+begin_proof
+Since $x_n = s_n - s_{n-1}$
+
+$$\lim_{n \to \infty} x_n = \lim_{n \to \infty} s_n - \lim_{n \to \infty} s_{n-1} = 0$$
+
+So $(x_n)$ is convergent
+#+end_proof
+
+*Convergence of $(x_n)$ does not imply convergence of $(s_n)$*
+ex. harmonic series = $x_n = \frac{1}{n}$
+
+#+begin_theorem
+If $(x_n)$ is a positive sequence
+
+then $$\lim_{n \to \infty} s_n < \infty$$ or $$\lim_{n \to \infty} s_n = \infty$$
+#+end_theorem
+#+begin_proof
+Since $(x_n)$ is positive, $(s_n)$ is increasing.
+
+Increasing series are either bounded and convergent
+
+or unbounded and divergent
+#+end_proof
+
+#+begin_theorem
+Let $(x_n)$ and $(y_n)$ be sequences s.t. $0 \leq x_n \leq y_n$
+
+Let $(s_n)$ and $(t_n)$ be sequences of $(x_n)$ and $(y_n)$ respectively
+
+If $(t_n)$ is convergent, then $(s_n)$ is convergent
+
+If $(s_n)$ is divergent, then $(t_n)$ is divergent
+#+end_theorem
+#+begin_proof
+$0 \leq x_1 \leq y_1$
+
+$0 \leq x_2 \leq y_2$
+
+...
+
+$0 \leq x_n \leq y_n$
+
+So, $0 \leq s_n \leq t_n$
+
+
+Assume $(t_n)$ is convergent.
+
+Then $(t_n)$ is bounded, then $(s_n)$ is bounded.
+
+Since $(s_n)$ is increasing and bounded, it is convergent
+
+
+Assume $(s_n)$ is divergent.
+
+then $(s_n)$ is unbounded, then $(t_n)$ is unbounded
+
+Since $(s_n)$ is increasing and unbounded, it is divergent
+#+end_proof
+
+#+begin_examples
+1. Let $x_n = \frac{1}{n^r}, r \geq 0$
+
+   then $s_n = \sum_{k=1}^{\infty} \frac{1}{k^r} \
+
+   & = 1 + \frac{1}{2^r} + ...
+
+   \end{align*}
+
+   *case* $0 \leq r \leq 1$
+
+   $\frac{1}{n^r} \geq \frac{1}{n}$
+
+   So $s_n$ is divergent
+
+   *case* $r > 1$
+
+   For $n \geq 2$ (by bernoulli inequality)
+
+   $\frac{1}{nr} \leq \frac{1}{r-1} (\frac{1}{(n-1)^{r-1}} - \frac{1}{n^{r-1}})$
+
+   Let $y_n = \frac{1}{r-1} (\frac{1}{(n-1)^r} - \frac{1}{n^{r-1}})$
+
+   Then $$\sum_{k=1}^{\infty} y_k = \frac{1}{r-1}(1 - \frac{1}{n^{r-1}}) < \infty$$
+
+   So $$\sum_{k=1}^{\infty} x_k < \infty$$
+
+   We conclude $$\sum_{k=1}^{\infty} \frac{1}{n^r} < \infty$$ if and and only if $r > 1$
+#+end_examples
