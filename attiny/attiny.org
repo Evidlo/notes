@@ -1,18 +1,6 @@
-ATTINY Notes -*- mode: org -*-
-#+STARTUP: showall
-
-
 #+attr_html: :width 600
 [[./attiny85.jpg]]
 
-* TIMSK - Timer Interrupt Mask Register
-
-|-------+--------------------------------------------------|
-| OCIE0 |                                                  |
-|-------+--------------------------------------------------|
-| TOIE0 | Overflow interrupt                               |
-|       | Calls ISR(TIMER0_OVF_vect){} when TCNT0 overflow |
-|-------+--------------------------------------------------|
 
 * DDRB - Port B Data Direction Register
 
@@ -29,6 +17,7 @@ ATTINY Notes -*- mode: org -*-
 * TCCR0 - Timer 0 Counter Control Register (8bit)
 ** Counter Select -  set timer prescaler
 
+#+begin_settings
 |------+------+------+---------------|
 | CS02 | CS01 | CS00 | Prescaler     |
 |------+------+------+---------------|
@@ -39,9 +28,11 @@ ATTINY Notes -*- mode: org -*-
 |    1 |    0 |    0 | /256          |
 |    1 |    0 |    1 | /102          |
 |------+------+------+---------------|
+#+end_settings
 
 ** Wave Form Generation
 
+#+begin_settings
 |-------+-------+-------------------|
 | WGM00 | WGM01 | Mode              |
 |-------+-------+-------------------|
@@ -50,12 +41,17 @@ ATTINY Notes -*- mode: org -*-
 |     1 |     0 | CTC               |
 |     1 |     1 | Fast PWM          |
 |-------+-------+-------------------|
+#+end_settings
 
-TCNT0 - counter
-OCR0A - stationary threshold
-OC0A - output from compare
-OCR0B - stationary threshold
-OC0B - output from compare
+*TCNT0* - counter
+
+*OCR0A* - stationary threshold
+
+*OC0A* - output from compare
+
+*OCR0B* - stationary threshold
+
+*OC0B* - output from compare
 
 * TCCR1 - Timer 1 Counter Control Register (16bit)
 
@@ -64,9 +60,12 @@ OC0B - output from compare
 |------+-------+--------+--------+------+------+------+------|
 
 *CTC1* - clear TCNT1 on compare match with OCR1C
+
 *PWM1A* - enable PWM mode using OCR1A, reset on compare match with OCR1C
+
 *COM1A1/COM1A0* - determine output behavior of OC1A on compare match with OCR1A
-:Settings:
+
+#+begin_settings
 |--------+--------+-----------------------------------|
 | COM1A1 | COM1A0 | Mode                              |
 |--------+--------+-----------------------------------|
@@ -75,13 +74,15 @@ OC0B - output from compare
 |      1 |      0 | Clear 0C1A                        |
 |      1 |      1 | Set OC1A                          |
 |--------+--------+-----------------------------------|
-:END:
+#+end_settings
 
-TCNT1 - counter
+*TCNT1* - counter
 
 * Timer modes
 *BOTTOM* - always 0
+
 *MAX* - size of the counter
+
 *TOP* - can be either *MAX* or OCRxx, depending on mode
 
 ** Normal
@@ -95,12 +96,27 @@ Timer counts up to TOP then resets to BOTTOM.
 
 * Interrupts
 *sei()* - enable interrupts
+** TIMSK - Timer Interrupt Mask Register
+*0CIE1A* - call TIMER1_COMPA_vect compare match
+
+*0CIE1B* - call TIMER1_COMPB_vect compare match
+
+*0CIE0A* - call TIMER0_COMPA_vect compare match
+
+*0CIE0B* - call TIMER0_COMPB_vect compare match
+
+*TOIE1* - call TIMER1_OVF_vect on timer overflow
+
+*TOIE0* - call TIMER0_OVF_vect on timer overflow
 ** Hardware interrupts
 *** External interrupts
 Only available to certain pins (only INT0 on attiny85)
 Interrupts must be unmasked (enabled)
+
 *GIMSK* - set INT0 to enable interrupt
+
 *MCUCR* - set ISC01/ISC00 to interrupt on change/rising/falling edge
+
 #+BEGIN_SRC c
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -130,7 +146,9 @@ Only one interrupt per port, but any pin on the port can trigger it.
 Interrupts must be unmasked (enabled)
 
 *GIMSK* - set PCIE to unmask all PCI on port (only 1 port on attiny85)
+
 *PCMSK* - set PCINTx to enable PCI on PCINT0 pin
+
 #+BEGIN_SRC c
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -156,6 +174,11 @@ ISR(PCINT0_vect)
 ** Timer interrupts
 *TIMSK* - timer interrupt mask
 
+*TIMER1_COMPA_vect* - call on compare match with OCR1A
+
+*TIMER1_COMPB_vect* - call on compare match with OCR1B
+
+*TIMER1_OVF_vect* - call when TOP is reached
 
 #+BEGIN_SRC c
 #include <avr/io.h>
