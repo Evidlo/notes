@@ -3,17 +3,22 @@
 
 dir=$(dirname $1)
 file=$(basename $1)
-
 outdir=out/$dir
-outfile=$(basename $file .md).pdf
-echo $dir
-echo $file
-echo $outdir
-echo $outfile
-echo "#######"
-# mkdir -p "$outdir"
-# cd "$dir"
-# pwd
-# pandoc -o "$outfile".pdf "$outfile".md
-# echo "built $outfile"
 
+if [[ $file == *.org ]]
+then
+    outdir=out/$dir
+    outfile=$(basename $file .org).html
+    # echo "$dir/$file"
+    # echo "$outdir/$outfile"
+    # echo "#######"
+    mkdir -p "$outdir"
+    pandoc --template=test.template -S -s --mathjax --toc "$dir/$file" -o "$outdir/$outfile"
+    # pandoc -S -s --toc -c /out/notes.css --mathjax "$dir/$file" -o "$outdir/$outfile"
+    echo "built $file"
+else
+    mkdir -p "$outdir"
+    cp "$dir/$file" "$outdir/"
+    echo "copied $file"
+
+fi

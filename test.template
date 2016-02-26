@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="/fancy.css"/>
+  <link rel="stylesheet" type="text/css" href="/notes.css"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Evan Widloski</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-25109327-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  $if(highlighting-css)$
+  <style type="text/css">
+  $highlighting-css$
+  </style>
+  $endif$
+
+  $for(css)$
+  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+  $endfor$
+
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    displayAlign: "left",
+    displayIndent: "2em"
+  });
+  </script>
+
+  $for(header-includes)$
+  $header-includes$
+  $endfor$
+</head>
+
+<body>
+	<div class="v h">
+		<div class="h hc">
+			<div class="simplebox">
+				<div class="title">$title$</div>
+				<div class="body v">
+          $if(toc)$
+          $toc$
+          $endif$
+          $body$
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
