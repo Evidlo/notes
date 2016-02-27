@@ -2,4 +2,4 @@
 #Evan Widloski - 2015-01-17
 #Search for markdown files and build them
 
-find . -regex ".*\(org\|png\|jpg\)" -not -path "*ltxpng*" -exec "find_call" {} \;
+find ./content -regex ".*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*" -exec "find_call" {} \;

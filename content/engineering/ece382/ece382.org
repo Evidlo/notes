@@ -1,0 +1,346 @@
+#+TITLE: ECE382 - Control Systems - Spring 2016
+* Poles and Zeros
+** Open loop
+
+** Closed loop
+
+#+attr_html: width 400
+[[./loop.png]]
+
+$T(s) = \frac{C(s)}{R(s)} = \frac{G(s)}{1 + G(s)H(s)}$
+
+roots of $G(s)$: closed loop zeros
+
+roots of $1 + G(s)$: closed loop poles
+
+$\frac{B}{E} = G(s)H(s)$
+
+roots of $G(s)H(s)$: zeros
+
+poles of $G(s)H(s)$: poles
+
+* Characteristic Equation
+
+#+begin_definition
+Characteristic equation - $1 + G(s)H(s) = 1 + \frac{N_1N_2}{D_1D_2} = \frac{D_1D_2 + N_1N_2}{D_1D_2}$
+#+end_definition
+
+$D_1D_2 + N_1N_2$: closed-loop poles
+
+$D_1D_2$: open-loop poles
+
+transfer functions need to be in polynomial form
+#+begin_examples
+1. $G_2(s) = \frac{1}{s-1}$
+
+   $s = +1 \Rightarrow e^t$, so system is unstable
+#+end_examples
+
+* Second-order systems
+** Characterization
+*second-order transfer function* - \[T(s) = \frac{N}{N + D} = \frac{w_n^2}{s^2 + 2\zeta w_ns + w_n^2}\]
+
+$\zeta = \cos (\theta)$: damping coefficient
+
+$w_n$: undamped natural frequency
+
+$w_d = w_n \sqrt{1 - \zeta^2}$ - damped frequency
+
+$\zeta \omega_n$: attenuation
+
+use quadratic formula to find poles
+
+\begin{equation*}
+s_1,s_2 =
+  \begin{cases}
+    -\zeta w_n +- w_n \sqrt{\zeta^2 -1} & \zeta \geq 0 \\ 
+    -\zeta w_n +- w_n \sqrt{1 - \zeta^2} & 0 < \zeta < 1
+  \end{cases}
+\end{equation*}
+
+
+[[./damping.png]]
+
+Four cases:
+1. $\zeta = 0$: infinite signal
+2. $\zeta = 1$: critically-damped$
+3. $0 < \zeta < 1$ - infinite oscillations
+4. $\zeta > 1$ - overdamped 
+
+** Analysis
+[[./performance.png]]
+
+aaa
+#+begin_derivation
+deriv
+#+end_derivation
+*** Overshoot
+$M_P = e^{\dfrac{-\pi \zeta}{\sqrt{1 - \zeta^2}}}$ - percent overshoot
+
+#+begin_derivation
+\begin{align*}
+M_P & = \frac{c(t_p) - c(\infty)}{c(\infty)} \\
+    & = c(t_p) \\
+    & = e^{\dfrac{-\pi \zeta}{\sqrt{1 - \zeta^2}}}
+\end{align*}
+#+end_derivation
+
+$t_p = \frac{\pi}{\omega_d}$ - time to first overshoot
+*** Rise Time
+$t_r$ - rise time ( to 100% of target value )
+
+#+begin_derivation
+\begin{eqnarray*}
+\frac{d}{dt}[c(t)] = 0 \\ 
+\Rightarrow t_p = \frac{\pi}{w_d}
+\end{eqnarray*}
+#+end_derivation
+
+*** Settling Time
+$t_s = \frac{4}{\zeta \omega_n}$ - settling time
+#+begin_derivation
+\begin{align*}
+e^{-\zeta \omega_n t} = .02 \\
+\Rightarrow t & = \frac{-\ln(.02)}{\zeta \omega_n} \\
+t & \approx \frac{4}{\zeta \omega_n}
+\end{align*}
+#+end_derivation
+
+Damped sinusoid with unit step input
+$c(t) = 1 - \beta e^{-\zeta \omega_n t} \sin(\omega_d t + \theta)$
+
+#+begin_examples
+1. [[./loop2.png]]
+
+   $G(s) = \frac{k}{s(s+p)}$
+
+2. [[./loop3.png]]
+
+   $T(s) = \frac{G}{1+G} = \frac{N}{N + D} = \frac{k}{s^2 + ps + k}$
+
+   Find K and P s.t.t $R(s) = \frac{1}{s}, t_s = 2, M_P = .1$
+
+   In canonical form, $k = {\omega_n}^2, p = 2 \zeta \omega_n$
+
+   $M_P = .1 = e^{\dfrac{-\pi \zeta}{\sqrt{1 - \zeta^2}}}$
+#+end_examples
+ 
+*** Steady State Error
+$E(s) = \frac{R(S)}{1+G(S)H(S)}$
+
+We will only study the error when $R(S)$ is a step, ramp, or exponential function
+
+Let $r(t) = ku(t),R(s) = \frac{k}{s}$
+
+$E(s) = \dfrac{\dfrac{k}{s}}{1 + G(s)H(s)}$
+
+**** Finite value theorem
+Requirements
+1. Poles of $F(t)$ must have negative real parts to be stable
+2. $F(s)$ has at most 1 pole at the origin
+
+$f_{ss} = f(\infty) = \lim_{t \rightarrow \infty} f(t) = lim_{s \rightarrow 0} s F(s)$
+
+
+_steady state error_
+#+begin_definition
+$e_{ss} = \frac{k}{1 + \lim_{s \rightarrow 0} k_p}$
+#+end_definition
+#+begin_derivation
+\begin{align*}
+e_{ss} & = \lim_{s \rightarrow 0} s E(s) \\
+& = \lim_{s \rightarrow 0} \frac{k}{1 + G(s)H(s)} \\
+& = \frac{k}{1 + \lim_{s \rightarrow 0} G(s)H(s)} \\
+& = \frac{k}{1 + \lim_{s \rightarrow 0} k_p}
+\end{align*}
+#+end_derivation
+
+_static error constant_ (error contribution from a step input)
+#+begin_definition
+$k_p = \lim_{s \rightarrow 0} G(s)H(s) = \frac{K(s+Z_1)...(s+Z_n)}{s^N(s+P_1)...(s+P_n)}$ 
+#+end_definition
+
+_static velocity constant_ (error contribution from a ramp input)
+#+begin_definition
+$k_v = \lim_{s \rightarrow 0} sG(s)H(s) = \frac{sK(s+Z_1)...(s+Z_n)}{s^N(s+P_1)...(s+P_n)}$ 
+#+end_definition
+
+_static acceleration constant_ (error contribution from a parabolic input)
+#+begin_definition
+$k_v = \lim_{s \rightarrow 0} s^2G(s)H(s) = \frac{s^2K(s+Z_1)...(s+Z_n)}{s^N(s+P_1)...(s+P_n)}$ 
+#+end_definition
+
+So if the input is $r(t) = (A t r(t) + B r(t) + C) u(t)$
+
+$e_{ss} = \frac{A}{k_a} + \frac{B}{k_v} + \frac{c}{1 + k_p}$
+
+#+begin_examples
+1. Consider unity feedback
+
+   $G(s) = \frac{k}{s(s+1)(s+2)}$
+
+   Find the steady state error
+
+   $R(s) = \frac{3}{s} + \frac{2}{s^2}$
+
+   $k_p = lim_{s \to 0} G(s) = \infty$
+
+   $k_v = lim_{s \to 0} s G(s) = \frac{1}{k}$
+
+   $e_{ss} = \frac{3}{1 + k_p} + \frac{2}{k_v} = \frac{3}{1 + \infty} + \frac{2}{\frac{k}{2}} = \frac{4}{k}$
+
+   So as $k \to \infty$, $e_{ss} = 0$
+#+end_examples
+*You must also prove the stability of the system to prove that $e_{ss}$ exists*
+
+*** Stability
+#+begin_definition
+_bibo_ - bounded input bounded output
+#+end_definition
+#+begin_examples
+1. Unity feedback with $G(s) = \frac{2}{s(s+3)}$
+
+   $T(s) = \frac{C(s)}{R(s)} = \frac{2}{(s+1)(s+3)}$
+
+   If the input is step, $R(s) = \frac{1}{s}$
+
+   So $C(s) = \frac{2}{s(s+1)(s+3)} = \frac{A}{s} + \frac{B}{s+1} + \frac{C}{s+2}$
+   
+   \begin{align*}
+   Q(s) & = 1 + G(s) = 0 \\
+   & = \frac{s(s+1)(s+2) + k}{s(s+1)(s+2)} = 0
+   \end{align*}
+
+   Since the closed-loop poles (num of char eqn) are in LHP, system is stable.
+   
+#+end_examples
+
+Assume feedback system with $G(s)$ and $H(s)$
+
+$Q(s) = 1 + G(s)H(s) = \frac{D_1D_2 + N_1N_2}{D_1D_2} = 0$
+
+$D_1D_2 + N_1N_2$ - closed-loop poles
+
+Three ways to solve for stability
+1. Matlab
+2. Routh-Hurwitz Stability Test
+3. Root locus
+
+*** Routh-Hurwitz Stability Test
+1. Construct first two rows
+2. Construct next rows based on first two
+3. Count number of sign changes in first column to find RHP poles
+
+Let $Q(s) = a_ns^n + a_{n-1}s^{n-1} + ... + a_1s + a_0 = 0$
+
+If $n$ is even
+
+| $s^n$     | $a_n$     | $a_{n-2}$ | ... | $a_0$ |
+| $s^{n-1}$ | $a_{n-1}$ | $a_{n-3}$ | ... | $a_1$ |
+
+If $n$ is odd
+
+| $s^n$     | $a_n$     | $a_{n-2}$ | ... | $a_0$ |
+| $s^{n-1}$ | $a_{n-1}$ | $a_{n-3}$ | ... | $a_1$ |
+
+Construct rest of table
+
+| $s^{n-2}$   | $b_1$ | $b_2$ | ... | $b_{n+1}$ |
+| $s^{n-3}$ | $c_1$ | $c_2$ | ... | $c_{n+1}$ |
+| $s^{n-4}$ | $d_1$ | $d_2$ | ... | $d_{n+1}$ |
+
+Where 
+\begin{align*}
+b_1 & = \frac{a_{n_1}a_{n-2} - a_na_{n-3}}{a_{n-1}} \\
+b_2 & = \frac{a_{n_1}a_{n-2} - a_na_{n-4}}{a_{n-2}} \\
+...
+\end{align*}
+
+If $b_n$ is zero, use $\varepsilon$ as a placeholder for a positive number.
+Assume blank entries to be 0.
+
+If a row is zero, differentiate the row above it and replace the zeros with the coefficients.
+
+The number of sign changes in the first column is equal to
+the number of poles in RHP.
+
+If the last and third to last row have the same sign,
+then the poles are on the imaginary axis.
+
+#+begin_examples
+1. Let $Q(s) = s(s+1)(s+2) + 3 = s^3 + 3s^2 + 2s + 7 = 0$
+   | $s^3$ |               1 |   2 |
+   | $s^2$ |               3 |   7 |
+   | $s$   | $\frac{-1}{3}$  | nan |
+   | $s^0$ |               7 | nan |
+   
+   Two sign changes means two RHP poles, 1 LHP pole, so the system is unstable.
+
+2. Let $Q(s) = s^3 + 4s^2 + s - 6$
+   | $s^3$ |              1 |  1 |
+   | $s^2$ |              4 | -6 |
+   | $s^1$ | $\frac{10}{4}$ |    |
+   | $s^0$ |             -6 |    |
+
+    One sign change means one RHP pole, 2 LHP poles, so the system is unstable.
+
+3. Let $Q(s) = s^3 - s^2 - s + 1 = 0$
+   | $s^3$ |             1 | -1 |
+   | $s^2$ |            -1 |  1 |
+   | $s^1$ | $\varepsilon$ |    |
+   | $s^0$ |             1 |    |
+#+end_examples
+
+#+begin_examples
+1. $G(s) = \frac{k}{s(s+1)(s+2)}$
+   $k_p = \lim_{s \to 0} G(s) = \infty$
+   $k_v = \lim_{s \to 0} s G(s) = \frac{k}{2}$
+   $e_{ss} = \frac{3}{1 + k_p} + \frac{2}{k_v} = \frac{4}{k}$
+   $Q(s) = s(s+1)(s+2) + K = s^3 + 3s^2 + 2s + K$
+   | $s^3$ | $1$             | $2$ |
+   | $s^2$ | $3$             | $K$ |
+   | $s^1$ | $\frac{6-K}{3}$ |     |
+   | $s^0$ | $0$             |     |
+2. $T(s) = \frac{G}{1+G} = \frac{k}{s^2 +2s + K}$
+
+   $Q(s) = \frac{s^2 + 2s + K}{s(s+2)}$
+
+   $Q(s) = s^2 + 2s + K$
+
+   | $s^2$ | 1    | K |
+   | $s^1$ | $2$  |   |
+   | $s^0$ | $2K$ |   |
+   
+   System is stable for all $K > 0$
+
+   $s_1,s_2 = \frac{-2 +- \sqrt{4 - 4K}}{2} = -1 += \sqrt{1-K}$
+
+   Let $K=0$, then $s_1,s_2 = 0, -2$
+
+   Let $K=.5$, then $s_1,s_2 = -0.29, -1.707$
+
+   Overdamped
+
+   Let $K=1$, then $s_1,s_2 = -1, 1$
+
+   Critically damped
+
+   Let $K=2$, then $s_1,s_2 = -1+j, 1+j$
+
+   Underdamped
+   
+   [[./root_locus.png]]
+#+end_examples
+*** Root Locus
+#+begin_examples
+\begin{align*}
+Q(s) = 1 + G(s)H(s) & = 1 + \frac{K \sum_{i=1}^{N_z} (s + Z_i)}{\sum_{j=1}^{N_p} (s + P_j)} \\
+& = 1 + \frac{K \sum_{i=1}^{N_z} (s + Z_i)}{\sum_{j=1}^{N_p} (s + P_j)}
+\end{align*}
+
+$KG(s)H(s) = -1 + j0$
+
+$|KG(s)H(s)| = 1$
+
+$$\angle KG(s)H(s) = \pi(1 + 2m), m=0,1,2,...$$
+#+end_examples
