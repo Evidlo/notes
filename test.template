@@ -33,7 +33,6 @@
   <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     displayAlign: "left",
-    displayIndent: "2em"
   });
   </script>
 
