@@ -432,7 +432,8 @@ $$\lim_{n \to \infty} x_n = \lim_{n \to \infty} s_n - \lim_{n \to \infty} s_{n-1
 So $(x_n)$ is convergent
 #+end_proof
 
-*Convergence of $(x_n)$ does not imply convergence of $(s_n)$*
+Convergence of $(x_n)$ does not imply convergence of $(s_n)$
+
 ex. harmonic series = $x_n = \frac{1}{n}$
 
 #+begin_theorem

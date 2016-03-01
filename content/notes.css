@@ -54,12 +54,6 @@ pre.sourceCode {
 
 /* ------------ general stuff -------*/
 
-body{
-    white-space: no-wrap;
-    font-family: Terminus;
-    max-width: 600px;
-    padding: 20px;
-}
 p {
     white-space: pre-wrap;
 }
@@ -76,9 +70,6 @@ h1.title {
 
 /* ---------- tables and lists ---------*
 /* center align exported tables */
-/* table .org-left { */
-/*     text-align:center; */
-/* } */
 
 ol {
     /* padding-left:0; */
@@ -98,6 +89,7 @@ table {
 }
 td, th {
     padding: 10px;
+    text-align: center;
 }
 
 
