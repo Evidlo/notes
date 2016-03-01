@@ -54,6 +54,8 @@ For a charged body, the work required to approach the body scales with charge,
 
 so the ratio between charge and voltage is constant, called *capacitance*
 
+$C = \frac{Q}{V}$
+
 #+begin_examples
 1. Find the capacitance for a parallel plate capacitor
 
@@ -105,3 +107,15 @@ so the ratio between charge and voltage is constant, called *capacitance*
    \[E_2 = \frac{V}{d_2 + d_1 \frac{\varepsilon_2}{\varepsilon_1}}\]
    
 #+end_examples
+
+** Energy in Capacitor
+
+$W = \frac{1}{2} CV^2$
+
+#+begin_derivation
+\begin{align*}
+W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
+& = \frac{1}{C} [\frac{1}{2} q(t)^2]_0^Q = \frac{Q^2}{2C} \\
+& = \frac{(CV)^2}{2C} = \frac{1}{2}CV^2
+\end{align*}
+#+end_derivation
