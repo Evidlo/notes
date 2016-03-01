@@ -1,0 +1,107 @@
+* Calc III Review
+** History of Vectors
+More than 10 vector systems developed between 1790 and 1850
+
+*quaternions* - scalar + vector - William Hamilton
+
+*modern vectors*  - direction + magnitude - Gibbs and Heaviside
+
+*field* - function which assigns quantity to points in space
+
+
+*scalar* - ex. temperature in space
+*vector* - ex. electromagnetic field
+
+
+** Spherical Coordinates
+[[https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/3D_Spherical_2.svg/240px-3D_Spherical_2.svg.png]]
+
+[[https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Coord_system_CY_1.svg/240px-Coord_system_CY_1.svg.png]]
+
+
+** Line Integrals
+*potential* - work requried to move 1C of charge
+$$ V_{AB} = V_A - V_B = - \int_A^B E \cdot ds $$
+
+[[./line_int.png]]
+
+
+* Dipoles
+
+** Bound charges
+$\overrightarrow{E_D} = \frac{\overrightarrow{D} - \overrightarrow{P}}{\varepsilon_0}$
+
+\begin{align*}
+\overrightarrow{P} &= \varepsilon_0 x_e \overrightarrow{E} \\
+&= \varepsilon_0(1 + x_e)\overrightarrow{E}
+\end{align*}
+
+\begin{align*}
+\overrightarrow{D} & = \varepsilon_0 \overrightarrow{E} + \varepsilon_0 x_e \overrightarrow{E} \\
+& = \varepsilon_0 (1 + x_e) \overrightarrow{E} \\
+& = \varepsilon_0 \varepsilon_r \overrightarrow{E}
+\end{align*}
+
+** Coulomb's Law in Dielectric
+\begin{align*}
+\overrightarrow{D} &= \frac{q_2}{4\pi r^2} \hat{a_r}^2 \\
+\overrightarrow{E} &= \frac{q_2}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2 \\
+\overrightarrow{F_{1,2}} &= \frac{q_2 q_1}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2
+\end{align*}
+
+* Capacitance
+For a charged body, the work required to approach the body scales with charge,
+
+so the ratio between charge and voltage is constant, called *capacitance*
+
+#+begin_examples
+1. Find the capacitance for a parallel plate capacitor
+
+   [[./capacitor.png]] 
+
+   $\overrightarrow{D} = \frac{Q}{A} \hat{a_x}$
+
+   \[\overrightarrow{E} = \frac{\overrightarrow{D}}{\varepsilon_0 \varepsilon_r}
+   = \frac{Q}{\varepsilon_0 \varepsilon_r A} \hat{a_x}\]
+
+   \begin{align*}
+   V &= - \int_0^d \overrightarrow{E} \overrightarrow{dl} = \int_0^d \frac{Q}{\varepsilon_0 \varepsilon_r} \hat{a_x} \overrightarrow{dx} \\
+   &= \frac{Q}{\varepsilon_0 \varepsilon_r A} d
+   \end{align*}
+
+   $C = \frac{Q}{V} = \frac{\varepsilon_0 \varepsilon_r A}{d}$
+   
+2. Prove capacitors in parallel sum together
+
+   [[./parallel_caps.png]] 
+
+   \[V = - \int_0^d \overrightarrow{E_1} \overrightarrow{dl} = - \int_0^d \overrightarrow{E_2} \overrightarrow{dl}
+   \Rightarrow E_1 = E_2 = E\]
+
+   Since the electric field is approximately constant between plates $E = \frac{V}{D}$
+
+   \[D_1 = \frac{Q_1}{A_1} = \varepsilon_1 E \\
+   \Rightarrow Q_1 = A_1 \varepsilon_1 E = A_1 \varepsilon_1 \frac{V}{d}\]
+
+   \[D_2 = \frac{Q_2}{A_2} = \varepsilon_2 E \\
+   \Rightarrow Q_2 = A_2 \varepsilon_2 E = A_2 \varepsilon_2 \frac{V}{d}\]
+
+   $C_T = \frac{Q_1 + Q_2}{V} = \frac{A_1 \varepsilon_1}{d} + \frac{A_2 \varepsilon_2}{d} = C_1 + C_2$
+   
+3. Solve for $E_2$
+
+   [[./series_caps.png]] 
+   
+   $D = \frac{Q}{A} = E_1 \varepsilon_1 = E_2 \varepsilon_2$
+
+   $E_1 = E_2 \frac{\varepsilon_2}{\varepsilon_1}$
+
+   \begin{align*}
+   V & = - \int_{d_1} \overrightarrow{E_1} \overrightarrow{dl} - \int_{d_2} \overrightarrow{E_2} \overrightarrow{dl} \\
+   & = - \int_{d_1} \overrightarrow{E_2} \frac{\varepsilon_2}{\varepsilon_1} \overrightarrow{dl} - \int_{d_2} \overrightarrow{E_2} \overrightarrow{dl} \\
+   & = d_2 E_2 + d_1 E_2 \frac{\varepsilon_2}{\varepsilon_1}
+   \end{align*}
+
+   \[E_2 = \frac{V}{d_2 + d_1 \frac{\varepsilon_2}{\varepsilon_1}}\]
+   
+#+end_examples
