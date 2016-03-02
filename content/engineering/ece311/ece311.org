@@ -1,3 +1,4 @@
+#+TITLE: ECE311 - Electromagnetism
 * Calc III Review
 ** History of Vectors
 More than 10 vector systems developed between 1790 and 1850
@@ -119,3 +120,59 @@ W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
 & = \frac{(CV)^2}{2C} = \frac{1}{2}CV^2
 \end{align*}
 #+end_derivation
+* Magnetic Fields
+** Ampere's Force Law
+Magnetic field from point current
+
+Magnetic Field Intensity
+#+begin_definition
+\[dH = \frac{I \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2} \frac{A}{m}\]
+#+end_definition
+
+\[dF = \mu_0 I_1 \overrightarrow{dl_1} \times \overrightarrow{dH}\]
+
+** Magnetic Field of infinite wire
+#+begin_definition
+\[\overrightarrow{H(\rho)} = \frac{I}{2 \pi \rho} \hat{a_{\phi}}\]
+#+end_definition
+
+#+begin_derivation
+\[H_2 = \int_{-\infty}^{\infty} \frac{I_2 \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2}\]
+#+end_derivation
+
+#+begin_examples
+1. Find the force between two parallel wires with opposite currents
+   
+   ipe
+
+   \[dH_2 = \frac{I_2 \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2}\]
+
+   \[\overrightarrow{dF_1} = \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi}\]
+
+   \[\overrightarrow{F_1} = \int_0^L \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi} = - \frac{\mu_0 I_1 I_2 L}{4 \pi R} \hat{a_\rho}\]
+#+end_examples
+
+* Closed paths in magnetic fields
+Around current
+$xxxxxxx$
+
+[[./magflux_integral1.png]]
+
+\begin{align*}   
+\oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \pi \rho} \hat{a_{\phi}} \cdot ( d\rho \hat{a_{\rho}} + \rho d\phi \hat{a_{\phi}} + dz \hat{a_z}) \\
+& = \oint \frac{I}{2 \phi \rho} \rho d\phi
+\end{align*}
+
+$xxxxxxx$
+
+Outside of current
+
+[[./magflux_integral.png]]
+
+\begin{align*}   
+\oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \phi \rho} \rho d\phi \\
+& = \int_{\phi_1}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_1}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi \\
+& = 0
+\end{align*}
+
+$xxxxxxx$

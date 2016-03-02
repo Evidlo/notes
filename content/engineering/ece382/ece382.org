@@ -226,7 +226,7 @@ Three ways to solve for stability
 2. Routh-Hurwitz Stability Test
 3. Root locus
 
-*** Routh-Hurwitz Stability Test
+* Routh-Hurwitz Stability Test
 1. Construct first two rows
 2. Construct next rows based on first two
 3. Count number of sign changes in first column to find RHP poles
@@ -331,16 +331,38 @@ then the poles are on the imaginary axis.
    
    [[./root_locus.png]]
 #+end_examples
-*** Root Locus
+* Root Locus
+Let $F(s)$ be some complex function and $s_1$ be some complex point.
+
+Then \[|F(s)| = \frac{|s_1 + z_1|...|s_1 + z_n|}{|s_1 + p_1|...|s_1 + p_n|}\]
+
+and \[\angle F(s) = \sum \angle (zeros \rightarrow s_1) - \sum \angle (poles \rightarrow s_1)\]
+
+** Finding closed loop poles
+With the characteristic equation, we can find all the poles of the closed-loop transfer function and determine stability.
+
+The zeroes of the characteristic equation are the poles of the closed-loop transfer function.
+
+Note that we factor $K$ out of $G(s)H(s)$ since the gain is trivial to adjust in most systems.
+
+\[Q(s) = 1 + KG(s)H(s) = 1 + \frac{K (s + Z_1) ... (s + Z_n)}{(s + P_1) ... (s + P_n)}\]
+
+\[KG(s)H(s) = \frac{K (s + Z_1) ... (s + Z_n)}{(s + P_1) ... (s + P_n)} = -1 + j0\]
+
+So \[\frac{K |s + Z_1| ... |s + Z_n|}{|s + P_1| ... |s + P_n|} = 1\]
+
+and \[\sum \angle (zeros \rightarrow s_1) - \sum \angle (poles \rightarrow s_1) = \pi(1 + 2n), n = 0,1,2,...\]
+
+When testing specific points, it is generally easier to start by checking the angle first.
+
 #+begin_examples
-\begin{align*}
-Q(s) = 1 + G(s)H(s) & = 1 + \frac{K \sum_{i=1}^{N_z} (s + Z_i)}{\sum_{j=1}^{N_p} (s + P_j)} \\
-& = 1 + \frac{K \sum_{i=1}^{N_z} (s + Z_i)}{\sum_{j=1}^{N_p} (s + P_j)}
-\end{align*}
+1. Given $G(s)H(s) = \frac{s+1}{s+3}$, check if $s_1 = 2 + j3$ is a pole of the closed-loop transfer function 
+   
+   [[./rootlocus1.png]]
 
-$KG(s)H(s) = -1 + j0$
+   $\theta_1 - \phi_1 = \tan^{-1} (\frac{3}{3}) \tan^{-1} (\frac{3}{5}) \approx 14^{\circ}$
 
-$|KG(s)H(s)| = 1$
+   Characteristic equation: $1 + KG(s)H(s) = 0$
 
-$$\angle KG(s)H(s) = \pi(1 + 2m), m=0,1,2,...$$
+   So $s_1$ is not a pole.
 #+end_examples
