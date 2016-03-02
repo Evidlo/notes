@@ -1,19 +1,71 @@
-*graph* - consists of vertices and edges
+#+TITLE: MA279 - Modern Mathematics in Society
+* Voting
+#+begin_definition
 
-:img:
-[[./eulergraph.png]]
-:end:
+*ballot* - ordering of candidates
+
+*method* - way of counting ballots
+
+*criterion* - requirements on the result of a method
+#+end_definition
+** Criteria
+*majority criteron* - a candidate with more than half of the votes should win
+
+*condorcet criterion* - a candidate that wins head-to-head with all others should win
+
+*plurality criterion* - a candidate with the most votes overall should win
+
+*monotonicity criterion* - a change in votes which only favors a candidate should help that candidate
+** Methods
+*** Plurality Method
+- the candidate with the most 1st place votes wins
+- fails condorcet criterion
+
+#+begin_examples
+1. Plurality with elimination fails monotonicity
+
+   | 7 | 8 | 10 | 4 |
+   |---+---+----+---|
+   | A | B | C  | A |
+   | B | C | A  | C |
+   | C | A | B  | B |
+
+   C wins
+
+   If 4 players vote for C instead of A...
+
+   | 7 | 8 | 14 |
+   |---+---+----|
+   | A | B | C  |
+   | B | C | A  |
+   | C | A | B  |
+ 
+   B wins, even though the votes for C increased
+#+end_examples
+*** Plurality Method with instant drop off
+- a candidate with more than half of 1st place votes wins, otherwise eliminate the last place candidate and repeat
+- fails condorcet
+*** Borda count method
+- assign weights to each position on the ballot and sum total points for each candidate
+- fails condorcet criterion
+*** Pairwise compare method (Copeland's method)
+- count number of permutations of candidate pairs where X beats Y, give X one point
+- the candidate with the most points wins
+- passes plurality and condorcet
 * Euler Paths
+[[./eulergraph.png]]
+
 *euler paths* - uses each edge once
 
 If G has an euler path, then
  - all vertices must have even degree except for start and end
  - start and end are either both odd or even
- :proof:
- If two points are odd and rest are even, delete 1 path which connects
- the two vertices.  Then all paths are even and you can find an euler circuit.
- Now use the deleted path to connect the odd vertices. 
- :END:
+
+#+begin_proof
+If two points are odd and rest are even, delete 1 path which connects
+the two vertices.  Then all paths are even and you can find an euler circuit.
+Now use the deleted path to connect the odd vertices. 
+#+end_proof
 
 *euler circuit* - uses each edge once and returns to start
 
@@ -23,17 +75,19 @@ If G has an euler circuit, then
 
 If G has an even degree, then
  - it can be seen as a union of circuits
- :HierHolzer:
- Start following circuit I until you reach circuit II
- Continue on circuit II until you reach III
- ...
- Continue on circuit m until you reach n
- Finish m
- Finish n
- ...
- Finish II
- Finish I
- :END:
+
+*Hierholzer Algorithm*
+#+begin_definition
+Start following circuit I until you reach circuit II
+Continue on circuit II until you reach III
+...
+Continue on circuit m until you reach n
+Finish m
+Finish n
+...
+Finish II
+Finish I
+#+end_definition
  
 *euler circuit* ⇔ G has even degree
 
@@ -41,13 +95,17 @@ If G has an even degree, then
 
 
 * Platonic Solids
-_platonic solids_
+#+begin_definition
+*platonic solids*
   - regular polygon faces
   - faces and edges all have same angles
   - same number of faces and edges meet at every vertex
+#+end_definition
 
-_semiplatonic solids_
+#+begin_definition
+*semiplatonic solids*
   - relax one of the rules for platonic solids
+#+end_definition
 
 * Bipartite Graphs
 *bipartite* - elements can be grouped into two non touching groups
@@ -129,9 +187,8 @@ If $q_i \leq \sqrt{\lfloor q_i\rfloor \lceil q_i \rceil}$, use $\lfloor q_i \rfl
 * Trees
 #+begin_definition
 *tree* - a connected graph with no loops
-#+end_definition
-#+begin_definition
 *spanning tree* - a tree which contains all vertices of a graph
+*leaf* - a vertex in a graph with degree one
 #+end_definition
 
 #+begin_theorem
@@ -141,9 +198,6 @@ _Properties of Trees_
 3. edges = vertices - 1
 #+end_theorem
 
-#+begin_definition
-*leaf* - a vertex in a graph with degree one
-#+end_definition
 #+begin_theorem
 All trees must have at least one leaf
 #+end_theorem
@@ -154,25 +208,34 @@ _Steps to create Prüfer Sequence from tree_
 2. delete and record index that leaf was attached to
 
 #+begin_examples
-#+attr_html: width 200px
 [[./prufer1.png]]
+
 sequence: {4,4}
 
-#+attr_html: width 200px
 [[./prufer2.png]]
+
 sequence {2,3}
 #+end_examples
 
 #+begin_examples
 _Steps to recreate graph from Prüfer sequence_
+
 S = {3,3} - Prüfer sequence
+
 L = {1,2,3,4} - list of vertices
+
 1. S = {3}
+
    L = {2,3,4}
+
    edge 1-3
+
 2. S = {}
+
    L = {3,4}
+
    edge 2-3
+
 3. edge 3-4
 #+end_examples
 
