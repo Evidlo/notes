@@ -1,7 +1,9 @@
-
+#+TITLE: CLEP Biology Review
 * Meiosis and Mitosis
 - _centromere_ - 
 
+  *chromosome* - has one centromere, might consist of 1 chromatid or 2 sister chromatids
+  *chromatid* - hunk of DNA, might be a chromosome, or a sister chromatid
 ** Haploid Cell
 - contains 1 set of all chromosomes (2 chromatids)
 - sex cells
@@ -17,8 +19,18 @@
 
 ** Meiosis
 - occurs in the sex cells of certain organisms
-- produces 4 haploids
+- produces 4 gametes (1 set of chromatids)
 - helps with genetic variation
+
+Interphase
+- cell is diploid (:w
+
+
+Meiosis I
+- prophase - chromosomes pair up
+- metaphase - chromosomes recombine
+- anaphase - chromosomes pulled apart (ana- - back)
+- telophase - cells split (telo- - end)
 
 * Cells
 ** Cellular Structures

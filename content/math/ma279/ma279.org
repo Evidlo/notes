@@ -56,7 +56,7 @@
 #+begin_examples
 1. Copeland's method fails irrelevant alternatives criterion
 
-   Original Ballot
+   _Original Ballot_
 
    | 2 | 6 | 4 | 1 | 1 | 4 | 4 |
    |---+---+---+---+---+---+---|
@@ -68,14 +68,20 @@
    
    Running Copeland's method:
    
-   A > *B*: 7
+   | A > *B*   |  7 |
+   | *A* > C   | 16 |
+   | *A* > D   | 13 |
+   | *A* > E   | 18 |
+   | B > *C*   | 10 |
+   | *B* > *D* | 11 |
+   | *B* > E   | 14 |
+   | *C* > D   | 12 |
+   | *D* > E   | 18 |
+   | C > *E*   | 10 |
 
-   A > C: 16
+   *A wins*
 
-*A* > D: 13
-
-*
-
+   _Modified Ballot (candidate C removed)_
 
    | 2 | 6 | 4 | 1 | 1 | 4 | 4 |
    |---+---+---+---+---+---+---|
@@ -84,7 +90,253 @@
    | B | D | D | D | B | E | B |
    | E | E | E | E | E | B | A |
     
+   Running Copeland's method
+
+   | A > *B*   |  7 |
+   | *A* > D   | 13 |
+   | *A* > E   | 18 |
+   | *B* > *D* | 11 |
+   | *B* > E   | 14 |
+   | *D* > E   | 18 |
+
+   *B wins*
+
+   *A* lost even though votes were changed in this candidate's favor
 #+end_examples
+
+** Counting Methods and Criterion Violations
+
+|                    | Majority | Condorcet | Monotonicity | Independence |
+|--------------------+----------+-----------+--------------+--------------|
+| Plurality          |          | fail      |              | fail         |
+| Borda              | fail     | fail      |              | fail         |
+| Plurality w/ elim. |          | fail      | fail         | fail         |
+| Copeland's         |          |           |              | fail         |
+
+#+begin_theorem
+*Ken Arrow's Theorem*
+
+All ballot methods fail at least one test
+#+end_theorem
+
+** Ranking and Extended Voting Methods
+*** Recursive
+ - use voting method, remove winner and repeat process
+*** Extended Methods
+- *borda* - rank by Borda number
+- *pairwise* - rank by number of comparisons won
+- *plurality* - rank by total first place votes
+** Weighted Voting
+Each players vote has a weight $w_n$ for either supporting or rejecting a motion
+
+[q : $w_1$, $w_2$,...]
+
+#+begin_definition
+- *quota* - minimum number of votes needed to carry a motion
+- *gridlock* - q is more than all votes
+- *anarchy* - the number of votes for and the number against a motion are more than the quota
+- *dictator* - a player that has more votes than the quota
+- *unsuspecting dummy* - a player that has no impact on the result
+  - eg [30: 10, 10, 10, 9]
+#+end_definition
+    
+*** Banzhaf Power Index
+Characterizes voting power of a player
+
+\[\beta_i = \frac{B_i}{B_1 + ... + B_N}\]
+
+where $B_i$ is the number of coalitions where player i is a critical player (removing them would cause the coalition to lose)
+
+#+begin_examples
+1. [5: 3, 2, 1, 1]
+
+   Winning coalitions: (with critical players bolded)
+
+   | *A* B C D |
+   | *A B* C   |
+   | *A B*     |
+   | *A C D*   |
+   | *A B* D   |
+
+  $B_A = 5$ 
+
+  $B_B = 3$ 
+
+  $B_C = 1$ 
+
+  $B_D = 1$ 
+   
+  \[\beta_A = \frac{5}{5 + 3 + 1 + 1} = \frac{1}{2}\]
+#+end_examples
+
+* Division
+#+begin_definition
+*goods/booty* - things to be divided amongst players
+
+*player preferences* - how each player values goods
+
+*fair share* - at least $\frac{1}{n}$ of the goods available to a player
+
+*divisible goods* - money, pizza, land, etc.
+
+*indivisible goods* - house, car, horse, etc.
+#+end_definition
+
+** Continuous Division
+*** Divider-Chooser
+- Two players.  Player 1 divides the goods and player 2 chooses which share to take.
+- Chooser always has an advantage.  They can choose the share that caters to their own value system
+*** Lone Divider
+- One player divides the booty into equal shares.  A third party must allot the shares so that all players get what they consider a fair share
+
+
+#+begin_theorem
+*Wedding Theory*
+- N boys want to marry N girls
+- boys can only marry girls they know
+
+There can't be a good match if K players collectively like less than K unique items
+#+end_theorem
+
+#+begin_examples
+1. Divider has broken booty into shares I, II and III.  Fair shares for each player have been marked.
+
+   |       | I             | II            | III           |
+   | $D$   | $\frac{1}{3}$ | $\frac{1}{3}$ | $\frac{1}{3}$ |
+   | $C_1$ |               | fair          | fair          |
+   | $C_2$ | fair          | fair          |               |
+
+   - give I to $C_2$
+   - give II to $D$
+   - give III to $C_1$
+
+2. Divider has broken booty into shares I, II and III, IV.  Fair shares for each player have been marked.
+
+   |       | I             | II            | III           | IV            |
+   |-------+---------------+---------------+---------------+---------------|
+   | $D$   | $\frac{1}{4}$ | $\frac{1}{4}$ | $\frac{1}{4}$ | $\frac{1}{4}$ |
+   | $C_1$ |               |               |               | fair          |
+   | $C_2$ |               | fair          | fair          |               |
+   | $C_3$ |               |               |               | fair          |
+
+   - give I to $D$
+   - give II or III to $C_2$
+   - give II, III, or IV to $C_1$, $C_2$
+#+end_examples
+
+*** Lone Chooser
+1. divide booty into 2 fair shares using above methods
+2. $D_1$ and $D_2$ each divide their share into 3 fair shares
+3. $C$ chooses $\frac{1}{3}$ of a share from $D_1$ and $D_2$
+
+*** Last Diminisher
+1. Player 1 takes a fair share of the booty and passes it to Player 2.
+2. Player 2 either cuts down the share to what he thinks is fair, or doesn't change it and passes it down
+3. Share continues to Player N.  The share goes to the last player who considered it fair
+
+This is fair to the last player because all pieces he rejected were less than a fair share, so the remaining piece
+must be a fair share.
+
+** Discrete Division
+*** Markers
+1. Put all goods in a line and have each player place N-1 markers to divide the goods into fair shares.
+   [[./graphic]]
+2. Give the first share to Player A
+   [[./graphic]]
+3. Remove the all the markers for the first share and Player A's markers. Repeat for Players B,...,N
+
+Player A always gets exactly a fair share
+
+Other players get at least a fair share
+*** Sealed Bids
+- N players bid for N-1 items
+- Top bid for each item wins the item
+- The item winners pay back the difference of the value of the item they won and what they consider a fair share
+   $(\text{won item value} - \frac{\text{total item values}{N})$
+- The amount payed back can be a negative value
+- the value of a loser's item is 0
+- The leftover money is always positive
+* Apportionment
+How do we assign the seats in Congress to populations of states?
+
+The sum of all shares of seats must equal the total seats available.
+
+#+begin_definition
+- $A_1,...,A_N$ - states to assign seats to
+- $P_i$ - population of each state
+- $M$ - seats in congress
+- $SD = \frac{P}{M}$ - standard divisor (people corresponding to each state)
+- $q_i = \frac{P_i}{SD}$ - standard quota (fair share of seats for a state)
+
+*Quota Criterion*
+
+Each state should get either $\lfloor q_i \rfloor$ or $\lceil q_i \rceil$ seats
+#+end_definition
+
+** Hamilton's Method
+1. Find the fair share for each state ($q_i$) and give them the floor
+2. Assign the remaining seats to the states with the largest leftover fraction ($q_i - \lfloor q_i \rfloor$)
+
+#+begin_examples
+1. 
+   |                       |     A |      B |    C |     D |    E |     F | $\sum$ |
+   |-----------------------+-------+--------+------+-------+------+-------+--------|
+   | $P_i$                 |  1646 |   6936 |  154 |  2091 |  685 |   988 |  12500 |
+   | $q_i$                 | 32.92 | 138.72 | 3.08 | 41.82 | 13.7 | 19.76 |    250 |
+   | $\lfloor q_i \rfloor$ |    32 |    138 |    3 |    41 |   13 |    19 | 246    |
+
+   Give 4 remaining seats to $A, D, F, B$
+#+end_examples
+
+#+begin_theorem
+With a decrease in $M$ (the number of seats available), 
+it is possible for the number of seats assigned to a state to increase.
+#+end_theorem
+** Jefferson's Method
+- population and $M$ are fixed
+- modify $SD = \frac{P}{M}$ so that \[\sum \lfloor q_i \rfloor = \sum \lfloor ( \frac{P_i}{P} M ) \rfloor = M\]
+- new $SD$ \leq old $SD$
+
+#+begin_examples
+1. 
+   |                       |     A |      B |    C |     D |     E |     F | $\sum$ |
+   |-----------------------+-------+--------+------+-------+-------+-------+--------|
+   | new $q_i$             | 33.25 | 140.12 | 3.11 | 42.24 | 13.84 | 19.96 |        |
+   | $\lfloor q_i \rfloor$ |    33 |    140 |    3 |    42 |    13 |    19 |    250 |
+
+   2 extra seats for $B$ violates quota criterion
+#+end_examples
+
+
+** Adam's Method
+- identical to Jefferson's method, but using ceiling
+- modify $SD = \frac{P}{M}$ so that \[\sum \lceil q_i \rceil = \sum \lceil ( \frac{P_i}{P} M ) \rceil = M\]
+- new $SD$ \geq old $SD$
+
+#+begin_examples
+1. 
+   |                       |  A |   B | C |  D |  E |  F | $\sum$ |
+   |-----------------------+----+-----+---+----+----+----+--------|
+   | $\lceil q_i \rceil$ | 33 | 137 | 4 | 42 | 14 | 20 |    250 |
+#+end_examples
+
+** Webster's Method
+- identical to Adam's and Jefferson's, but using rounding
+- modify $SD = \frac{P}{M}$ so that \[\sum \text{round} (q_i) = \sum \text{round} ( \frac{P_i}{P} M ) = M\]
+
+#+begin_examples
+1. 
+   |                     |     A |      B |    C |     D |     E |     F | $\sum$ |
+   |---------------------+-------+--------+------+-------+-------+-------+--------|
+   | new $q_i$           | 32.85 | 138.44 | 3.07 | 41.74 | 13.67 | 19.72 |        |
+   | $\lceil q_i \rceil$ |    33 |    138 |    3 |    42 |    14 |    20 |    250 |
+#+end_examples
+
+** Huntington-Hill
+- similar to webster, but rounding using geometric mean
+
+- if $\frac{P_i}{P} * M \geq \sqrt{N(N+1)}$ use ceiling
+- if $\frac{P_i}{P} * M \leq \sqrt{N(N+1)}$ use floor
 * Euler Paths
 [[./eulergraph.png]]
 
@@ -126,7 +378,6 @@ Finish I
 
 *fluery algorithm*
 
-
 * Platonic Solids
 #+begin_definition
 *platonic solids*
@@ -142,9 +393,7 @@ Finish I
 
 * Bipartite Graphs
 *bipartite* - elements can be grouped into two non touching groups
-:img:
 [[./bipartite.png]]
-:end:
 * Traveling Salesman
 Given some locatoins, find a pth through them that is minimal.
 By giving each location a weight, we can give minimal a concrete meaning.

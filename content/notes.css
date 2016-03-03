@@ -48,7 +48,7 @@ pre.sourceCode {
 }
 
 .proof::before {
-    content: "Proof";
+    /* content: "Proof"; */
     border: 1px solid black;
 }
 
@@ -60,12 +60,16 @@ p {
 
 /*override default in fancy.css*/
 h1 {
-    color:black;
+    color: black;
 }
 
 /*set document header to white*/
 h1.title {
-    color:white;
+    color: white;
+}
+
+strong {
+    font-weight: bold;
 }
 
 /* ---------- tables and lists ---------*
