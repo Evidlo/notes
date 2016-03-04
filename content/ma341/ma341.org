@@ -487,10 +487,11 @@ Since $(s_n)$ is increasing and unbounded, it is divergent
 #+begin_examples
 1. Let $x_n = \frac{1}{n^r}, r \geq 0$
 
-   then $s_n = \sum_{k=1}^{\infty} \frac{1}{k^r} \
+   then 
 
+   \begin{align*}
+   s_n = \sum_{k=1}^{\infty} \frac{1}{k^r} \
    & = 1 + \frac{1}{2^r} + ...
-
    \end{align*}
 
    *case* $0 \leq r \leq 1$
@@ -513,3 +514,99 @@ Since $(s_n)$ is increasing and unbounded, it is divergent
 
    We conclude $$\sum_{k=1}^{\infty} \frac{1}{n^r} < \infty$$ if and and only if $r > 1$
 #+end_examples
+* Limits
+** Limits of functions
+#+begin_definition
+*cluster point*
+
+[[figure]]
+
+Let $A \subseteq \mathbb{R}$ be a non empty set. 
+
+Then $a \in \mathbb{R}$ is a cluster point of A if:
+
+- if $\forall \varepsilon > 0, \exists c \in A$ s.t. $c \neq a$
+
+  $|c - a| < \varepsilon$
+#+end_definition
+
+#+begin_examples
+1. Let $A = \{ \frac{1}{n}, n \in \mathbb{N}\}$
+
+   0 is the only cluster point for the set $A$
+
+2. Let $A = \{n | n \in \mathbb{N}\}$
+
+   There are no cluster points in the set.  We can always find a smaller $\varepsilon$ which excludes $c$
+
+3. Let $A = \mathbb{Q} = \{\frac{x}{y} | x,y \in \mathbb{N}\}$
+
+   The set of cluster points is $\mathbb{R}$
+
+   This is because $\mathbb{Q}$ is dense in $\mathbb{R}$
+#+end_examples
+
+#+begin_definition
+*function*
+
+#+end_definition
+
+#+begin_definition
+*limit*
+
+$f$ admits a limit $L \in \mathbb{R}$ if:
+
+$\forall \varepsilon > 0$, $\exists \zeta > 0$,
+
+ s.t. $|x - a| \leq \zeta \Rightarrow |f(x) - L| \leq \varepsilon$
+#+end_definition
+
+#+begin_examples
+[[f=x figure]]
+
+Let $f(x) = x$
+
+Let $a \in \mathbb{R}$, $\varepsilon > 0$
+
+if $|x - a| \leq \varepsilon$,
+
+then $|f(x) - a| \leq \varepsilon$
+#+end_examples
+
+#+begin_theorem
+_Uniqueness of Limit_
+
+Let $A \subseteq \mathbb{R}$ be a nonempty set
+
+Let $f: A \to \mathbb{R}$ and let $c \in \mathbb{R}$ be a cluster point of $A$
+
+Assume $f$ has a limit $L$ at $a$ and also has limit $L'$ at $a$
+
+Then $L = L'$
+
+then $L = \lim_{x \to a} f(x)$ is called the limit of $f$ at $a$
+#+end_theorem
+
+#+begin_proof
+Let $\varepsilon > 0$
+
+Since $L$ is a limit, $\exists \zeta > 0$ s.t.
+
+$|x - a| \leq \zeta \Rightarrow |f(x) - L| \leq \varepsilon$
+
+Since $L'$ is a limit, $\exists \zeta' > 0$ s.t.
+
+$|x - a| \leq \zeta' \Rightarrow |f(x) - L'| \leq \varepsilon$
+
+Let $x \in \mathbb{R}$ s.t.
+
+$|x - a| \leq \min(\zeta, \zeta')$
+
+Then 
+
+\begin{align*}
+|L - L'| & \leq |L - f(x) + f(x) - L'| \\
+& \leq |L - f(x)| + |f(x) - L| \\
+& \leq \varepsilon + \varepsilon \leq 2 \varepsilon
+\end{align*}
+#+end_proof

@@ -1,4 +1,5 @@
-#+TITLE: ECE382 - Control Systems - Spring 2016
+#+title: ECE382 - Control Systems - Spring 2016
+
 * Poles and Zeros
 ** Open loop
 
@@ -365,4 +366,34 @@ When testing specific points, it is generally easier to start by checking the an
    Characteristic equation: $1 + KG(s)H(s) = 0$
 
    So $s_1$ is not a pole.
+#+end_examples
+** Constructing root locus
+Rules
+1. root locus has 1 branch for every pole of the characteristic equation (zero of closed loop)
+2. branches start at poles and ends at zeros
+3. root locus is defined for areas on the real axis where the number of poles and zeros to the right is odd
+4. the asymptotes of the zeros at infinity have the angle $$\phi_i = \frac{180^\circ (1 + 2 q)}{N_p - N_i}, i = 0, 1, 2, ..., (N_p - N_z -1)$$ where $N_p,N_z$ are number of poles, zeros
+5. centroid: $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z}$
+6. branches intersect the real axis where K is at a local min/max ($\frac{dK}{ds} = 0$)  (breakaway point)
+
+#+begin_examples
+1. Let $G(s)H(s) = \frac{K}{s (s + 1) (s + 2)}$
+
+   $N_p = 3, N_z = 0$
+
+   From rule 3, the locus is defined on the real axis for $(-\infty, -2) \cup (-1, 0)$
+
+   From rule 5, The centroid is located at $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1 + 2 + 0}{3} = -1$
+
+   From rule 4, the angles of the poles at infinite from the centroid are $\phi_i = \frac{180^\circ (1 + 2 q)}{N_p - N_i}, (q = 0,1,2) = 60^\circ, 180^\circ, 300^\circ$
+
+   Breakaway point: $1 + KG(s)H(s) = 0 \rightarrow K = \frac{-1}{G(s)H(s)}$
+
+   \[\frac{d}{ds} [\frac{1}{s (s + 1) (s + 2)}] = \frac{-(1) (3s^2 + 6s + 2)}{[s (s + 1) (s + 2)]^2} = 0\]
+
+   so  $s_1,s_2 = \frac{-6 \pm \sqrt{36 - 24}}{6} \approx -0.42, -1.58$
+
+   but $-1.58$ is not defined on the real axis, so it is thrown away
+   
+   [[./rootlocus_example.png]] 
 #+end_examples

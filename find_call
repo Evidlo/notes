@@ -3,19 +3,15 @@
 
 dir=$(dirname $1)
 file=$(basename $1)
-outdir=out/$dir
+outdir=~/resources/evanw.org-static/out/$dir
 
+# build org files
 if [[ $file == *.org ]]
 then
-    outdir=out/$dir
-    outfile=$(basename $file .org).html
-    # echo "$dir/$file"
-    # echo "$outdir/$outfile"
-    # echo "#######"
     mkdir -p "$outdir"
-    pandoc --template=test.template -S -s --mathjax --toc "$dir/$file" -o "$outdir/$outfile"
-    # pandoc -S -s --toc -c /out/notes.css --mathjax "$dir/$file" -o "$outdir/$outfile"
+    pandoc --template=notes.pandoc_template -S -s --mathjax --toc "$dir/$file" -o "$outdir/index.html"
     echo "built $file"
+# copy anything else
 else
     mkdir -p "$outdir"
     cp "$dir/$file" "$outdir/"

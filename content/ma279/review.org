@@ -1,0 +1,90 @@
+#+TITLE: MA279 Review
+
+* Voting
+** Vocabulary
+- candidate
+- ballot
+- election
+- preference schedule
+** Methods
+- plurality
+- borda count
+- plurality with instant run off
+- pairwise comparison
+** Criteria
+- majority
+- condorcet
+- monotonicity
+- independence of irrelevant alternatives
+** Arrows Theorem
+- all methods must fail at least one criterion
+* Ranking
+- extension of voting methods
+- recursive (repeat voting methods)
+** Weighted Voting
+** Vocabulary
+- players, weights, quote, dictator, veto power, unsuspecting dummy
+** Banzhaf Power Index
+- quantify voting power
+*** Vocabulary
+- coalition, winning coalition, grand coalition, critical players
+** Shapley-shubik index
+- sequential coalition
+- mult. rule for counting indep xxxx
+* Division
+** Vocabulary
+- players
+- goods
+- value system
+- fair share
+- continuous/discrete division
+** Assumptions
+- rational players
+- preferences are private
+** Methods
+*** Continuous
+- divider-choose
+  - lone divider
+  - lone chooser
+  - last diminisher
+*** Discrete
+- sealed bids
+- markers
+* Apportionment
+- quota rule
+** Vocabulary
+- states, seats, populations, upper/lower standard quote
+** Methods
+- hamilton, jefferson, adams
+- webster
+** Paradoxes
+- alabama
+- new state
+- population
+* Graphs
+** Euler circuits
+*** Vocabulary
+- graph, vertex, edge, loop, degree, path, circuit
+** Types
+- complete, bipartite
+- bridge, adjacency matrix
+- wedding theorem, euler's theorem
+Fleury, Hierholzer
+** Hamilton circuits
+- hamilton circuit, hamilton path
+- np hard to test
+** Traveling salesman
+- shortest path
+*** Methods
+- nearest neighbor, cheapest link
+** Spanning trees
+- counting number in complete graph
+- prufer sequence
+** Networks
+- kruskal's algorithm
+- mwst
+*** vocabulary
+- tree, leaf
+* Characteristics
+- E+I = V, only bridges, no loops - all equivalent
+- Shortest networks: steiner points

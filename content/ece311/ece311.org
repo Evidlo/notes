@@ -124,9 +124,14 @@ W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
 ** Ampere's Force Law
 Magnetic field from point current
 
-Magnetic Field Intensity
 #+begin_definition
-\[dH = \frac{I \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2} \frac{A}{m}\]
+*Magnetic Field Intensity*
+
+Contribution from point current
+
+\[\overrightarrow{dH} = \frac{I \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2} \frac{A}{m}\]
+
+\[\overrightarrow{H} = \oint \overrightarrow{dH} \frac{A}{m}\]
 #+end_definition
 
 \[dF = \mu_0 I_1 \overrightarrow{dl_1} \times \overrightarrow{dH}\]
@@ -152,27 +157,81 @@ Magnetic Field Intensity
    \[\overrightarrow{F_1} = \int_0^L \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi} = - \frac{\mu_0 I_1 I_2 L}{4 \pi R} \hat{a_\rho}\]
 #+end_examples
 
-* Closed paths in magnetic fields
+* Ampere's Circuital Law
 Around current
-$xxxxxxx$
 
 [[./magflux_integral1.png]]
 
+$\oint H \cdot \overrightarrow{dl} = I$
+
+#+begin_derivation
 \begin{align*}   
 \oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \pi \rho} \hat{a_{\phi}} \cdot ( d\rho \hat{a_{\rho}} + \rho d\phi \hat{a_{\phi}} + dz \hat{a_z}) \\
 & = \oint \frac{I}{2 \phi \rho} \rho d\phi
 \end{align*}
-
-$xxxxxxx$
+#+end_derivation
 
 Outside of current
 
 [[./magflux_integral.png]]
 
+$\oint H \cdot \overrightarrow{dl} = 0$
+
+#+begin_derivation
 \begin{align*}   
 \oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \phi \rho} \rho d\phi \\
 & = \int_{\phi_1}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_1}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi \\
 & = 0
 \end{align*}
+#+end_derivation
 
-$xxxxxxx$
+*** Magnetic field intensity of single wire
+$\oint H(\rho) \hat{a_{\phi}} \cdot \overrightarrow{dl} = I_{enc}$
+
+$\oint H(\rho) \hat{a_{\phi}} \cdot (d\rho \hat{a_{\rho}} + \rho d\phi \hat{a_{phi}} + dz \hat{a_z})  = I_{enc}$
+
+$\oint H(\rho) \rho d\phi = I$
+
+$H(\rho) \rho \oint_0^{2\pi} d\phi = I$
+
+$H(\rho) \rho 2 \pi = I$
+
+$H(\rho) = \frac{I}{\rho 2 \pi}$
+
+*** Magnetic field intensity of slab of current
+
+$K = J \Delta H$
+
+slab figure ipe
+
+#+begin_derivation
+
+ipe figure
+A B
++++
+D C
+
+\begin{eqnarray*}
+\oint \overrightarrow{H(z)} \cdot \overrightarrow{dl} = I_{enc} \\
+\oint_A^B \overrightarrow{H(z)} \cdot \overrightarrow{dl} + \int_B^C \overrightarrow{H(z)} \cdot \overrightarrow{dl} + \int_C^D \overrightarrow{H(z)} \cdot \overrightarrow{dl} + \int_D^A \overrightarrow{H(z)} \cdot \overrightarrow{dl}= I_{enc} \\
+\int_A^B \overrightarrow{H(z)} \cdot \overrightarrow{dl} + 0 + \int_C^D \overrightarrow{H(z)} \cdot \overrightarrow{dl} + 0 = I_{enc}\\
+\overrightarrow{H(z)} L  + \overrightarrow{H(z)} L = I_{enc}\\
+\overrightarrow{H(z)} = \frac{I_{enc}}{2 L} = \frac{J \Delta z L}{2 L} = \frac{J \Delta z}{2} = \frac{K}{2}
+\end{eqnarray*}
+
+Where $K$ is called the sheet charge density
+#+end_derivation
+
+*** Magnetic field intensity of cylinder of current
+Many point currents arranged in a circle with radius $a$ and $I_T = K(2 \pi)(a)$
+
+   \begin{eqnarray*}   
+   \oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \overrightarrow{dl} = \oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \rho d\phi = H(\rho) 2 \pi \rho = I_T \\
+   H(\rho) = \frac{I}{2 \pi \rho}
+   \end{eqnarray*}
+
+   for $\phi \geq a$
+
+   $H(\rho) = 0$
+
+   for $\phi \leq a$
