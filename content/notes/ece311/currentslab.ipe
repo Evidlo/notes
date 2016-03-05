@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160305145909" modified="D:20160305150842"/>
+<info created="D:20160305145909" modified="D:20160305151605"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -426,10 +426,10 @@ h
 91.9526 832.022 l
 h
 </path>
-<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="43.7207 832.292" stroke="black" type="label" valign="baseline">A</text>
-<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="91.0504 832.292" stroke="black" type="label" valign="baseline">B</text>
-<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="92.0682 787.761" stroke="black" type="label" valign="baseline">C</text>
-<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="43.7207 788.015" stroke="black" type="label" valign="baseline">D</text>
+<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="43.7207 832.292" stroke="black" type="label" width="7.472" height="6.808" depth="0" valign="baseline">A</text>
+<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="91.0504 832.292" stroke="black" type="label" width="7.057" height="6.808" depth="0" valign="baseline">B</text>
+<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="92.0682 787.761" stroke="black" type="label" width="7.195" height="6.808" depth="0" valign="baseline">C</text>
+<text matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" transformations="translations" pos="43.7207 788.015" stroke="black" type="label" width="7.61" height="6.808" depth="0" valign="baseline">D</text>
 <path matrix="2.04043 0 0 2.34537 -3.88082 -1124.29" stroke="gray" arrow="normal/tiny">
 16 824 m
 40 824 l
