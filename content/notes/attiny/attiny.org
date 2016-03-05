@@ -1,7 +1,5 @@
-#+OPTIONS: ^:nil
 #+attr_html: :width 600
 [[./attiny85.jpg]]
-
 
 * Register Summary
 ** DDRB - Port B Data Direction Register

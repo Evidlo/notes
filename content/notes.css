@@ -89,8 +89,6 @@ ol {
 
 table {
     border-collapse: collapse;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
 }
 td, th {
     padding: 10px;
@@ -110,8 +108,8 @@ img{
 
 /* ----------- headlines ------------- */
 h1 {
-    text-decoration: underline;
     text-align:center;
+    border-bottom: 2px black solid;
 }
 h2 {
     text-decoration: underline;
