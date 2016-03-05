@@ -79,13 +79,11 @@ deriv
 $M_P = e^{\dfrac{-\pi \zeta}{\sqrt{1 - \zeta^2}}}$ - percent overshoot
 
 #+begin_derivation
-$$
-\begin{aligned}
+$$ \begin{aligned}
 M_P & = \frac{c(t_p) - c(\infty)}{c(\infty)} \\
     & = c(t_p) \\
     & = e^{\dfrac{-\pi \zeta}{\sqrt{1 - \zeta^2}}}
-\end{aligned}
-$$
+\end{aligned} $$
 #+end_derivation
 
 $t_p = \frac{\pi}{\omega_d}$ - time to first overshoot
@@ -102,13 +100,11 @@ $t_r$ - rise time ( to 100% of target value )
 *** Settling Time
 $t_s = \frac{4}{\zeta \omega_n}$ - settling time
 #+begin_derivation
-$$
-\begin{aligned}
+$$ \begin{aligned}
 e^{-\zeta \omega_n t} = .02 \\
 \Rightarrow t & = \frac{-\ln(.02)}{\zeta \omega_n} \\
 t & \approx \frac{4}{\zeta \omega_n}
-\end{aligned}
-$$
+\end{aligned} $$
 #+end_derivation
 
 Damped sinusoid with unit step input
@@ -152,14 +148,12 @@ _steady state error_
 $e_{ss} = \frac{k}{1 + \lim_{s \rightarrow 0} k_p}$
 #+end_definition
 #+begin_derivation
-$$
-\begin{aligned}
+$$ \begin{aligned}
 e_{ss} & = \lim_{s \rightarrow 0} s E(s) \\
 & = \lim_{s \rightarrow 0} \frac{k}{1 + G(s)H(s)} \\
 & = \frac{k}{1 + \lim_{s \rightarrow 0} G(s)H(s)} \\
 & = \frac{k}{1 + \lim_{s \rightarrow 0} k_p}
-\end{aligned}
-$$
+\end{aligned} $$
 #+end_derivation
 
 _static error constant_ (error contribution from a step input)
@@ -213,12 +207,10 @@ _bibo_ - bounded input bounded output
 
    So $C(s) = \frac{2}{s(s+1)(s+3)} = \frac{A}{s} + \frac{B}{s+1} + \frac{C}{s+2}$
    
-   $$
-   \begin{aligned}
+   $$ \begin{aligned}
    Q(s) & = 1 + G(s) = 0 \\
    & = \frac{s(s+1)(s+2) + k}{s(s+1)(s+2)} = 0
-   \end{aligned}
-   $$
+   \end{aligned} $$
 
    Since the closed-loop poles (num of char eqn) are in LHP, system is stable.
    
@@ -259,13 +251,11 @@ Construct rest of table
 | $s^{n-4}$ | $d_1$ | $d_2$ | ... | $d_{n+1}$ |
 
 Where 
-$$
-\begin{aligned}
+$$ \begin{aligned}
 b_1 & = \frac{a_{n_1}a_{n-2} - a_na_{n-3}}{a_{n-1}} \\
 b_2 & = \frac{a_{n_1}a_{n-2} - a_na_{n-4}}{a_{n-2}} \\
 ...
-\end{aligned}
-$$
+\end{aligned} $$
 
 If $b_n$ is zero, use $\varepsilon$ as a placeholder for a positive number.
 Assume blank entries to be 0.

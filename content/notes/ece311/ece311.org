@@ -32,29 +32,23 @@ $$ V_{AB} = V_A - V_B = - \int_A^B E \cdot ds $$
 ** Bound charges
 $\overrightarrow{E_D} = \frac{\overrightarrow{D} - \overrightarrow{P}}{\varepsilon_0}$
 
-$$
-\begin{aligned}
+$$ \begin{aligned}
 \overrightarrow{P} &= \varepsilon_0 x_e \overrightarrow{E} \\
 &= \varepsilon_0(1 + x_e)\overrightarrow{E}
-\end{aligned}
-$$
+\end{aligned} $$
 
-$$
-\begin{aligned}
+$$ \begin{aligned}
 \overrightarrow{D} & = \varepsilon_0 \overrightarrow{E} + \varepsilon_0 x_e \overrightarrow{E} \\
 & = \varepsilon_0 (1 + x_e) \overrightarrow{E} \\
 & = \varepsilon_0 \varepsilon_r \overrightarrow{E}
-\end{aligned}
-$$
+\end{aligned} $$
 
 ** Coulomb's Law in Dielectric
-$$
-\begin{aligned}
+$$ \begin{aligned}
 \overrightarrow{D} &= \frac{q_2}{4\pi r^2} \hat{a_r}^2 \\
 \overrightarrow{E} &= \frac{q_2}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2 \\
 \overrightarrow{F_{1,2}} &= \frac{q_2 q_1}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2
-\end{aligned}
-$$
+\end{aligned} $$
 
 * Capacitance
 For a charged body, the work required to approach the body scales with charge,
@@ -73,12 +67,10 @@ $C = \frac{Q}{V}$
    \[\overrightarrow{E} = \frac{\overrightarrow{D}}{\varepsilon_0 \varepsilon_r}
    = \frac{Q}{\varepsilon_0 \varepsilon_r A} \hat{a_x}\]
 
-   $$
-   \begin{aligned}
+   $$ \begin{aligned}
    V &= - \int_0^d \overrightarrow{E} \overrightarrow{dl} = \int_0^d \frac{Q}{\varepsilon_0 \varepsilon_r} \hat{a_x} \overrightarrow{dx} \\
    &= \frac{Q}{\varepsilon_0 \varepsilon_r A} d
-   \end{aligned}
-   $$
+   \end{aligned} $$
 
    $C = \frac{Q}{V} = \frac{\varepsilon_0 \varepsilon_r A}{d}$
    
@@ -107,13 +99,11 @@ $C = \frac{Q}{V}$
 
    $E_1 = E_2 \frac{\varepsilon_2}{\varepsilon_1}$
 
-   $$
-   \begin{aligned}
+   $$ \begin{aligned}
    V & = - \int_{d_1} \overrightarrow{E_1} \overrightarrow{dl} - \int_{d_2} \overrightarrow{E_2} \overrightarrow{dl} \\
    & = - \int_{d_1} \overrightarrow{E_2} \frac{\varepsilon_2}{\varepsilon_1} \overrightarrow{dl} - \int_{d_2} \overrightarrow{E_2} \overrightarrow{dl} \\
    & = d_2 E_2 + d_1 E_2 \frac{\varepsilon_2}{\varepsilon_1}
-   \end{aligned}
-   $$
+   \end{aligned} $$
 
    \[E_2 = \frac{V}{d_2 + d_1 \frac{\varepsilon_2}{\varepsilon_1}}\]
    
@@ -124,13 +114,11 @@ $C = \frac{Q}{V}$
 $W = \frac{1}{2} CV^2$
 
 #+begin_derivation
-$$
-\begin{aligned}
+$$ \begin{aligned}
 W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
 & = \frac{1}{C} [\frac{1}{2} q(t)^2]_0^Q = \frac{Q^2}{2C} \\
 & = \frac{(CV)^2}{2C} = \frac{1}{2}CV^2
-\end{aligned}
-$$
+\end{aligned} $$
 #+end_derivation
 * Magnetic Fields
 ** Ampere's Force Law
@@ -177,12 +165,10 @@ Around current
 $\oint H \cdot \overrightarrow{dl} = I$
 
 #+begin_derivation
-$$ 
-\begin{aligned} 
+$$ \begin{aligned} 
 \oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \pi \rho} \hat{a_{\phi}} \cdot ( d\rho \hat{a_{\rho}} + \rho d\phi \hat{a_{\phi}} + dz \hat{a_z}) \\ 
 & = \oint \frac{I}{2 \phi \rho} \rho d\phi 
-\end{aligned} 
-$$
+\end{aligned} $$
 #+end_derivation
 
 Outside of current
@@ -192,13 +178,11 @@ Outside of current
 $\oint H \cdot \overrightarrow{dl} = 0$
 
 #+begin_derivation
-$$
-\begin{aligned}   
+$$ \begin{aligned}   
 \oint H \cdot \overrightarrow{dl} & = \oint \frac{I}{2 \phi \rho} \rho d\phi \\
 & = \int_{\phi_1}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_1}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_2} \frac{I}{2 \phi \rho} \rho d\phi + \int_{\phi_2}^{\phi_1} \frac{I}{2 \phi \rho} \rho d\phi \\
 & = 0
-\end{aligned}
-$$
+\end{aligned} $$
 #+end_derivation
 
 *** Magnetic field intensity of single wire
