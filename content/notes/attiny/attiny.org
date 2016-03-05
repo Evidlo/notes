@@ -1,21 +1,23 @@
+#+OPTIONS: ^:nil
 #+attr_html: :width 600
 [[./attiny85.jpg]]
 
 
-* DDRB - Port B Data Direction Register
+* Register Summary
+** DDRB - Port B Data Direction Register
 
 |------+------+------+------+------+------|
 | DDB5 | DDB4 | DDB3 | DDB2 | DDB1 | DDB0 |
 |------+------+------+------+------+------|
 
-* PORTB - Port B Data Register
+** PORTB - Port B Data Register
 
 |--------+--------+--------+--------+--------+--------|
 | PORTB5 | PORTB4 | PORTB3 | PORTB2 | PORTB1 | PORTB0 |
 |--------+--------+--------+--------+--------+--------|
 
-* TCCR0 - Timer 0 Counter Control Register (8bit)
-** Counter Select -  set timer prescaler
+** TCCR0 - Timer 0 Counter Control Register (8bit)
+*** Counter Select -  set timer prescaler
 
 #+begin_settings
 |------+------+------+---------------|
@@ -30,7 +32,7 @@
 |------+------+------+---------------|
 #+end_settings
 
-** Wave Form Generation
+*** Wave Form Generation
 
 #+begin_settings
 |-------+-------+-------------------|
@@ -53,7 +55,7 @@
 
 *OC0B* - output from compare
 
-* TCCR1 - Timer 1 Counter Control Register (16bit)
+** TCCR1 - Timer 1 Counter Control Register (16bit)
 
 |------+-------+--------+--------+------+------+------+------|
 | CTC1 | PWM1A | COM1A1 | COM1A0 | CS13 | CS12 | CS11 | CS10 |
@@ -97,17 +99,17 @@ Timer counts up to TOP then resets to BOTTOM.
 * Interrupts
 *sei()* - enable interrupts
 ** TIMSK - Timer Interrupt Mask Register
-*0CIE1A* - call TIMER1_COMPA_vect compare match
+*0CIE1A* - call TIMER1\_COMPA\_vect compare match
 
-*0CIE1B* - call TIMER1_COMPB_vect compare match
+*0CIE1B* - call TIMER1\_COMPB\_vect compare match
 
-*0CIE0A* - call TIMER0_COMPA_vect compare match
+*0CIE0A* - call TIMER0\_COMPA\_vect compare match
 
-*0CIE0B* - call TIMER0_COMPB_vect compare match
+*0CIE0B* - call TIMER0\_COMPB\_vect compare match
 
-*TOIE1* - call TIMER1_OVF_vect on timer overflow
+*TOIE1* - call TIMER1\_OVF\_vect on timer overflow
 
-*TOIE0* - call TIMER0_OVF_vect on timer overflow
+*TOIE0* - call TIMER0\_OVF\_vect on timer overflow
 ** Hardware interrupts
 *** External interrupts
 Only available to certain pins (only INT0 on attiny85)
@@ -174,11 +176,11 @@ ISR(PCINT0_vect)
 ** Timer interrupts
 *TIMSK* - timer interrupt mask
 
-*TIMER1_COMPA_vect* - call on compare match with OCR1A
+*TIMER1\_COMPA\_vect* - call on compare match with OCR1A
 
-*TIMER1_COMPB_vect* - call on compare match with OCR1B
+*TIMER1\_COMPB\_vect* - call on compare match with OCR1B
 
-*TIMER1_OVF_vect* - call when TOP is reached
+*TIMER1\_OVF\_vect* - call when TOP is reached
 
 #+BEGIN_SRC c
 #include <avr/io.h>

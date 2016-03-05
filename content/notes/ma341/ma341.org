@@ -224,11 +224,13 @@ $\exists K(\varepsilon) \geq 0$ such that $\forall n \geq K(\varepsilon)$ $|x_n 
 
 For $n,m \geq K(\varepsilon)$,
 
-\begin{align*}
+$$
+\begin{aligned}
  |x_n - x_m| & = |x_n - x + x - x_m| \\
 & \leq |x_n + x| + |x - x_m| \\
 & \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \\
-\end{align*}
+\end{aligned}
+$$
 
 So $(x_n)$ is a Cauchy sequence
 #+end_proof
@@ -258,11 +260,13 @@ there exists $N \geq K(\varepsilon), |x - x_n| \leq \varepsilon$
 
 For $n \geq K(\varepsilon)$
 
-\begin{align*}
+$$
+\begin{aligned}
 |x_n - x| & = |x_n - x_N + x_N - x| \\
 & \leq |x_n - x_N| + |x_N - x| \\
 & \leq \varepsilon + \varepsilon = 2 \varepsilon
-\end{align*}
+\end{align}
+$$
 #+end_proof
 #+begin_examples
 1. $x_n = 1 + \frac{1}{2} + ... + \frac{1}{n}$
@@ -287,22 +291,26 @@ Any contracting sequence is convergent
 #+begin_proof
 Let $(x_n)$ be a contracting sequence
 
-\begin{align*}
+$$
+\begin{aligned}
 | x_{n+1} - x_n| & \leq C |x_n - x_{n-1}| \\
 & \leq C^2 | x_{n-1} - x_{n-2} | \\
 & \leq C^3 | x_{n-1} - x_{n-2} | \\
 & \leq ... \\
 & \leq C^{n-1} | x_2 - x_1 |
-\end{align*}
+\end{aligned}
+$$
 
-\begin{align*}
+$$
+\begin{aligned}
 |x_{n+m} - x_n| & = |x_{n+m} - x_{n+m-1} + ... + x_{n+1} - x_n| \\
 & \leq |x_{n+m} - x_{n+m-1}| + ... + |x_{n+1} - x_n| \\
 & \leq C^{n+m-1} |x_{n+m} - x_{n+m-1}| + ... + C ^{n-1} |x_{n+1} - x_n| \\
 & \leq C^{n-1} (1 + ... + C^m) |x_2 - x_1| \\
 & \leq C^{n-1} \frac{1-C^{n+1}}{1-C} |x_2 - x_1| \\
 & \leq \frac{C^{n-1}}{1-C} |x_2 - x_1| \\
-\end{align*}
+\end{aligned}
+$$
 
 $$\lim_{n \to \infty} C^{n-1} = 0$$
 
@@ -381,21 +389,24 @@ $$\lim_{n \to \infty} s_n = \sum_{k=1}^{\infty} x_k$$
 
    Then 
 
-   \begin{align*}
+   $$
+   \begin{aligned}
    (s_n) & = \sum_{k=1}^{\infty} \frac{1}{k(k+1)} \\
    & = \sum_{k=1}^{\infty} \frac{1}{k} - \sum_{k=1}^{\infty} \frac{1}{k+1} \\
    & = \sum_{k=1}^{\infty} \frac{1}{k} - \sum_{k=2}^{\infty} \frac{1}{k} \\
    & = 1 - \frac{1}{n+1}
-   \end{align*}
+   \end{aligned}
+   $$
    
 2. Let $(x_n) = r^{n-1}$
 
    then
 
-   \begin{align*}
+   \begin{aligned}
    s_n & = \sum_{k=1}^{\infty} r^{n-1} \\
    & = \frac{1-r^n}{1-r}
-   \end{align*}
+   \end{aligned}
+   $$
 
    case $|r| < 1$
 
@@ -489,10 +500,12 @@ Since $(s_n)$ is increasing and unbounded, it is divergent
 
    then 
 
-   \begin{align*}
+   $$
+   \begin{aligned}
    s_n = \sum_{k=1}^{\infty} \frac{1}{k^r} \
    & = 1 + \frac{1}{2^r} + ...
-   \end{align*}
+   \end{aligned}
+   $$
 
    *case* $0 \leq r \leq 1$
 
@@ -604,9 +617,11 @@ $|x - a| \leq \min(\zeta, \zeta')$
 
 Then 
 
-\begin{align*}
+$$
+\begin{aligned}
 |L - L'| & \leq |L - f(x) + f(x) - L'| \\
 & \leq |L - f(x)| + |f(x) - L| \\
 & \leq \varepsilon + \varepsilon \leq 2 \varepsilon
-\end{align*}
+\end{aligned}
+$$
 #+end_proof
