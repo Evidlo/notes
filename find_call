@@ -9,7 +9,8 @@ outdir=~/resources/evanw.org-static/out/$dir
 if [[ $file == *.org ]]
 then
     mkdir -p "$outdir"
-    pandoc --template=notes.pandoc_template -S -s --mathjax --toc "$dir/$file" -o "$outdir/index.html"
+    # pandoc --template=notes.pandoc_template -S -s --mathjax --toc "$dir/$file" -o "$outdir/index.html"
+    pandoc -t json "$dir/$file" | ../filter.py | pandoc --template=notes.pandoc_template -S -s --mathjax --toc -f json -t html -o "$outdir/index.html"
     echo "built $file"
 # copy anything else
 else
