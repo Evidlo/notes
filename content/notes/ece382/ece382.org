@@ -265,8 +265,11 @@ If a row is zero, differentiate the row above it and replace the zeros with the 
 The number of sign changes in the first column is equal to
 the number of poles in RHP.
 
-If the last and third to last row have the same sign,
+If the rows above and below $\varepsilon$ have the same sign,
 then the poles are on the imaginary axis.
+
+If the rows above and below $\varepsilon$ have the same sign,
+then the poles are on the real axis.
 
 #+begin_examples
 1. Let $Q(s) = s(s+1)(s+2) + 3 = s^3 + 3s^2 + 2s + 7 = 0$
@@ -375,6 +378,13 @@ Rules
 4. the asymptotes of the zeros at infinity have the angle $$\phi_i = \frac{180^\circ (1 + 2 q)}{N_p - N_i}, i = 0, 1, 2, ..., (N_p - N_z -1)$$ where $N_p,N_z$ are number of poles, zeros
 5. centroid: $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z}$
 6. branches intersect the real axis where K is at a local min/max ($\frac{dK}{ds} = 0$)  (breakaway point)
+7. angle of departure from a pole: $\phi_p = \sum \angle (zeros \rightarrow s_1) - \sum \angle (poles \rightarrow s_1) - \pi$
+   #+begin_derivation
+   \[\angle G(s)H(s)|_{s=s_1} = \sum \angle (zeros \rightarrow s_1) - \sum \angle (poles (except s_1) \rightarrow s_1) - \phi_p = \pi\]
+
+   $\phi_p = \sum \angle (zeros \rightarrow s_1) - \sum \angle (poles \rightarrow s_1) - \pi$
+   #+end_derivation
+8. Routh-Hurwitz
 
 #+begin_examples
 1. Let $G(s)H(s) = \frac{K}{s (s + 1) (s + 2)}$
@@ -383,17 +393,46 @@ Rules
 
    From rule 3, the locus is defined on the real axis for $(-\infty, -2) \cup (-1, 0)$
 
-   From rule 5, The centroid is located at $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1 + 2 + 0}{3} = -1$
+   From rule 5, The *centroid* is located at $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1 + 2 + 0}{3} = -1$
 
-   From rule 4, the angles of the poles at infinite from the centroid are $\phi_i = \frac{180^\circ (1 + 2 q)}{N_p - N_i}, (q = 0,1,2) = 60^\circ, 180^\circ, 300^\circ$
+   From rule 4, the *asymptotes* of the branches at $K = \infty$ from the centroid are $\phi_i = \frac{180^\circ (1 + 2 q)}{N_p - N_i}, (q = 0,1,2) = 60^\circ, 180^\circ, 300^\circ$
 
-   Breakaway point: $1 + KG(s)H(s) = 0 \rightarrow K = \frac{-1}{G(s)H(s)}$
+   *Breakaway point*: $1 + KG(s)H(s) = 0 \rightarrow K = \frac{-1}{G(s)H(s)}$
 
    \[\frac{d}{ds} [\frac{1}{s (s + 1) (s + 2)}] = \frac{-(1) (3s^2 + 6s + 2)}{[s (s + 1) (s + 2)]^2} = 0\]
 
    so  $s_1,s_2 = \frac{-6 \pm \sqrt{36 - 24}}{6} \approx -0.42, -1.58$
 
    but $-1.58$ is not defined on the real axis, so it is thrown away
+
+   *Imaginary exis intersection*
+
+   | $s^3$ |               1 |   2 |
+   | $s^2$ |               3 | $K$ |
+   | $s^1$ | $\frac{6-K}{3}$ |     |
+   | $s^0$ |               K |     |
+
+   So the poles are on the imaginary exis when $K=6$
+    
    
-   [[./rootlocus_example.png]] 
+   [[./rootlocus_example.png]]
+
+2. Let $G(s) = \frac{K}{s(s+1)}$
+
+   $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1}{2} = \frac{-1}{2}$
+
+   *Breakaway point*
+
+   \[\frac{d}{ds} [G(s)] = 0\]
+   
+   $s = \frac{-1}{2}$
+
+   ipe
+   -1     0
+    x     x
+
+   [[./rootlocus_example2.png]] 
+
+3. Let
+
 #+end_examples
