@@ -19,10 +19,19 @@ More than 10 vector systems developed between 1790 and 1850
 *cylindrical coordinates*
 [[https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Coord_system_CY_1.svg/240px-Coord_system_CY_1.svg.png]]
 
+** Gradient
+The change in each direction of a field
 
-** Line Integrals
-*potential* - work requried to move 1C of charge
-$$ V_{AB} = V_A - V_B = - \int_A^B E \cdot ds $$
+*cartesian coordinates*
+
+\[\overrightarrow{\nabla} F = \frac{d}{dx} F_x \hat{a_x} + \frac{d}{dy} F_y \hat{a_y} + \frac{d}{dz} F_z \hat{a_z}\]
+** Divergence
+The measure of outflow of a field in an infinitesimal volume around some point
+
+\[ \nabla F = \lim_{V \to 0} \iint_S \frac{F \times n}{V} dS \]
+
+** Laplacian
+\[\nabla \cdot \overrightarrow{\nabla} F \]
 
 * Dipoles
 
