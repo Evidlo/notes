@@ -202,7 +202,7 @@ $H(\rho) = \frac{I}{\rho 2 \pi}$
 
 \[\overrightarrow{H} = \frac{Z}{2}\]
 
-Where $K$ is called the sheet charge density
+Where $K = J \Delta H$ is called the sheet charge density
 
 #+begin_derivation
 [[./currentslab.png]]
@@ -220,9 +220,15 @@ $$ \begin{aligned}
 *** Magnetic field intensity of cylinder of current
 Many point currents arranged in a circle with radius $a$ and $I_T = K(2 \pi)(a)$
 
+$$ H(\rho) = \begin{cases}
+ \frac{I}{2 \pi \rho} & \phi \geq a,\\
+0 & \phi \leq a
+\end{cases} $$
+
+#+begin_derivation
 $$ \begin{aligned}   
-\oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \overrightarrow{dl} = \oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \rho d\phi = H(\rho) 2 \pi \rho = I_{Tot} \\
-H(\rho) = \frac{I_{Tot}}{2 \pi \rho}
+\oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \overrightarrow{dl} = \oint_0^{2 \pi} \overrightarrow{H}(\rho) \hat{a}_{\phi} \rho d\phi = H(\rho) 2 \pi \rho = I \\
+H(\rho) = \frac{I}{2 \pi \rho}
 \end{aligned} $$
 
 for $\phi \geq a$
@@ -230,3 +236,4 @@ for $\phi \geq a$
 $H(\rho) = 0$
 
 for $\phi \leq a$
+#+end_derivation
