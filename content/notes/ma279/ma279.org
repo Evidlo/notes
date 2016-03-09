@@ -531,3 +531,74 @@ L = {1,2,3,4} - list of vertices
 #+end_examples
 
 Spanning trees in $K_N$: $n^{n-2}$
+
+* Exponential Growth
+
+There is a pair of rabbits.  A pair of rabbits takes 1 year to mature, and another to produce offspring.  What is the population at year n?
+
+| $n$   | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| $m_n$ | 1 | 0 | 1 | 1 | 2 | 3 | 5 |
+| $m_n$ | 0 | 1 | 1 | 2 | 3 | 5 | 8 |
+| $p_n$ | 1 | 1 | 2 | 3 | 5 | 8 | 13 |
+
+$p_n = \frac{1 - \lambda_1}{\lambda_2(\lambda_2 - \lambda_1)} \lambda_1^n + \frac{1 - \lambda_2}{\lambda_1(\lambda_1 - \lambda_2)} \lambda_2^n$
+
+where $\lambda_1,\lambda_2 = \frac{1 + \sqrt{5}}{2},\frac{1 - \sqrt{5}}{2}$
+#+begin_derivation
+So $y_{n+1} = m_n$, $m_{n+1} = m_n + y_n$, $p_n = y_n + m_n$
+
+$m_{n+1} = m_n + m_{n-1}$
+
+$p_t = p_{t-1} + p_{t-2}$
+
+$p_t = C * \lambda^t = C$
+
+$C*\lambda^t = C * \lambda^{t-1} + C* \lambda^{t-2}$
+
+$\lambda^2 = \lambda + 1 \Rightarrow \lambda = \frac{1 \pm \sqrt{5}}{2}$
+
+$p_n = C_1 \lambda_1^n + C_2 \lambda_2^n$
+
+
+$1 = p_1 = C_1 \lambda_1 + C_2 \lambda_2$
+
+$1 = p_2 = C_1 \lambda_1^2 + C_2 \lambda_2^2$
+
+solving the linear system yields
+
+\[C_2 = \frac{1 - \lambda_1}{\lambda_2(\lambda_2 - \lambda_1)}\]
+
+\[C_1 = \frac{1 - C_2}{\lambda_2(\lambda_2 - \lambda_1)} = \frac{1 - \lambda_2}{\lambda_1(\lambda_1 - \lambda_2)}\]
+
+So let $s_u = \frac{1 - \lambda_1}{\lambda_2(\lambda_2 - \lambda_1)} \lambda_1^n + \frac{1 - \lambda_2}{\lambda_1(\lambda_1 - \lambda_2)} \lambda_2^n$
+
+where $s_1,s_2 = 1,2$ are the initial conditions.
+#+end_derivation
+
+#+begin_theorem
+If $(a)$ is a sequence with a recurrence of depth 2,
+
+then $a_n = C_{n-1}a_{n-1} + C_{n-2}a_{n-2}$
+
+with initial conditions $a_1,a_n = A_1,A_2$
+
+Let $\lambda_1,\lambda_2$ be the roots of $\lambda^2 = C_{n-1} \lambda + C_{n-2}$
+#+end_theorem
+
+#+begin_examples
+1. Let $a_n = 3a_{n-1} - 2a_{n-2}$, $a_0 = 1$, $a_1 = 1$
+
+   Find $\lambda$
+
+   $\lambda^2 = 3 \lambda - 2$
+
+   $\lambda1,\lambda2 = 1,2$
+
+   Find $b_1,b_2$ using initial conditions
+
+   $1 = a_0 = b_1 1^0 + b_2 2^0 = b_1 + b_2$
+
+   $1 = a_1 = b_1 1^1 + b_2 2^1 = b_1 + 2 b_2$
+
+   So $b_1 = 1, b_2 = 0$
+#+end_examples

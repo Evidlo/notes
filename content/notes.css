@@ -29,6 +29,14 @@ pre.sourceCode {
     border-bottom: 1px solid black;
 }
 
+/* ------------ derivation ------------- */
+.derivation {
+    color: purple;
+}
+.derivation:hover {
+    cursor: pointer;
+}
+
 /* ------------ definitions ------------ */
 
 .definition {

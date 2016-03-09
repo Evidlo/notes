@@ -419,7 +419,7 @@ Rules
 
 2. Let $G(s) = \frac{K}{s(s+1)}$
 
-   $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1}{2} = \frac{-1}{2}$
+   $\sigma_A = \frac{\sum Re(p_i) - \sum Re(z_i)}{N_p - N_z} = \frac{-1}{2}$
 
    *Breakaway point*
 
@@ -433,6 +433,5 @@ Rules
 
    [[./rootlocus_example2.png]] 
 
-3. Let
 
 #+end_examples
