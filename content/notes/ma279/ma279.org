@@ -543,6 +543,8 @@ There is a pair of rabbits.  A pair of rabbits takes 1 year to mature, and anoth
 | $m_n$ | 0 | 1 | 1 | 2 | 3 | 5 | 8 |
 | $p_n$ | 1 | 1 | 2 | 3 | 5 | 8 | 13 |
 
+where $n$ is the year, $y_n$ is the number of young rabbits, $m_n$ is the number of mature rabbits, and $p_n$ is the total population
+
 $p_n = \frac{1 - \lambda_1}{\lambda_2(\lambda_2 - \lambda_1)} \lambda_1^n + \frac{1 - \lambda_2}{\lambda_1(\lambda_1 - \lambda_2)} \lambda_2^n$
 
 where $\lambda_1,\lambda_2 = \frac{1 + \sqrt{5}}{2},\frac{1 - \sqrt{5}}{2}$
@@ -585,6 +587,8 @@ then $a_n = C_{n-1}a_{n-1} + C_{n-2}a_{n-2}$
 with initial conditions $a_1,a_n = A_1,A_2$
 
 Let $\lambda_1,\lambda_2$ be the roots of $\lambda^2 = C_{n-1} \lambda + C_{n-2}$
+
+then $a_n = b_1 \lambda_1^n + b_2 \lambda_2^n$
 #+end_theorem
 
 #+begin_examples
@@ -604,3 +608,58 @@ Let $\lambda_1,\lambda_2$ be the roots of $\lambda^2 = C_{n-1} \lambda + C_{n-2}
 
    So $b_1 = 1, b_2 = 0$
 #+end_examples
+
+#+begin_theorem...
+Let $a_n = c_{n-1}a_{n-1} + ... + c_{n-d}a_{n-d}$
+
+If there are $k$ roots of $\lambda^d - (C_{n-1}\lambda^{d-1} + C_{n-2}\lambda^{d-2} + ... + C_{n-d}\lambda^{0}$, let the multiplicities be $e_1,...,e_k$
+
+so $f(\lambda) = (\lambda - \lambda_1)^{e_1} + ... (\lambda - \lambda_k)^{e_k}$
+
+$$ \begin{align*}
+a_n & = \lambda_1^n(b_{1,0} + b_{1,1}n + ... + b_{1,e_1 - 1} n^{e_1 - 1}) \\
+& + \lambda_2^n(b_{2,0} + b_{2,1}n + ... + b_{2,e_2 - 1} n^{e_2 - 1}) \\
+& + ... \\
+& + \lambda_k^n(b_{k,0} + b_{k,1}n + ... + b_{k,e_k - 1} n^{e_k - 1})
+\end{align*} $$
+#+end_theorem
+
+* Solving Higher Order Polynomials
+
+#+begin_theorem
+If $f$ is a polynomial with integer coefficients and leading coefficient 1, then
+- all rational roots are integers
+- all integer roots divide the constant term of f
+#+end_theorem
+
+#+begin_examples
+1. Let $a_n = 6a_{n-1} - 11a_{n-2} + 6a_{n-3}$
+
+   $\lambda^3 - 6\lambda^2 + 11\lambda - 6 = 0$
+
+   Divisors of 6 as possible roots: -6, -3, -2, -1, *1*, *2*, *3*, 6
+
+   $a_n = b_11^n + b_22^n + b_33^n$
+
+2. Let $a_n = 8a_{n-2} - 16a_{n-4}$
+
+   $f(\lambda) = \lambda^4 - 8\lambda^2 + 16 \\
+   & = (\lambda^2 - 4)^2
+   \end{align*} $$
+
+   $\lambda_1,\lambda_2 = -2_{x2},2_{x2}$
+
+   $$ \begin{align*}
+   a_n = 2^n (b_{1,0} + b_{1,1}n) \\
+   & + (-2)^n (b_{2,0} + b_{2,1}n)
+   \end{align*} $$
+
+   $F_1(n) = 1$
+   $t = 0, m = 1, s = 1$
+
+   $F_2(n) = 2^n$
+   $t = 0, m = 0, s = 2$
+#+end_examples
+
+* Ginomons
+

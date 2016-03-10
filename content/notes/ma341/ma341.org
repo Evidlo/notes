@@ -742,3 +742,167 @@ Let $A \subset \mathbb{R}$ be nonempty, $f:A \rightarrow \mathbb{R}$, and $c \in
 
    Since the subsequences don't converge to the same value, $f(x)$ does not converge
 #+end_examples
+
+** Limit Theorems
+#+begin_definition
+Let $A \subset \mathbb{R}$ be a nonempty set.  Let $c \in \mathbb{R}$ be a cluster point of $A$.  Let $f: A \longrightarrow \mathbb{R}$
+
+Then $f$ is bounded in a neighborhood of c if there exists $M > 0$ and $\zeta > 0$
+
+s.t. if $x\in[c - \zeta, c + \zeta] \cap A$
+
+$|f(x) \leq M$
+#+end_definition
+
+#+begin_examples
+1. Let $f(x) = x^2$.  For $x \in [-1,1]$, $f(x) \leq 1$ so $f$ is bounded in the neighborhood of 0
+   
+2. Let $f(x) = \frac{1}{x}$
+#+end_examples
+
+
+#+begin_theorem
+Let $f: A \longrightarrow \mathbb{R}$ Let $c$ be a cluster point of $A$.  
+
+If $\lim_{x \to c} f(x)$ exists, then $f$ is a bounded in a neighborhood of $c$
+#+end_theorem
+
+#+begin_proof
+Let $L = \lim_{x \to 1} f(x)$.  We can find $\zeta > 0$
+
+s.t. for $x \in [c - \zeta, c + \zeta] \cap A, x \neq c$,
+
+$|f(x) - L| \leq 1$
+
+We have $|f(x)| \leq 1 + |L|$
+#+end_proof
+
+#+begin_definition
+
+Let $f,g: A \longrightarrow \mathbb{R}$
+
+- $(f + g)(x) = f(x) + g(x)$
+- $(fg)(x) = f(x)g(x)$
+- if $\forall x \in A, g(x) \neq 0$
+
+  $\frac{f}{g}(x) = \frac{f(x)}{g(x)}$
+#+end_definition
+
+#+begin_theorem
+Let $f,g: A \longrightarrow \mathbb{R}$
+
+Let c \in \mathbb{R} be a cluster point of $A$
+
+If $\lim_{x \to c} f(x)$ and $\lim_{x \to c} g(x)$ exist, then
+
+$\lim_{x \to c} f(x) + \lim_{x \to c} g(x) = \lim_{x \to c} f(x) + g(x)$
+#+end_theorem
+
+#+begin_proof
+Let $(x_n)$ be a sequence in $A$, s.t. $\lim_{n \to \infty} x_n = c$ and $x_n \neq c$
+
+Since $\lim_{n \to \infty} x_n$ exists, the sequence $f(x_n)$ is convergent and $\lim_{n \to \infty} f(x_n) = \lim_{n \to c} f(x)$
+
+similarly,  $\lim_{n \to \infty} g(x_n) = \lim_{n \to c} g(x)$
+
+so, $f(x_n) + g(x_n)$ is convergent and $\lim_{n \to \infty} f(x_n) + g(x_n) = \lim_{n \to \infty}f(x_n) + \lim_{n \to \infty}g(x_n) = \lim_{n \to c}f(x) + \lim_{n \to c}g(x)$ 
+#+end_proof
+
+#+begin_theorem
+Let $f,g: A \to \mathbb{R}$.  Let $c \in \mathbb{R}$ be a cluster point of $A$.
+
+If $\lim_{x \to c} f(x)$ and \lim_{x \to c} g(x)$ exist, then
+
+$\lim_{x \to c} f(x)g(x) = \lim_{x \to c} f(x) \lim_{x \to c} g(x)$
+#+end_theorem
+
+#+begin_examples
+1. Find $\lim_{x \to 1} \frac{x^2 + 1}{x}$
+
+  $\lim_{x \to 1} \frac{x^2 + 1}{x} = \frac{\lim_{x \to 1} x^2 + 1}{\lim_{x \to 1} x} = 2$
+   
+2. Let $f(x) = x + \mathbb{1}_{\mathbb{Q}}$
+
+   The limit of $x$ exists, but not $\mathbb{1}_{\mathbb{Q}}$, so the limit of $f(x)$ does not exist
+
+3. Let $f(x) = x \mathbb{1}_{\mathbb{Q}}$
+
+   Since $\mathbb{1}_{\mathbb{Q}}$ is bounded and $x$ is convergent, $f(x)$ is convergent
+#+end_examples
+
+** Squeeze Theorem
+#+begin_theorem
+Let $f,g,h: A \to \mathbb{R}$.  Let $c \in \mathbb{R}$ be a cluster point of $A$.
+
+Assume $f \leq g \leq h$ for all $x$.
+
+If $\lim_{x \to c} f(x) = \lim_{x \to c} h(x) = L$, then $\lim_{x \to c} g(x) = L$
+#+end_theorem
+
+#+begin_proof
+Let $(x_n) \in A$ be a sequence which converges to $c$, but $x_n \neq c$
+
+$\lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} h(x_n) = L$
+
+From the squeeze theorem for sequences, $g(x_n)$ converges and $\lim_{n \to \infty} g(x_n) = L$
+#+end_proof
+
+
+
+
+
+
+M > 0.  prop div if x_n > M for all n > k
+** Proper Divergence
+#+begin_definition
+Let $f: A \to \mathbb{R}$  Let $c \in \mathbb{R}$ be a cluster point
+
+We say that $\lim_{x \to c} f(x) = \infty$
+
+if for $\forall M \geq 0$, $\exists \zeta > 0$, s.t. for $x \in [c - \zeta, c + \zeta] \cap A, x \neq c$
+
+$f(x) \geq M$
+#+end_definition
+#+begin_examples
+1. $f(x) = \frac{1}{x}, x > 0$
+
+   $\lim_{x \to 0} f(x) = \infty$
+
+2. Let $f(x) = \frac{1}{x}, x < 0$
+
+   $\lim_{x \to 0} f(x) = -\infty$
+#+end_examples
+*changing A can change the limit*
+
+#+begin_theorem
+Let $f: A \to \mathbb{R}$.  Let $c \in \mathbb{R}$ be a cluster point of $A$
+
+then $\lim_{x \to c} f(x) = \infty$ iff 
+
+for every sequence $(x_n) \in A$ converging to $c$, $x_n \neq c$
+
+$\lim_{n \to \infty} f(x_n) = \infty$
+#+end_theorem
+#+begin_proof
+_1 -> 2_
+
+Assume that $\lim_{x \to c} f(x) = \infty$
+
+Let $M > 0$.  We can find $\zeta > 0$
+
+s.t. for $x \in [c - \zeta, c + \zeta] \cap A, f(x) > M, x \neq c$
+
+Since $x_n$ converges to $c$, we can find $N \geq 0$, s.t. for $n \geq N, x_n \in [c - \zeta, c + \zeta]$ and $f(x_n) \geq M$
+
+so $\lim_{n \to \infty} f(x_n) = \infty$
+
+_2 -> 1_
+
+Assume for contradiction that $\lim_{x \to c} f(x) \neq \infty$.  Then we can find $M > 0$ s.t. $\forall \zeta$,
+
+there exists $x \in [c - \zeta, c + \zeta] \cap A, x \neq c$ where $f(x) \leq M$
+
+Let $\zeta = \frac{1}{n}$.  $x_n \in [c - \zeta, c + \zeta], f(x_n) \leq M$
+
+we don't have $\lim_{n \to \infty} f(x_n) = \infty$ which is a contradiction
+#+end_proof
