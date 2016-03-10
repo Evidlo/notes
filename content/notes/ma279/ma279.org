@@ -397,7 +397,8 @@ If the fair share is less than the geometric mean, use the floor.
 If $q_i \geq \sqrt{\lfloor q_i \rfloor \lceil q_i \rceil}$, use $\lceil q_i \rceil$
 If $q_i \leq \sqrt{\lfloor q_i\rfloor \lceil q_i \rceil}$, use $\lfloor q_i \rfloor$
 
-* Euler Paths
+* Graphs
+** Euler Paths
 [[./eulergraph.png]]
 
 *euler paths* - uses each edge once
@@ -438,7 +439,7 @@ Finish I
 
 *fluery algorithm*
 
-* Platonic Solids
+** Platonic Solids
 #+begin_definition
 *platonic solids*
   - regular polygon faces
@@ -451,10 +452,10 @@ Finish I
   - relax one of the rules for platonic solids
 #+end_definition
 
-* Bipartite Graphs
+** Bipartite Graphs
 *bipartite* - elements can be grouped into two non touching groups
 [[./bipartite.png]]
-* Traveling Salesman
+** Traveling Salesman
 Given some locatoins, find a pth through them that is minimal.
 By giving each location a weight, we can give minimal a concrete meaning.
 
@@ -462,7 +463,7 @@ By giving each location a weight, we can give minimal a concrete meaning.
   - $\sum w(e) = 1$
   - There are edges between all vertices
  
-* Hamilton Graphs
+** Hamilton Graphs
 *hamilton circuit* - a path that visits every vertex exactly once
 *hamilton graph* - a graph with a hamilton circuit
 
@@ -472,13 +473,15 @@ If $\text{deg}(a) + \text{deg}(b) \geq n$ for all vertices a,b
 then the graph is hamiltonian
 #+end_theorem
 
-* P vs NP
+** P vs NP
 *P* - any problem with \[a_nn^{b_n} + a_{n-1}n^{b_{n-1}} + ... + a_0\] steps is class P
 *NP hard* - finding an algorithm for these problems proves P = NP
-* Trees
+** Trees
 #+begin_definition
 *tree* - a connected graph with no loops
+
 *spanning tree* - a tree which contains all vertices of a graph
+
 *leaf* - a vertex in a graph with degree one
 #+end_definition
 
@@ -493,7 +496,7 @@ _Properties of Trees_
 All trees must have at least one leaf
 #+end_theorem
 
-** Prüfer Sequence
+*** Prüfer Sequence
 _Steps to create Prüfer Sequence from tree_
 1. find leaf with smallest index
 2. delete and record index that leaf was attached to
@@ -531,7 +534,6 @@ L = {1,2,3,4} - list of vertices
 #+end_examples
 
 Spanning trees in $K_N$: $n^{n-2}$
-
 * Exponential Growth
 
 There is a pair of rabbits.  A pair of rabbits takes 1 year to mature, and another to produce offspring.  What is the population at year n?

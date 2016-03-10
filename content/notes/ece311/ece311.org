@@ -183,6 +183,9 @@ $$ \begin{aligned}
 #+end_derivation
 
 *** Magnetic field intensity of single wire
+$H(\rho) = \frac{I}{\rho 2 \pi}$
+
+#+begin_derivation
 $\oint H(\rho) \hat{a_{\phi}} \cdot \overrightarrow{dl} = I_{enc}$
 
 $\oint H(\rho) \hat{a_{\phi}} \cdot (d\rho \hat{a_{\rho}} + \rho d\phi \hat{a_{phi}} + dz \hat{a_z})  = I_{enc}$
@@ -194,6 +197,7 @@ $H(\rho) \rho \oint_0^{2\pi} d\phi = I$
 $H(\rho) \rho 2 \pi = I$
 
 $H(\rho) = \frac{I}{\rho 2 \pi}$
+#+end_derivation
 
 *** Magnetic field intensity of slab of current
 
@@ -234,3 +238,27 @@ $H(\rho) = 0$
 
 for $\phi \leq a$
 #+end_derivation
+** Point form of Ampere's circuital law
+*incomplete*
+
+\frac{dH_y}{dx} - \frac{dH_x}{dy} = J_z
+$$ \begin{align}
+\\oint overrightarrow{H} \cdot \overrightarrow{dl} & = J_Z \Delta x \Delta y \\
+\int_1^4 \overrightarrow{H} \cdot \overrightarrow{dl} + \int_2^3 \overrightarrow{H} \cdot \overrightarrow{dl} + \int_3^4 \overrightarrow{H} \cdot \overrightarrow{dl} + \int_1^2 \overrightarrow{H} \cdot \overrightarrow{dl} & = J_z \Delta x \Delta y \\
+H_{14} \Delta x + H_{23} \Delta y - H_{34} \Delta x - H_{12} \Delta y = J_Z \Delta x \Delta y \\
+(H_{0x} - \frac{\Delta y}{2} \frac{dH_x}{dy})\Delta x 
+
+\end{align} $$
+
+$\overrightarrow{F_m} = \mu_0 (I \overrightarrow{dl} \times \overrightarrow{H})$
+
+$\overrightarrow{F_m} = \mu_0 (Q\mu \times \overrightarrow{H})$
+
+$\overrightarrow{F_m} = Q\mu \times \mu_0 \overrightarrow{H}$
+
+$\overrightarrow{B} = \mu_0 \overrightarrow{H}$
+
+$\overrightarrow{F_m} = Q\mu \times \overrightarrow{B}$
+
+*Lorentz Force Equation*
+$\overrightarrow{F} = Q \overrightarrow{E} + Q\mu \times \overrightarrow{B}$
