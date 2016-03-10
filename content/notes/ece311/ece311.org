@@ -13,16 +13,25 @@ More than 10 vector systems developed between 1790 and 1850
 *scalar* - ex. temperature in space
 *vector* - ex. electromagnetic field
 
-
-** Spherical Coordinates
+*spherical coordinates*
 [[https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/3D_Spherical_2.svg/240px-3D_Spherical_2.svg.png]]
 
+*cylindrical coordinates*
 [[https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Coord_system_CY_1.svg/240px-Coord_system_CY_1.svg.png]]
 
+** Gradient
+The change in each direction of a field
 
-** Line Integrals
-*potential* - work requried to move 1C of charge
-$$ V_{AB} = V_A - V_B = - \int_A^B E \cdot ds $$
+*cartesian coordinates*
+
+\[\overrightarrow{\nabla} F = \frac{d}{dx} F_x \hat{a_x} + \frac{d}{dy} F_y \hat{a_y} + \frac{d}{dz} F_z \hat{a_z}\]
+** Divergence
+The measure of outflow of a field in an infinitesimal volume around some point
+
+\[ \nabla F = \lim_{V \to 0} \iint_S \frac{F \times n}{V} dS \]
+
+** Laplacian
+\[\nabla \cdot \overrightarrow{\nabla} F \]
 
 * Dipoles
 
@@ -126,32 +135,35 @@ Magnetic field from point current
 
 Contribution from point current
 
-\[\overrightarrow{dH} = \frac{I \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2} \frac{A}{m}\]
+\[\overrightarrow{dH} = \frac{I \overrightarrow{dl} \times \hat{r'}}{4 \pi R^2} \frac{A}{m}\]
+
+where $\hat{r'}$ is the vector pointing from the point current to $\overrightarrow{r}$
 
 \[\overrightarrow{H} = \oint \overrightarrow{dH} \frac{A}{m}\]
 #+end_definition
 
 \[dF = \mu_0 I_1 \overrightarrow{dl_1} \times \overrightarrow{dH}\]
 
-** Magnetic Field of infinite wire
+** Force  between straight wires
 #+begin_definition
-\[\overrightarrow{H(\rho)} = \frac{I}{2 \pi \rho} \hat{a_{\phi}}\]
+\[\overrightarrow{B(\rho)} = \frac{I}{2 \pi \rho} \hat{r'}\]
 #+end_definition
 
 #+begin_derivation
-\[H_2 = \int_{-\infty}^{\infty} \frac{I_2 \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2}\]
+\[d \overrightarrow{B}(\overrightarrow{r}) = \frac{I \overrightarrow{dl} \times \hat{r'}}{4 \pi R^2}\]
+
+
+\[ \overrightarrow{B}(r) = \int_{-\infty}^{\infty} \frac{I \overrightarrow{dl} \times \hat{r'}}{4 \pi R^2} = \]
 #+end_derivation
 
 #+begin_examples
 1. Find the force between two parallel wires with opposite currents
    
-   ipe
+   [[./parallelwires.png]] 
 
-   \[dH_2 = \frac{I_2 \overrightarrow{dl} \times \hat{a_R}}{4 \pi R^2}\]
+   \[\overrightarrow{dF_1} = \mu_0 -I_1 \overrightarrow{dl} \times \frac{I_2}{2 \pi R} \hat{r'}\]
 
-   \[\overrightarrow{dF_1} = \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi}\]
-
-   \[\overrightarrow{F_1} = \int_0^L \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi} = - \frac{\mu_0 I_1 I_2 L}{4 \pi R} \hat{a_\rho}\]
+   \[\overrightarrow{F_1} = \int_0^L \mu_0 (-I_1 dz \hat{a_z}) \times \frac{I_2}{2 \pi R} a_{\phi} = - \frac{\mu_0 I_1 I_2 L}{4 \pi R} \hat{r'}\]
 #+end_examples
 
 ** Ampere's Circuital Law
