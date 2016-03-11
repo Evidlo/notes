@@ -57,15 +57,19 @@ $$ \begin{aligned}
 \end{aligned} $$
 
 * Current and Conductivity
+#+begin_definition
 The *current density* $J$ in a conductive material is the amount of current flowing perdendicular through a unit area
 
 $J = u \rho_c q$
 
 where $u$ is the velocity of the particles, $\rho_c$ is the density of the particles, and $q$ is the charge per particle
+#+end_definition
 
+#+begin_definition
 The *conductivity* $\sigma$ of a material relates the strength of the electric field to the current flowing per cross sectional area
 
 $\overrightarrow{J} = \sigma \overrightarrow{E}$
+#+end_definition
 
 ** Current flow from applied voltage
 Let a voltage $V$ be applied to a conductive block with cross-sectional area $A$ and length $d$.
@@ -182,7 +186,7 @@ and the voltage is doubled.
 
 2. A metal sphere of radius 1m is surrounded everywhere by a dielectric with $\varepsilon_r = 3$.  Find the capacitance of the sphere.
 
-   fig
+  [[./sphere_cap.png]] 
 
    Assume a charge $Q$ on the sphere.
 

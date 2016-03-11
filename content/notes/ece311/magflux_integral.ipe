@@ -1,32 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160301171157" modified="D:20160301172227"/>
-<bitmap id="1" width="246" height="223" length="1230" ColorSpace="DeviceGray" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
-eNrtndF24yAMRPX/P80+7GnrJDjGIGlmLHjqaWKYixRjhMCt7bKLV7FDqcTaK9V4n8c+AvUs
-8psoTyCfJFAGX5MuCe6iWYzbT64OuK9QCe4IkezcUfqYuUO1sXJH62LkztDExp2lhwo7TwyP
-uXOVcHDnqyDARkiAmxvUPhQb1+lAbHyPV4NGNQ+/lQIE0Iya5aCzsameC8tBp08Bqs18GGe5
-j7txUmAThq/isSljdtHYpAHahDhlK4ZNvAYRqIx54SVMG/cqW5A69qXFsCW21ophCyye16T2
-16iTJ1EO2lmnTCpQTermnAjUWjVsqRQ/L7F6eY3F/NvPSGq5uy5W0stY9lAsmKa9Llk1N72Y
-f3uYKjYcRRrqCpqyhm9nWqZOQI7JKScxdR8xBnyR2h156uNUe3nOXy6ZfLnnK3Kcvtzau4c1
-tt/sZbgmV2w4dNz3vY3tNXe5W40fNm7qMlOJ4aZNOGgktst8zbL7axFguVVbfiw0PWqXncjp
-2B67p/HBAYCp0TGRqUETH4NxwE6el4OfpqcgWEIwazWlUvMsLN4/tAQTyIAamyvulETNA50Z
-AiMJtiUbey3W5hzdFqFujQb7zqVUphahbk0Tey0aEEJt5NQ3ZqJ3vk1MPXFQ3+gVGdSBbcws
-Z2asZIT27BvoIPeKJDx1j3EEO+dOEwk91BUPoj6ls5H+EqaevV1lUMeZ+szuA2v6mtQHsM6o
-FWVsAurvf9kDqf+w3lx7DFuXult9x+7OP2wG6s5Tijj1yKcf33oy9Z+Dn12nST3q4J3b90AF
-z6A2+7i9XVWwqf2HLhx1e7qtu7/rx1Jn38Mt2MPb1KPZEdo81FNRf7r462UX8RQjpl54Dg+i
-Ho+6B1O/1n+ENgfxfNTn82sborZJaCD1t1jK1XqA6VK3zo6m914IojYs9dXrub5rt1loc1Dv
-jW3Ppm5flj5sxBVsEjp03XRqmev3nxfUbZa64VeLP7H/euJ8Oaj9dMvcDRy/Rv7mcm/j19nN
-9f9HE8mwPxcOYcdR95btv7Z7dP67aaG/iggSIk4zFb6N15Pm+L0STn3+1GRAQYyZVwlXPifL
-bmdUahnbNKgLZkpTZcXn7QVosjsgau52odnPpbOzydPHhXax0RyPuXenZjgpxU7k9P3XLLvO
-s+9IkicMNLhoBLSTrQzrK4hB15Y2qWB8Tf1EIPDpT5ZzlZPV3IZcyElfZU91g04ibnD4HVyI
-PrdwnNvzkEqmkznt+iv4CEzEKaw22SuJysNO3H3JoSU7cTfzdGX3dhoP9gl5QBuNizqhGEVM
-RAxaE7vkmy8YgleSpi76Rhs1Y5OE4hX9W83HWY7HFIUWe9sgaWUippZ6iyhvJ4pAF307sMJP
-O2iibuWg6bGj5FFjx73Qjhib+C1+gv5NjR2ryzixo1VRYsdrIsTOUESHnaOHDDtLDRV2nhYi
-7EwlLNjZOiiw8zufABvhcWgvB7WPxYa1bkBuZJej2gb/ujDNwwdOhJcby/hhtZizsY3naThN
-ihndzMeKMaco4mOOV8XJHKuMlzlOHTdzjEJ+5oNKq8R85DaSeoTATY55VbaJIi+IVybukI+d
-2qmP3MV5I8rY8cNDnrOvi529FSmFUHfZZZdddtlll1122WWg/APs9kS3
-</bitmap>
+<ipe version="70107" creator="Ipe 7.2.2">
+<info created="D:20160301171157" modified="D:20160310233052"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -279,26 +254,40 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<image layer="alpha" matrix="1 0 0 1 -164.361 298.913" rect="174.515 309.514 420.485 532.486" bitmap="1"/>
-<path matrix="1 0 0 1 -4.36059 -5.08736" stroke="green" pen="ultrafat">
-134.604 739.458 m
-210.635 781.386 l
+<path layer="alpha" matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
+112 768 m
+16 0 0 -16 96 768 111.935 769.442 a
 </path>
-<path matrix="1 0 0 1 -4.36059 -5.08736" stroke="green" pen="ultrafat">
-209.517 779.709 m
-189.391 815.488
-161.438 822.756 c
+<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
+135.066 768.673 m
+38.9466 0 0 -38.9466 96.1295 767.788 135.052 769.151 a
 </path>
-<path matrix="1 0 0 1 -4.36059 -5.08736" stroke="green" pen="ultrafat">
-126.777 747.843 m
-161.438 821.079 l
+<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
+151.183 767.968 m
+55.0804 0 0 -55.0804 96.1025 767.973 151.175 768.908 a
 </path>
-<path matrix="1 0 0 1 -4.36059 -5.08736" stroke="green" pen="ultrafat">
-127.336 746.725 m
-134.604 743.93
-134.604 738.899 c
+<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" pen="heavier">
+6.74239 0 0 6.74239 95.9193 767.94 e
 </path>
-<text matrix="1 0 0 1 1.85347 -11.3745" transformations="translations" pos="211.27 789.971" stroke="black" type="label" width="16.328" height="11.953" depth="3.35" valign="baseline" size="LARGE">$\phi_1$</text>
-<text matrix="1 0 0 1 -14.3547 -5.45719" transformations="translations" pos="172.996 832.975" stroke="black" type="label" width="16.328" height="11.953" depth="3.35" valign="baseline" size="LARGE">$\phi_2$</text>
+<use matrix="1 0 0 1 -27.875 10.6191" name="mark/cross(sx)" pos="95.9193 768.031" size="normal" stroke="black"/>
+<path stroke="green" pen="fat">
+95.5719 806.234 m
+38.8507 0 0 -38.8507 68.1475 778.715 106.998 778.715 a
+</path>
+<path stroke="green" pen="fat">
+107.153 817.815 m
+55.2289 0 0 -55.2289 68.1475 778.715 123.376 778.715 a
+</path>
+<path stroke="green" pen="fat">
+95.3026 805.965 m
+107.153 817.815 l
+95.4372 806.099 l
+</path>
+<path stroke="green" pen="fat">
+106.931 778.715 m
+123.629 778.715 l
+</path>
+<text transformations="translations" pos="109.442 820.105" stroke="black" type="label" width="10.405" height="6.926" depth="1.93" valign="baseline">$\phi_1$</text>
+<text transformations="translations" pos="127.669 778.715" stroke="black" type="label" width="10.405" height="6.926" depth="1.93" valign="baseline">$\phi_2$</text>
 </page>
 </ipe>
