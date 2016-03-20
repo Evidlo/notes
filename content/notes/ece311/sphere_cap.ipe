@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.2.2">
-<info created="D:20160301171157" modified="D:20160310232722"/>
+<info created="D:20160310233538" modified="D:20160310233545"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -254,24 +254,32 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
-112 768 m
-16 0 0 -16 96 768 111.935 769.442 a
+<path layer="alpha" fill="pink">
+0 832 m
+0 704 l
+128 704 l
+128 832 l
+h
 </path>
-<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
-135.066 768.673 m
-38.9466 0 0 -38.9466 96.1295 767.788 135.052 769.151 a
+<path stroke="black" fill="white">
+16 0 0 16 64 768 e
 </path>
-<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" arrow="normal/normal">
-151.183 767.968 m
-55.0804 0 0 -55.0804 96.1025 767.973 151.175 768.908 a
+<path stroke="black" cap="1">
+80 736 m
+80 736 l
 </path>
-<path matrix="1 0 0 1 -27.875 10.6191" stroke="black" pen="heavier">
-6.74239 0 0 6.74239 95.9193 767.94 e
+<path stroke="black" cap="1">
+64 768 m
+64 768 l
 </path>
-<use matrix="1 0 0 1 -27.875 10.6191" name="mark/cross(sx)" pos="95.9193 768.031" size="normal" stroke="black"/>
-<path matrix="1 0 0 1 -27.875 10.6191" stroke="green" pen="heavier">
-38.7888 0 0 38.7888 96.1035 768.018 e
+<path stroke="black">
+64 768 m
+80 768 l
+80 768 l
+</path>
+<text transformations="translations" pos="68.4896 770.309" stroke="black" type="label" width="4.771" height="4.289" depth="0" valign="baseline">$r$</text>
+<path stroke="black" dash="dashed">
+48 0 0 48 64 768 e
 </path>
 </page>
 </ipe>

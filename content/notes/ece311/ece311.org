@@ -56,6 +56,51 @@ $$ \begin{aligned}
 \overrightarrow{F_{1,2}} &= \frac{q_2 q_1}{4\pi \varepsilon_0 \varepsilon_r r^2} \hat{a_r}^2
 \end{aligned} $$
 
+* Current and Conductivity
+#+begin_definition
+The *current density* $J$ in a conductive material is the amount of current flowing perdendicular through a unit area
+
+$J = u \rho_c q$
+
+where $u$ is the velocity of the particles, $\rho_c$ is the density of the particles, and $q$ is the charge per particle
+#+end_definition
+
+#+begin_definition
+The *conductivity* $\sigma$ of a material relates the strength of the electric field to the current flowing per cross sectional area
+
+$\overrightarrow{J} = \sigma \overrightarrow{E}$
+#+end_definition
+
+** Current flow from applied voltage
+Let a voltage $V$ be applied to a conductive block with cross-sectional area $A$ and length $d$.
+
+Then the total current flow is $I = \frac{\sigma V A}{d}$
+
+#+begin_derivation
+There is a uniform electric field, so $V = - \int_0^d \overrightarrow{E} dl$
+
+$\|E| = \frac{V}{d}$
+
+$I = J A = \sigma |E| A = \frac{\sigma V A}{d}$
+#+end_derivation
+
+** Resistances in series
+Let a conductive block have cross-sectional area $A$ and length $2d$.  
+There are two conductive regions in series with conductivities $\sigma_1, \sigma_2$
+
+$R_{tot} = R_1 + R_2 = \frac{d}{A \sigma_1} + \frac{d}{A \sigma_2}$
+
+#+begin_derivation
+From symmetry, we know $\overrightarrow{J}$ is the same in both regions of the block
+
+$\overrightarrow{J} = \sigma_1 \overrightarrow{E_1} = \sigma_2 \overrightarrow{E_2}$
+
+$\overrightarrow{E_2} = \frac{\sigma_1}{\sigma_2} \overrightarrow{E_1}$
+
+$V = - \int_0^d \overrightarrow{E_1} dl - \int_d^{2d} \frac{\sigma_1}{\sigma_2} \overrightarrow{E_1} dl = - d E_1 - d \frac{\sigma_1}{\sigma_2} \overrightarrow{E_1}$
+
+\[\frac{V}{I} = R_{tot} = - \frac{d E_1}{I} - \frac{d \frac{\sigma_1}{\sigma_2} E_1}{I} = - \frac{d \sigma_1 J}{JA} - \frac{d \frac{\sigma_1}{\sigma_2} \sigma_2 J}{JA} = \frac{d}{A \sigma_1} + \frac{d}{A \sigma_2} = R_1 + R_2\]
+#+end_derivation
 * Capacitance
 For a charged body, the work required to approach the body scales with charge,
 
@@ -63,41 +108,67 @@ so the ratio between charge and voltage is constant, called *capacitance*
 
 $C = \frac{Q}{V}$
 
+** Capacitance of parallel plate capacitor
+[[./capacitor.png]] 
+
+$C = \frac{Q}{V} = \frac{\varepsilon_0 \varepsilon_r A}{d}$
+
+#+begin_derivation
+$\overrightarrow{D} = \frac{Q}{A} \hat{a_x}$
+
+\[\overrightarrow{E} = \frac{\overrightarrow{D}}{\varepsilon_0 \varepsilon_r}
+= \frac{Q}{\varepsilon_0 \varepsilon_r A} \hat{a_x}\]
+
+$$ \begin{aligned}
+V &= - \int_0^d \overrightarrow{E} \overrightarrow{dl} = \int_0^d \frac{Q}{\varepsilon_0 \varepsilon_r} \hat{a_x} \overrightarrow{dx} \\
+&= \frac{Q}{\varepsilon_0 \varepsilon_r A} d
+\end{aligned} $$
+
+$C = \frac{Q}{V} = \frac{\varepsilon_0 \varepsilon_r A}{d}$
+#+end_derivation
+** Capacitances in parallel
+[[./parallel_caps.png]] 
+
+$C_T = C_1 + C_2$
+#+begin_derivation
+\[V = - \int_0^d \overrightarrow{E_1} \overrightarrow{dl} = - \int_0^d \overrightarrow{E_2} \overrightarrow{dl}
+\Rightarrow E_1 = E_2 = E\]
+
+Since the electric field is approximately constant between plates $E = \frac{V}{D}$
+
+\[D_1 = \frac{Q_1}{A_1} = \varepsilon_1 E \\
+\Rightarrow Q_1 = A_1 \varepsilon_1 E = A_1 \varepsilon_1 \frac{V}{d}\]
+
+\[D_2 = \frac{Q_2}{A_2} = \varepsilon_2 E \\
+\Rightarrow Q_2 = A_2 \varepsilon_2 E = A_2 \varepsilon_2 \frac{V}{d}\]
+
+$C_T = \frac{Q_1 + Q_2}{V} = \frac{A_1 \varepsilon_1}{d} + \frac{A_2 \varepsilon_2}{d} = C_1 + C_2$
+#+end_derivation
+
+** Energy in Capacitor
+
+$W = \frac{1}{2} CV^2$
+
+#+begin_derivation
+Sum the work required to move each charge across the capacitor
+
+$$ \begin{aligned}
+W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
+& = \frac{1}{C} [\frac{1}{2} q(t)^2]_0^Q = \frac{Q^2}{2C} \\
+& = \frac{(CV)^2}{2C} = \frac{1}{2}CV^2
+\end{aligned} $$
+#+end_derivation
+** Changing capacitor shape
+Assume a capacitor is charged to some voltage, and the voltage is removed.  The charge on the plates will remain, regardless of how the plates are moved.
+
+If the distance between the plates is doubled, $\overrightarrow{E}$ remains constant, so:
+
+$V = - \int_0^d \overrightarrow{E} dl = dE$ -> $V = - \int_0^{2d} \overrightarrow{E} dl = 2dE$
+
+and the voltage is doubled.
+** Examples
 #+begin_examples
-1. Find the capacitance for a parallel plate capacitor
-
-   [[./capacitor.png]] 
-
-   $\overrightarrow{D} = \frac{Q}{A} \hat{a_x}$
-
-   \[\overrightarrow{E} = \frac{\overrightarrow{D}}{\varepsilon_0 \varepsilon_r}
-   = \frac{Q}{\varepsilon_0 \varepsilon_r A} \hat{a_x}\]
-
-   $$ \begin{aligned}
-   V &= - \int_0^d \overrightarrow{E} \overrightarrow{dl} = \int_0^d \frac{Q}{\varepsilon_0 \varepsilon_r} \hat{a_x} \overrightarrow{dx} \\
-   &= \frac{Q}{\varepsilon_0 \varepsilon_r A} d
-   \end{aligned} $$
-
-   $C = \frac{Q}{V} = \frac{\varepsilon_0 \varepsilon_r A}{d}$
-   
-2. Prove capacitors in parallel sum together
-
-   [[./parallel_caps.png]] 
-
-   \[V = - \int_0^d \overrightarrow{E_1} \overrightarrow{dl} = - \int_0^d \overrightarrow{E_2} \overrightarrow{dl}
-   \Rightarrow E_1 = E_2 = E\]
-
-   Since the electric field is approximately constant between plates $E = \frac{V}{D}$
-
-   \[D_1 = \frac{Q_1}{A_1} = \varepsilon_1 E \\
-   \Rightarrow Q_1 = A_1 \varepsilon_1 E = A_1 \varepsilon_1 \frac{V}{d}\]
-
-   \[D_2 = \frac{Q_2}{A_2} = \varepsilon_2 E \\
-   \Rightarrow Q_2 = A_2 \varepsilon_2 E = A_2 \varepsilon_2 \frac{V}{d}\]
-
-   $C_T = \frac{Q_1 + Q_2}{V} = \frac{A_1 \varepsilon_1}{d} + \frac{A_2 \varepsilon_2}{d} = C_1 + C_2$
-   
-3. Solve for $E_2$
+1. Solve for $E_2$
 
    [[./series_caps.png]] 
    
@@ -112,20 +183,22 @@ $C = \frac{Q}{V}$
    \end{aligned} $$
 
    \[E_2 = \frac{V}{d_2 + d_1 \frac{\varepsilon_2}{\varepsilon_1}}\]
-   
+
+2. A metal sphere of radius 1m is surrounded everywhere by a dielectric with $\varepsilon_r = 3$.  Find the capacitance of the sphere.
+
+  [[./sphere_cap.png]] 
+
+   Assume a charge $Q$ on the sphere.
+
+   $\overrightarrow{D} = \frac{Q}{4 \pi r^2} \hat{a_{\rho}}$ (from Gauss's equation)
+
+   \[\overrightarrow{E} = \frac{\overrightarrow{D}}{\varepsilon_0 \varepsilon_r} = \frac{Q}{4 \pi \varepsilon_0 \varepsilon_r r^2} \hat{a_{\rho}}\]
+
+   \[V = V(1) - V(\infty) = \frac{Q}{4 \pi \varepsilon_0 \varepsilon_r (1)^2}\]
+
+   \[C = \frac{Q}{V} = 4 \pi \varepsilon_0 \varepsilon_r = 12 \pi \varepsilon_0\]
 #+end_examples
 
-** Energy in Capacitor
-
-$W = \frac{1}{2} CV^2$
-
-#+begin_derivation
-$$ \begin{aligned}
-W & = \int dw = \int V(t) dq = \int_0^Q \frac{q(t)}{C} dq \\
-& = \frac{1}{C} [\frac{1}{2} q(t)^2]_0^Q = \frac{Q^2}{2C} \\
-& = \frac{(CV)^2}{2C} = \frac{1}{2}CV^2
-\end{aligned} $$
-#+end_derivation
 * Magnetic Fields
 ** Ampere's Force Law
 Magnetic field from point current
