@@ -14,10 +14,47 @@
 | PORTB5 | PORTB4 | PORTB3 | PORTB2 | PORTB1 | PORTB0 |
 |--------+--------+--------+--------+--------+--------|
 
-** TCCR0 - Timer 0 Counter Control Register (8bit)
-*** Counter Select -  set timer prescaler
+* Timers
+** TCCR0A - Timer 0 Counter Control Register A
+|--------+--------+--------+--------+---+---+-------+-------|
+| COM0A1 | COM0A0 | COM0B1 | COM0B0 |   |   | WGM01 | WGM00 |
+|--------+--------+--------+--------+---+---+-------+-------|
 
-#+begin_settings
+*COM0A[1:0]* - control behavior on OC0A compare match
+
+*COM0B[1:0]* - control behavior on OC0B compare match
+
+|--------+--------+-----------------------------------------------|
+| COM0x1 | COM0x0 | OC0x behavior on compare match in Normal mode |
+|--------+--------+-----------------------------------------------|
+|      0 |      0 | OC0x disconnected                             |
+|      0 |      1 | Toggle OC0x                                   |
+|      1 |      0 | Clear OC0x                                    |
+|      1 |      1 | Set OC0x                                      |
+|--------+--------+-----------------------------------------------|
+
+*WGM0[2:0]* - control bits for waveform generation mode.  *WGM02* is in *TCCR0B*
+
+|-------+-------+-------+-------------------|
+| WGM02 | WGM01 | WGM00 | Mode              |
+|-------+-------+-------+-------------------|
+|     0 |     0 |     0 | Normal            |
+|     0 |     0 |     1 | PWM Phase Correct |
+|     0 |     1 |     0 | CTC               |
+|     0 |     1 |     1 | Fast PWM          |
+|-------+-------+-------+-------------------|
+
+** TCCR0B - Timer 0 Counter Control Register B
+|-------+-------+---+---+-------+------+------+------|
+| FOC0A | FOC0B |   |   | WGM02 | CS02 | CS01 | CS00 |
+|-------+-------+---+---+-------+------+------+------|
+*FOC0A* - 
+
+*FOC0B* - 
+
+*WGM02* - part of waveform generation settings, see TCCR0A
+
+*CS0[2:0]* - set Timer 0 prescaler
 |------+------+------+---------------|
 | CS02 | CS01 | CS00 | Prescaler     |
 |------+------+------+---------------|
@@ -28,20 +65,67 @@
 |    1 |    0 |    0 | /256          |
 |    1 |    0 |    1 | /102          |
 |------+------+------+---------------|
-#+end_settings
+
+** TCNT0 - Timer 0 Counter Register
+Contains current counter value for Timer 0
+
+** 0CR0A - Timer 0 Output Compare Register A
+Compared against Timer 0 counter value to trigger some event, 
+like an output compare interupt
+
+** 0CR0B - Timer 0 Output Compare Register B
+Compared against Timer 0 counter value to trigger some event, 
+like an output compare interupt
+
+** TCCR1 - Timer 1 Counter Control Register
+|------+-------+--------+--------+------+------+------+------|
+| CTC1 | PWM1A | COM1A1 | COM1A0 | CS13 | CS12 | CS11 | CS10 |
+|------+-------+--------+--------+------+------+------+------|
+
+*CTC1* - clear Timer 1 after compare match with OCR1C
+
+*PWM1A* - enable PWM mode for OCR1A, (counter reset after compare match with OCR1C)
+
+*COM1A[1:0]* - control OC1A behavior on compare match with OCR1A
+
+|--------+--------+-------------------|
+| COM1A1 | COM1A0 | Behavior          |
+|--------+--------+-------------------|
+|      0 |      0 | OC1A disconnected |
+|      0 |      1 | Toggle OC1A       |
+|      1 |      0 | Clear OC1A        |
+|      1 |      1 | Set OC1A          |
+|--------+--------+-------------------|
+
+*CS1[3:0]* - set Timer 1 prescaler
+
+|------+------+------+------+---------------|
+| CS13 | CS12 | CS11 | CS10 |     Prescaler |
+|------+------+------+------+---------------|
+|    0 |    0 |    0 |    0 | Timer stopped |
+|    0 |    0 |    0 |    1 |             1 |
+|    0 |    0 |    1 |    0 |             2 |
+|    0 |    0 |    1 |    1 |             4 |
+|    0 |    1 |    0 |    0 |             8 |
+|    0 |    1 |    0 |    1 |            16 |
+|    0 |    1 |    1 |    0 |            32 |
+|    0 |    1 |    1 |    1 |            64 |
+|    1 |    0 |    0 |    0 |           128 |
+|    1 |    0 |    0 |    1 |           256 |
+|    1 |    0 |    1 |    0 |           512 |
+|    1 |    0 |    1 |    1 |          1024 |
+|    1 |    1 |    0 |    0 |          2048 |
+|    1 |    1 |    0 |    1 |          4096 |
+|    1 |    1 |    1 |    0 |          8192 |
+|    1 |    1 |    1 |    1 |         16384 |
+|------+------+------+------+---------------|
+
+
+** TIMSK - Timer 0 Interrupt Mask Register
+
 
 *** Wave Form Generation
 
-#+begin_settings
-|-------+-------+-------------------|
-| WGM00 | WGM01 | Mode              |
-|-------+-------+-------------------|
-|     0 |     0 | Normal            |
-|     0 |     1 | PWM Phase Correct |
-|     1 |     0 | CTC               |
-|     1 |     1 | Fast PWM          |
-|-------+-------+-------------------|
-#+end_settings
 
 *TCNT0* - counter
 
@@ -53,7 +137,7 @@
 
 *OC0B* - output from compare
 
-** TCCR1 - Timer 1 Counter Control Register (16bit)
+** TCCR1 - Timer 1 Counter Control Register
 
 |------+-------+--------+--------+------+------+------+------|
 | CTC1 | PWM1A | COM1A1 | COM1A0 | CS13 | CS12 | CS11 | CS10 |
@@ -78,21 +162,21 @@
 
 *TCNT1* - counter
 
-* Timer modes
+** Timer modes
 *BOTTOM* - always 0
 
 *MAX* - size of the counter
 
 *TOP* - can be either *MAX* or OCRxx, depending on mode
 
-** Normal
+*** Normal
 Timer counts up to TOP=0xFF then overflows and resets.
 Use OCRxx to either toggle output (OCxx) or trigger an interrupt
-** CTC - Clear Timer to Compare Match
+*** CTC - Clear Timer to Compare Match
 Timer is cleared when TCNT* (timer count) passes 0CR* (output compare)
-** Fast PWM
+*** Fast PWM
 Timer counts up to TOP then resets to BOTTOM.
-** Waveform Generation
+*** Waveform Generation
 
 * Interrupts
 *sei()* - enable interrupts
@@ -205,3 +289,79 @@ ISR(TIMER1_COMPA_vect){
     PORTB ^= 1<<PB1; // toggle output
 }
 #+END_SRC
+* ADC
+** ADMUX - ADC Multiplexer Select
+|-------+-------+-------+-------+------+------+------+------|
+| REFS1 | REFS0 | ADLAR | REFS2 | MUX3 | MUX2 | MUX1 | MUX0 |
+|-------+-------+-------+-------+------+------+------+------|
+
+*REFS[2:0]* - used to set voltage reference for ADC
+
+*ADLAR* - enable left adjust for result (ADH contains 8 MSBs of ADC reading)
+
+*MUX[3:0]* - set adc to use
+|------+------+------+------+------------|
+| MUX3 | MUX2 | MUX1 | MUX0 | Input Used |
+|------+------+------+------+------------|
+|    0 |    0 |    0 |    0 | ADC0       |
+|    0 |    0 |    0 |    1 | ADC1       |
+|    0 |    0 |    1 |    0 | ADC2       |
+|    0 |    0 |    1 |    1 | ADC3       |
+|------+------+------+------+------------|
+
+** ADCSRA - ADC Control and Status
+|------+------+-------+------+------+-------+-------+-------|
+| ADEN | ADSC | ADATE | ADIF | ADIE | ADPS2 | ADPS1 | ADPS0 |
+|------+------+-------+------+------+-------+-------+-------|
+
+*ADEN* - enable ADC
+
+*ADSC* - enable a single measurement in manual mode, or enable auto mode
+
+*ADATE* - enable ADC auto triggering
+
+*ADIF* - this output is set when the ADC measurement is ready. cleared automatically if ADC interrupt is used
+
+*ADIE* - enable ADC interrupt ADC_vect
+
+*ADPS[2:0]* - adc prescaler
+
+|-------+-------+-------+-----------|
+| ADPS2 | ADPS1 | ADPS0 | Prescaler |
+|-------+-------+-------+-----------|
+|     0 |     0 |     0 |         2 |
+|     0 |     0 |     1 |         2 |
+|     0 |     1 |     0 |         4 |
+|     0 |     1 |     1 |         8 |
+|     1 |     0 |     0 |        16 |
+|     1 |     0 |     1 |        32 |
+|     1 |     1 |     0 |        64 |
+|     1 |     1 |     1 |       128 |
+|-------+-------+-------+-----------|
+
+** ADCSRB - ADC Control and Status
+|-----+------+-----+---+---+-------+-------+-------|
+| BIN | ACME | IPR |   |   | ADTS2 | ADTS1 | ADTS0 |
+|-----+------+-----+---+---+-------+-------+-------|
+
+*BIN* - enables bipolar mode.  9 bit resolution + sign bit
+
+*IPR* - reverse polarity in bipolar mode
+
+*ADTS* - control ADC triggering in auto mode
+
+|-------+-------+-------+------------------------|
+| ADTS2 | ADTS1 | ADTS0 | Trigger Source         |
+|-------+-------+-------+------------------------|
+|     0 |     0 |     0 | Free running           |
+|     0 |     0 |     1 | Analog comparator      |
+|     0 |     1 |     0 | External interrupt 0   |
+|     0 |     1 |     1 | Timer0 Compare Match A |
+|     1 |     0 |     0 | Timer0 Overflow        |
+|     1 |     0 |     1 | Timer0 Compare Match B |
+|     1 |     1 |     1 | Pin Change Interrupt   |
+|-------+-------+-------+------------------------|
+
+** Manual Triggering
+** Auto triggering
+*ADATE* - ADC auto trigger enable

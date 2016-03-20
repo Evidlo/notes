@@ -1,14 +1,104 @@
 #+title: ECE382 - Control Systems - Spring 2016
 
+* Block diagrams
+
+[[./blockdiagram.png]]
+
+#+begin_definition
+*a* - pickoff point
+
+*b* - block
+
+*c* - arrow
+
+*d* - summing junction
+#+end_definition
+
+* Generalized Feedback System
+#+begin_definition
+*closed loop gain* - $T(s) = \frac{C(s)}{R(s)}$
+
+*open loop gain* - $\frac{B(s)}{E(s)}$
+
+*feedforward gain* - $\frac{C(s)}{E(s)}$
+#+end_definition
+
+#+begin_examples
+1. Express the circuit as a block diagram
+
+  [[./circuit.png]] 
+
+   \[\frac{V_{in} - V_{out}}{R} = i\]
+
+   $V_{out} = \frac{1}{C} \int i(t) dt = \frac{1}{sC} i$
+
+  [[./circuitblock.png]] 
+#+end_examples
+
+** Signal flow graph
+
+[[./signalflow.png]] 
+
+#+begin_definition
+*node* - signal or variable
+
+*transmittance* - gain between nodes
+
+*path* - traversal of nodes
+
+*loop* - closed path
+
+*n-loop* - a loop made of n single loops
+
+*forward path gain* - gain of open path
+#+end_definition
+
+** Mason's Gain Formula
+
+Used to calculate gain between nodes in complex graphs
+
+#+begin_definition
+*Mason's gain formula
+
+\[G_{BA} = \frac{\sum P_i \Delta_i}{\Delta}\]
+
+Graph cofactor
+\[\Delta = 1 - \sum \text{1-loop gains} + \sum \text{2-loop gains} - ...\]
+
+$P_i$ - ith forward path gain
+
+$\Delta_i$ - graph cofactor with the gains of loops touching the ith forward path removed 
+#+end_definition
+
+#+begin_examples
+1. Find the gain between $x1$ and $r1$ where
+
+   $A_{11} x_1 + A_{12} x_2 + r_1 = x_1$
+
+   $A_{21} x_1 + A_{22} x_2 + r_2 = x_2$
+
+   [[./masonsexample.png]] 
+
+   *1-loops*
+   - $L_1 = A_{11}$
+   - $L_2 = A_{12} A_{21}$
+   - $L_3 = A_{22}$
+
+   *2-loops*
+   - $L_1L_2 = A_{11}A_{22}$
+
+   $\Delta = 1 - L_1 - L_2 - L_3 + L_1L_2 = 1 - A_{11} - A_{12} A_{21} - A_{22} + A_{11}A_{22}$
+
+   \[\frac{x_1}{r_1} = \frac{P_1 \Delta_1}{\Delta} = \frac{(1)(1 - L_2)}{\Delta} = \frac{1 - A_{22}}{1 - A_{11} - A_{12} A_{21} - A_{22} + A_{11}A_{22}}\]
+#+end_examples
+
 * Poles and Zeros
 ** Open loop
 
 ** Closed loop
 
-#+attr_html: width 400
 [[./loop.png]]
 
-$T(s) = \frac{C(s)}{R(s)} = \frac{G(s)}{1 + G(s)H(s)}$
 
 roots of $G(s)$: closed loop zeros
 
@@ -30,7 +120,7 @@ $D_1D_2 + N_1N_2$: closed-loop poles
 
 $D_1D_2$: open-loop poles
 
-transfer functions need to be in polynomial form
+transfer functions needs to be in polynomial form
 #+begin_examples
 1. $G_2(s) = \frac{1}{s-1}$
 
@@ -240,7 +330,7 @@ Rules
 
    *Breakaway point*: $1 + KG(s)H(s) = 0 \rightarrow K = \frac{-1}{G(s)H(s)}$
 
-   \[\frac{d}{ds} [\frac{1}{s (s + 1) (s + 2)}] = \frac{-(1) (3s^2 + 6s + 2)}{[s (s + 1) (s + 2)]^2} = 0\]
+   \[\frac{d}{ds} \frac{1}{s (s + 1) (s + 2)} = \frac{-(1) (3s^2 + 6s + 2)}{[s (s + 1) (s + 2)]^2} = 0\]
 
    so  $s_1,s_2 = \frac{-6 \pm \sqrt{36 - 24}}{6} \approx -0.42, -1.58$
 
@@ -280,7 +370,7 @@ Rules
 
    *Breakaway point*
 
-   \[\frac{dK}{ds} = \frac{d}{ds} G(s) = \frac{(s^2 - 2s)(2s + 2) - (s^2 + 2s+ 2)(2s - 2)}{(s(s - 2))^2 =  0\]  
+   \[\frac{dK}{ds} = \frac{d}{ds} G(s) = \frac{(s^2 - 2s)(2s + 2) - (s^2 + 2s+ 2)(2s - 2)}{(s(s - 2))^2} =  0\]  
 
    so $s_1,s_2 = 0.618, -1.68$
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160212093516" modified="D:20160320140110"/>
+<info created="D:20160320144943" modified="D:20160320144943"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -280,46 +280,72 @@ h
 </path>
 </group>
 </symbol>
+<symbol name="resistor">
+<group>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+64 816 m
+68 804 l
+76 828 l
+</path>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+76 828 m
+84 804 l
+92 828 l
+96 816 l
+100 816 l
+</path>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+60 816 m
+64 816 l
+</path>
+</group>
+</symbol>
 </ipestyle>
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" stroke="black" pen="heavier" arrow="normal/normal">
+<path layer="alpha" matrix="0.587714 0 0 0.589223 6.42367 343.559" stroke="black" pen="heavier" arrow="normal/normal">
 32 816 m
 96 816 l
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.587714 0 0 0.589223 6.42367 343.559" stroke="black" pen="heavier" arrow="normal/normal">
 128 816 m
 176 816 l
 </path>
-<path stroke="black" pen="heavier">
+<path matrix="0.587714 0 0 0.589223 6.42367 343.559" stroke="black" pen="heavier">
 176 832 m
 176 800 l
 224 800 l
 224 832 l
 h
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
+<path matrix="0.587714 0 0 0.589223 6.42367 343.559" stroke="black" pen="heavier" arrow="normal/normal">
 224 816 m
 272 816 l
 </path>
-<path stroke="black" pen="heavier">
-240 816 m
-240 784 l
-</path>
-<path stroke="black" pen="heavier">
-240 784 m
-112 784 l
-112 784 l
-</path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-112 784 m
-112 800 l
-</path>
-<text matrix="1 0 0 1 -3.85141 -1.40051" transformations="translations" pos="192 816" stroke="black" type="label" width="22.817" height="7.473" depth="2.49" valign="baseline">G(s)
+<text matrix="0.587714 0 0 0.589223 0.223788 341.698" transformations="translations" pos="192 816" stroke="black" type="label" valign="baseline">G(s)
 </text>
-<text matrix="1 0 0 1 -5.60204 0.350128" transformations="translations" pos="16 816" stroke="black" type="label" width="19.012" height="7.473" depth="2.49" valign="baseline">R(s)</text>
-<text matrix="1 0 0 1 -9.45345 -1.05038" transformations="translations" pos="288 816" stroke="black" type="label" width="18.874" height="7.473" depth="2.49" valign="baseline">C(s)</text>
-<use matrix="1 0 0 1 48 48" name="sum" pos="64 768"/>
+<text matrix="0.587714 0 0 0.589223 -3.70554 341.072" transformations="translations" pos="16 816" stroke="black" type="label" valign="baseline">R(s)</text>
+<text matrix="0.587714 0 0 0.589223 0.867748 342.94" transformations="translations" pos="288 816" stroke="black" type="label" valign="baseline">C(s)</text>
+<path matrix="0.587714 0 0 0.589223 6.00891 305.646" stroke="black" pen="heavier">
+176 832 m
+176 800 l
+224 800 l
+224 832 l
+h
+</path>
+<use matrix="0.598592 0 0 0.575163 30.2 351.08" name="sum" pos="69.9121 822.168"/>
+<path matrix="1 0 0 1 2.13673 1.79261" stroke="black" arrow="normal/normal">
+144.288 822.789 m
+144.288 784.669 l
+135.587 784.669 l
+</path>
+<path matrix="1.00411 0 0 0.994975 1.01636 5.60762" stroke="black" arrow="normal/normal">
+106.997 784.669 m
+70.7408 784.669 l
+70.5337 813.052 l
+</path>
+<text matrix="0.587714 0 0 0.589223 -1.01891 303.577" transformations="translations" pos="192 816" stroke="black" type="label" valign="baseline">H(s)
+</text>
 </page>
 </ipe>

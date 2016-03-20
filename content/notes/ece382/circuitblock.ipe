@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160212093516" modified="D:20160320140110"/>
+<info created="D:20160320144141" modified="D:20160320144155"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -280,46 +280,72 @@ h
 </path>
 </group>
 </symbol>
+<symbol name="resistor">
+<group>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+64 816 m
+68 804 l
+76 828 l
+</path>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+76 828 m
+84 804 l
+92 828 l
+96 816 l
+100 816 l
+</path>
+<path matrix="1 0 0 1 -80 -816" stroke="black">
+60 816 m
+64 816 l
+</path>
+</group>
+</symbol>
 </ipestyle>
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" stroke="black" pen="heavier" arrow="normal/normal">
-32 816 m
-96 816 l
+<path layer="alpha" matrix="1 0 0 1 8 0" stroke="black" arrow="normal/normal">
+24 816 m
+48 816 l
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
+<use matrix="0.5 0 0 0.5 32 408" name="sum" pos="64 816"/>
+<path matrix="1 0 0 1 -8 0" stroke="black" arrow="normal/normal">
+80 816 m
+104 816 l
+</path>
+<path stroke="black">
+96 832 m
+96 800 l
+128 800 l
+128 832 l
+h
+</path>
+<path stroke="black">
+176 832 m
+176 800 l
+208 800 l
+208 832 l
+h
+</path>
+<path stroke="black" arrow="normal/normal">
 128 816 m
 176 816 l
 </path>
-<path stroke="black" pen="heavier">
-176 832 m
-176 800 l
-224 800 l
-224 832 l
-h
+<path stroke="black" arrow="normal/normal">
+208 816 m
+256 816 l
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
+<path stroke="black" arrow="normal/normal">
 224 816 m
-272 816 l
+224 768 l
+64 768 l
+64 808 l
 </path>
-<path stroke="black" pen="heavier">
-240 816 m
-240 784 l
-</path>
-<path stroke="black" pen="heavier">
-240 784 m
-112 784 l
-112 784 l
-</path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-112 784 m
-112 800 l
-</path>
-<text matrix="1 0 0 1 -3.85141 -1.40051" transformations="translations" pos="192 816" stroke="black" type="label" width="22.817" height="7.473" depth="2.49" valign="baseline">G(s)
-</text>
-<text matrix="1 0 0 1 -5.60204 0.350128" transformations="translations" pos="16 816" stroke="black" type="label" width="19.012" height="7.473" depth="2.49" valign="baseline">R(s)</text>
-<text matrix="1 0 0 1 -9.45345 -1.05038" transformations="translations" pos="288 816" stroke="black" type="label" width="18.874" height="7.473" depth="2.49" valign="baseline">C(s)</text>
-<use matrix="1 0 0 1 48 48" name="sum" pos="64 768"/>
+<text matrix="1 0 0 1 3.75941 -2.92399" transformations="translations" pos="104 816" stroke="black" type="label" width="10.033" height="12.066" depth="4.95" valign="baseline" size="Large">$\frac{1}{R}$</text>
+<text matrix="1 0 0 1 1.25314 -3.3417" transformations="translations" pos="184 816" stroke="black" type="label" width="14.894" height="12.066" depth="4.95" valign="baseline" size="Large">$\frac{1}{sC}$</text>
+<text matrix="1 0 0 1 -13.3668 -3.75941" transformations="translations" pos="25.9279 816.098" stroke="black" type="label" width="18.1" height="9.805" depth="2.15" valign="baseline" size="Large">$V_{in}$</text>
+<text matrix="1 0 0 1 233.501 -3.7591" transformations="translations" pos="25.9279 816.098" stroke="black" type="label" width="22.817" height="9.805" depth="2.15" valign="baseline" size="Large">$V_{out}$</text>
+<text transformations="translations" pos="46.8135 824.452" stroke="black" type="label" width="10.926" height="8.275" depth="1.09" valign="baseline" size="Large">+</text>
+<text transformations="translations" pos="55.5855 791.453" stroke="black" type="label" width="4.682" height="6.177" depth="0" valign="baseline" size="Large">-</text>
 </page>
 </ipe>

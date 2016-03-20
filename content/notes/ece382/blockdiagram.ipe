@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160212093516" modified="D:20160320140110"/>
+<info created="D:20160320141626" modified="D:20160320144433"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
-<textsize name="small" value="\small"/>
-<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -284,42 +284,49 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" stroke="black" pen="heavier" arrow="normal/normal">
-32 816 m
-96 816 l
+<path layer="alpha" matrix="0.533333 0 0 0.573875 7.46667 352.446" stroke="black" arrow="normal/normal">
+16 800 m
+80 800 l
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-128 816 m
-176 816 l
-</path>
-<path stroke="black" pen="heavier">
-176 832 m
-176 800 l
-224 800 l
-224 832 l
+<path matrix="0.533333 0 0 0.573875 7.46667 352.446" stroke="black">
+80 816 m
+80 784 l
+128 784 l
+128 816 l
 h
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-224 816 m
-272 816 l
+<path matrix="0.8 0 0 0.573875 -26.6667 352.446" stroke="black" arrow="normal/normal">
+128 800 m
+192 800 l
 </path>
-<path stroke="black" pen="heavier">
-240 816 m
+<use matrix="0.533333 0 0 0.573875 24.5333 352.446" name="sum" pos="208 800"/>
+<path matrix="0.533333 0 0 0.573875 55.9933 324.66" stroke="black">
+80 816 m
+80 784 l
+128 784 l
+128 816 l
+h
+</path>
+<path matrix="0.900816 0 0 0.578879 -45.4511 348.442" stroke="black" arrow="normal/normal">
+144 800 m
+144 752 l
+160 752 l
+</path>
+<path matrix="0.351703 0 0 0.58149 51.0579 346.476" stroke="black" arrow="normal/normal">
+208 752 m
+240 752 l
 240 784 l
 </path>
-<path stroke="black" pen="heavier">
-240 784 m
-112 784 l
-112 784 l
+<text matrix="0.533333 0 0 0.573875 8.13501 350.768" transformations="translations" pos="92.8208 801.393" stroke="black" type="label" valign="baseline">$G(t)$</text>
+<text matrix="0.533333 0 0 0.573875 56.2555 322.242" transformations="translations" pos="92.8208 801.393" stroke="black" type="label" valign="baseline">$H(t)$</text>
+<use matrix="0.533333 0 0 0.573875 7.46667 352.446" name="mark/disk(sx)" pos="144 800" size="normal" stroke="black"/>
+<text matrix="0.533333 0 0 0.573875 4.34774 346.214" transformations="translations" pos="48 816" stroke="black" type="label" valign="baseline">\emph{a}</text>
+<text matrix="0.533333 0 0 0.573875 56.9239 346.933" transformations="translations" pos="48 816" stroke="black" type="label" valign="baseline">\emph{c}</text>
+<text matrix="0.533333 0 0 0.573875 35.5372 354.843" transformations="translations" pos="48 816" stroke="black" type="label" valign="baseline">\emph{b}</text>
+<text matrix="0.533333 0 0 0.573875 107.273 354.364" transformations="translations" pos="48 816" stroke="black" type="label" valign="baseline">\emph{d}</text>
+<path matrix="0.533333 0 0 0.573875 7.46667 352.446" stroke="black" arrow="normal/normal">
+256.564 799.722 m
+271.602 799.722 l
 </path>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-112 784 m
-112 800 l
-</path>
-<text matrix="1 0 0 1 -3.85141 -1.40051" transformations="translations" pos="192 816" stroke="black" type="label" width="22.817" height="7.473" depth="2.49" valign="baseline">G(s)
-</text>
-<text matrix="1 0 0 1 -5.60204 0.350128" transformations="translations" pos="16 816" stroke="black" type="label" width="19.012" height="7.473" depth="2.49" valign="baseline">R(s)</text>
-<text matrix="1 0 0 1 -9.45345 -1.05038" transformations="translations" pos="288 816" stroke="black" type="label" width="18.874" height="7.473" depth="2.49" valign="baseline">C(s)</text>
-<use matrix="1 0 0 1 48 48" name="sum" pos="64 768"/>
 </page>
 </ipe>
