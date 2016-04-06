@@ -523,16 +523,19 @@ Since $(s_n)$ is increasing and unbounded, it is divergent
 #+begin_definition
 *cluster point*
 
-[[figure]]
+[[./cluster_point.png]] 
 
 Let $A \subseteq \mathbb{R}$ be a non empty set. 
 
-Then $a \in \mathbb{R}$ is a cluster point of A if:
+Then $c \in \mathbb{R}$ is a cluster point of A if
 
-- if $\forall \varepsilon > 0$, $\exists c \in A$, $c \neq a$  s.t.
+$\exists a \in A$, $a \neq c$  s.t. $\forall \varepsilon > 0$,
 
-  $|c - a| < \varepsilon$
+$|a - c| < \varepsilon$
 #+end_definition
+
+$c$ is a cluster point of the set 
+$A$ if the values of $A$ get arbitrarily close to $c$
 
 #+begin_examples
 1. Let $A = \{ \frac{1}{n}, n \in \mathbb{N}\}$
@@ -565,8 +568,10 @@ $f$ admits a limit $L \in \mathbb{R}$ if:
 
 $\forall \varepsilon > 0$, $\exists \zeta > 0$,
 
- s.t. $|x - a| \leq \zeta \Rightarrow |f(x) - L| \leq \varepsilon$
+ s.t. $|x - a| \leq \zeta$ implies $|f(x) - L| \leq \varepsilon$
 #+end_definition
+
+Or, as $x$ converges to $a$, $f(x)$ converges to $L$
 
 #+begin_examples
 [[./function_limit_example1.png]]
@@ -587,11 +592,11 @@ Let $A \subseteq \mathbb{R}$ be a nonempty set
 
 Let $f: A \to \mathbb{R}$ and let $c \in \mathbb{R}$ be a cluster point of $A$
 
-Assume $f$ has a limit $L$ at $a$ and also has limit $L'$ at $a$
+Assume $f$ has a limit $L$ at $c$ and also has limit $L'$ at $c$
 
 Then $L = L'$
 
-then $L = \lim_{x \to a} f(x)$ is called the limit of $f$ at $a$
+and $L = \lim_{x \to c} f(x)$ is called the limit of $f$ at $c$
 #+end_theorem
 
 #+begin_proof
@@ -736,9 +741,9 @@ Let $A \subset \mathbb{R}$ be nonempty, $f:A \rightarrow \mathbb{R}$, and $c \in
    0 & \text{else}
    \end{cases} $$
 
-   Let $(x_n) = \frac{1}{n}$.  $\lim_{n \to infty} f(x_n) = 1$
+   Let $(x_n) = \frac{1}{n}$.  $\lim_{n \to \infty} f(x_n) = 1$
 
-   Let $(y_n) = \frac{\sqrt{2}}{n}$.  $\lim_{n \to infty} f(x_n) = 0$
+   Let $(y_n) = \frac{\sqrt{2}}{n}$.  $\lim_{n \to \infty} f(x_n) = 0$
 
    Since the subsequences don't converge to the same value, $f(x)$ does not converge
 #+end_examples
@@ -846,16 +851,11 @@ $\lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} h(x_n) = L$
 
 From the squeeze theorem for sequences, $g(x_n)$ converges and $\lim_{n \to \infty} g(x_n) = L$
 #+end_proof
-
-
-
-
-
-
 M > 0.  prop div if x_n > M for all n > k
+
 ** Proper Divergence
 #+begin_definition
-Let $f: A \to \mathbb{R}$  Let $c \in \mathbb{R}$ be a cluster point
+Let $f: A \to \mathbb{R}$  Let $c \in \mathbb{R}$ be a cluster point of $A$
 
 We say that $\lim_{x \to c} f(x) = \infty$
 
@@ -906,3 +906,431 @@ Let $\zeta = \frac{1}{n}$.  $x_n \in [c - \zeta, c + \zeta], f(x_n) \leq M$
 
 we don't have $\lim_{n \to \infty} f(x_n) = \infty$ which is a contradiction
 #+end_proof
+** Continuous Functions
+#+begin_theorem
+*Continuous at point*
+
+Let $\varepsilon > 0$. 
+
+$f$ is continuous at $c$ if there exists $\zeta > 0$ such that
+
+$\forall x \in A, |x - c| \leq \zeta$ implies $|f(x) - f(c)| \leq \varepsilon$
+
+#+end_theorem
+
+[[./continuous_def.png]] 
+
+If $c \in A$ is a cluster point of A, 
+
+then $f$ is a continuous function at $c$ iff $\lim_{x \to c} f(x) = f(c)$
+
+If $c \in A$ is not a cluster point, then $f$ is automatically continuous at $c$
+
+#+begin_examples
+1. Let $f(x) = x, x \in \mathbb{Z}$.
+
+   Then $f$ is continuous at $x$
+
+2. Let 
+
+   $$ f(x) =
+   \begin{cases}
+   1 & x \geq 0 \\
+   0 & x < 0
+   \end{cases} $$
+
+   Then $f$ is not continuous at 0
+
+3. Let 
+
+   $$ f(x) =
+   \begin{cases}
+   1 & x \in \mathbb{Q} \\
+   0 & x \notin \mathbb{Q}
+   \end{cases} $$
+
+   f(x) is nowhere continuous
+
+4. Let 
+
+   $$ f(x) =
+   \begin{cases}
+   1 & x \in \mathbb{R} \\
+   0 & x \notin \mathbb{R} 
+   \end{cases} $$
+
+   from the squeeze theorem, $f$ is continuous at 0
+
+   but if $x \neq 0$, then the limit does not exist and $f$ is not continuous
+#+end_examples
+
+#+begin_theorem
+*Continuity of points*
+
+Let $A \rightarrow \mathbb{R}$
+
+Let $c \in A$, then $f$ is continuous at $c$ iff
+
+for every $(x_n)$ s.t. $\lim_{n\to \infty} x_n = c$, we have $\lim_{n\to \infty} f(x_n) = f(c)$
+
+$f$ is not continuous at $c$, iff there exists $(x_n)$ that converges to c
+
+where $f(x_n)$ does not converge to $f(c)$
+#+end_theorem
+
+#+begin_definition
+*Continuity of functions*
+
+Let $f:A \to \mathbb{R}$
+
+Let $B \subset A$
+
+We say $f$ is continuous on $B$ if $f(x)$ is continuous for every $x \in B$
+#+end_definition
+#+begin_examples
+1. Let $f(x) = 1, x > 0$
+
+   $f$ is continuous on $(0, \infty)$
+
+   Let $f:A \to \mathbb{R}$ and $c \in \mathbb{R}$ be a cluster point of $A$. 
+
+   Assume $c \notin A$, but $\lim_{x \to c} f(x)$ exists.  Then we can define
+
+   $f'(x) = f(x), x in A, \lim_{x \to c}f(x), x = c$
+
+   f' fills in holes
+#+end_examples
+
+** Combinations of continuous functions
+#+begin_theorem
+Let $f,g:A \to \mathbb{R}$ be continuous functions at $c$.  Let $c \in A$
+
+Then $f+g$, $fg$, and $\frac{f}{g}$ ($g \neq 0$) are continuous at $c$
+#+end_theorem
+#+begin_proof
+Let $(x_n) \in A$ converge to $c$. 
+
+Since $f,g$ are continuous at $c$,
+
+$\lim_{n \to \infty} f(x_n) = f(c)$ and $\lim_{n \to \infty} g(x_n) = g(c)$
+
+so $\lim_{n \to \infty} f(x_n) + \lim_{n \to \infty} g(x_n) = f(c) + g(c)$ 
+
+The proof is identical for $fg$ and $\frac{f}{g}$
+#+end_proof
+#+begin_examples
+1. Let $f$ be any polynomial in $\mathbb{R}$
+
+   Since $f$ is a sum of products of $x$ and $x$ is continuous on $\mathbb{R}$, $f$ is also continuous on $\mathbb{R}$
+#+end_examples
+#+begin_theorem
+Let $f:A \to \mathbb{R},g:B \to \mathbb{R}$
+
+Assume for $x \in B$, $g(x) \in A$
+
+We define $(f \circ g)(x) = f(g(x))$
+
+If $g$ is continuous at $c$ and $f$ is continuous at $g(c)$, then $f \circ g$ is continuous at $c$
+#+end_theorem
+#+begin_proof
+
+#+end_proof
+#+begin_theorem
+Let $A,B \subseteq \mathbb{R}$.  Let $f$ be continuous on $A$, and $g$ be continuous on $B$
+
+If $f(A) \subseteq B$, then $g \circ f$ is continuous on $A$
+#+end_theorem
+
+closed set/function
+
+** Intervals
+#+begin_definition
+interval is a continuous subset of R
+#+end_definition
+
+#+begin_theorem
+*f has a supremum on a bounded set*
+*uses squeeze theorem*
+
+
+Assume that $f$ is not bounded on $I$.  We can assume $f$ has no upper bound.
+
+$n$ is not an upper bound for $f$, so we can find $(x_n) \in I$ s.t. $f(x_n) \geq n$
+
+$(x_n)$ is bounded, therefore it admits a convergent subsequence $(x_m)$
+
+Let $x^* = \lim x_m$
+
+Since I is closed, $x^* \in I$
+
+Since $f$ is continuous at $x^* \lim f(x_m) = \lim f(x^*)$
+
+This contradicts $f(x_n) \geq n$
+
+So $f$ admits a supremum on $I$
+
+The proof is similar for infimum
+#+end_theorem
+
+#+begin_theorem
+*The supremum/infimum of a function of closed set is also a min/max*
+
+Let $I = [a,b]$.  Let $f:I \to \mathbb{R}$ be a continuous function.
+
+Let $M = \text{sup}{f(x), x \in I}$, $S = \inf {f(x), x \in I}$
+
+$\exists x_S, x_M \in I$ s.t. $f(x_S) = S, f(x_M) = M$
+#+end_theorem
+
+#+begin_proof
+Let $f: I \to \mathbb{R}$.  $S = \sup f$
+
+We can find a sequence $x_n \in I$ s.t. $f(x_n)$ converges to $S$.
+
+We can find a convergfent subsequence $x_m$.
+
+Let $x^* = \lim x_m$
+
+Since $f$ is continuous at $x^*$,
+
+$\lim f(x_m) = f(x^*)$
+
+Therefore $S = f(x^*)$
+#+end_proof
+
+#+begin_examples
+1. Let $f(x) = x^2, I = [-1, 1]$
+
+   $\sup{F} = 1 = f(1)$
+
+   $\inf{F} = 0 = f(0)$
+
+2. Let $f(x) = x, I = (0,1)$
+
+   $\inf f = 0$, but there is no $x \in I$ such that $f(x) = 0$
+#+end_examples
+
+#+begin_theorem
+*Intermediate Value Theorem*
+
+Let $I$ be an interval and $f:I \to \mathbb{R}$ be continuous
+
+Let $a,b,c \in I$ s.t. $a \leq b$ $f(a) \leq f(b)$
+
+Let $\lambda \in [f(a), f(b)]$.  We can always find $c \in [a,b]$
+
+s.t. $f(c) = \lambda$
+#+end_theorem
+
+#+begin_proof
+Let $A = {x \in [a,b], f(x) \leq \lambda}$
+
+$A \neq crosszero$ and is bounded so $A$ has an upper bound
+
+Let $c = \sup A$
+
+Let $(x_n)$ be a sequence in $A$, s.t. $\lim x_n = c$
+
+Since $x_n \in A$, f(x_n) \leq \lambda$
+
+Since $f$ is continuous at $c$, $\lim f(x_n) = f(c)$
+
+Therefore $f(c) \leq \lambda$
+
+For $n \geq 1$, $c + \frac{1}{n} \notin A$, so $f(x + \frac{1}{n} > \lambda$
+
+So $f(c) \geq \lambda$
+
+We conclude $f(c) = \lambda$
+#+end_proof
+
+#+begin_theorem
+*Zero crossing corollary*
+
+Let $f:[a,b] \to \mathbb{R}$ be continuous
+
+If $f(a) < 0, f(b) > 0$ then $\exists c$ s.t. $f(c) = 0$
+#+end_theorem
+
+#+begin_theorem
+Let $f:\mathbb{R} \to \mathbb{R}$ be continuous.  Let $I \in \mathbb{R}$ be an interval.
+
+Then $f(I) = {f(x) | x \in I}$ is an interval
+#+end_theorem
+
+#+begin_proof
+Let $I$ be an interval.  Let $a,b$ s.t. $a \leq b$ and $a,b \in f(I)$
+
+Since $a \in f(I), \exists \alpha \in I$ s.t.
+
+$f(\alpha) = a$
+
+Since $b \in f(I), \exists \beta \in I$ s.t.
+
+$f(\beta) = b$
+
+For $c \in [a,b]$ we can find $\gamma \in [\alpha, \beta]$ s.t. $f(\gamma) = c$
+
+So $f(\gamma) = c$.  Therefore $f(I)$ is an interval
+#+end_proof
+
+** Uniform continuity
+#+begin_definition
+$f$ is uniformly continuous if
+
+for all $\varepsilon$ there exists $\delta$ such that
+
+$|x_1 - x_2| \leq \delta$ implies $|f(x_1) - f(x_2)| \leq \varepsilon$
+#+end_definition
+
+#+begin_definition
+*Lipschitz*
+
+Let $f:A \to \mathbb{R}$
+
+$f$ is lipschitz if, there exists $K \geq 0$ such that
+
+for all $x, y \in A$
+
+$|f(x) - f(y)| \leq K|x - y|$
+#+end_definition
+
+#+begin_examples
+1. Let $f(x) = x$.
+
+   $|f(x) - f(y)| \leq 1 * |x - y|$, so $f$ is lipschitz
+
+2. Let $f(x) = \sqrt{x}$
+
+   $|f(x) - f(y)| = |\sqrt{x} - \sqrt{y}| = \frac{1}{\sqrt{x} + \sqrt{y}} |x - y|$
+   
+   so $f$ is not lipschitz on $[0, \infty)$.
+
+   If we let $x,y \in [a, \infty)$, then
+
+   $|f(x) - f(y)| \leq \frac{1}{2\sqrt{a}} |x - y|$
+
+   so $f$ is lipschitz on $[a, \infty)$
+
+3. Let $f(x) = x^2$
+
+   $|f(x) - f(y)| = |x^2 - y^2| = |x - y||x + y|$.
+
+   $f$ is not lipschitz on $\mathbb{R}$
+
+   but it is for any bounded interval, since some $K$ will be greater than $|x - y|$
+#+end_examples
+
+#+begin_theorem
+Any lipschitz function is uniformly continuous
+#+end_theorem
+
+#+begin_proof
+Let $\varepsilon > 0$.  For $x,y \in A$ such that $|x - y| \leq \frac{\varepsilon}{K}$
+
+we have $|f(x) - f(y)| \leq \varepsilon$
+#+end_proof
+
+The converse is not true, as $f(x) = \sqrt{x}$ is uniformly continuous, but not lipschitz
+
+#+begin_definition
+The derivative of Lipschitz functions are bounded by K
+#+end_definition
+
+** Monotonic functions
+#+begin_definition
+*Increasing and decreasing functions
+
+Let $f:A \to \mathbb{R}$, and $x,y \in A$, such that $x \leq y$
+
+then $f$ is increasing if $f(x) \leq f(y)$
+
+the definition is similar for strictly increasing/decreasing
+#+end_definition
+
+#+begin_examples
+1. Let $f(x) = x$
+
+   $f$ is strictly increasing
+
+2. Let $f(x) = x^2$
+
+   $f$ is strictly increasing on the domain $x \geq 0$
+#+end_examples
+
+#+begin_theorem
+The left and right limits exist for all points in monotonic functions
+
+Let $f:I \to \mathbb{R}$ be monotonic.
+
+Let $c \in I$ which is not an endpoint of $I$.
+
+Then $\lim_{x \to +c} f(x)$ and $\lim_{x \to -c} f(x)$ exist
+#+end_theorem
+
+#+begin_proof
+Let $f$ be increasing.
+
+Let $L = \sup\{f(x)| x < c\}$
+
+$L - \varepsilon$ is not an upper bound, so
+
+there exists $x_{\varepsilon} < c$ such that $f(x_{\varepsilon} > L - \varepsilon$
+
+For $x \in [x_{\varepsilon}, c)$
+
+$L - \varepsilon \leq f(x) \leq L$
+
+so $\lim_{x \to +c} f(x) = L$, $\lim_{x \to -c} f(x) = L$.
+
+The proof is similar for right limits and infimums
+#+end_proof
+
+** Inverse functions
+#+begin_definition
+A function $f$ has an inverse if $f$ is injective
+
+ie. $x \neq y$ implies $f(x) \neq f(y)$ ($f$ uniquely maps values in its domain)
+#+end_definition
+
+#+begin_theorem
+Let $f:A \to \mathbb{R}$ be a strictly increasing function.
+
+Then $f$ is injective and $g:f(A) \to A$ is strictly increasing.
+#+end_theorem
+
+#+begin_proof
+Let $x,y \in A$ such that $x \neq y$
+
+We have $x < y$ or $x > y$, so
+
+$f(x) < f(y)$ or $f(x) > f(y)$, so $f(x) \neq f(y)$
+
+so $f$ is injective.
+
+Let $y_1,y_2 \in f(A)$ such that $y_1 < y_2 $
+
+We have $y_1 = f(x_1), y_2 = f(x_2)$ for some $x_1,x_2 \in A$
+
+We must have $x_1 < x_2$, so $f^{-1}{y_1} < f^{-1}{y_2}$
+#+end_proof
+
+#+begin_theorem
+Let $f$ be a strictly increasing and continuous function.  Then $f^{-1}$ is strictly increasing and continuous.
+#+end_theorem
+
+#+begin_proof
+Let $f(I) = J$
+
+Assume for contradiction that $g$ is not continuous.
+
+Then $g(J) = g(f(I)) = I$ is not an interval, which is a contradiction
+#+end_proof
+
+* Test II Review
+
+- a function which is continuous on a bounded and closed interval is uniformly continuous
+
+- if a function is uniformly continuous on an open interval, the limits at the endpoints exist
+
+- a function is uniformly continuous on a bounded interval iff the limits exist at the endpoints
