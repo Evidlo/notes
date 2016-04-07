@@ -662,4 +662,225 @@ If $f$ is a polynomial with integer coefficients and leading coefficient 1, then
 #+end_examples
 
 * Ginomons
+* Mathematics of Money
+#+begin_definition
+*Simple Interest*
 
+$F_s = P(1 + rt)$
+#+end_definition
+
+#+begin_definition
+*Compounded Interest
+
+$F_c = P * (1 + \frac{r}{n})^{tn}$
+
+$\lim_{n \to \infty} F_c = P * e^{rt}$
+#+end_definition
+
+Let $t \geq 1$
+
+then $F_c = P (1^n + 1^{n-1}r(\frac{t}{1}) + ... \geq F_s = P (1 + rt)$
+
+* Credit Cards
+- Month 1 - spend 876
+- Month 2 - spend 288
+
+Bill 1
+- pay 876
+- pay $20 min charge
+- pay $20<$400<$876
+
+Bill 2
+- nothing, owe 288
+- owe $1165 = $876 - $20 + $288 + $21
+- owe $777.64 = $876 - $400 + $288 + $13.64
+  not paying off bill increases interest for this month's balance by $\frac{1}{2} \frac{\text{APR}}{12}$ times what was spent this month
+  Over the course of a year this compounds to more than $(\frac{1}{2} APR) * \text{spent over year}$
+- 
+
+* Annuities
+#+begin_definition
+*Fixed annuity*
+
+Sequence of equal payments at regular time intervals
+
+*deferred*
+
+Collecting for lumpsum payment layter
+
+*Installment loan*
+
+Pay lump sum, get regular payments later
+#+end_definition
+
+* Motions
+#+begin_definition
+*motion*
+
+Let $v \in \mathbb{R}^n$
+
+Let $A \in M_{m \times n}, B \in \mathbb{R}^m$
+
+Then the mapping $(A,B): \mathbb{R}^n \to \mathbb{R}^n$ such that $(A,B) \overrightarrow{v} = A\overrightarrow{v} + b$
+
+is called a motion
+#+end_definition
+
+- motions have an inverse and an identity, which makes all motions a *group*
+- motions are associative and have an inverse
+
+We can find the size of a motion in various dimensions
+
+In dimension 1, $A^TA = 1$, so $A = 1$ and $A$ has 0 degrees of freedom + 2 degrees of freedom for $B$
+
+In dimension 2, $A^TA = 1$, so $A$ has 1 degree of freedom + 2 degrees of freedom for $B$
+
+** Finding a motion for some input and output
+If $\overrightarrow{v}$ and $(A,B)\overrightarrow{v}$ are given, there is a line of possible points for the center of rotation
+
+** Proper motions
+A motion is proper if $\det(A) = 1$.
+
+ie. A motion rotates the input, but does not flip
+
+If $\det(A) = -1$, then the motion is called improper and flips the system as well as rotates
+
+*If a pair of points are reflected and shifted by the same amount, how can we find the axis of reflection and the shift?*
+
+** Symmetry groups
+#+begin_definition
+*Symmetry group*
+
+Let $G$ be the set of motions such that the system $X$ looks the same before and after
+
+$G$ is called a symmetry group
+#+end_definition
+
+- symmetry groups are not commutative (ex. rotating an object, then flipping is not the same as flipping then rotating)
+
+#+begin_definition
+*Dihedral group*
+
+The set of motions which preserve the look of a regular polygon is called a dihedral group
+#+end_definition
+
+#+begin_examples
+\----/
+|\  /|
+------
+|/  \|
+/----\
+
+4 rotations, 4 reflections
+#+end_examples
+
+** Frieze patterns
+| Pattern               | Type | Symmetry groups                                                                            |
+|-----------------------+------+--------------------------------------------------------------------------------------------|
+| ...--T--T--T--T--...  | m1   | translations by $\mathbb{Z}$ and vertical reflections at $\mathbb{Z}$ or $\mathbb{Z} + .5$ |
+| ...->-T->-T->-T->-... | 11   | translations by $\mathbb{Z}$                                                               |
+| ...->-I->-I->-I->-... | 1m   | translations by $\mathbb{Z}$ and horizontal reflection                                     |
+| ...--I--I--I--...     | mm   | translations by $\mathbb{Z}$ and horizontal/vertical reflections                           |
+| ...--Z--Z--Z--...     | 12   | translations by $\mathbb{Z}$ and rotations by $180^{\circ}$                                |
+| ...--b--p--b--...     | 1g   | translation by $2\mathbb{Z}$ and glide reflection                                          |
+| ...--^--v--^--...     | mg   | translation by $2\mathbb{Z}$ and glide reflection                                          |
+
+Type shows available reflections at position
+
+m - vertical/horizontal, g - glide reflection, 2 - half turn, 1 - translation
+
+* Fractals
+** Sierpinsky gasket
+
+[[https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Sierpinski_triangle.svg/220px-Sierpinski_triangle.svg.png]]
+
+$\text{Area} = \frac{3}{4}^n$
+
+$\text{Perimeter} = \frac{3}{2}^n$
+
+** Snowflake
+
+[[https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/KochFlake.svg/362px-KochFlake.svg.png]]
+
+$\text{Area} = \sum
+
+*pascal's triangle modulo 6*
+
+** Mandelbrot set
+
+1. begin with a seed $s \in \mathbb{C}$
+
+2. iterate $a_{n+1} = a_n^2 + s$
+
+#+begin_examples
+1. *Periodic*
+
+   Let $s = -1$
+
+   | $a_1$ |  -1 |
+   | $a_2$ |   0 |
+   | $a_3$ |  -1 |
+   | ...   | ... |
+
+2. *Escaping*
+
+   Let $s = 1$
+
+   | $a_1$ |  1 |
+   | $a_2$ |   2 |
+   | $a_3$ |  5 |
+   | ...   | ... |
+
+3. *Attracting*
+
+   Let $s = \frac{-3}{4}$
+
+   | $a_1$ | $\frac{-3}{4}$ |
+   | $a_2$ |  $\frac{-3}{16}$ |
+   | ... |  ... |
+   | $a_n$ | $\frac{-1}{2}$ |
+
+** Game of life
+*** Rules
+- if a live square has less than 2 or more than 3 neighbors, it dies
+- if a dead square has 3 neighbors, it comes to life
+
+** Dimension
+#+begin_definition
+If the volume of an object X satisfies $\text{vol}(\alpha X) = \alpha^{d} \text{vol}(X)$
+
+we call $d$ the *dimension* of X
+#+end_definition
+
+#+begin_examples
+1. Let X be a sierpinsky gasket
+
+   Since X is the union of 3 half-size copies of itself,
+
+   $\text{vol}(X) = 3(\text{vol}(\frac{1}{2}X)) = 3 * \frac{1}{2}^{d}\text{vol}(X)$
+
+   Solving for $d$,
+
+   $1 = 3 * \frac{1}{2}^d$
+
+   \[d = \dfrac{\log (3)}{\log (2)}\]
+
+2. Let X be a sponge (3D carpet)
+
+   Since X is the union of 20 third-size copies of itself,
+
+   $\text{vol}(X) = 20 \text{vol}(\frac{1}{3}X) = 20 \frac{1}{3}^d \text{vol}(X)$
+
+   Solving for $d$,
+
+   $1 = 20 * \frac{1}{3}^d$
+
+   $d = \frac{\log{20}}{\log{3}}$
+#+end_examples
+
+** Collatz conjecture
+#+begin_definition
+1. Start with X
+   - if X is divisible by 2, divide it by 2
+   - otherwise, multiply by 3 and add 1
+#+end_definition
