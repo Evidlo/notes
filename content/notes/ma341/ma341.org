@@ -1259,7 +1259,7 @@ the definition is similar for strictly increasing/decreasing
 #+end_examples
 
 #+begin_theorem
-The left and right limits exist for all points in monotonic functions
+_The left and right limits exist for all points in monotonic functions._
 
 Let $f:I \to \mathbb{R}$ be monotonic.
 
@@ -1269,13 +1269,13 @@ Then $\lim_{x \to +c} f(x)$ and $\lim_{x \to -c} f(x)$ exist
 #+end_theorem
 
 #+begin_proof
-Let $f$ be increasing.
+Let $f$ be increasing. $\varepsilon > 0$, and $c \in \mathbb{R}$
 
 Let $L = \sup\{f(x)| x < c\}$
 
 $L - \varepsilon$ is not an upper bound, so
 
-there exists $x_{\varepsilon} < c$ such that $f(x_{\varepsilon} > L - \varepsilon$
+there exists $x_{\varepsilon} < c$ such that $f(x_{\varepsilon}) > L - \varepsilon$.
 
 For $x \in [x_{\varepsilon}, c)$
 
@@ -1287,10 +1287,14 @@ The proof is similar for right limits and infimums
 #+end_proof
 
 ** Inverse functions
-#+begin_definition
-A function $f$ has an inverse if $f$ is injective
 
-ie. $x \neq y$ implies $f(x) \neq f(y)$ ($f$ uniquely maps values in its domain)
+#+begin_definition
+*Inverse*
+The function $g:f(A) \to A$ such that $g(f(a)) = a$ for $a \in A$
+
+A function $f$ has an inverse if $f$ is injective. ($f$ uniquely maps values in its domain)
+
+ie. $x \neq y$ implies $f(x) \neq f(y)$ 
 #+end_definition
 
 #+begin_theorem
@@ -1302,13 +1306,13 @@ Then $f$ is injective and $g:f(A) \to A$ is strictly increasing.
 #+begin_proof
 Let $x,y \in A$ such that $x \neq y$
 
-We have $x < y$ or $x > y$, so
+Since $f$ is increasing, we have $x < y$ or $x > y$, so
 
 $f(x) < f(y)$ or $f(x) > f(y)$, so $f(x) \neq f(y)$
 
 so $f$ is injective.
 
-Let $y_1,y_2 \in f(A)$ such that $y_1 < y_2 $
+Let $y_1,y_2 \in f(A)$ such that $y_1 < y_2$
 
 We have $y_1 = f(x_1), y_2 = f(x_2)$ for some $x_1,x_2 \in A$
 
@@ -1334,3 +1338,100 @@ Then $g(J) = g(f(I)) = I$ is not an interval, which is a contradiction
 - if a function is uniformly continuous on an open interval, the limits at the endpoints exist
 
 - a function is uniformly continuous on a bounded interval iff the limits exist at the endpoints
+* Derivatives
+#+begin_definition
+*Differentiability*
+
+We say that a function $f:I_1 \to \mathbb{R}$ is differentiable at $c \in I$ if
+
+\[\lim_{x \to c} \dfrac{f(x) - f(c)}{x - c}\]
+
+exists.  We call this $f'(c)$
+#+end_definition
+
+#+begin_examples
+1. Let $f(x) = c$ for $c \in \mathbb{R}$
+
+   $\frac{f(x) - f(c)}{x - c} = 0$
+
+   so $f'(x) = 0$
+
+2. Let $f(x) = x$
+   
+   $\frac{f(x) - f(c)}{x - c} = \frac{x - c}{x - c} = 1$
+
+   so $\lim_{x \to c} f'(x) = 1$
+
+3. Let $f(x) = x^2$
+
+   $\frac{f(x) - f(c)}{x - c} = \frac{x^2 - c^2}{x - c} = \frac{(x - c)(x + c)}{x - c} = x + c$
+
+   so $\lim_{x \to c} x + c = 2c$
+
+4. Let $f(x) = x^3$
+
+   $\frac{f(x) - f(c)}{x - c} = \frac{x^3 - c^3}{x - c} = \frac{(x - c)(x^2 + xc + c^2)}{x - c} = x^2 + xc + c^2$
+
+   so $\lim_{x \to c} x^2 + xc + c^2 = 3c^2$
+#+end_examples
+
+#+begin_theorem
+If a function is differentiable at c, it is continuous at c
+#+end_theorem
+
+#+begin_proof
+Let $f:I \to \mathbb{R}$ be differentiable.  Then $\lim_{x \to c} \frac{f(x) - f(c)}{x - c} = L$
+
+$\frac{f(x) - f(c)}{x - c}(x - c) = L(x-c)$
+
+so $\lim_{x \to c} f(x) - f(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} \times \lim_{x \to c} (x-c) = f'(c) \times 0 = 0$
+
+so $\lim_{x \to c} f(x) = f(c)$
+#+end_proof
+
+#+begin_theorem
+The derivative of a sum of functions is the sum of the derivative of the functions
+
+$(f + g)'(x) = f'(x) = g'(x)$
+#+end_theorem
+
+#+begin_proof
+\[(f + g)'(c) = \frac{f(x) + g(x) - (f(c) + g(c)) }{x - c} = \frac{f(x) - f(c)}{x - c} +  \frac{g(x) - g(c)}{x - c}\]
+so
+
+\[\lim_{x \to c} (f + g)'(c) = f'(c) + g'(c)\]
+#+end_proof
+
+#+begin_theorem
+$(fg)'(c) = f'(c)g(c) = f(c)g'(c)$
+#+end_theorem
+#+begin_proof
+\[\frac{f(x)g(x) - f(c)g(c)}{x - c} = \frac{f(x)g(x) - f(x)g(c) + f(x)g(c) - f(c)g(c)}{x - c} = f(x) \frac{g(x) - g(c)}{x - c} + g(c) \frac{f(x) - f(c)}{x - c}\]
+
+so $\lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x - c} = f'(c)g(c) + f(c)g'(c)$
+#+end_proof
+
+#+begin_theorem
+Let $f$ be a differentiable function which is not zero on a neighborhood around $c$
+
+Then $(\frac{1}{f})'(c) = \frac{f'(c)}{f(c)^2}$
+#+end_theorem
+
+#+begin_proof
+\[\frac{\frac{1}{f(x)} - \frac{1}{f(c)}}{x - c} = \frac{f(c) = f(x)}{f(x)f(c)(x-c)}\]
+
+so 
+
+$\lim_{x \to c} \frac{\frac{1}{f(x)} - \frac{1}{f(c)}}{x - c} = \frac{-f'(c)}{f(c)^2}$
+#+end_proof
+
+#+begin_theorem
+Let $f,g$ be differentiable functions where $g$ is not zero on a neighborhood around $c$
+
+then $\left(\frac{f}{g}\right)'(c) = \frac{f'g(c) - fg'(c)}{g(c)^2}$
+#+end_theorem
+#+begin_proof
+$\left( \frac{f}{g} \right)(x) = f(x) \frac{1}{g(x)}$
+
+so \[\left(\frac{f}{g}\right)' (c) = f'(c) \times \frac{1}{g(x)} + f(c) \times \left(\frac{1}{g}\right)'(c) = \frac{f'(c)}{g(c)} - f(c) \frac{g'(c)}{g(c)^2} = \frac{f'g(c) - fg'(c)}{g(c)^2}\]
+#+end_proof

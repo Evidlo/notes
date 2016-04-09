@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160308205845" modified="D:20160308205909"/>
+<info created="D:20160308205845" modified="D:20160330164016"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -274,12 +274,12 @@ h
 95.9915 793.524 m
 63.9898 793.524 l
 </path>
-<text matrix="1 0 0 1 -4.35475 -0.19452" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" width="16.098" height="3.468" depth="0.96" valign="baseline" size="tiny">$a - \zeta$</text>
-<text matrix="1 0 0 1 25.3378 -0.132213" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" width="16.098" height="3.468" depth="0.96" valign="baseline" size="tiny">$a - \zeta$</text>
-<text matrix="1 0 0 1 15.9255 -0.0064932" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" width="3.858" height="2.145" depth="0" valign="baseline" size="tiny">$a$</text>
-<text matrix="1 0 0 1 -0.489438 0.652585" transformations="translations" pos="58.8662 791.747" stroke="black" type="label" width="3.858" height="2.145" depth="0" valign="baseline" size="tiny">$a$</text>
-<text matrix="1 0 0 1 -31.1277 20.7896" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" width="15.874" height="3.321" depth="0.83" valign="baseline" size="tiny">$a - \varepsilon$</text>
-<text matrix="1 0 0 1 -31.2908 36.6962" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" width="15.598" height="3.321" depth="0.83" valign="baseline" size="tiny">$a + \varepsilon$</text>
+<text matrix="1 0 0 1 -4.35475 -0.19452" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" valign="baseline" size="tiny">$a - \zeta$</text>
+<text matrix="1 0 0 1 25.3378 -0.132213" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" valign="baseline" size="tiny">$a - \zeta$</text>
+<text matrix="1 0 0 1 15.9255 -0.0064932" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" valign="baseline" size="tiny">$a$</text>
+<text matrix="1 0 0 1 -0.489438 0.652585" transformations="translations" pos="58.8662 791.747" stroke="black" type="label" valign="baseline" size="tiny">$a$</text>
+<text matrix="1 0 0 1 -31.1277 20.7896" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" valign="baseline" size="tiny">$a - \varepsilon$</text>
+<text matrix="1 0 0 1 -31.2908 36.6962" transformations="translations" pos="78.4319 763.153" stroke="black" type="label" valign="baseline" size="tiny">$a + \varepsilon$</text>
 <path stroke="black">
 81.8575 767.99 m
 81.8575 770.738 l
