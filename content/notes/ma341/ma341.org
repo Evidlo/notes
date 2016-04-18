@@ -1435,3 +1435,133 @@ $\left( \frac{f}{g} \right)(x) = f(x) \frac{1}{g(x)}$
 
 so \[\left(\frac{f}{g}\right)' (c) = f'(c) \times \frac{1}{g(x)} + f(c) \times \left(\frac{1}{g}\right)'(c) = \frac{f'(c)}{g(c)} - f(c) \frac{g'(c)}{g(c)^2} = \frac{f'g(c) - fg'(c)}{g(c)^2}\]
 #+end_proof
+
+The Carathéoday Lemma is needed to prove the next theorem.
+
+#+begin_theorem
+*Carathéoday Lemma*
+
+Let $f:I \ to \mathbb{R} be continuous.
+
+$f$ is differentiable at $c \in I$ iff,
+
+there exists a continuous $\phi:I \to \mathbb{R}$ such that
+
+$f(x) - f(c) = \phi(x)(x - c)$ for all $x \in I$
+#+end_theorem
+#+begin_proof
+Assume $f$ is differentiable at $c$.  Let 
+
+$$ \phi(x) =
+\begin{cases}
+\frac{f(x) - f(c)}{x - c} & x \neq c \\
+f'(c) & x = c
+\end{cases} $$
+
+Then $\phi$ is continuous and $f(x) - f(c) = \phi(x)(x - c)$ for all $x \in I$
+
+Assume $\phi:I \to \mathbb{R}$ is continuous such that $f(x) - f(c) = \phi(x)(x - c)$ for all $x \in I$.
+
+$f(x) - f(c) = \phi(x)(x - c) \rightarrow \frac{f(x) - f(c)}{x - c} = \phi(x)$
+
+$\lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{x \to c}\phi(x) = \phi(c)$
+
+so $f$ is differentiable at $c$ and $f'(c) = \phi(c)$
+#+end_proof
+
+#+begin_theorem
+*Chain rule*
+
+Let $f:I \to \mathbb{R}$ and $g:f(I) \to \mathbb{R}$ be continuous.
+
+then $g(f(c))' = g'(f(c))f'(c)$
+#+end_theorem
+#+begin_proof
+By the Carathéoday Lemma,
+
+$f(x) - f(c) = \phi(x)(x - c), x \in I$
+
+$g(y) - g(f(c)) = \Psi(y)(y - f(c)), y \in f(I)$
+
+So $g(f(x)) - g(f(c)) = \Psi(f(x))(f(x) - f(c)) = \Psi(f(x))(\phi(x)(x - c))$
+
+and $\lim_{x \to c} \frac{g(f(x)) - g(f(c))}{x - c} = \Psi(f(c))\phi(f(c)) = g'(f(c))f'(c)$
+ 
+#+end_proof
+
+#+begin_theorem
+*Derivative of inverse*
+
+Let $f:I \to \mathbb{R}$ and $f^{-1}:f(I) \to I$ be continuous.
+
+then $f^{-1}'(c) = \frac{1}{f'(g(f(c)))}$
+#+end_theorem
+#+begin_proof
+Since $f$ is continuous and differentiable at $c$, we can find a continuous $\phi$ such that $f(x) - f(c) = \phi(x)(x - c)$.
+
+Let $d = f(c) \in f(I)$ where $f'(c) \neq = 0$
+
+$x = g(y), y \in f(I)$
+
+$f(g(y)) - f(g(d)) = \phi(g(y))(g(y) - g(d))$
+
+$y - d = \phi(g(y))(g(y) - g(d))$
+
+$\phi(g(d)) = f'(c) \neq 0$
+
+Since $\phi(g(y))$ is continuous so $\phi(g(y)) \neq 0$ in a neighborhood around $d$.
+
+so $\lim_{y \to d} \frac{g() - g(d)}{y - d} = \frac{1}{\phi(g(d))} = \frac{1}{f'(g(d))}$
+#+end_proof
+
+#+begin_definition
+*Relative Extrema*
+
+Let $f: I \to \mathbb{R}$ be continuous.
+
+We say $f$ has a relative minimum at $x_0 \in I$ if there exists $\zeta$ s.t. 
+
+for $x \in [x_0 - \zeta, x_0 + \zeta ] \cap I$
+
+$f(x) \geq f(x_0)$
+
+how does this eliminate constant regions
+#+end_definition
+
+#+begin_theorem
+"The derivative at local extrema is 0"
+
+Let $f: I \to \mathbb{R}$, $x_0 \in I$, where $x_0$ is not a boundary point
+
+Assume $x_0$ is a relative extrema and $f$ is differentiable at $x_0$
+
+Then $f'(x_0) = 0$
+#+end_theorem
+#+begin_proof
+Assume for contradiction $f'(x_0) > 0$
+
+We know $\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = f'(x_0)$
+
+So there exists $\zeta > 0$ such that
+
+for $x \in [x_0 - \zeta, x_0 + \zeta] \cap I$, we have $\frac{f(x) - f(x_0)}{x - x_0}$
+
+and for $x \in [x_0 - \zeta, x_0]$, we have $f(x) < f(x_0)$
+
+This contradicts that $x_0$ is a relative minimum.
+
+The proof can be repeated for relative maximum.
+
+
+we cant have f'(x_0) < 0
+
+otherwise ina neighborhood of x_0  f(x)-f(x_0)/(x - x_0) < 0
+
+so x > x_0 implies f(x) < f(x_0)
+#+end_proof
+
+#+begin_examples
+1. Let $f(x) = |x|$
+
+   There is a relative minimum at 0, but the function is not diff
+#+end_examples
