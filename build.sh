@@ -3,4 +3,5 @@
 #Search for markdown files and build them
 
 cd content
-find . -regex ".*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*" -exec "../find_call" {} \;
+# iterate all content files, ignore emacs backups
+find . -regex "[^#].*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*" -exec "../find_call" {} \;

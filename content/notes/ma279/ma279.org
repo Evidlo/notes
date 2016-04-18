@@ -884,3 +884,33 @@ we call $d$ the *dimension* of X
    - if X is divisible by 2, divide it by 2
    - otherwise, multiply by 3 and add 1
 #+end_definition
+* Statistical Data
+** Census
+- 850,000 people participated in the 2000 census
+- census data used for district marking, resource allocation
+- measurement problems include lack of centralized ID database, individual apathy, homeless individuals, illegal immigrants
+** Sampling
+#+begin_definition
+*target population* - set to evaluate
+
+*sample population* - sampled subset
+
+*sampling frame* - where lists of the sample population are obtained (eg, magazine subscription lists, club membership).  Adds selection bias to the polls
+#+end_definition
+#+begin_example
+1. In 1916-1932, the Literary Digest journal conducted voting polls that were "scientifically reliable".
+   
+   25% of all voters were sampled
+
+   In the 1936 election - Landon (R-Kansas), Roosevelt (D):
+   
+   prediction: 57% Landon
+   results: 38% Roosevelt
+
+   At the same time, George Gallup asked 50,000 people and predicted the result within 1%.  He also predicted what the Literary Digest would predict 
+   with a sample size of 3,000 people.
+
+   Gallup focused on eliminating bias by sampling in person and prescribing quotas for certain profiles.
+
+   eg. 7 white males over 40, 5 black males under 40, etc.
+#+end_example
