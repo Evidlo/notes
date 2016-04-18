@@ -723,16 +723,41 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
    |-------------------+--------------------------|
    | /                 | <>                       |
    | $0+$     | $K \angle - \varepsilon$ |
-   | $\omega$ | $0 \angle - 90^{\circ}$  |
+   | $\infty$ | $0 \angle - 90^{\circ}$  |
    
    Plotting semicircle:
 
-   \[\lim_{r \to \infty} G(re^{j\phi}) = \lim_{r \to \infty}\frac{K}{re^{j\phi} + 1} \approx \lim_{r \to \infty}\frac{K}{re^{j\phi}} = |0|\angle e^{-j\phi}\]
+   \[\lim_{r \to \infty} G(re^{j\phi}) = \lim_{r \to \infty}\frac{K}{re^{j\phi} + 1} \approx \lim_{r \to \infty}\frac{K}{re^{j\phi}} = 0*e^{-j\phi} = 0*(\cos(-\phi) + j\sin(-\phi)) = |0|\angle \tan^{-1}\left( \frac{\sin(-\phi)}{\cos(-\phi)} \right) = |0|\angle \phi\]
 
    | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
    |---------------+------------------------------------|
    | /             | <>                                 |
-   | $90^{\circ}$  | $\angle -90^{\circ}$               |
-   | $0^{\circ}$   | $\angle 0^{\circ}$                 |
-   | $-90^{\circ}$ | $\angle 90^{\circ}$                |
+   | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
+   | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
+   | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
+
+[[./nyquist_ex1.png]]
+
+2. Let $G(s) = \frac{K}{s(s+1)}$
+
+   \[G(s) = \frac{K}{j\omega(\omega+1)} = |\frac{K}{\omega^2 \sqrt{\omega^2 + 1}}| \angle - (90^{\circ} + \tan^{-1}\left( \frac{\omega}{1} \right))\]
+
+   Plotting imaginary axis: $\phi = \pm 90^{\circ}$, so $s = jw$
+
+   | $\omega$ | $G(j\omega)$             |
+   |----------+--------------------------|
+   | /        | <>                       |
+   | $0+$     | $K \angle - (90^{\circ} + \varepsilon)$ |
+   | $\infty$ | $0 \angle 180^{\circ} - \varepsilon$ |
+
+   Plotting large semicircle
+
+   \[\lim_{r \to \infty} G(re^{j\phi}) = \lim_{r \to \infty}\frac{K}{(r^2e^{2j\phi} + re^{j\phi}} \approx \lim_{r \to \infty}\frac{K}{r^2e^{2j\phi}} = |0|\angle e^{-2j\phi}\]
+   
+   | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
+   |---------------+------------------------------------|
+   | /             | <>                                 |
+   | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
+   | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
+   | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
 #+end_examples
