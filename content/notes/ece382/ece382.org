@@ -719,9 +719,9 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 
    \[G(s) = \frac{K}{\sqrt{\omega^2 +1}}\angle -\tan \left( \frac{\omega}{1} \right)\]
 
-   | $\omega$          | $G(j\omega)$             |
-   |-------------------+--------------------------|
-   | /                 | <>                       |
+   | $\omega$ | $G(j\omega)$             |
+   |----------+--------------------------|
+   | /        | <                       |
    | $0+$     | $K \angle - \varepsilon$ |
    | $\infty$ | $0 \angle - 90^{\circ}$  |
    
@@ -731,7 +731,7 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 
    | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
    |---------------+------------------------------------|
-   | /             | <>                                 |
+   | /             | <                                 |
    | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
    | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
    | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
@@ -746,7 +746,7 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 
    | $\omega$ | $G(j\omega)$             |
    |----------+--------------------------|
-   | /        | <>                       |
+   | /        | <                       |
    | $0+$     | $K \angle - (90^{\circ} + \varepsilon)$ |
    | $\infty$ | $0 \angle 180^{\circ} - \varepsilon$ |
 
@@ -756,7 +756,7 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
    
    | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
    |---------------+------------------------------------|
-   | /             | <>                                 |
+   | /             | <                                 |
    | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
    | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
    | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
