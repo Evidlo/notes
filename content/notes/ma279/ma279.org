@@ -908,3 +908,52 @@ we call $d$ the *dimension* of X
 
    eg. 7 white males over 40, 5 black males under 40, etc.
 #+end_examples
+
+#+begin_definition
+*Independence*
+
+Events $E_1$ and $E_2$ are independent iff
+
+$P(E_1 \cap E_2) = P(E_1) * P(E_2)$
+#+end_definition
+#+begin_definition
+*Conditional Probability*
+
+$P(E_1 | E_2) = \frac{P(E_1 \cap E_2)}{P(E_2)}$
+
+if $E_1$ and $E_2$ are independent, then $P(E_1 | E_2) = P(E_1)$
+#+end_definition
+#+begin_examples
+1. Let the sample space be $S = {2,...,12}$ (rolling 2 fair dice)
+
+   Let $E$ - even sum, $F$ - sum $\geq$ 9
+
+   |   | 1 | 2 | 3 |  4 |  5 |  6 |
+   |---+---+---+---+----+----+----|
+   | / | < |   |   |    |    |    |
+   | 1 | 2 | 3 | 4 |  5 |  6 |  7 |
+   | 2 | 3 | 4 | 5 |  6 |  7 |  8 |
+   | 3 | 4 | 5 | 6 |  7 |  8 |  9 |
+   | 4 | 5 | 6 | 7 |  8 |  9 | 10 |
+   | 5 | 6 | 7 | 8 |  9 | 10 | 11 |
+   | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+
+   $P(E) = .5$
+
+   $P(F) = \frac{10}{36}$
+
+   $P(E|F) = \frac{P(E \cap F)}{P(F)} = \frac{4}{10}$
+#+end_examples
+** Capture-Recapture Method
+Used to determine total populations.
+
+1. Capture n indivudals from the population
+2. Tag each individual and release them again
+3. Allow the tagged individuals to mix with the population
+4. Capture m individuals from the population.
+5. If there are t tagged individuals in the m captured individuals, the population is approximately \[N = \frac{n}{\frac{t}{m}}\]
+** Poker Hands
+ - full house - AAABB - $13 \left( \frac{4}{3} \right) 12 \left( \frac{4}{2} \right)$
+   - choose suit for A, pick A cards, choose suit for B, pick B cards
+ - 2 pair - AABBC - \[\frac{13 \left( \frac{4}{2} \right) 12 \left( \frac{4}{2} \right) 11 \left( \frac{4}{1} \right)}{2}\]
+   - choose suit for A, pick A cards, choose suit for B, pick B cards, pick C cards, remove A-B permutation
