@@ -721,7 +721,7 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 
    | $\omega$ | $G(j\omega)$             |
    |----------+--------------------------|
-   | /        | <                       |
+   | /        | <                        |
    | $0+$     | $K \angle - \varepsilon$ |
    | $\infty$ | $0 \angle - 90^{\circ}$  |
    
@@ -731,14 +731,18 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 
    | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
    |---------------+------------------------------------|
-   | /             | <                                 |
-   | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
-   | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
-   | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
+   | /             | <                                  |
+   | $90^{\circ}$  | $\vert 0 \vert \angle -90^{\circ}$ |
+   | $0^{\circ}$   | $\vert 0 \vert \angle 0^{\circ}$   |
+   | $-90^{\circ}$ | $\vert 0 \vert \angle 90^{\circ}$  |
+   
+   [[./nyquist_ex1.png]]
 
-[[./nyquist_ex1.png]]
+   Does not encircle -1, so N = 0.
 
-2. Let $G(s) = \frac{K}{s(s+1)}$
+   -N = P, so system is stable.
+
+1. Let $G(s) = \frac{K}{s(s+1)}$
 
    \[G(s) = \frac{K}{j\omega(\omega+1)} = |\frac{K}{\omega^2 \sqrt{\omega^2 + 1}}| \angle - (90^{\circ} + \tan^{-1}\left( \frac{\omega}{1} \right))\]
 
@@ -747,17 +751,86 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
    | $\omega$ | $G(j\omega)$             |
    |----------+--------------------------|
    | /        | <                       |
-   | $0+$     | $K \angle - (90^{\circ} + \varepsilon)$ |
+   | $0+$     | $\vert \infty \vert \angle - (90^{\circ} + \varepsilon)$ |
    | $\infty$ | $0 \angle 180^{\circ} - \varepsilon$ |
 
    Plotting large semicircle
 
-   \[\lim_{r \to \infty} G(re^{j\phi}) = \lim_{r \to \infty}\frac{K}{(r^2e^{2j\phi} + re^{j\phi}} \approx \lim_{r \to \infty}\frac{K}{r^2e^{2j\phi}} = |0|\angle e^{-2j\phi}\]
+   \[\lim_{r \to \infty} G(re^{j\phi}) = \lim_{r \to \infty}\frac{K}{r^2e^{2j\phi} + re^{j\phi}} \approx \lim_{r \to \infty}\frac{K}{r^2e^{2j\phi}} = |0|\angle e^{-2j\phi}\]
    
-   | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$ |
-   |---------------+------------------------------------|
-   | /             | <                                 |
-   | $90^{\circ}$  | $|0|\angle -90^{\circ}$              |
-   | $0^{\circ}$   | $|0|\angle 0^{\circ}$                |
-   | $-90^{\circ}$ | $|0\\angle 90^{\circ}$              |
+   | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$  |
+   |---------------+-------------------------------------|
+   | /             | <                                   |
+   | $90^{\circ}$  | $\vert 0 \vert \angle -180^{\circ}$ |
+   | $0^{\circ}$   | $\vert 0 \vert \angle 0^{\circ}$    |
+   | $-90^{\circ}$ | $\vert 0 \vert \angle 180^{\circ}$  |
+
+   Plotting small semicircle
+
+   \[\lim_{r \to 0} G(re^{j\phi}) = \lim_{r \to 0}\frac{K}{r^2e^{2j\phi} + re^{j\phi}} \approx \lim_{r \to 0}\frac{K}{re^{j\phi}} = |\infty|\angle e^{-j\phi}\]
+
+   | $\phi         | $\lim_{r \to \infty}G(re^{j\phi})$  |
+   |---------------+-------------------------------------|
+   | /             | <                                   |
+   | $90^{\circ}$  | $\vert \infty \vert \angle -90^{\circ}$ |
+   | $0^{\circ}$   | $\vert \infty \vert \angle 0^{\circ}$ |
+   | $-90^{\circ}$ | $\vert \infty \vert \angle 90^{\circ}$ |
+
+     [[./nyquist_ex2.png]] 
+
+   Does not encircle -1, so $N = 0$.
+
+   $-N = P$, so system is stable.
+
+3. Let $G(s) = \frac{K}{s^2(s+1)}$
+
+   For the real axis $G(s) = \frac{K}{s^2(s + 1)$
+
+   For the semicircles $G(s) \approx \frac{K}{s^3$
+
+   | s                                | G(s)                                                    |
+   |----------------------------------+---------------------------------------------------------|
+   | /                                | <                                                       |
+   | $\varepsilon j$                  | $\vert \infty \vert \angle - 180^{\circ} - \varepsilon$ |
+   | $\infty j$                       | $\vert 0 \vert \angle - 270^{\circ}$                    |
+   | $\infty e^{\frac{\pi}{2} j}$     | $\vert 0 \vert \angle - 270^{\circ}$                    |
+   | $\infty e^{0 j}$                 | $\vert 0 \vert \angle 0^{\circ}$                        |
+   | $\infty e^{\frac{-\pi}{2} j}$    | $\vert 0 \vert \angle 270^{\circ}$                      |
+   | $-\infty j$                      | $\vert 0 \vert \angle 270^{\circ}$                      |
+   | $- \varepsilon j$                | $\vert \infty \vert \angle 180^{\circ} - \varepsilon$   |
+   | $\varepsilon e^{- 90^{\circ} j}$ | $\vert \infty \vert \angle 270^{\circ}$                 |
+   | $\varepsilon e^{0^{\circ} j}$    | $\vert \infty \vert \angle 0^{\circ}$                   |
+   | $\varepsilon e^{90^{\circ} j}$   | $\vert \infty \vert \angle - 270^{\circ}$               |
+
+   [[./nyquist_ex3.png]] 
+
+
+   Encircles -1 twice, so $N = 2$.
+
+   $-N \neq P$, so system is unstable.
 #+end_examples
+
+** Gain and Phase Margins
+
+The  gain margin $G_m$ and phase margin $\phi_{PM}$ are useful for determining 
+when instability occurs as input parameters like gain or phase are changed.
+
+[[./crossover.png]]
+
+#+begin_definition
+$G_m \def \frac{1}{|G(\omega_{\pi})|}$
+
+where $\omega_{\pi}$ is the phase crossover frequency, (the frequency where the nyquist plot intersects the real axis)
+#+end_definition
+
+When $|G(\omega_{\pi})| > 1$ the nyquist plot encloses -1 and the system becomes unstable, so for the system to remain stable $|G(\omega_{\pi})|$ < 1 and $G_M > 1$
+
+Physically, the gain margin is the gain that can be added to the system before it becomes unstable.
+
+Solve for $\omega_{\pi}$ by setting the imaginary part of $G(jw)$ equal to zero.
+
+#+begin_definition
+$\phi_{PM} = 180^{\circ} + \angle G(j\omega_c)$
+
+where $\omega_c$ is the gain crossover frequency, (the frequency where the nyquist plot intersects the unit circle).
+#+end_definition

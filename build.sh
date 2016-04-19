@@ -4,5 +4,4 @@
 
 cd content
 # iterate all content files, ignore emacs backups
-# find . -regex "[^#].*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*" -exec "../find_call" {} \;
-find . -regex "[^\#]*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*"
+find . -regex "[^#]*\(org\|png\|jpg\|css\|js\|ttf\)" -not -path "*ltxpng*" -exec "../find_call" {} \;
