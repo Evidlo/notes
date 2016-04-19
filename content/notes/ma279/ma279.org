@@ -616,12 +616,12 @@ If there are $k$ roots of $\lambda^d - (C_{n-1}\lambda^{d-1} + C_{n-2}\lambda^{d
 
 so $f(\lambda) = (\lambda - \lambda_1)^{e_1} + ... (\lambda - \lambda_k)^{e_k}$
 
-$$ \begin{align*}
+$$ \begin{aligned}
 a_n & = \lambda_1^n(b_{1,0} + b_{1,1}n + ... + b_{1,e_1 - 1} n^{e_1 - 1}) \\
 & + \lambda_2^n(b_{2,0} + b_{2,1}n + ... + b_{2,e_2 - 1} n^{e_2 - 1}) \\
 & + ... \\
 & + \lambda_k^n(b_{k,0} + b_{k,1}n + ... + b_{k,e_k - 1} n^{e_k - 1})
-\end{align*} $$
+\end{aligned} $$
 #+end_theorem
 
 * Solving Higher Order Polynomials
@@ -704,9 +704,9 @@ Bill 2
 
 Sequence of equal payments at regular time intervals
 
-*deferred*
+*Deferred*
 
-Collecting for lumpsum payment layter
+Collecting for lumpsum payment later
 
 *Installment loan*
 
@@ -715,7 +715,7 @@ Pay lump sum, get regular payments later
 
 * Motions
 #+begin_definition
-*motion*
+*Motion*
 
 Let $v \in \mathbb{R}^n$
 
@@ -765,25 +765,19 @@ The set of motions which preserve the look of a regular polygon is called a dihe
 #+end_definition
 
 #+begin_examples
-\----/
-|\  /|
-------
-|/  \|
-/----\
-
-4 rotations, 4 reflections
+*incomplete*
 #+end_examples
 
 ** Frieze patterns
 | Pattern               | Type | Symmetry groups                                                                            |
 |-----------------------+------+--------------------------------------------------------------------------------------------|
-| ...--T--T--T--T--...  | m1   | translations by $\mathbb{Z}$ and vertical reflections at $\mathbb{Z}$ or $\mathbb{Z} + .5$ |
-| ...->-T->-T->-T->-... | 11   | translations by $\mathbb{Z}$                                                               |
-| ...->-I->-I->-I->-... | 1m   | translations by $\mathbb{Z}$ and horizontal reflection                                     |
-| ...--I--I--I--...     | mm   | translations by $\mathbb{Z}$ and horizontal/vertical reflections                           |
-| ...--Z--Z--Z--...     | 12   | translations by $\mathbb{Z}$ and rotations by $180^{\circ}$                                |
-| ...--b--p--b--...     | 1g   | translation by $2\mathbb{Z}$ and glide reflection                                          |
-| ...--^--v--^--...     | mg   | translation by $2\mathbb{Z}$ and glide reflection                                          |
+| --T--T--T--T--  | m1   | translations by $\mathbb{Z}$ and vertical reflections at $\mathbb{Z}$ or $\mathbb{Z} + .5$ |
+| ->-T->-T->-T->- | 11   | translations by $\mathbb{Z}$                                                               |
+| ->-I->-I->-I->- | 1m   | translations by $\mathbb{Z}$ and horizontal reflection                                     |
+| --I--I--I--     | mm   | translations by $\mathbb{Z}$ and horizontal/vertical reflections                           |
+| --Z--Z--Z--     | 12   | translations by $\mathbb{Z}$ and rotations by $180^{\circ}$                                |
+| --b--p--b--     | 1g   | translation by $2\mathbb{Z}$ and glide reflection                                          |
+| --^--v--^--     | mg   | translation by $2\mathbb{Z}$ and glide reflection                                          |
 
 Type shows available reflections at position
 
@@ -897,7 +891,7 @@ we call $d$ the *dimension* of X
 
 *sampling frame* - where lists of the sample population are obtained (eg, magazine subscription lists, club membership).  Adds selection bias to the polls
 #+end_definition
-#+begin_example
+#+begin_examples
 1. In 1916-1932, the Literary Digest journal conducted voting polls that were "scientifically reliable".
    
    25% of all voters were sampled
@@ -913,4 +907,4 @@ we call $d$ the *dimension* of X
    Gallup focused on eliminating bias by sampling in person and prescribing quotas for certain profiles.
 
    eg. 7 white males over 40, 5 black males under 40, etc.
-#+end_example
+#+end_examples

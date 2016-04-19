@@ -1331,13 +1331,6 @@ Assume for contradiction that $g$ is not continuous.
 Then $g(J) = g(f(I)) = I$ is not an interval, which is a contradiction
 #+end_proof
 
-* Test II Review
-
-- a function which is continuous on a bounded and closed interval is uniformly continuous
-
-- if a function is uniformly continuous on an open interval, the limits at the endpoints exist
-
-- a function is uniformly continuous on a bounded interval iff the limits exist at the endpoints
 * Derivatives
 #+begin_definition
 *Differentiability*
@@ -1390,6 +1383,8 @@ so $\lim_{x \to c} f(x) = f(c)$
 #+end_proof
 
 #+begin_theorem
+*Sum Rule*
+
 The derivative of a sum of functions is the sum of the derivative of the functions
 
 $(f + g)'(x) = f'(x) = g'(x)$
@@ -1403,6 +1398,8 @@ so
 #+end_proof
 
 #+begin_theorem
+*Product Rule*
+
 $(fg)'(c) = f'(c)g(c) = f(c)g'(c)$
 #+end_theorem
 #+begin_proof
@@ -1412,6 +1409,8 @@ so $\lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x - c} = f'(c)g(c) + f(c)g'(c)$
 #+end_proof
 
 #+begin_theorem
+*Quotient Rule*
+
 Let $f$ be a differentiable function which is not zero on a neighborhood around $c$
 
 Then $(\frac{1}{f})'(c) = \frac{f'(c)}{f(c)^2}$
@@ -1441,7 +1440,7 @@ The Carathéoday Lemma is needed to prove the next theorem.
 #+begin_theorem
 *Carathéoday Lemma*
 
-Let $f:I \ to \mathbb{R} be continuous.
+Let $f:I \to \mathbb{R}$ be continuous.
 
 $f$ is differentiable at $c \in I$ iff,
 
@@ -1494,7 +1493,7 @@ and $\lim_{x \to c} \frac{g(f(x)) - g(f(c))}{x - c} = \Psi(f(c))\phi(f(c)) = g'(
 
 Let $f:I \to \mathbb{R}$ and $f^{-1}:f(I) \to I$ be continuous.
 
-then $f^{-1}'(c) = \frac{1}{f'(g(f(c)))}$
+then $f'^{-1}(c) = \frac{1}{f'(g(f(c)))}$
 #+end_theorem
 #+begin_proof
 Since $f$ is continuous and differentiable at $c$, we can find a continuous $\phi$ such that $f(x) - f(c) = \phi(x)(x - c)$.
@@ -1525,11 +1524,12 @@ for $x \in [x_0 - \zeta, x_0 + \zeta ] \cap I$
 
 $f(x) \geq f(x_0)$
 
-how does this eliminate constant regions
 #+end_definition
 
+Note that by the above definition, constant functions are maximum and minimums everywhere.
+
 #+begin_theorem
-"The derivative at local extrema is 0"
+*Derivative at relative extrema*
 
 Let $f: I \to \mathbb{R}$, $x_0 \in I$, where $x_0$ is not a boundary point
 
@@ -1544,24 +1544,15 @@ We know $\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = f'(x_0)$
 
 So there exists $\zeta > 0$ such that
 
-for $x \in [x_0 - \zeta, x_0 + \zeta] \cap I$, we have $\frac{f(x) - f(x_0)}{x - x_0}$
-
-and for $x \in [x_0 - \zeta, x_0]$, we have $f(x) < f(x_0)$
+for $x \in [x_0 - \zeta, x_0 + \zeta] \cap I$, we have $\frac{f(x) - f(x_0)}{x - x_0} > 0 \longrightarrow f(x) > f(x_0)$
 
 This contradicts that $x_0$ is a relative minimum.
 
 The proof can be repeated for relative maximum.
-
-
-we cant have f'(x_0) < 0
-
-otherwise ina neighborhood of x_0  f(x)-f(x_0)/(x - x_0) < 0
-
-so x > x_0 implies f(x) < f(x_0)
 #+end_proof
 
 #+begin_examples
 1. Let $f(x) = |x|$
 
-   There is a relative minimum at 0, but the function is not diff
+   There is a relative minimum at 0, but the function is not differentiable
 #+end_examples
