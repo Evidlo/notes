@@ -1551,8 +1551,106 @@ This contradicts that $x_0$ is a relative minimum.
 The proof can be repeated for relative maximum.
 #+end_proof
 
+Note that the converse is not true.  $\frac{d}{dx}\left[ x^3 \right]_{x = 0} = 0$, but $x = 0$ is not an extremum
+
 #+begin_examples
 1. Let $f(x) = |x|$
 
    There is a relative minimum at 0, but the function is not differentiable
 #+end_examples
+
+#+begin_theorem
+*Rolle's Theorem*
+
+Let $f:I \to \mathbb{R}$ be a differentiable function.
+
+If $f(a) = f(b)$, where $a < b$
+
+then $f'(c) = 0$ for some $c \in (a,b)$
+
+if abs(x) is not differentiable, then what is the integral of step function
+#+end_theorem
+#+begin_proof
+Since $f$ is differentiable, it is continuous.  Since $[a,b]$ is closed and bounded we can find $c,d \in [a,b]$,
+
+such that $f(c) = \sup(f(x)$ for $x \in [a,b]$
+
+$f(d) = \inf(f(x)$ for $x \in [a,b]$
+
+If $c$ and $d$ are both boundary points, then $f$ must be 0, so $f'(x) = 0$ for all $x$.
+
+If one of $c$ or $d$ is not a boundary point, then the derivative at this relative extrema is 0.
+
+So $f$ has at least one point between $a$ and $b$ where the derivative is 0.
+#+end_proof
+
+#+begin_theorem
+*Mean Value Theorem*
+
+Let $f:I \to \mathbb{R}$ be differentiable over $[a,b]$, where $a < b$
+
+then there is a point $c \in (a,b)$ such that $f'(c) = \frac{f(b) - f(a)}{b - a}$
+#+end_theorem
+#+begin_proof
+We will make use of Rolle's theorem by transforming the function so that the tangent line 
+is flat.
+
+Let $g(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}(x - a)$
+
+So $g(a) = g(b) = 0$
+
+$g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a}$
+
+Then there exists $c \in (a,b)$ such that $g'(c) = 0$
+
+so $f'(c) = \frac{f(b) - f(a)}{b - a}$
+#+end_proof
+
+#+begin_theorem
+*Derivative is zero implies constant function*
+
+Let $f:I \to \mathbb{R}$ be differentiable such that $f'(x) = 0$ for all $x$
+
+Then $f(x)$ is constnat on $I$
+#+end_theorem
+#+begin_proof
+Let $a,b \in I$ such that $a < b$
+
+From the mean value theorem, we can find $c \in I$ such that $f'(c) = \frac{f(b) - f(a)}{b - a} = 0$
+
+$f(b) - f(a) = 0 \longrightarrow f(b) = f(a)$
+
+So $f$ is constant
+#+end_proof
+
+#+begin_theorem
+*Positive derivatives implies increasing function*
+
+Let $f:I \to \mathbb{R}$ be differentiable.
+
+$f$ is increasing iff $f'(x) \geq 0$
+#+end_theorem
+#+begin_proof
+Using the definition of derivative:
+
+If $f$ is increasing, then $f'(x) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$.
+
+since $\frac{f(x) - f(c)}{x - c}$ is a positive function,
+
+therefore, $f'(x) \geq 0$
+
+Assume for all x, $f'(x) \geq 0$
+
+From the MVT, we can find $c \in (a,b)$, such that $f'(c) = \frac{f(b) - f(a)}{b - a}$
+
+Since $f'(c) \geq 0$, $f$ is increasing.
+#+end_proof
+
+** First Derivative Test for Extrema
+Let $f:I \to \mathbb{R}$
+
+If $f'(c) = 0$ and $f'(x) \geq 0$ for $x \in (c - \delta, c]$
+
+and $f'(x) \leq 0$ for $x \in [c,c + \delta)$
+
+then $c$ is a relative minimum.
