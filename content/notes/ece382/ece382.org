@@ -817,8 +817,9 @@ when instability occurs as input parameters like gain or phase are changed.
 
 [[./crossover.png]]
 
+Note that the magnitude and phase of the nyquist plot as a function of frequency are identical to the bode plot.
 #+begin_definition
-$G_m \def \frac{1}{|G(\omega_{\pi})|}$
+$G_m = \frac{1}{|G(\omega_{\pi})|}$
 
 where $\omega_{\pi}$ is the phase crossover frequency, (the frequency where the nyquist plot intersects the real axis)
 #+end_definition
@@ -834,3 +835,33 @@ $\phi_{PM} = 180^{\circ} + \angle G(j\omega_c)$
 
 where $\omega_c$ is the gain crossover frequency, (the frequency where the nyquist plot intersects the unit circle).
 #+end_definition
+
+When angle $\alpha$ becomes negative, the nyquist plot encircles -1 and the system becomes unstable.
+
+#+begin_examples
+1. Let $G(s) = \frac{K}{s(s+1)(s+2)}$
+
+   $G(jw) = \frac{K}{\omega \sqrt{\omega^2 + 1} \sqrt{\omega^2 + 4}} = \frac{-Kj\omega(2 - \omega^2 - 3 j \omega}{\omega^2 ( \omega^2 + 1)(\omega^2 + 4)}$
+
+   To find gain margin:
+
+   $\text{Im}(G) = \frac{-k\omega_\pi(2 - \omega_\pi^2)}{\omega_\pi^2(\omega_\pi^2 + 1)(\omega_\pi^2 + 4)} = 0 \longrightarrow \omega_\pi^2 = 2 \longrightarrow \omega_\pi = \sqrt{2}$
+
+   so $\omega_\pi = \sqrt{2}$
+
+   $|G(j\omega_\pi)| < 1 \longrightarrow \frac{K(3\omega_\pi^2}{\omega_\pi^2(\omega_\pi^2 + 1)(\omega_\pi^2 + 4)} < 1 \longrightarrow \frac{K}{6} < 1 \longrightarrow 0 < K < 6$
+
+   To find phase margin:
+
+   $|G(\omega_c)| = 1 \longrightarrow \frac{2}{\omega_c \sqrt{2_c^2 + 1} \sqrt{\omega_c^2 + 4}} = 1 \longrightarrow \omega_c^6 + 5\omega_c^4 + 4\omega_c^2 - 4 = 0$
+
+   using matlab:
+   #+begin_src :octave
+   p = [1 0 5 0 4 0 -4];
+   roots(p)
+   #+end_src
+
+   so $\omega_c = 0.749$
+
+   $\Phi_{PM} = 180^{\circ} + \angle G(j \omega_c) = 180^{\circ} - 147.39^{\circ} = 32.6^{\circ}$
+#+end_examples

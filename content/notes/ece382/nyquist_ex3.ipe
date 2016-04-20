@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70107" creator="Ipe 7.1.10">
-<info created="D:20160418195133" modified="D:20160418202756"/>
+<info created="D:20160418195133" modified="D:20160420092319"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -220,13 +220,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -269,7 +269,7 @@ h
 128 736
 128 736 c
 </path>
-<path matrix="0 1 1 -0 -608 608" stroke="red" dash="dashed">
+<path matrix="0 1 1 0 -608 608" stroke="red" dash="dashed">
 128 672 m
 112 720
 112 736
@@ -277,7 +277,7 @@ h
 128 736 c
 </path>
 <use name="mark/disk(sx)" pos="128 736" size="normal" stroke="black"/>
-<path stroke="black">
+<path stroke="red">
 64 0 0 64 128 736 e
 </path>
 </page>
