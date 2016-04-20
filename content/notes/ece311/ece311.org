@@ -466,3 +466,17 @@ $\oint H \cdot dl = I_{enc}$
 Move the boundary of the surface between the plates of a capacitor.
 
 $\frac{dQ}{dt} = 
+
+* Waves
+\[u = \frac{\omega}{\beta} = \frac{2 \pi f}{\frac{2 \pi}{\lambda}} = f \lambda = \frac{1}{\sqrt{\mu \varepsilon}} \]
+
+* Young's Experiment
+Young demonstrated the particle and wave behavior of light with his experiment.
+
+[[http://h2physics.org/wp-content/uploads/2009/08/young2a.jpg]]
+
+He shone light through a pair of narrow slits, which resulted bands forming on the photosensitive plate, suggesting wave-like behavior.
+This is because the distance between a band and each slit results in a slight phase shift of the light wave.
+
+If the intensity of the light is lowered and exposure of the plate is brief, the photons hitting the plate cause specs of exposure,
+suggesting particle-like behavior.
