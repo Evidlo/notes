@@ -1654,3 +1654,155 @@ If $f'(c) = 0$ and $f'(x) \geq 0$ for $x \in (c - \delta, c]$
 and $f'(x) \leq 0$ for $x \in [c,c + \delta)$
 
 then $c$ is a relative minimum.
+* L'Hôpital's Rule
+#+begin_definition
+*Indeterminate limit*
+
+Let $f,g:(a,b) \to \mathbb{R}$ be continuous.
+
+If $\lim_{x \to a+)} f(x) = 0$ and $\lim_{x \to a+)} g(x) = 0$
+
+Then we say \[\lim_{x \to a+} \frac{f(x)}{g(x)}\]
+
+is indeterminate
+#+end_definition
+
+#+begin_examples
+1. If it exists, evaluate $\lim_{x \to 0} \frac{sin(x)}{x}$
+
+   $\frac{sin(x)}{x} = \frac{sin(x) - sin(0)}{x - 0}$
+
+   Since $\sin(x)$ differentiable at 0, $\lim_{x \to 0} \frac{\sin(x)}{x} = \cos(0) = 1$
+
+2. If it exists, evaluate $\lim_{x \to 0} \frac{x}{x^2}$
+
+   $\lim_{x \to 0} \frac{x}{x^2} = \infty$
+
+   so it is indeterminate
+#+end_examples
+
+#+begin_theorem
+*L'Hôpital's Rule #1*
+
+Let $f,g:I \to \mathbb{R}$ be continuous.
+
+Assume $f(a) = g(a) = 0$ and that $f,g$ are differentiable at $a$
+
+and $g'(a) \neq 0$
+
+we have \[\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{f'(a)}{g'(a)}\]
+#+end_theorem
+#+begin_proof
+\[\frac{f(x)}{g(x)} = \frac{\frac{f(x) - f(a)}{x - a}}{\frac{g(x) - g(a)}{x - a}}\]
+
+so $\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{f'(a)}{g'(a)}$
+#+end_proof
+#+begin_examples
+1. If it exists, compute $\lim_{x \to 0} \frac{1 - \cos(x)}{x}$
+
+   Let $f(x) = 1 - \cos(x)$, $g(x) = x$
+
+   Then $f'(0) = 0$, $g'(0) = 1$
+
+   so by L'Hôpital's rule, $\lim_{x \to 0} \frac{1 - \cos(x)}{x}$
+
+2. If it exists $\lim_{x \to 0} \frac{1 - \cos(x)}{x^2}$
+
+   We apply L'Hôpital's rule twice:
+
+   $f(x) = 1 - \cos(x)$, $f'(x) = \sin(x)$, $f''(x) = \cos(x)$
+
+   $g(x) = x^2$, $g'(x) = 2x$, $g''(x) = 2$
+
+   so $\lim_{x \to 0} \frac{1 - \cos(x)}{x^2} = \frac{f''(0)}{g''(0)} = \frac{1}{2}$
+#+end_examples
+
+#+begin_theorem
+*L'Hôpital's Rule #2*
+
+Let $f,g:I \to \mathbb{R}$ be continuous ad differentiable functions.
+
+Assume $\lim_{x \to a+} f(x),g(x) = 0$ and $g'(x) \neq 0$ for $x \in (a,b)$
+
+a) If $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = L$, then $\lim_{x \to a+} \frac{f(x)}{g(x)} = L$
+b) If $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = \infty$, then $\lim_{x \to a+} \frac{f(x)}{g(x)} = \infty$
+   
+This does not require that $f,g$ be differentiable at $a$
+#+end_theorem
+To prove the above, we need the Cauchy Mean Value Theorem
+#+begin_theorem
+*Cauchy Mean Value Theorem*
+
+Let $f,g:I \to \mathbb{R} be differentiable$
+
+Let $a,b \in I, a < b$
+
+Assume $g'(x) \neq 0$, for $x \in (a,b)$
+
+You can find $c \in (a,b)$ such that
+
+\[\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}\]
+#+end_theorem
+#+begin_proof
+Let $h(x) = \frac{f(b) - f(a)}{g(b) - g(a)} \left[g(x) - g(a)\right] - \left[f(x) - f(a)\right]$
+
+then $h(a) = 0$
+
+$h'(x) = \frac{f(b) - f(a)}{g(b) - g(a)} g'(x) - f'(x)$
+
+From Rolle's theorem, there exists $c$ such that $h'(c) = 0$
+
+$\frac{f(b) - f(a)}{g(b) - g(a)} g'(x) - f'(x) = 0$
+
+so \[\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}\]
+#+end_proof
+#+begin_proof
+*Proof for L'Hôpital's Rule #2*
+
+Let $f,g:(a,b) \to \mathbb{R}$ be differentiable functions.
+
+Assume $\lim_{x \to a+} f(x) = \lim_{x \to a+} g(x) = 0$
+
+Assume $g'(x) \neq$ for $x \in (a,b)$
+
+a) Assume $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = L$
+
+   Let $\varepsilon > 0$  We can find $\delta > 0$ such that for $x \in (a, a + \delta)$
+
+   we have $L - \varepsilon \leq \frac{f'(x)}{g'(x)} \leq L + \varepsilon$
+
+   Let $\alpha, \beta \in (a, a + \delta)$ where $\alpha < \beta$
+
+   We can find $\gamma \in (\alpha, \beta)$ such that $\frac{f(\beta) - f(\alpha)}{g(\beta) - g(\alpha)} = \frac{f'(\gamma)}{g'(\gamma)}$
+
+   so $L - \varepsilon \leq \frac{f(\beta) - f(\alpha)}{g(\beta) - g(\alpha)} \leq L + \varepsilon$
+
+   Take the limit for $\alpha \to a$
+
+   Then $L - \varepsilon \leq \frac{f(\beta)}{g(\beta)} \leq L + \varepsilon$, for $\beta \in (a, a + \delta)$
+
+   so $\lim_{x \to a+} \frac{f(x)}{g(x)} = L$
+
+b) Assume $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = \infty$
+
+   Let $M \geq 0$.  
+
+   There exists $\delta > 0$ such that $\frac{f'(x)}{g'(x)} \geq M$ for $x \in (a, a + \delta)$
+
+   we can find $\gamma \in (\alpha, \beta)$ such that $\frac{f(\beta) - f(\alpha)}{g(\beta) - g(\alpha)} = \frac{f'(\gamma)}{g'(\gamma)}$
+
+   so $\frac{f(\beta) - f(\alpha)}{g(\beta) - g(\alpha)} \geq M$
+
+   Let $\alpha \to a$.  Then $\frac{f(\beta)}{g(\beta)} \geq M$
+
+   so $\lim_{x \to a+} \frac{f(x)}{g(x)} = \infty$
+#+end_proof
+#+begin_examples
+1. Evaluate $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$
+
+   $f(x) = e^x - 1 - x$, $f'(x) = e^x - 1$, $f''(x) = e^x$
+
+   $g(x) = x^2$, $g'(x) = 2x$, $g''(x) = 2$
+
+   $\lim_{x \to 0} \frac{f(x)}{g(x)} = \lim_{x \to 0} \frac{f'(x)}{g'(x)} = \lim_{x \to 0} \frac{f''(x)}{g''(x)} = \frac{1}{2}$
+#+end_examples
