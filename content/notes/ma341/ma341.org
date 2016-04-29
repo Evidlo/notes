@@ -1231,11 +1231,25 @@ Let $\varepsilon > 0$.  For $x,y \in A$ such that $|x - y| \leq \frac{\varepsilo
 we have $|f(x) - f(y)| \leq \varepsilon$
 #+end_proof
 
-The converse is not true, as $f(x) = \sqrt{x}$ is uniformly continuous, but not lipschitz
+The converse is not true, as $f(x) = \sqrt{x}$ is uniformly continuous, but not lipschitz.
 
-#+begin_definition
+ie.  $\sqrt{x}$ is continuous on a bounded interval $[0,1]$, but the derivative is not bounded ($\lim_{x \to 0} f'(x) = \infty$)
+
+#+begin_theorem
 The derivative of Lipschitz functions are bounded by K
-#+end_definition
+#+end_theorem
+
+#+begin_proof
+Let $f:I \to \mathbb{R}$ be a differentiable function.
+
+Assume $|f'(x)| \leq K$ for all $x \in I$
+
+Using the Mean Value Theorem:
+
+There exists a $c \in I$ such that $\frac{f(x) - f(y)}{x - y} = f'(c)$
+
+if we let $K = f'(c)$, then $|f(x) - f(y)| \leq K|x - y|$
+#+end_proof
 
 ** Monotonic functions
 #+begin_definition
@@ -1806,3 +1820,88 @@ b) Assume $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = \infty$
 
    $\lim_{x \to 0} \frac{f(x)}{g(x)} = \lim_{x \to 0} \frac{f'(x)}{g'(x)} = \lim_{x \to 0} \frac{f''(x)}{g''(x)} = \frac{1}{2}$
 #+end_examples
+* Riemann Integrals
+
+#+begin_definition
+*Partition*
+
+Let $I=[a,b]$  A partition of $I$ is a sequence $x_0,...,x_n$ 
+
+such that $a = x_0 < ... < x_n = b$
+
+*Tagged partition*
+
+A tagged partition is a partition where a tag $t_i$ is defined for every interval.
+
+where $t_i \in [x_{i-1}, x_i]$
+
+*Mesh*
+
+The mesh of a partition is defined as $||\cal{P}|| = max(x_i - x_{i - 1} , 1 \leq i \leq n)$
+#+end_definition
+
+\[ \lim_{\Delta x \to 0} \sum_{n = 0}^{\frac{b - a}{\Delta x}} \Delta x (f(a + \Delta x n))\]
+
+#+begin_definition
+*Riemann Sum*
+
+$S(f, \bar{\cal{P}}) = \sum_{i = 1}{n} f(t_i)(x_i - x_{i-1})$
+
+[[./riemann.gif]]
+
+*Riemann Integrable*
+We say a function $f$ is Riemann integrable f $\forall \varepsilon > 0$, you can find $\delta > 0$ such that
+
+for every tagged partition $\bar{\cal{P}}$ with mesh $||\bar{\cal{P}}|| \leq \delta$
+
+you have $|S(f,\bar{\cal{P}}) - L| \leq \varepsilon$
+and $L$ is called the Riemann integral, where $L = \int_a^b f(x) dx$
+#+end_definition
+
+#+begin_examples
+1. Let $f(x) = 0, x \in [0,1]$
+   
+   $S(f,\cal{\bar{P}}) = 0$ for any tagged partition.
+
+   Therefore $\int_a^b f(x) dx = 0$
+
+2. Let $f(x) = 1, x \in \mathbb{R}$
+
+   $$ \begin{aligned} S(f,\bar{\cal{P}}) & = \sum_{i = 1}^n f(t_i)(x_i - x_{i-1}) \\
+   & = \sum_{i=1}^n (x_i - x_{i - 1}) \\
+   & = b - a
+   \end{aligned} $$
+
+   So $\int_a^b f(x) dx = b - a$
+#+end_examples
+
+#+begin_theorem
+*Properties of integrals*
+Let $f,g \in \cal{R}[a,b]$
+
+1. $\int_a^b f(x) + g(x) dx = \int_a^b f(x) dx + \int_a^b g(x) dx$
+2. $\int_a^b kf(x) dx = k\int_a^b f(x) dx$ for $k \in \mathbb{R}$
+3. if $f$ is Riemann integrable, $f$ must be bounded
+#+end_theorem
+
+#+begin_proof
+1. Since $S(f+g,\bar{\cal{P}}) = S(f,\bar{\cal{P}}) + S(g,\bar{\cal{P}})$ (linearity of sums and limits)
+   we have 
+   $$\begin{aligned} \lim_{||\bar{\cal{P}}|| \to 0} S(f+g,\bar{\cal{P}}) &= \lim_{||\bar{\cal{P}}|| \to 0} S(f,\bar{\cal{P}}) + \lim_{||\bar{\cal{P}}|| \to 0} S(g,\bar{\cal{P}})\\
+   \int_a^b f(x) + g(x) dx &= \int_a^b f(x) dx + \int_a^b g(x) dx
+   \end{aligned} $$
+
+   A similar proof can be performed for  $S(kf,\bar{\cal{P}}) = kS(f+g,\bar{\cal{P}})$
+
+2. Proof idea: Riemann sums cannot be defined for unbounded functions
+#+end_proof
+
+#+begin_theorem
+If $f:I \to \mathbb{R}$ is continuous, then $f$ is Riemann integrable.
+
+The converse is not true
+#+end_theorem
+
+#+begin_theorem
+If $f$ is a monotonic function, then it is Riemann integrable
+#+end_theorem

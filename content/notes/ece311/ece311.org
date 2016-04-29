@@ -467,9 +467,6 @@ Move the boundary of the surface between the plates of a capacitor.
 
 $\frac{dQ}{dt} = 
 
-* Waves
-\[u = \frac{\omega}{\beta} = \frac{2 \pi f}{\frac{2 \pi}{\lambda}} = f \lambda = \frac{1}{\sqrt{\mu \varepsilon}} \]
-
 * Young's Experiment
 Young demonstrated the particle and wave behavior of light with his experiment.
 
@@ -480,3 +477,143 @@ This is because the distance between a band and each slit results in a slight ph
 
 If the intensity of the light is lowered and exposure of the plate is brief, the photons hitting the plate cause specs of exposure,
 suggesting particle-like behavior.
+
+* Electromagnetic Waves
+\[u = \frac{\omega}{\beta} = \frac{2 \pi f}{\frac{2 \pi}{\lambda}} = f \lambda = \frac{1}{\sqrt{\mu \varepsilon}} \]
+
+$\overrightarrow{\mathbb{P}} = \overrightarrow{E} \times \overrightarrow{H}$ - energy of waves (Poynting vector)
+** Plane Waves in Lossless Media
+*incomplete*
+
+$\overrightarrow{E}(z,t) = E_{x0} e^{-\alpha z} \cos(\omega t - \beta z) \hat{a}_x$
+
+$\overrightarrow{H}(z,t) = \frac{\varepsilon}{\mu} E_{x0} e^{-\alpha z} \cos(\omega t - \beta z) \hat{a}_y$
+
+$\mu = \frac{\omega}{\beta}$ - velocity
+$\beta = \frac{2 \pi}{\lambda}$ - wave number
+ 
+$n = \sqrt{\frac{\mu}{\varepsilon}}$ - 
+
+#+begin_examples
+1. Let $\overrightarrow{H} = 25 \cos(1.33*10^{-4}z + 40,000t) \hat{a}_y \frac{A}{m}$
+
+   Find the wavelength:
+
+#+end_examples
+
+   
+** Plane Waves in Lossy Media
+$\overrightarrow{E}(z,t) = E_0 e^{-\alpha z} \cos(\omega t - \beta z) \hat{a}_x$
+
+$\overrightarrow{H}(z,t) = \frac{E_0}{n} e^{-\alpha z} \cos(\omega t - \beta z) \hat{a}_y$
+
+$n = \sqrt{\frac{j \omega \mu}{\sigma + j\omega \varepsilon}}$ - intrinsic impedance
+
+$\alpha + j \beta = \sqrt{j \omega \mu (\sigma + j \omega \varepsilon)} = \gamma$ - propogation constant
+
+
+#+begin_examples
+1. Assume $\mu_r = 1$. $\overrightarrow{H} = 25 \sin(2 \times 10^8 t + 6x) \hat{a}_y$
+
+   For the wave to hold in place *** as $t$ increases, $x$ must decrease.  So the wave propogates in the $-\hat{a}_x$ direction.
+
+   $\omega = 2 \times 10^8 s^{-1}$, $\beta = 6 = \frac{2 pi}{\lambda}$, 
+
+2. $u = \frac{\omega}{\beta} = \frac{2 \times 10^8}{6} \frac{m}{s} = \frac{1}{\sqrt{\mu \varepsilon}}$
+
+Since material is lossless, $\mu = \mu_0$
+
+$\frac{1}{3} \times 10^8 = \frac{1}{\sqrt{\mu \varepsilon}} = \frac{1}{\sqrt{\mu_0 \varepsilon_0 \varepsilon_r}}$
+
+so $\varepsilon_r = 81$
+
+3. Find E. $n = \sqrt{\frac{\mu}{\varepsilon_r}} = \frac{377}{9} \Omega$
+
+   $E = n H = \frac{377}{9} (25 \frac{mA}{m}) = 1.05 \frac{V}{m}$
+
+   Using the geometry of the wave $\overrightarrow{\cal{P}} = \overrightarrow{E} \times \overrightarrow{H}$, we can find that
+   the direction of propogation is in the $\hat{a}_z$ direction, so 
+
+   $\overrightarrow{E} = 1.05 \sin(2 \times 10^8 t + 6X) \hat{a}_z \frac{V}{m}$
+
+#+end_examples
+
+#+begin_examples
+Let \overrightarrow{E} = 16e^{-0.05x} \sin(2 \times 10 ^8 t - 2x) \hat{a}_z \frac{V}{m}$
+
+1. Find propogation constant
+
+   $\gamma = \alpha + Jj \beta = 0.05 + j2$
+
+2. Find \lambda
+
+   $\beta = \frac{2\pi}{\lambda}$
+
+   $\lambda = \frac{2\pi}{\beta} = \pi$
+
+3. Find the velocity $u$
+
+   $u = \frac{\omega}{\beta} = \frac{2 \times 10^8 (s^{-1})}{2 (m^{-1})} = 10^8 \frac{m}{s}$
+
+4. Find the skin depth $\delta$
+
+   $\delta = \frac{1}{\alpha} = 20$
+#+end_examples
+
+** Skin depth
+# Assume a current is flowing through a wire with nonzero thickness.
+
+# To find the current in the wire
+
+# $\oint \overrightarrow{H} \cdot dl = I$
+
+# $H 2\pi \rho = J \pi \rho^2$
+
+# so $H = \frac{J \rho{P2} \hat{a}_\phi$
+
+If the current through the wire is increasing, current loops perpendicular to the current flow to oppose the magnetic field generated.
+$\delta = \frac{1}{\alpha}$ - skin depth
+
+[[./skin_effect.png]]
+
+#+begin_derivation
+The skin depth is defined as the depth at which the wave has attenuated to magnitude $e^{-1}$
+
+$e^{-\alpha \delta} = e^{-1}$
+
+so $\delta = \frac{1}{\alpha}$
+#+end_derivation
+
+
+* Reflection
+
+#+begin_examples
+1. Assume non-magnetic lossless
+
+   In the first medium, $E_i = 10 \cos(3 \times 10 ^8 t - 1z) \hat{a}_x \frac{V}{m}$, $\varepsilon_r = 1$, $\varepsilon_{r2} = 16$
+
+   $\eta_0 = \sqrt{\mu_0}{\varepsilon_0}$, $\eta_2 = \sqrt{\mu_0}{16 \varepsilon_0}$
+
+   Find r
+
+   $r = \eta_2 - \eta_1}{\eta_2 + \eta_1} = -3/5$
+
+   Find $E_r$
+
+   $E_{r0} = rE_{io} = -6$
+
+   $E_r = -6\cos(3 \times 10^8 t - 1z) \hat{a}_x$
+
+   Find $E_t$
+
+   $E_{t0} = \tau E_{io} = 4$
+
+   But the medium is changed, so the wavelength is changed:
+   $\frac{\omega}{\beta} = \frac{1}{\sqrt{\mu_0 \varepsilon_{r2} \varepsilon_0}} = \frac{1}{\sqrt{16}\sqrt{\mu_0 \varepsilon_0}}$
+
+   so $\beta = 4$
+
+   $E_i = 4 \cos(3 \times 10^8 t - 4 z) \hat{a}_z$
+
+
+#+end_examples

@@ -555,7 +555,6 @@ Similar to Lag compensator, but pole added is on the origin.  This means the typ
    
 #+end_examples
 
-
 * MATLAB SISO Toolbox
 #+begin_src :octave
 G = tf([4],[1,2,0])
@@ -864,4 +863,77 @@ When angle $\alpha$ becomes negative, the nyquist plot encircles -1 and the syst
    so $\omega_c = 0.749$
 
    $\Phi_{PM} = 180^{\circ} + \angle G(j \omega_c) = 180^{\circ} - 147.39^{\circ} = 32.6^{\circ}$
+#+end_examples
+* Lead Compensator Design in Frequency Domain
+In a lead compensator, we try to adjust the phase margin of $G(s)$ by adding the phase
+from the compensator to the phase of $G(s)$.
+
+We move the peak of the compensator phase to the crossover frequency of $G(s)$
+
+[[./nyquist_lead_bode.png]]
+
+Let $G_c = \frac{K_c ( s + \frac{1}{\tau})}{s + \frac{1}{\alpha \tau}} = \left|\frac{K_c  \sqrt{\omega^2 + (\frac{1}{\tau})^2}}{\sqrt{\omega^2 + (\frac{1}{\alpha \tau})^2}} \right| \angle \tan^{-1}(\omega \tau) - \tan^{-1}(\omega \alpha \tau)$
+
+We can find the peak phase of the compensator $\phi_m$ using
+
+$\sin(\phi_m) = \frac{1 - \alpha}{1 + \alpha} \longrightarrow \alpha = \frac{1 - \sin(\phi_m)}{1 + \sin(\phi_m)}$
+#+begin_derivation
+#+end_derivation
+
+with frequency $\omega_m = \frac{1}{\sqrt{\alpha} \tau}$
+#+begin_derivation
+The peak is located at the geometric mean of the peak and pole, so
+
+$\omega_m = \sqrt{\frac{1}{\tau} \frac{1}{\alpha \tau}} = \frac{1}{\sqrt{\alpha} \tau}$
+#+end_derivation
+
+and the magnitude contribution at this frequency is $10\log(\alpha)$
+#+begin_derivation
+$|G_d(j\omega_m)| = |G_c(j\omega_m)G(j\omega_m)| = 0 \text{ dB}$
+
+$$ \begin{aligned}
+20 \log |G(j\omega_m)| & = -20 \log |G_c(j \omega_m)| \\
+& = -20 \log \left[ \frac{\frac{1}{\alpha} \sqrt{\omega_m^2 + (\frac{1}{\tau})^2}}{\sqrt{\omega_m^2 + (\frac{1}{\alpha \tau})^2}} \right] \\
+& = -20 \log \left[ \frac{\frac{1}{\alpha} \frac{1}{\tau} \sqrt{\frac{1}{\alpha} + 1}}{\frac{1}{\sqrt{\alpha}}\frac{1}{\tau} \sqrt{\frac{1}{\alpha} + 1}} \right] = 10 \log \alpha
+\end{aligned} $$
+#+end_derivation
+
+#+begin_examples
+1. Let $G(s) = \frac{K}{s(s+2)}$.  Assume design requirements are
+
+   $K_V = 20 \text{ s}^{-1}$, $\phi_{PM}^d \geq 50^{\circ}$, $G_m \geq 10 \text{ dB}$
+First find $K_V$
+
+   $K_V^G = \lim_{s \to 0}sG(s) = \frac{K}{2}$
+
+
+   If we set $K_c = \frac{1}{\alpha}$, then the magnitude contribution from the compensator is $0 \text{ dB}$ up until the first pole.
+
+   $K_V^{G_d} = \lim_{s \to 0}sG_d(s) = \lim_{s \to 0} \left[ \frac{K_c \frac{1}{\tau}}{\frac{1}{\alpha \tau}} \right] \left[ \frac{K}{2} \right] = 40$
+
+    $K = 40$
+
+   [[./nyquist_lead.png]]
+
+   Using the bode plot, we can find $\omega_c = 6.17 \text{ rad/s}$ and $\omega_\pi = \infty$
+
+   $\phi_{PM} = 180^{\circ} + \angle G(j \omega_c) \approx 18^{\circ}$
+
+   \[G_M = \frac{1}{|G(j\omega_\pi)|} = \infty \text{ dB}\]
+
+
+   $\phi_{PM}^d = 180^{\circ} + \angle G_d(\omega_c) = \phi_{PM} + \phi_m = 50^{\circ}$
+
+   So the phase angle that needs to be added is:
+
+   $\phi_m = 32^{\circ}$ at $\omega = \omega_c$
+
+   However, adding a lead compensator to the system also slightly changes the magnitude
+   and thus $\omega_c$ is shifted slightly.  We must account for this by adding a slight
+   phase lead, $\varepsilon$ to $\phi_m$
+
+   If we let $\varepsilon = 5^{\circ}$, then $\phi_m = 32^{\circ} + 5^{\circ} = 37^{\circ}$.
+
+   So $\alpha = \frac{1 - \sin(37^{\circ})}{1 + \sin(37^{\circ})} =  0.2486$
+
 #+end_examples

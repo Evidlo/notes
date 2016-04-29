@@ -359,15 +359,15 @@ $q_i = \frac{P_i}{SD}$ - fair share of seats for state
 ** Apportionment methods
 *** Hamilton's Method
 Give everyone the floor of their fair share.  Assign the remaining n seats to n states with highest remainder.
-:example:
-| State |     A |      B |    C |     D |    E |     F |   sum |
-|-------+-------+--------+------+-------+------+-------+-------|
-| $P_i$ |  1646 |   6936 |  154 |  2091 |  685 |   988 | 12500 |
-| $q_i$ | 32.92 | 138.71 | 3.08 | 41.82 | 13.7 | 19.76 |   250 |
-| floor |    32 |    138 |    3 |    41 |   13 |    19 |   246 |
+#+begin_examples
+1. | State |     A |      B |    C |     D |    E |     F |   sum |
+   |-------+-------+--------+------+-------+------+-------+-------|
+   | $P_i$ |  1646 |   6936 |  154 |  2091 |  685 |   988 | 12500 |
+   | $q_i$ | 32.92 | 138.71 | 3.08 | 41.82 | 13.7 | 19.76 |   250 |
+   | floor |    32 |    138 |    3 |    41 |   13 |    19 |   246 |
 
-So remaining for seats are assigned to A,B,D,F
-:END:
+   So remaining for seats are assigned to A,B,D,F
+#+end_examples
 *** Adam's Method
 Modify $SD$ until the sum of the ceils of fair shares of seats is equal to the total seats available
 
@@ -607,6 +607,28 @@ then $a_n = b_1 \lambda_1^n + b_2 \lambda_2^n$
    $1 = a_1 = b_1 1^1 + b_2 2^1 = b_1 + 2 b_2$
 
    So $b_1 = 1, b_2 = 0$
+
+2. Let $a_n = 6a_{n-1} - 11a_{n-2} + 6a_n - 3$, $a_0 = 1, a_1 = 2, a_2 = 7$
+
+   $\lambda^n = 6\lambda^{n-1} - 11\lambda^{n-2} + 6\lambda^{n-3}$
+
+   Divide out $\lambda^{n-3}$
+
+   $\lambda^3 = 6\lambda^2 - 11\lambda + 6$
+
+   Making guesses for roots: $\lambda = \pm 1, \pm 2, \pm 3, \pm 6$
+
+   our roots are $\lambda = 1,2,3$
+
+   so the guess for the solution is $a_n = A1^n + B2^n + C3^n$
+
+   Substituting our initial conditions:
+
+   $1 = a_0 = A1^0 + B2^0 + C3^0 = A + B + C$
+   $1 = a_1 = A1^1 + B2^1 + C3^1 = A + 2B + 3C$
+   $7 = a_2 = A1^2 + B2^2 + C3^2 = A + 4B + 9C$
+
+   Solving the system yields $A = \frac{3}{2}, B = -2, C = \frac{3}{2}$
 #+end_examples
 
 #+begin_theorem...
@@ -681,7 +703,7 @@ Let $t \geq 1$
 
 then $F_c = P (1^n + 1^{n-1}r(\frac{t}{1}) + ... \geq F_s = P (1 + rt)$
 
-* Credit Cards
+** Credit Cards
 - Month 1 - spend 876
 - Month 2 - spend 288
 
@@ -698,7 +720,7 @@ Bill 2
   Over the course of a year this compounds to more than $(\frac{1}{2} APR) * \text{spent over year}$
 - 
 
-* Annuities
+** Annuities
 #+begin_definition
 *Fixed annuity*
 
@@ -706,11 +728,11 @@ Sequence of equal payments at regular time intervals
 
 *Deferred*
 
-Collecting for lumpsum payment later
+Making regular payments and collecting at some point in the future (investment)
 
 *Installment loan*
 
-Pay lump sum, get regular payments later
+Receive loan up front and pay it back in regular payments
 #+end_definition
 
 * Motions
@@ -734,6 +756,13 @@ We can find the size of a motion in various dimensions
 In dimension 1, $A^TA = 1$, so $A = 1$ and $A$ has 0 degrees of freedom + 2 degrees of freedom for $B$
 
 In dimension 2, $A^TA = 1$, so $A$ has 1 degree of freedom + 2 degrees of freedom for $B$
+
+** Rotation
+If a motion is a rotation about the origin, it has the form 
+$$A = \left( \begin{bmatrix}
+\cos(\alpha) & -\sin(\alpha) \\
+\sin(\alpha) & \cos(alpha)
+\end{bmatrix} \right)$$
 
 ** Finding a motion for some input and output
 If $\overrightarrow{v}$ and $(A,B)\overrightarrow{v}$ are given, there is a line of possible points for the center of rotation
@@ -764,11 +793,28 @@ $G$ is called a symmetry group
 The set of motions which preserve the look of a regular polygon is called a dihedral group
 #+end_definition
 
-#+begin_examples
-*incomplete*
-#+end_examples
 
-** Frieze patterns
+** Frieze patterns (Border Patterns)
+
+We can classify various line patterns based on their symmetries
+
+Type name convention: *xy*
+
+*x* can be m or 1
+  - m - reflection, vertical axis
+  - 1- no reflection
+*y* can be m, g, 2, or 1
+  - m - reflection, horizontal axis
+  - g - glide reflection
+  - 2 - $180^{\circ}$ rotation
+  - 1 - no reflection
+
+#+begin_definition
+*Glide reflection*
+
+Flip a pattern over the horizontal axis, then translate it left or right:
+#+end_definition
+
 | Pattern               | Type | Symmetry groups                                                                            |
 |-----------------------+------+--------------------------------------------------------------------------------------------|
 | --T--T--T--T--  | m1   | translations by $\mathbb{Z}$ and vertical reflections at $\mathbb{Z}$ or $\mathbb{Z} + .5$ |
@@ -779,9 +825,6 @@ The set of motions which preserve the look of a regular polygon is called a dihe
 | --b--p--b--     | 1g   | translation by $2\mathbb{Z}$ and glide reflection                                          |
 | --^--v--^--     | mg   | translation by $2\mathbb{Z}$ and glide reflection                                          |
 
-Type shows available reflections at position
-
-m - vertical/horizontal, g - glide reflection, 2 - half turn, 1 - translation
 
 * Fractals
 ** Sierpinsky gasket
@@ -945,7 +988,7 @@ if $E_1$ and $E_2$ are independent, then $P(E_1 | E_2) = P(E_1)$
    $P(E|F) = \frac{P(E \cap F)}{P(F)} = \frac{4}{10}$
 #+end_examples
 ** Capture-Recapture Method
-Used to determine total populations.
+Used to determine total populations.  Assumes population exhibits Brownian (random) motion.
 
 1. Capture n indivudals from the population
 2. Tag each individual and release them again
@@ -957,3 +1000,63 @@ Used to determine total populations.
    - choose suit for A, pick A cards, choose suit for B, pick B cards
  - 2 pair - AABBC - \[\frac{13 \left( \frac{4}{2} \right) 12 \left( \frac{4}{2} \right) 11 \left( \frac{4}{1} \right)}{2}\]
    - choose suit for A, pick A cards, choose suit for B, pick B cards, pick C cards, remove A-B permutation
+
+** Permutations
+#+begin_examples
+1. Find the average number of inversions of all permutations in $S_n$
+
+   Let $X: S_n \to \mathbb{R}$
+
+   $E(x) = \sum_{\sigma \in S_n} p(\sigma)X(\sigma)$
+
+   Let $X_{i,j} = 
+$$
+X = \sum X_{i,j} = \sum
+\begin{cases}
+1 & \text{i,j are inverted} \\
+0 & \text{i,j are not inverted}
+\end{cases}
+$$
+#+end_examples
+
+* Final Review
+** Exponential Growth
+- fibonacci sequence
+- linear recurrence
+  - general form
+  - explicity solution
+- golden ratio
+** Mathematics of Money
+- 20% increase then decrease
+- simple interest
+- compound interest $F = P(1 + \frac{R}{n})^{nt}$
+- APY vs APR
+- geometric series $P(\frac{c^N - 1}{c - 1}) = \sum_{n = 0}^{n - 1} P * c^n$
+- deferred annuities - 
+- installment (amortization) formula $P = f*q * \frac{q^T - 1}{q - 1}$ 
+** Symmetries
+- rigid motion in $\mathbb{R}^2, \mathbb{R}^3$
+- translation, rotation, reflection, glide
+- proper/improper (reflection)
+- regular polygons - dihedral groups
+- border patterns
+** Fractals
+- koch snowflake, sierpinski gasket
+- iteration leads to self similarity
+- chaos game
+- twisted fractals
+- mandelbrot set - seed, attracted, period, escaping, asymptotic
+** Censuses and Surveys
+- N-value, population
+- sampling frame, convenience sampling, quota sampling, random sampling, stratified sampling
+- sample bias
+- capture recapture 
+** Probability
+- sample space
+- probability function
+- expected value
+  - linearity
+- discrete vs continuous distributions
+- fair vs loaded experiment (uniformity)
+- independence
+- conditional probability
