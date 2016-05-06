@@ -243,7 +243,7 @@ So $(x_n)$ is a Cauchy sequence
 #+end_examples
 
 #+begin_theorem - Convergence of Cauchy sequences
-Let $(x_n)$ be a Cauchy sequence
+Let $(x_n)$ be a bounded Cauchy sequence
 
 Then $(x_n)$ is convergent
 #+end_theorem
@@ -796,7 +796,7 @@ Let $f,g: A \longrightarrow \mathbb{R}$
 #+begin_theorem
 Let $f,g: A \longrightarrow \mathbb{R}$
 
-Let c \in \mathbb{R} be a cluster point of $A$
+Let $c \in \mathbb{R}$ be a cluster point of $A$
 
 If $\lim_{x \to c} f(x)$ and $\lim_{x \to c} g(x)$ exist, then
 
@@ -1524,7 +1524,7 @@ $\phi(g(d)) = f'(c) \neq 0$
 
 Since $\phi(g(y))$ is continuous so $\phi(g(y)) \neq 0$ in a neighborhood around $d$.
 
-so $\lim_{y \to d} \frac{g() - g(d)}{y - d} = \frac{1}{\phi(g(d))} = \frac{1}{f'(g(d))}$
+so $\lim_{y \to d} \frac{g(y) - g(d)}{y - d} = \frac{1}{\phi(g(d))} = \frac{1}{f'(g(d))}$
 #+end_proof
 
 #+begin_definition
@@ -1625,7 +1625,7 @@ so $f'(c) = \frac{f(b) - f(a)}{b - a}$
 
 Let $f:I \to \mathbb{R}$ be differentiable such that $f'(x) = 0$ for all $x$
 
-Then $f(x)$ is constnat on $I$
+Then $f(x)$ is constant on $I$
 #+end_theorem
 #+begin_proof
 Let $a,b \in I$ such that $a < b$
