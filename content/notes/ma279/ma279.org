@@ -495,6 +495,13 @@ _Properties of Trees_
 #+begin_theorem
 All trees must have at least one leaf
 #+end_theorem
+*** Kruskal's Algorithm
+Identical to the cheapest link algorithm, but prevents circuits from forming.
+
+1. Select the cheapest edge.
+2. Repeat until all vertices are connecting, taking care not to create circuits.
+
+Kruskal's Algorithm always finds an optimal solution.
 
 *** Prüfer Sequence
 _Steps to create Prüfer Sequence from tree_
@@ -844,7 +851,6 @@ Flip a pattern over the horizontal axis, then translate it left or right:
 | --Z--Z--Z--     | 12   | translations by $\mathbb{Z}$ and rotations by $180^{\circ}$                                |
 | --b--p--b--     | 1g   | translation by $2\mathbb{Z}$ and glide reflection                                          |
 | --^--v--^--     | mg   | translation by $2\mathbb{Z}$ and glide reflection                                          |
-
 
 * Fractals
 ** Sierpinsky gasket
