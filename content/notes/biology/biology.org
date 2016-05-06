@@ -1,9 +1,9 @@
 #+TITLE: CLEP Biology Review
 * Meiosis and Mitosis
-- _centromere_ - 
-
-  *chromosome* - has one centromere, might consist of 1 chromatid or 2 sister chromatids
-  *chromatid* - hunk of DNA, might be a chromosome, or a sister chromatid
+*centromere* - attachment point for chromosome
+*chromosome* - has one centromere, might consist of 1 chromatid or 2 sister chromatids
+*chromatid* - hunk of DNA, might be a chromosome, or a sister chromatid
+*chromatin* - unravelled DNA
 ** Haploid Cell
 - contains 1 set of all chromosomes (2 chromatids)
 - sex cells
@@ -33,9 +33,16 @@ Meiosis I
 - telophase - cells split (telo- - end)
 
 * Cells
+*isotonic* - same water concentration in and outside
+*anabolism* - builds molecules by consuming energy
+*catabolism* - process of breaking down molecules for energy
+*krebs cycle/citric acid cycle* - cycle where organisms breakdown carbs/fats/etc for energy
 ** Cellular Structures
-- _ribosomes_ - produce protein
-- _mitochondria_ - create ATP during cellular respiration
+*ribosomes* - produce protein
+*mitochondria* - create ATP during cellular respiration
+*lysosome* - handle waste in a cell
+*endocytic vesicles* - the cell wall "eats" a particle
+*centriole* - where microtubules attach during reproduction
 
 ** Cellular Respiration
 
@@ -43,26 +50,76 @@ Meiosis I
 - help catalyze reactions
 
 
-** Binomial Nomenclature
+* Binomial Nomenclature
 _genus species_
 
  - kingdom > phylum > class > order > family > genus > species
+ - king phillip came over from great spain
 
+*arthropoda* - insects, bees
+*aves* - birds
+*annelid* - segmented worms
+*nematoda* - round worms
+*porifera* - sponge
+*cnidaria* - jellyfish
+*sporophyte* - fern
+*prothallus* - also a fern
+*bryphytes* - mosses, no xylem, phloem
 * Ecosystems
-
+*differential reproduction* - the fittest organisms will survive long enough to reproduce
+*hardy-weinberg* - genotypes stay the same in the absence of environmental factors
+*allopatric speciation* - separation of organisms results in separate evolutionary paths
 ** r/K Selection
 - _r selected_ - describes organisms with high growth rates, high mortality, fast sexual maturity
 - _K selected_ - describes organisms with low growth rates, low mortality, long parental care
 
-- _cofactor_ - inorganic substances which catalyze or assist with catalization
+- _cofactor_ - complementary molecule that works with an enzyme to catalyze stuff
 
 - _catalyst_ - lowers activation energy for reaction
 - _endergomic reaction_ - absorbs energy from environment
 - _CAM photosynthesis_ - used by some plants in arid environments to reduce water loss
-
+* Insects
+*spiracles* - respiratory organs
 * Plants
 ** Tissue
 _phloem_ - carries nutrients
 _xylem_ - carries water
+*meristem* - allows roots to grow quickly
 ** Behavior
 _calvin cycle_ - light independent reactions inside a plant
+*photolysis* - process of breaking down molecules by light
+*angiosperm* - flowering
+*gymnosperm* - seeding
+*phototropism* - orient towards light
+*saphrophytic* - feeding on dead matter
+
+* Prefixes
+*epi* - 
+*iso* -
+*ecto* -
+*meso* - 
+* History
+*pre-cambrian* - some soft-bodied organisms, plants 
+*cambrian* - large emergence of multicellular organisms
+*mesozoic* - dinosaurs, ended with mass extinction
+*cenozoic* - current era, flowering plants
+*paleozoic*
+* Human Body
+*cerebrum* - speech
+*cerebellum* - motor skills
+*forebrain* - smell
+*pituitary gland* - controls other glands and hormones (master gland)
+*pancreas* - makes insulin
+
+*collagen* - connective tissue (vitamin C helps with its creation)
+*vitamins* - organic cofactors
+
+** Reproduction
+*** Embryo
+*germ layers* - the various layers in an embryo
+*endoderm layer* - gut lining and internals
+*mesoderm* - muscles, skeleton, reproductory
+*ectoderm* - skin
+** Diseases
+- hemophilia
+- color blindness
