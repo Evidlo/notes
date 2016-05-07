@@ -960,11 +960,11 @@ Finally, since $\omega_c^* > \omega_c$, the phase margin at $G(j\omega_c^*$ is s
    \[G_m = \frac{1}{|G(j\omega_\pi)|} = \infty \text{ dB}\]
 
 
-   $\phi_{PMd} = 50^{\circ} = \phi_{PM} + \phi_m = 17.964^{\circ} + \phi_m$
+   $\phi_{PMd} = 50^{\circ} = \phi_{PM} + \phi_m$
 
    So the phase angle that needs to be added is:
 
-   $\phi_m = 32.036^{\circ}$
+   $\phi_m = 50 - \phi_{PM} = 32.036^{\circ}$
 
    If we let $\varepsilon = 5^{\circ}$, then $\phi_m = 32.036^{\circ} + 5^{\circ} = 37.036^{\circ}$.
 
@@ -974,7 +974,7 @@ Finally, since $\omega_c^* > \omega_c$, the phase margin at $G(j\omega_c^*$ is s
 
    Checking the bode plot again, we find that $|G(j\omega)| = 10\log(\alpha)$ at $8.87 \text{ rad/s}$.
 
-   The phase angle at this point is $-167.3^{\circ}$, which is a decrease of $5.336^{|circ}$.
+   The phase angle at this point is $-167.3^{\circ}$, which is a decrease of $5.336^{\circ}$.
 
    Since $5.336 > \varepsilon$, we must use $\varepsilon = 6^{\circ}$ and repeat the process:
 
@@ -986,7 +986,7 @@ Finally, since $\omega_c^* > \omega_c$, the phase margin at $G(j\omega_c^*$ is s
 
    so $\omega_c^* = 8.993$
 
-   zero: $\frac{1}{\tau} = \sqrt{\alph 4.383$
+   zero: $\frac{1}{\tau} = \sqrt{\alpha}\omega_c^* = 4.383$
    pole: $\frac{1}{\alpha\tau} = 18.453$
    
    $G_c(s) = \frac{\frac{1}{0.2375}(s + 4.383)}{s + 18.453}$
