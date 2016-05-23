@@ -360,9 +360,6 @@ Rules
    
    $s = \frac{-1}{2}$
 
-   ipe
-   -1     0
-    x     x
 
    [[./rootlocus_example2.png]]
 
@@ -421,8 +418,7 @@ Rules
 
 A block added in front of the plant of a feedback system to tweak performance, denoted by $G_C(s)$.
 
-*ipe*
-[[./loop.png]]
+[[./compensator_fig.png]]
 #+end_definition
 
 ** Selecting a Compensator
