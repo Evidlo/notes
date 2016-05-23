@@ -605,41 +605,69 @@ $|G(jw)| = K$
 
 $\angle G(jw) = \tan^{-1} \frac{0}{K} = 0$
 
-magplot: 20logK semilog (dB)
-phaseplot: 0 semilog
+*No phase contribution*
+
+*Upward shift of* $20\log(K) \text{ dB}$
 
 ** Zero at origin
-Let $G(s) = s$
+Let $G(s) = j\omega$
 
-$|G(jw)| = jw$
+$|G(j\omega)| = \omega$
+$\text{mag. dB} = -20log(\omega)$
 
-$\angle G(jw) = \tan^{-1}(\frac{\omega}{0}) = 90^{\circ}$
+$\angle G(j\omega) = \tan^{-1} \frac{\omega}{0} = 90^{\circ}$
 
-magplot: 20log(omega) semilog (dB)
-phaseplot: 90 semilog
+*Upward slope of 20dB/decade for low frequencies*
+
+*90 degree increase everywhere*
 
 ** Pole at origin
-Let $G(s) = \frac{1}{s}$
+Let $G(s) = \frac{1}{j\omega}$
 
-$|G(jw)| = \frac{1}{jw}$
+$|G(j\omega)| = \frac{1}{\omega}$
+$\text{mag. dB} = -20log(\omega)$
 
-$\angle G(jw) = \tan^{-1}(\frac{\omega}{0}) = -90^{\circ}$
+$$\angle G(j\omega) = \frac{1}{\tan^{-1} \left( \frac{\omega}{0} \right)} = -90^{\circ}$$
 
-magplot: -20log(omega) semilog (dB)
-phaseplot: 90 semilog
+*Downward slope of 20dB/decade for low frequencies*
+
+*90 degree decrease everywhere*
 
 ** Zero
-Let $G(s) = s + \tau = \frac{s}{\tau} + 1$ (normalized form $G(0) = 1$)
+Let $G(s) = s + \tau$
 
-$|G(jw)| = \sqrt{1 + \frac{\omega}{\tau}^2}$
+$\tau$ is called breakpoint
+
+$|G(jw)| = \sqrt{\omega^2 + \tau^2}$
+$\text{mag. dB} = 20\log(\sqrt{\omega^2 + \tau^2})$
 
 $\angle G(jw) = \tan^{-1}(\frac{\omega}{\tau})$
 
-tau is called breakpoint
+*Upward slope of 20dB/decade, starting at the break point*
 
-magplot: 20log(sqrt 1 + w^2/tau) semilog (dB)
-phaseplot: tan^-1 w/tau semilog
+*+90 degree tangent curve, starting one decade below the breakpoint and ending 1 decade above*
 
+** Pole
+Let $G(s) = \frac{1}{s + \tau}$
+
+$\tau$ is called breakpoint
+
+$$|G(jw)| = \frac{1}{\sqrt{\omega^2 + \tau^2}}$$
+$\text{mag. dB} = -20\log(\sqrt{\omega^2 + \tau^2})$
+
+$\angle G(jw) = -\tan^{-1}(\frac{\omega}{\tau})$
+
+*Downward slope of 20dB/decade, starting at the break point*
+
+*-90 degree tangent curve, starting one decade below the breakpoint and ending 1 decade above*
+
+** Complex
+
+** Construction by Hand
+
+It is easy to construct fairly accurate bode plots using the primitive elements above.
+
+The plot should range from 1 decade below the lowest breakpoint to 1 decade above the highest.
 #+begin_examples
 1. Let $G(s) = \frac{1}{s + \tau} = \frac{1}{\frac{s}{\tau} + 1}$ (normalized)
 
@@ -662,6 +690,7 @@ phaseplot: tan^-1 w/tau semilog
 
    Let $\zeta = .1$
    Points of interest
+
    | $v = \frac{\omega}{\omega_n}$ | 0.1       | 1           | 10           |
    | $-20 \log(G(j v))$        | 0 dB      | +14 dB    | -40 dB   |
    | $\angle G(j\omega)$       | 0 degrees | -90 degrees | -180 degrees |
@@ -808,82 +837,73 @@ A useful property of LTI systems is that $G(s) = |G(s)|\angle G(s)$, so we will 
 ** Gain and Phase Margins
 
 The  gain margin $G_m$ and phase margin $\phi_{PM}$ are useful for determining 
-when instability occurs as input parameters like gain or phase are changed.
+when instability occurs as gain or phase are changed.
 
 [[./crossover.png]]
 
 Note that the magnitude and phase of the nyquist plot as a function of frequency are identical to the bode plot.
+
+Let $\omega_pi$ be the frequency when the bode plot crosses the real axis.  When $|G(\omega_{\pi})| > 1$ the nyquist plot encloses -1 and the system becomes unstable, so for the system to remain stable $|G(\omega_{\pi})| < 1$ and $G_M > 1$
+
+We define gain margin as a method for quantifying this property.
 #+begin_definition
-$G_m = \frac{1}{|G(\omega_{\pi})|}$
+$G_m = \frac{1}{|G(j\omega_{\pi})|}$
 
 where $\omega_{\pi}$ is the phase crossover frequency, (the frequency where the nyquist plot intersects the real axis)
 #+end_definition
 
-When $|G(\omega_{\pi})| > 1$ the nyquist plot encloses -1 and the system becomes unstable, so for the system to remain stable $|G(\omega_{\pi})|$ < 1 and $G_M > 1$
-
 Physically, the gain margin is the gain that can be added to the system before it becomes unstable.
+To solve for $\omega_{\pi}$, use the fact that the imaginary part of $|G(\j omega_\pi)|$ is zero.
 
-Solve for $\omega_{\pi}$ by setting the imaginary part of $G(jw)$ equal to zero.
+Let $\omega_c$ be the frequency where the nyquist plot crosses the unit circle.  If the angle at this point (shown above as $\alpha$ is less than 0, the nyquist plot encloses -1, and the system becomes unstable.
 
+The phase margin quantifies this property.
 #+begin_definition
 $\phi_{PM} = 180^{\circ} + \angle G(j\omega_c)$
 
 where $\omega_c$ is the gain crossover frequency, (the frequency where the nyquist plot intersects the unit circle).
 #+end_definition
 
-When angle $\alpha$ becomes negative, the nyquist plot encircles -1 and the system becomes unstable.
-
 #+begin_examples
 1. Let $G(s) = \frac{K}{s(s+1)(s+2)}$
 
-   $G(jw) = \frac{K}{\omega \sqrt{\omega^2 + 1} \sqrt{\omega^2 + 4}} = \frac{-Kj\omega(2 - \omega^2 - 3 j \omega}{\omega^2 ( \omega^2 + 1)(\omega^2 + 4)}$
+   $G(jw) = \frac{K}{j\omega(j\omega+1)(j\omega+2)} * \frac{j\omega(j\omega-1)(j\omega-2)}{j\omega(j\omega-1)(j\omega-2)}= \frac{Kj\omega(j\omega - 1)(j\omega-2)}{\text{don't care}}$
 
-   To find gain margin:
+   To find phase crossover and gain margin:
 
-   $\text{Im}(G) = \frac{-k\omega_\pi(2 - \omega_\pi^2)}{\omega_\pi^2(\omega_\pi^2 + 1)(\omega_\pi^2 + 4)} = 0 \longrightarrow \omega_\pi^2 = 2 \longrightarrow \omega_\pi = \sqrt{2}$
+   $\text{Im}(G(j\omega_\pi)) = \text{Im}\left(\frac{Kj\omega_\pi(j\omega_\pi - 1)(j\omega_\pi-2)}{\text{don't care}}\right) =  \frac{k\omega_\pi(2 - \omega_\pi^2)}{\text{don't care}} = 0 \longrightarrow \omega_\pi^2 = 2 \longrightarrow \omega_\pi = \sqrt{2}$
 
-   so $\omega_\pi = \sqrt{2}$
+   $|G(j\omega_\pi)| = \frac{K}{\omega_\pi^2(\omega_\pi^2 + 1)(\omega_\pi^2 + 2)} = \frac{K}{6}$
 
-   $|G(j\omega_\pi)| < 1 \longrightarrow \frac{K(3\omega_\pi^2}{\omega_\pi^2(\omega_\pi^2 + 1)(\omega_\pi^2 + 4)} < 1 \longrightarrow \frac{K}{6} < 1 \longrightarrow 0 < K < 6$
+   $|G(j\omega_\pi)| < 1 \longrightarrow K < 6$
 
    To find phase margin:
 
-   $|G(\omega_c)| = 1 \longrightarrow \frac{2}{\omega_c \sqrt{2_c^2 + 1} \sqrt{\omega_c^2 + 4}} = 1 \longrightarrow \omega_c^6 + 5\omega_c^4 + 4\omega_c^2 - 4 = 0$
-
-   using matlab:
-   #+begin_src :octave
-   p = [1 0 5 0 4 0 -4];
-   roots(p)
-   #+end_src
-
-   so $\omega_c = 0.749$
-
-   $\Phi_{PM} = 180^{\circ} + \angle G(j \omega_c) = 180^{\circ} - 147.39^{\circ} = 32.6^{\circ}$
+   $|G(j\omega_c)| = 1 \longrightarrow \frac{K}{\omega_c \sqrt{\omega_c^2 + 1} \sqrt{\omega_c^2 + 4}} = 1 \longrightarrow \omega_c^6 + 5\omega_c^4 + 4\omega_c^2 - K^2 = 0$
 #+end_examples
 * Lead Compensator Design in Frequency Domain
 In a lead compensator, we try to adjust the phase margin of $G(s)$ by adding the phase
 from the compensator to the phase of $G(s)$.
 
-We move the peak of the compensator phase to the crossover frequency of $G(s)$
+We set the compensator phase peak frequency to the crossover frequency of $G_c(s)G(s)$
 
 [[./nyquist_lead_bode.png]]
 
 Let $G_c = \frac{K_c ( s + \frac{1}{\tau})}{s + \frac{1}{\alpha \tau}} = \left|\frac{K_c  \sqrt{\omega^2 + (\frac{1}{\tau})^2}}{\sqrt{\omega^2 + (\frac{1}{\alpha \tau})^2}} \right| \angle \tan^{-1}(\omega \tau) - \tan^{-1}(\omega \alpha \tau)$
 
-We can find the peak phase of the compensator $\phi_m$ using
+We can use the angle to be added by the compensator ($\phi_m$, angle of deficiency) to find $\alpha$ the ratio of the zero to pole location.
 
-$\sin(\phi_m) = \frac{1 - \alpha}{1 + \alpha} \longrightarrow \alpha = \frac{1 - \sin(\phi_m)}{1 + \sin(\phi_m)}$
-#+begin_derivation
-#+end_derivation
+$\sin(\phi_m) = \frac{1 - \alpha}{1 + \alpha} \longrightarrow \alpha = \frac{1 - \sin(\phi_m + \varepsilon)}{1 + \sin(\phi_m + \varepsilon)}$
+
+We add $\varepsilon$ to account for a slight phase shift that we will see later.
 
 with frequency $\omega_m = \frac{1}{\sqrt{\alpha} \tau}$
-#+begin_derivation
-The peak is located at the geometric mean of the peak and pole, so
+with the pole and zero separated like this, there is also going to be an addition to the magnitude.
 
-$\omega_m = \sqrt{\frac{1}{\tau} \frac{1}{\alpha \tau}} = \frac{1}{\sqrt{\alpha} \tau}$
-#+end_derivation
+The phase peak is located halfway between the pole and zero on a logarithmic plot, so the magnitude contribution is $\frac{20\log(\alpha)}{2} = 10\log(\alpha)$
 
-and the magnitude contribution at this frequency is $10\log(\alpha)$
+Next, we find the frequency on $|G(j\omega)|$ where the magnitude is equal to $10\log(\alpha)$.  When the compensator is added, this will be where $|G(j\omega)G_c(j\omega)|$ intersects $0 \text{ dB}$.  We call this frequency $\omega_c^*$.
+
 #+begin_derivation
 $|G_d(j\omega_m)| = |G_c(j\omega_m)G(j\omega_m)| = 0 \text{ dB}$
 
@@ -894,42 +914,78 @@ $$ \begin{aligned}
 \end{aligned} $$
 #+end_derivation
 
+Now that we know where to place the peak of the phase of the compensator, we can calculate the frequencies of the zero and pole.
+#+begin_derivation
+The peak is located at the geometric mean of the peak and pole, so
+
+$\omega_{mean} = \sqrt{\frac{1}{\tau} \frac{1}{\alpha \tau}} = \frac{1}{\sqrt{\alpha} \tau}$
+
+$\omega_c^* = \frac{1}{\sqrt{\alpha}\tau} \longrightarrow \frac{1}{\tau} = \sqrt{\alpha} \omega_c^*$
+#+end_derivation
+
+Finally, since $\omega_c^* > \omega_c$, the phase margin at $G(j\omega_c^*$ is slightly less than $G(j\omega_c$.  We check that this drop in phase is less than $\varepsilon$
+
+** Design Summary
+1. Determine the gain of $G$ from initial conditions.
+2. Find the phase margin of $G$.  Use this (plus $\varepsilon$ of $5-12^{\circ}$) to determine pole/zero ratio, $\alpha$
+3. Find the frequency where $|G(j\omega)| = 10\log(\alpha)$.  This is $\omega_c^*$
+4. Calculate pole zero locations.  zero: $\frac{1}{\tau} = \sqrt{\alpha} \omega_c^*$, pole: $\frac{\text{zero}}{\alpha}$
+5. Verify that $\angle G(j\omega_c) - \angle G(j\omega_c^*) < \varepsilon$
 #+begin_examples
 1. Let $G(s) = \frac{K}{s(s+2)}$.  Assume design requirements are
 
-   $K_V = 20 \text{ s}^{-1}$, $\phi_{PM}^d \geq 50^{\circ}$, $G_m \geq 10 \text{ dB}$
-First find $K_V$
+   $K_v = 20 \text{ s}^{-1}$, $\phi_{PMd} \geq 50^{\circ}$, $G_md \geq 10 \text{ dB}$
 
-   $K_V^G = \lim_{s \to 0}sG(s) = \frac{K}{2}$
+   First find the gain of $G(s)$ to satisfy the position error constant, $K_v$
 
+   $K_v = \lim_{s \to 0}sG(s) = \frac{K}{2} = 20 \longrightarrow K = 40$
 
-   If we set $K_c = \frac{1}{\alpha}$, then the magnitude contribution from the compensator is $0 \text{ dB}$ up until the first pole.
-
-   $K_V^{G_d} = \lim_{s \to 0}sG_d(s) = \lim_{s \to 0} \left[ \frac{K_c \frac{1}{\tau}}{\frac{1}{\alpha \tau}} \right] \left[ \frac{K}{2} \right] = 40$
-
-    $K = 40$
+   #+begin_src :octave
+   pkg load control
+   s = tf([40],[1 2 0]);
+   [mag ph w] = bode(s);
+   [mag2db(mag) ph w']
+   #+end_src
 
    [[./nyquist_lead.png]]
 
    Using the bode plot, we can find $\omega_c = 6.17 \text{ rad/s}$ and $\omega_\pi = \infty$
 
-   $\phi_{PM} = 180^{\circ} + \angle G(j \omega_c) \approx 18^{\circ}$
+   $\phi_{PM} = 180^{\circ} + \angle G(j \omega_c) \approx 17.964^{\circ}$
 
-   \[G_M = \frac{1}{|G(j\omega_\pi)|} = \infty \text{ dB}\]
+   \[G_m = \frac{1}{|G(j\omega_\pi)|} = \infty \text{ dB}\]
 
 
-   $\phi_{PM}^d = 180^{\circ} + \angle G_d(\omega_c) = \phi_{PM} + \phi_m = 50^{\circ}$
+   $\phi_{PMd} = 50^{\circ} = \phi_{PM} + \phi_m$
 
    So the phase angle that needs to be added is:
 
-   $\phi_m = 32^{\circ}$ at $\omega = \omega_c$
+   $\phi_m = 50 - \phi_{PM} = 32.036^{\circ}$
 
-   However, adding a lead compensator to the system also slightly changes the magnitude
-   and thus $\omega_c$ is shifted slightly.  We must account for this by adding a slight
-   phase lead, $\varepsilon$ to $\phi_m$
+   If we let $\varepsilon = 5^{\circ}$, then $\phi_m = 32.036^{\circ} + 5^{\circ} = 37.036^{\circ}$.
 
-   If we let $\varepsilon = 5^{\circ}$, then $\phi_m = 32^{\circ} + 5^{\circ} = 37^{\circ}$.
+   So $\alpha = \frac{1 - \sin(37.036^{\circ})}{1 + \sin(37.036^{\circ})} =  0.248$
 
-   So $\alpha = \frac{1 - \sin(37^{\circ})}{1 + \sin(37^{\circ})} =  0.2486$
+   $10\log(\alpha) = -6.04 \text{ dB}$
 
+   Checking the bode plot again, we find that $|G(j\omega)| = 10\log(\alpha)$ at $8.87 \text{ rad/s}$.
+
+   The phase angle at this point is $-167.3^{\circ}$, which is a decrease of $5.336^{\circ}$.
+
+   Since $5.336 > \varepsilon$, we must use $\varepsilon = 6^{\circ}$ and repeat the process:
+
+   $\alpha = 0.2375$
+
+   $10\log(\alpha) = -6.2433 \text{ dB}$
+
+   This yields a decrease in $5.353^{\circ} > \varepsilon$ at $8.993 \text{ rad/s}$
+
+   so $\omega_c^* = 8.993$
+
+   zero: $\frac{1}{\tau} = \sqrt{\alpha}\omega_c^* = 4.383$
+   pole: $\frac{1}{\alpha\tau} = 18.453$
+   
+   $G_c(s) = \frac{\frac{1}{0.2375}(s + 4.383)}{s + 18.453}$
+
+   [[./nyquist_lead2.png]]
 #+end_examples
