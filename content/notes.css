@@ -81,19 +81,13 @@ strong {
     font-weight: bold;
 }
 
-/* ---------- tables and lists ---------*
-/* center align exported tables */
+/* ---------- tables and lists ---------*/
 
-ol {
-    /* padding-left:0; */
-    /* list-style-position:inside; */
+.header th {
+    border-bottom:1px solid;
 }
-
-/* .org-ol li { */
-/*     white-space: pre-wrap; */
-/*     margin: 10px; */
-/* } */
-
+td + td { border-left: 1px dashed; }
+tr + tr { border-top: 1px dashed; }
 
 table {
     border-collapse: collapse;
@@ -102,7 +96,6 @@ td, th {
     padding: 10px;
     text-align: center;
 }
-
 
 /* ----------- figures -------------- */
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+#build org-mode files using pandoc
 #put generated file in equivalent directory under out/
 
 dir=$(dirname $1)

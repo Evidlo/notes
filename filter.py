@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+# Evan Widloski - 2016-03-06
+# Custom Pandoc Filtering for Orgmode
 
-from pandocfilters import toJSONFilter, Div, RawBlock
+from pandocfilters import toJSONFilter, Div, RawBlock, Link, Image
 
 derivation_open = """
 <div class="derivation" onclick="showHide(this);">
@@ -24,9 +26,19 @@ proof_close = """
 </div>
 </div>
 """
+href_image = """
+<a href="{0}"><img src="{0}"></a>
+"""
 
-# make derivation blocks collapsible
-def derivation(key, value, format, meta):
+
+def filter(key, value, format, meta):
+    if key == 'Image':
+        src = value[2][0]
+        attr = ("",[],[])
+        target = (src,"")
+        return  Link(attr,[Image(("",[],[]),[],target)],target)
+
+    # make derivation blocks collapsible
     if key == 'Div':
         [[ident, classes, kvs], contents] = value
         if 'derivation' in classes:
@@ -39,4 +51,4 @@ def derivation(key, value, format, meta):
                     [RawBlock('html',proof_close)]
 
 if __name__ == "__main__":
-  toJSONFilter(derivation)
+  toJSONFilter(filter)

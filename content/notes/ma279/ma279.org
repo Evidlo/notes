@@ -456,8 +456,8 @@ Finish I
 *bipartite* - elements can be grouped into two non touching groups
 [[./bipartite.png]]
 ** Traveling Salesman
-Given some locatoins, find a pth through them that is minimal.
-By giving each location a weight, we can give minimal a concrete meaning.
+Given some vertices, find a path through them that is minimal.
+By giving each edge a weight, we can give minimal a concrete meaning.
 
 2 Simplifications
   - $\sum w(e) = 1$
