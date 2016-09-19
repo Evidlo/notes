@@ -1032,9 +1032,6 @@ We define $(f \circ g)(x) = f(g(x))$
 
 If $g$ is continuous at $c$ and $f$ is continuous at $g(c)$, then $f \circ g$ is continuous at $c$
 #+end_theorem
-#+begin_proof
-
-#+end_proof
 #+begin_theorem
 Let $A,B \subseteq \mathbb{R}$.  Let $f$ be continuous on $A$, and $g$ be continuous on $B$
 
