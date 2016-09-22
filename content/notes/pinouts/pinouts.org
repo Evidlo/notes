@@ -1,0 +1,21 @@
+#+title: IC Pinouts
+
+* Logic
+** 74HC00 - NAND
+[[./00.png]]
+** 74HC01 - NAND
+[[./01.png]]
+** 74HC02 - NOR
+[[./02.png]]
+** 74HC04 - Inverter
+[[./04.png]]
+** 74HC08 - AND
+[[./08.png]]
+** 74HC14 - Inverter (Schmidt)
+[[./14.png]]
+** 74HC86 - XOR
+[[./86.png]]
+
+* Microcontrollers
+** ATTiny85/84
+[[./attiny.png]]

@@ -1,0 +1,95 @@
+% Created 2016-05-13 Fri 12:00
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Evan Widloski}
+\date{\today}
+\title{ECE30010 - HW1}
+\hypersetup{
+ pdfauthor={Evan Widloski},
+ pdftitle={ECE30010 - HW1},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 8.3.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+\item -
+\begin{center}
+\begin{tabular}{r|r|l|r}
+\(x_1\) & \(x_2\) & \(\sum w_ix_i + b\) & \(u(\sum)\)\\
+\hline
+0 & 0 & 1(0) + 1(0) - 1.5 = -1.5 & 0\\
+1 & 0 & 1(1) + 1(0) - 1.5 = -0.5 & 0\\
+0 & 1 & 1(0) + 1(1) - 1.5 = -0.5 & 0\\
+1 & 1 & 1(1) + 1(1) - 1.5 = 0.5 & 1\\
+\end{tabular}
+\end{center}
+
+\(y = u(x_1 + x_2 - 1.5)\)
+
+This is equivalent to the AND function.
+
+\item -
+\begin{enumerate}
+\item NOT
+\begin{center}
+\begin{tabular}{rr}
+\(x_1\) & \(u(\sum)\)\\
+1 & 0\\
+0 & 1\\
+\end{tabular}
+\end{center}
+
+So \(w_1 = -2\), \(b = 1\), and \(y = u(-2x_1 + 1)\)
+
+\item NAND
+\begin{center}
+\begin{tabular}{r|r|r}
+\(x_1\) & \(x_2\) & \(u(\sum)\)\\
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+1 & 1 & 0\\
+\end{tabular}
+\end{center}
+
+So \(w_1 = w_2 = -1\), \(b = 1.5\), and \(y = u(-x_1 - x_2  + 1.5)\)
+
+\item NOR
+\begin{center}
+\begin{tabular}{r|r|r}
+\(x_1\) & \(x_2\) & \(u(\sum)\)\\
+0 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 0\\
+1 & 1 & 0\\
+\end{tabular}
+\end{center}
+
+So \(w_1 = w_2 = -1\), \(b = 0.5\), and \(y = u(-x_1 -x_2 + 0.5)\)
+\end{enumerate}
+
+\item This can be constructed by composing logical gates: 
+
+(\(x_1\) AND \(x_2\)) OR (\(x_1\) AND \(x_3\)) OR (\(x_2\) AND \(x_3\)) = (\(x_1\) AND \(x_2\)) OR ((\(x_1\) AND \(x_3\)) OR (\(x_2\) AND \(x_3\)))
+
+\(u(u(u(x_1 + x_2 - 1.5) + u(x_1 + x_3 - 1.5) - 0.5) + u(x_2 + x_3 - 1.5) - 0.5)\)
+
+\item 
+\end{enumerate}
+\end{document}

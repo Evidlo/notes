@@ -1,0 +1,7 @@
+#+title: Useful Linux Commands
+
+I often forget these.  Pasted here for my own reference.
+
+#+begin_src bash
+dd if=foobar.iso if=/dev/sdX status=progress && sync
+#+end_src

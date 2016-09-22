@@ -1,0 +1,33 @@
+#+title: ECE438 - Digital Signal Processing
+* CTFT
+$$X(f) = \int_{-\infty}^{\infty} x(t) e^{-2 \pi j f t} dt$$
+
+$$x(t) = \int_{-\infty}^{\infty} X(f) e^{2 \pi j f t} df$$
+
+As a convention, we require $x(t)$ has the form $u(t)f(t)$ so that infinite negative tail of $e^{-2 \pi j f t}$ is eliminated.
+
+An alternative notation:
+
+$$X(\omega) = \int_{-\infty}^{\infty} x(t) e^{j f t} dt$$
+
+$$x(t) = \frac{1}{2 \pi} \int_{-\infty}^{\infty} X(f) e^{j f t} df$$
+** Useful CTFT Pairs
+$$\text{sinc}(t) = \frac{\sin (\pi t)}{\pi t} \xrightarrow[]{CTFT} \text{rect}(f)$$
+$$\text{comb}_T(x(t)) \xrightarrow[]{CTFT} \frac{1}{T} \text{rep}_{1/T}(X(f))$$
+** Duality of fourier transform
+
+$$x(t) \xrightarrow[]{CTFT} X(f)$$
+
+$$X(t) \xrightarrow[]{CTFT} x(-f)$$
+** Time Shifting
+$$x(t - t_0) \xrightarrow[]{CTFT} X(f)e^{-j 2 \pi  ft_0}$$
+** Time Scaling
+$$x\left(\frac{t}{a}\right) \xrightarrow[]{CTFT} |a| X(af)$$
+
+* DTFT
+$$X_d (\omega) = \sum_{n = - \infty}^\infty x[n] e^{-j \omega n}$$
+
+$$x[n] = \frac{1}{2 \pi} \int_{-\infty}^{\infty} X_d(\omega) e^{j \omega n}$$
+
+
+* Reconstruction

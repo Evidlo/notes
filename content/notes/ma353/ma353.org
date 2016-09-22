@@ -1,0 +1,375 @@
+#+TITLE: MA353 - Linear Algebra II
+
+* Vectorspaces and Subspaces
+#+begin_definition
+*vectorspace*
+
+A set of vectors V is a vectorspace if:
+
+- closed under addition and scalar multiplication - $\overrightarrow{v} + \overrightarrow{w} \in V$, $c \overrightarrow{v} \in V$
+- an identity is defined - $1 \cdot \overrightarrow{v} = \overrightarrow{v}$
+
+#+end_definition
+
+** Properties of Vectorspaces
+- commutative - $\overrightarrow{v} + \overrightarrow{w} = \overrightarrow{w} + \overrightarrow{v}$
+- distributive - $(a + b)\overrightarrow{v} = a\overrightarrow{v} + b \overrightarrow{v}$ and $a(\overrightarrow{v} + \overrightarrow{w}) = a \overrightarrow{v} + b \overrightarrow{w}$
+- $- \overrightarrow{v} + \overrightarrow{v} = 0$
+- $0 + \overrightarrow{v} = \overrightarrow{v}$
+
+#+begin_theorem
+0 in a vectorspace is unique.
+#+end_theorem
+#+begin_proof
+Suppose $0,0' \in V$, such that $0 + \overrightarrow{v} = \overrightarrow{v}$ and $0' + \overrightarrow{v} = \overrightarrow{v}$
+
+Then $0 + \overrightarrow{v} = 0' + \overrightarrow{v} \longrightarrow 0 = 0'$
+#+end_proof
+
+** Subspace
+#+begin_definition
+*subspace*
+
+Let $W,V$ be vectorspaces.  If $W \subseteq V$, then $W$ is a subspace.
+
+Equivalently, $W$ is a subspace $W \subseteq V$ and:
+1. $0 \in W$
+2. $\overrightarrow{v} + \overrightarrow{w} \in W$ for $\overrightarrow{v},\overrightarrow{w} \in W$
+3. $a \overrightarrow{v} \in W$ for $\overrightarrow{v} \in W, a \in \mathbb{R}$
+#+end_definition
+
+#+begin_theorem
+The intersection of subspaces is a subspace.
+#+end_theorem
+#+begin_proof
+Let $W_1, W_2$ be subspaces of $V$.  Show $W_1 \cap W_2$ is also a subspace of $V$
+1. $0 \in W_1, W_2$, so $0 \in W_1 \cap W_2$
+2. Let $\overrightarrow{v}, \overrightarrow{w} \in W_1 \cap W_2$.  Then $\overrightarrow{v}, \overrightarrow{w} \in W_1, W_2$.  By property of closed addition, $\overrightarrow{v} + \overrightarrow{w} \in W_1 \cap W_2$
+3. Let $a \in \mathbb{R}$, $\overrightarrow{v} \in W_1 \cap W_2$.  Then $\overrightarrow{v} \in W_1, W_2$.  By property of closed scalar multiplication, $a \overrightarrow{w} \in W_1 \cap W_2$
+#+end_proof
+
+#+begin_theorem
+Sum of vectorspaces is also a vectorspace.
+
+$W_1 + W_2 \defined \{w_1 + w_2 | w_1 \in W_1, w_2 \in W_2\}$
+#+end_theorem
+#+begin_proof
+Let $W_1, W_2$ be subspaces of $V$.  Show $W_1 + W_2$ is also a vectorspace.
+1. $0 \in W_1, W_2$, so $0 \in W_1 + W_2$
+2. Let $\overrightarrow{v}, \overrightarrow{w} \in W_1 + W_2$, 
+
+   where $\overrightarrow{v} = \overrightarrow{v_1} + \overrightarrow{v_2}$, $\overrightarrow{w} = \overrightarrow{w_1} + \overrightarrow{w_2}$, $\overrightarrow{v_1}, \overrightarrow{w_1} \in W_1$, $\overrightarrow{v_2, \overrightarrow{w_2} \in W_2$
+
+   Then $\overrightarrow{v} + \overrightarrow{w} = \overrightarrow{v_1} + \overrightarrow{w_1} + \overrightarrow{v_2} + \overrightarrow{w_2}$.
+
+   Since $\overrightarrow{v_1} + \overrightarrow{w_1} \in W_1$ and $\overrightarrow{v_2} + \overrightarrow{w_2} \in W_2$,
+
+   then $\overrightarrow{v} + \overrightarrow{w} \in W_1 + W_2$
+3. $a \overrightarrow{v} = a \overrightarrow{v_1} + a \overrightarrow{v_2}$
+
+   Since $a \overrightarrow{v_1} \in W_1$ and $a \overrightarrow{v_2} \in W_2$, $a \overrightarrow{v} \in W_1 + W_2$
+#+end_proof
+
+* Span and Linear Dependence
+#+begin_definition
+*span*
+
+The span of a set $S$ is all possible linear combinations of the set.
+
+Let $S = {v_1, ..., v_n}$
+
+
+$\text{span} (S) = \{c_1 v_1 + ... + c_n v_n | c_1,...,c_n \in \mathbb{R}\}$
+#+end_definition
+
+#+begin_theorem
+Let $S$ be a set, $W$ be a vectorspace.
+
+If $S \subseteq W$, then $\text{span} (S) \subseteq W$
+#+end_theorem
+#+begin_proof
+Let $\overrightarrow{v} = c_1 s_1 + ... + c_n s_n \in \text{span} (S)$
+
+Since $S$ is in $W$, by the properties of closed addition and scalar multiplication, $c_1 s_1 + ... + c_n s_n$ is also in $W$
+#+end_proof
+
+#+begin_theorem
+The span of subspaces $W_1 \cup W_2 = W_1 + W_2$.
+#+end_theorem
+#+begin_proof
+-> Since $W_1 \cup W_2 \subseteq W_1 + W_2$, $\text{span} (W_1 \cup W_2) \subseteq W_1 + W_2$ (since vectorspace containing set $S$ also contains $\text{span} (S)$
+
+<- Let $\overrightarrow{v} \in W_1$, $\overrightarrow{w} \in W_2$
+
+Since $\overrightarrow{v}, \overrightarrow{w} \in W_1 \cup W_2$, 
+
+$\overrightarrow{v} + \overrightarrow{w} \in W_1 \cup W_2$ and $\overrightarrow{v} + \overrightarrow{w} \in \text{span} (W_1 \cup W_2)$
+
+therefore $W_1 + W_2 \subseteq \text{span} (W_1 \cup W_2)$
+#+end_proof
+
+#+begin_definition
+*linear independence*
+
+A set $S = \{s_1, ..., s_n\}$ is linearly independent if $c_1, ..., c_n = 0$ is the only solution to $c_1 s_1 + ... + c_n s_n = 0$
+
+Equivalently, a set is linearly independent if every element cannot be expressed as a combination of the other elements.
+#+end_definition
+
+#+begin_examples
+1. Is the set $S = \{1 + x + x^2 + x^3, x + x^2 + x^3, x^2 + x^3, x^3\}$ linearly independent?
+
+   $$c_1(1 + x + x^2 + x^3) + c_2 ( x + x^2 + x^3) + c_3 ( x^2 + x^3) + c_4 x^3 = 0$$
+   $$c_1 + (c_1 + c_2)x + (c_1 + c_2 + c_3)x^2 + (c_1 + c_2 + c_3 + c_4)x^3 = 0$$
+   $$c_1 = 0$$
+   $$(c_1 + c_2)x = 0$$
+   $$(c_1 + c_2 + c_3)x^2 = 0$$
+   $$(c_1 + c_2 + c_3 + c_4)x^3 = 0$$
+
+   $c_1 = c_2 = c_3 = c_4 = 0$
+#+end_examples
+
+** Subset Dependence
+#+begin_theorem
+If $S_1 \subseteq S_2$ and $S_1$ is dependent, then $S_2$ is dependent.
+#+end_theorem
+#+begin_proof
+Let $S_1 = \{\overrightarrow{v_1}, ...,\overrightarrow{v_m}\}$ be dependent and $S_1 \subseteq S_2$
+
+Then at least one $c$ is nonzero in $c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} = 0$.
+
+Then at least one $c$ is nonzero in $c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} + ... + c_n \overrightarrow{n} = 0$.
+
+so $S_2$ is linearly dependent.
+#+end_proof
+
+#+begin_theorem
+If $S_1 \subseteq S_2$ and $S_2$ is independent, then $S_1$ is also independent.
+#+end_theorem
+#+begin_proof
+Let $S_2 = \{\overrightarrow{v_1}, ...,\overrightarrow{v_n}\}$ be independent and $S_1 \subseteq S_2$
+
+Then all $c$ must be zero in $c_1 \overrightarrow{v_1} + ... + ... + c_m \overrightarrow{v_m} + ... + c_n \overrightarrow{v_n} = 0$.
+
+Then all $c$ must be zero in $c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} = 0$.
+
+so $S_1$ is linearly independent.
+#+end_proof
+
+* Basis and Dimension
+#+begin_definition
+A set $B$ is called a basis of vectorspace $V$ if
+
+- it is linearly independent and a generating set ($V \subseteq \text{span} (B)$)
+
+  or
+
+- $B$ is the smallest set of $V$ such that $\text{span} (B) = V$
+
+  or
+
+- every vector in $V$ can be expressed uniquely from linear combinations of $B$
+#+end_definition
+#+begin_proof
+Show that every vector in $V$ can be expressed uniquely in terms of the basis $B$
+
+Let $\beta$ be a basis of $V$ and $\overrightarrow{V} \in V$
+
+$\overrightarrow{v} = c_1 b_1 + ... + c_n b_n, \overrightarrow{v} = c_1' b_1 + ... c_n' b_n$ for $c_1, ..., c_n, c_1', ..., c_n'$
+
+then  $c_1 b_1 + ... + c_n b_n = c_1' b_1 + ... + c_n' b_n$
+
+$0 = (c_1 - c_1')b_1 + ... + (c_n - c_n')b_n$
+
+Since $B$ is linearly independent, $c_1 = c_1', ..., c_n = c_n'$.
+
+Each vector is uniquely expressed in terms of $B$
+#+end_proof
+
+#+begin_theorem
+Let $L$ be an independent set of $V$ with $m$ elements.
+*An indepenent set can be extended to create a generating set*
+#+end_theorem
+
+#+begin_theorem
+Every basis of a finite vectorspace has the same number of elements.
+#+end_theorem
+#+begin_proof
+Let $B_1, B_2$ be bases of $V$ where $\dim (B_1) = n, \dim(B_2) = m$
+
+Since $B_1$ is a generating set and $B_2$ is an independent set, $|B_1| \geq |B_2|$
+
+Since $B_2$ is a generating set and $B_1$ is an independent set, $|B_2| \geq |B_1|$
+
+So $|B_1| = |B_2|$
+#+end_proof
+
+#+begin_theorem
+For every vectorspace of dimension $n$
+
+1. $\dim(\text{generating set}) \geq n$
+
+2. $\dim(\text{independent set}) \leq n$
+#+end_theorem
+#+begin_proof
+1. Let $G$ be a generating set and $B$ be a basis of some vectorspace of dimension $n$
+
+   Since $G$ is a generating set and $B$ is independent, $|G| \geq |B| = n$
+
+2. Let $L$ be a linearly independent set and $B$ be a basis of some vectorspace of dimension $n$
+
+   Since $L$ is a linearly independent set and $B$ is a generating set, $|L| \leq |B| = n$
+#+end_proof
+
+#+begin_theorem
+For a vectorspace $V$ of dimension $n$
+
+1. A generating set with $n$ elements is a basis of $V$
+
+2. An independent set with $n$ elements is a basis of $V$
+#+end_theorem
+#+begin_proof
+#+end_proof
+
+#+begin_theorem
+For a vectorspace $V$ of dimension $n$
+
+1. A generating set with dimension greater than $n$ can be reduced to be a basis.
+
+2. An independent set with dimension less than $n$ can be extended to be a basis.
+#+end_theorem
+#+begin_proof
+#+end_proof
+
+* Dimension of Subspace
+#+begin_theorem
+Let $W$ be a subspace of $V$.  If the dimensions of $W$ equals $V$, then $V = W$.  If the dimension of $W$ is zero, then $W = \{0\}$
+
+*Corollary*
+
+A basis $B$ of $W$ can be extended to be a basis of $V$.
+#+end_theorem
+
+** Properties
+*** Sum
+
+$\dim(W_1 + W_2) = \dim (W_1) + \dim (W_2) - \dim (W_1 \cap W_2)$
+
+#+begin_examples
+1. Line and coincident plane
+
+   [[./subspace_dim1.png]] 
+
+   $\dim(\text{line + plane}) = 2 = \dim(\text{line}) + \dim(\text{plane}) - \text{dim(line} \cap \text{plane)}$
+
+   where $\text{dim(plane)} - \text{dim(line} \cap \text{plane)} = 1$
+
+2. Line and noncoincident plane
+
+   [[./subspace_dim2.png]] 
+   
+   $\dim(\text{line + plane}) = 3 = \dim(\text{line}) + \dim(\text{plane}) - \dim(\text{line} \cap \text{plane)}$
+
+   where $\dim(\text{plane}) - \dim(\text{line} \cap \text{plane)} = 0$
+#+end_examples
+
+*** Direct Sum
+
+$W_1 + W_2 = W_1 \oplus W_2$ iff $\text{dim} (W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)$
+
+#+begin_proof
+$\Rightarrow$ Assume $W_1 + W_2 = W_1 \oplus W_2$.
+
+Then $W_1 \cap W_2 = \{0\}$, so $\text{dim} (W_1 \cap W_2) = 0$
+
+Then by the sum property, $\text{dim} (W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)$
+
+$\Leftarrow$ Assume $\text{dim} ( W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)$
+
+Then $\text{dim} (W_1 \cap W_2) = 0$, so $W_1 \cap W_2 = \{0\}$
+
+therefore $W_1 + W_2 = W_1 \oplus W_2$
+#+end_proof
+
+* Linear Transformations
+#+begin_definition
+A linear transformation is a mapping $T:V \rightarrow W$ from one vectorspace to another such that
+
+- addition is preserved
+
+  - Let $a,b \in V$.  $T(a) + T(b) = T(a + b)$
+
+- scalar multiplication is preserved
+
+  - Let $a \in \mathbb{R}, x \in V$, $T(ax) = aT(x)$
+#+end_definition
+
+** Properties
+- $T(\overrightarrow{0}) = \overrightarrow{0}$
+  - proof: $T(\overrightarrow{0}) = T(0*\over{v}) = 0T(\overrightarrow{v}) = \overrightarrow{0}$
+- $T(\overrightarrow{u} - \overrightarrow{v}) = T(\overrightarrow{u}) - T(\overrightarrow{v})$
+  - proof: $T(\overrightarrow{u} - \overrightarrow{v}) = T(\overrightarrow{u}) + T(-1 \overrightarrow{v}) = T(\overrightarrow{u}) - T(\overrightarrow{v})$
+
+#+begin_examples
+1. For $T:P_n(\mathbb{R}) \rightarrow P_{n-1}(\mathbb{R})$ where $T(f) = f'$ for $f \in P_n(\mathbb{R})$.  Show $T$ is linear.
+   
+   Let $a,b \in \mathbb{R}$, $f,g \in P_n(\mathbb{R})$.
+
+   $T(af + bg) = (af + bg)' = af' + bg' = aT(f) + bT(g)$
+#+end_examples
+
+#+begin_definition
+*Identity Transformation*
+
+A mapping $T:v \rightarrow W$ such that $T(\overrightarrow{v} = \overrightarrow{v}$ for $\overrightarrow{v} \in V$
+#end_definition
+
+#+begin_definition
+*Zero Transformation*
+
+A mapping $T:V \rightarrow W$ such that $T(\overrightarrow{v}) = \overrightarrow{0}$ for $\overrightarrow{v} in V$
+#+end_definition
+
+* Kernel and Image
+#+begin_definition
+*Kernel*
+
+The kernel ($\ker(T)$ or $N(T)$) of a transformation $T:V \rightarrow W$ is the set of vectors in $V$ that map to $\overrightarrow{0}$ in $W$
+
+[[./kernel.png]]
+#+end_definition
+
+#+begin_definition
+*Image*
+
+The image ($Im(T)$ or $R(T)$) of a transformation $T:V \rightarrow W$ is the set of vectors in $W$ mapped to by vecotrs in $V$.
+
+[[./image.png]]
+#+end_definition
+
+#+begin_examples
+1. Prove the kernel of $T$ is a subspace of $V$. (show $0 \in \ker(T)$, $\ker(T)$ closed for addition, $\ker(T)$ closed for scalar multiplication
+
+   1) By definition $T(0) = 0$, so $0 \in \ker(T)$
+
+   2) For $\overrightarrow{u}, \overrightarrow{v} \in \ker(T)$, we have $T(\overrightarrow{u}) = T(\overrightarrow{v}) = 0$
+
+      $T(\overrightarrow{u} + \overrightarrow{v}) = T(\overrightarrow{u}) + T(\overrightarrow{v}) = 0$
+
+      so $\overrightarrow{u} + \overrightarrow{v} \in \ker(T)$
+
+   3) For $a \in R$, $v \in \ker(T)$  we have $T(\overrightarrow{v}) = 0$
+
+      $T(a\overrightarrow{v}) = aT(\overrightarrow{v}) = 0$, so $a \overrightarrow{v} \in \ker(T)$
+2. Let $T:\mathbb{R}_3 \to \mathbb{R}_2$, where $$T \left( \begin{matrix} a\\b\\c \end{matrix} \right) = \left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right)$$. Find the kernel of $T$
+
+   $$\ker(T) = \left\{ \left( \begin{matrix} a\\b\\c \end{matrix} \right) \middle| T \left( \begin{matrix} a\\b\\c \end{matrix} \right) = 0 \right\}$$
+
+   $$\left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right) = 0$$, so $a = b$ and $c = 0$
+
+   $$\ker(T) = \left\{ \left( \begin{matrix} a\\a\\0 \end{matrix} \right) \middle| a \in \mathbb{R} \right\}$$
+
+3. Find the image of $T$.
+
+   $$Im(T) = \left\{ T(\overrightarrow{v}) \middle| \overrightarrow{v} \in \mathbb{R}_3 \right\} = \left\{ \left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right) \middle| a,b,c \in \mathbb{R} \right\} = \left\{ \left( \begin{matrix} a\\ 0 \\ b \end{matrix} \right) \middle| a,b \in \mathbb{R} \right\}$$
+#+end_examples

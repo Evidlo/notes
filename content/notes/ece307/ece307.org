@@ -1,0 +1,3 @@
+#+title: ECE307: Transmission Lines
+
+$\Gamma = \frac{Z_L - Z_O}{Z_L + Z_O}$

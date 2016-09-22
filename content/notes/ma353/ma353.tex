@@ -1,0 +1,460 @@
+% Created 2016-07-09 Sat 17:20
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{braket}
+\DeclareMathOperator{\ima}{Im}
+\author{evan}
+\date{\today}
+\title{MA353 - Linear Algebra II}
+\hypersetup{
+ pdfauthor={evan},
+ pdftitle={MA353 - Linear Algebra II},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 8.3.4)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Vectorspaces and Subspaces}
+\label{sec:orgheadline3}
+\begin{definition}
+\textbf{vectorspace}
+
+A set of vectors V is a vectorspace if:
+
+\begin{itemize}
+\item closed under addition and scalar multiplication - \(\overrightarrow{v} + \overrightarrow{w} \in V\), \(c \overrightarrow{v} \in V\)
+\item an identity is defined - \(1 \cdot \overrightarrow{v} = \overrightarrow{v}\)
+\end{itemize}
+\end{definition}
+
+\subsection{Properties of Vectorspaces}
+\label{sec:orgheadline1}
+\begin{itemize}
+\item commutative - \(\overrightarrow{v} + \overrightarrow{w} = \overrightarrow{w} + \overrightarrow{v}\)
+\item distributive - \((a + b)\overrightarrow{v} = a\overrightarrow{v} + b \overrightarrow{v}\) and \(a(\overrightarrow{v} + \overrightarrow{w}) = a \overrightarrow{v} + b \overrightarrow{w}\)
+\item \(- \overrightarrow{v} + \overrightarrow{v} = 0\)
+\item \(0 + \overrightarrow{v} = \overrightarrow{v}\)
+\end{itemize}
+
+\begin{theorem}
+0 in a vectorspace is unique.
+\end{theorem}
+\begin{proof}
+Suppose \(0,0' \in V\), such that \(0 + \overrightarrow{v} = \overrightarrow{v}\) and \(0' + \overrightarrow{v} = \overrightarrow{v}\)
+
+Then \(0 + \overrightarrow{v} = 0' + \overrightarrow{v} \longrightarrow 0 = 0'\)
+\end{proof}
+
+\subsection{Subspace}
+\label{sec:orgheadline2}
+\begin{definition}
+\textbf{subspace}
+
+Let \(W,V\) be vectorspaces.  If \(W \subseteq V\), then \(W\) is a subspace.
+
+Equivalently, \(W\) is a subspace \(W \subseteq V\) and:
+\begin{enumerate}
+\item \(0 \in W\)
+\item \(\overrightarrow{v} + \overrightarrow{w} \in W\) for \(\overrightarrow{v},\overrightarrow{w} \in W\)
+\item \(a \overrightarrow{v} \in W\) for \(\overrightarrow{v} \in W, a \in \mathbb{R}\)
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+The intersection of subspaces is a subspace.
+\end{theorem}
+\begin{proof}
+Let \(W_1, W_2\) be subspaces of \(V\).  Show \(W_1 \cap W_2\) is also a subspace of \(V\)
+\begin{enumerate}
+\item \(0 \in W_1, W_2\), so \(0 \in W_1 \cap W_2\)
+\item Let \(\overrightarrow{v}, \overrightarrow{w} \in W_1 \cap W_2\).  Then \(\overrightarrow{v}, \overrightarrow{w} \in W_1, W_2\).  By property of closed addition, \(\overrightarrow{v} + \overrightarrow{w} \in W_1 \cap W_2\)
+\item Let \(a \in \mathbb{R}\), \(\overrightarrow{v} \in W_1 \cap W_2\).  Then \(\overrightarrow{v} \in W_1, W_2\).  By property of closed scalar multiplication, \(a \overrightarrow{w} \in W_1 \cap W_2\)
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+Sum of vectorspaces is also a vectorspace.
+
+\(W_1 + W_2 \defined \{w_1 + w_2 | w_1 \in W_1, w_2 \in W_2\}\)
+\end{theorem}
+\begin{proof}
+Let \(W_1, W_2\) be subspaces of \(V\).  Show \(W_1 + W_2\) is also a vectorspace.
+\begin{enumerate}
+\item \(0 \in W_1, W_2\), so \(0 \in W_1 + W_2\)
+\item Let \(\overrightarrow{v}, \overrightarrow{w} \in W_1 + W_2\), 
+
+where \(\overrightarrow{v} = \overrightarrow{v_1} + \overrightarrow{v_2}\), \(\overrightarrow{w} = \overrightarrow{w_1} + \overrightarrow{w_2}\), \(\overrightarrow{v_1}, \overrightarrow{w_1} \in W_1\), \(\overrightarrow{v_2, \overrightarrow{w_2} \in W_2\)
+
+Then \(\overrightarrow{v} + \overrightarrow{w} = \overrightarrow{v_1} + \overrightarrow{w_1} + \overrightarrow{v_2} + \overrightarrow{w_2}\).
+
+Since \(\overrightarrow{v_1} + \overrightarrow{w_1} \in W_1\) and \(\overrightarrow{v_2} + \overrightarrow{w_2} \in W_2\),
+
+then \(\overrightarrow{v} + \overrightarrow{w} \in W_1 + W_2\)
+\item \(a \overrightarrow{v} = a \overrightarrow{v_1} + a \overrightarrow{v_2}\)
+
+Since \(a \overrightarrow{v_1} \in W_1\) and \(a \overrightarrow{v_2} \in W_2\), \(a \overrightarrow{v} \in W_1 + W_2\)
+\end{enumerate}
+\end{proof}
+
+\section{Span and Linear Dependence}
+\label{sec:orgheadline5}
+\begin{definition}
+\textbf{span}
+
+The span of a set \(S\) is all possible linear combinations of the set.
+
+Let \(S = {v_1, ..., v_n}\)
+
+
+\(\text{span} (S) = \{c_1 v_1 + ... + c_n v_n | c_1,...,c_n \in \mathbb{R}\}\)
+\end{definition}
+
+\begin{theorem}
+Let \(S\) be a set, \(W\) be a vectorspace.
+
+If \(S \subseteq W\), then \(\text{span} (S) \subseteq W\)
+\end{theorem}
+\begin{proof}
+Let \(\overrightarrow{v} = c_1 s_1 + ... + c_n s_n \in \text{span} (S)\)
+
+Since \(S\) is in \(W\), by the properties of closed addition and scalar multiplication, \(c_1 s_1 + ... + c_n s_n\) is also in \(W\)
+\end{proof}
+
+\begin{theorem}
+The span of subspaces \(W_1 \cup W_2 = W_1 + W_2\).
+\end{theorem}
+\begin{proof}
+-> Since \(W_1 \cup W_2 \subseteq W_1 + W_2\), \(\text{span} (W_1 \cup W_2) \subseteq W_1 + W_2\) (since vectorspace containing set \(S\) also contains \(\text{span} (S)\)
+
+<- Let \(\overrightarrow{v} \in W_1\), \(\overrightarrow{w} \in W_2\)
+
+Since \(\overrightarrow{v}, \overrightarrow{w} \in W_1 \cup W_2\), 
+
+\(\overrightarrow{v} + \overrightarrow{w} \in W_1 \cup W_2\) and \(\overrightarrow{v} + \overrightarrow{w} \in \text{span} (W_1 \cup W_2)\)
+
+therefore \(W_1 + W_2 \subseteq \text{span} (W_1 \cup W_2)\)
+\end{proof}
+
+\begin{definition}
+\textbf{linear independence}
+
+A set \(S = \{s_1, ..., s_n\}\) is linearly independent if \(c_1, ..., c_n = 0\) is the only solution to \(c_1 s_1 + ... + c_n s_n = 0\)
+
+Equivalently, a set is linearly independent if every element cannot be expressed as a combination of the other elements.
+\end{definition}
+
+\begin{examples}
+\begin{enumerate}
+\item Is the set \(S = \{1 + x + x^2 + x^3, x + x^2 + x^3, x^2 + x^3, x^3\}\) linearly independent?
+
+\(c_1(1 + x + x^2 + x^3) + c_2 ( x + x^2 + x^3) + c_3 ( x^2 + x^3) + c_4 x^3 = 0\)
+\(c_1 + (c_1 + c_2)x + (c_1 + c_2 + c_3)x^2 + (c_1 + c_2 + c_3 + c_4)x^3 = 0\)
+\(c_1 = 0\)
+\((c_1 + c_2)x = 0\)
+\((c_1 + c_2 + c_3)x^2 = 0\)
+\((c_1 + c_2 + c_3 + c_4)x^3 = 0\)
+
+\(c_1 = c_2 = c_3 = c_4 = 0\)
+\end{enumerate}
+\end{examples}
+
+\subsection{Subset Dependence}
+\label{sec:orgheadline4}
+\begin{theorem}
+If \(S_1 \subseteq S_2\) and \(S_1\) is dependent, then \(S_2\) is dependent.
+\end{theorem}
+\begin{proof}
+Let \(S_1 = \{\overrightarrow{v_1}, ...,\overrightarrow{v_m}\}\) be dependent and \(S_1 \subseteq S_2\)
+
+Then at least one \(c\) is nonzero in \(c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} = 0\).
+
+Then at least one \(c\) is nonzero in \(c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} + ... + c_n \overrightarrow{n} = 0\).
+
+so \(S_2\) is linearly dependent.
+\end{proof}
+
+\begin{theorem}
+If \(S_1 \subseteq S_2\) and \(S_2\) is independent, then \(S_1\) is also independent.
+\end{theorem}
+\begin{proof}
+Let \(S_2 = \{\overrightarrow{v_1}, ...,\overrightarrow{v_n}\}\) be independent and \(S_1 \subseteq S_2\)
+
+Then all \(c\) must be zero in \(c_1 \overrightarrow{v_1} + ... + ... + c_m \overrightarrow{v_m} + ... + c_n \overrightarrow{v_n} = 0\).
+
+Then all \(c\) must be zero in \(c_1 \overrightarrow{v_1} + ... + c_m \overrightarrow{v_m} = 0\).
+
+so \(S_1\) is linearly independent.
+\end{proof}
+
+\section{Basis and Dimension}
+\label{sec:orgheadline6}
+\begin{definition}
+A set \(B\) is called a basis of vectorspace \(V\) if
+
+\begin{itemize}
+\item it is linearly independent and a generating set (\(V \subseteq \text{span} (B)\))
+
+or
+
+\item \(B\) is the smallest set of \(V\) such that \(\text{span} (B) = V\)
+
+or
+
+\item every vector in \(V\) can be expressed uniquely from linear combinations of \(B\)
+\end{itemize}
+\end{definition}
+\begin{proof}
+Show that every vector in \(V\) can be expressed uniquely in terms of the basis \(B\)
+
+Let \(\beta\) be a basis of \(V\) and \(\overrightarrow{V} \in V\)
+
+\(\overrightarrow{v} = c_1 b_1 + ... + c_n b_n, \overrightarrow{v} = c_1' b_1 + ... c_n' b_n\) for \(c_1, ..., c_n, c_1', ..., c_n'\)
+
+then  \(c_1 b_1 + ... + c_n b_n = c_1' b_1 + ... + c_n' b_n\)
+
+\(0 = (c_1 - c_1')b_1 + ... + (c_n - c_n')b_n\)
+
+Since \(B\) is linearly independent, \(c_1 = c_1', ..., c_n = c_n'\).
+
+Each vector is uniquely expressed in terms of \(B\)
+\end{proof}
+
+\begin{theorem}
+Let \(L\) be an independent set of \(V\) with \(m\) elements.
+\textbf{An indepenent set can be extended to create a generating set}
+\end{theorem}
+
+\begin{theorem}
+Every basis of a finite vectorspace has the same number of elements.
+\end{theorem}
+\begin{proof}
+Let \(B_1, B_2\) be bases of \(V\) where \(\dim (B_1) = n, \dim(B_2) = m\)
+
+Since \(B_1\) is a generating set and \(B_2\) is an independent set, \(|B_1| \geq |B_2|\)
+
+Since \(B_2\) is a generating set and \(B_1\) is an independent set, \(|B_2| \geq |B_1|\)
+
+So \(|B_1| = |B_2|\)
+\end{proof}
+
+\begin{theorem}
+For every vectorspace of dimension \(n\)
+
+\begin{enumerate}
+\item \(\dim(\text{generating set}) \geq n\)
+
+\item \(\dim(\text{independent set}) \leq n\)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item Let \(G\) be a generating set and \(B\) be a basis of some vectorspace of dimension \(n\)
+
+Since \(G\) is a generating set and \(B\) is independent, \(|G| \geq |B| = n\)
+
+\item Let \(L\) be a linearly independent set and \(B\) be a basis of some vectorspace of dimension \(n\)
+
+Since \(L\) is a linearly independent set and \(B\) is a generating set, \(|L| \leq |B| = n\)
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+For a vectorspace \(V\) of dimension \(n\)
+
+\begin{enumerate}
+\item A generating set with \(n\) elements is a basis of \(V\)
+
+\item An independent set with \(n\) elements is a basis of \(V\)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+For a vectorspace \(V\) of dimension \(n\)
+
+\begin{enumerate}
+\item A generating set with dimension greater than \(n\) can be reduced to be a basis.
+
+\item An independent set with dimension less than \(n\) can be extended to be a basis.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\section{Dimension of Subspace}
+\label{sec:orgheadline10}
+\begin{theorem}
+Let \(W\) be a subspace of \(V\).  If the dimensions of \(W\) equals \(V\), then \(V = W\).  If the dimension of \(W\) is zero, then \(W = \{0\}\)
+
+\textbf{Corollary}
+
+A basis \(B\) of \(W\) can be extended to be a basis of \(V\).
+\end{theorem}
+
+\subsection{Properties}
+\label{sec:orgheadline9}
+\subsubsection{Sum}
+\label{sec:orgheadline7}
+
+\(\dim(W_1 + W_2) = \dim (W_1) + \dim (W_2) - \dim (W_1 \cap W_2)\)
+
+\begin{examples}
+\begin{enumerate}
+\item Line and coincident plane
+
+\includegraphics[width=.9\linewidth]{./subspace_dim1.png} 
+
+\(\dim(\text{line + plane}) = 2 = \dim(\text{line}) + \dim(\text{plane}) - \text{dim(line} \cap \text{plane)}\)
+
+where \(\text{dim(plane)} - \text{dim(line} \cap \text{plane)} = 1\)
+
+\item Line and noncoincident plane
+
+\includegraphics[width=.9\linewidth]{./subspace_dim2.png} 
+
+\(\dim(\text{line + plane}) = 3 = \dim(\text{line}) + \dim(\text{plane}) - \dim(\text{line} \cap \text{plane)}\)
+
+where \(\dim(\text{plane}) - \dim(\text{line} \cap \text{plane)} = 0\)
+\end{enumerate}
+\end{examples}
+
+\subsubsection{Direct Sum}
+\label{sec:orgheadline8}
+
+\(W_1 + W_2 = W_1 \oplus W_2\) iff \(\text{dim} (W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)\)
+
+\begin{proof}
+\(\Rightarrow\) Assume \(W_1 + W_2 = W_1 \oplus W_2\).
+
+Then \(W_1 \cap W_2 = \{0\}\), so \(\text{dim} (W_1 \cap W_2) = 0\)
+
+Then by the sum property, \(\text{dim} (W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)\)
+
+\(\Leftarrow\) Assume \(\text{dim} ( W_1 + W_2) = \text{dim} (W_1) + \text{dim} (W_2)\)
+
+Then \(\text{dim} (W_1 \cap W_2) = 0\), so \(W_1 \cap W_2 = \{0\}\)
+
+therefore \(W_1 + W_2 = W_1 \oplus W_2\)
+\end{proof}
+
+\section{Linear Transformations}
+\label{sec:orgheadline12}
+\begin{definition}
+A linear transformation is a mapping \(T:V \rightarrow W\) from one vectorspace to another such that
+
+\begin{itemize}
+\item addition is preserved
+
+\begin{itemize}
+\item Let \(a,b \in V\).  \(T(a) + T(b) = T(a + b)\)
+\end{itemize}
+
+\item scalar multiplication is preserved
+
+\begin{itemize}
+\item Let \(a \in \mathbb{R}, x \in V\), \(T(ax) = aT(x)\)
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+\subsection{Properties}
+\label{sec:orgheadline11}
+\begin{itemize}
+\item \(T(\overrightarrow{0}) = \overrightarrow{0}\)
+\begin{itemize}
+\item proof: \(T(\overrightarrow{0}) = T(0*\over{v}) = 0T(\overrightarrow{v}) = \overrightarrow{0}\)
+\end{itemize}
+\item \(T(\overrightarrow{u} - \overrightarrow{v}) = T(\overrightarrow{u}) - T(\overrightarrow{v})\)
+\begin{itemize}
+\item proof: \(T(\overrightarrow{u} - \overrightarrow{v}) = T(\overrightarrow{u}) + T(-1 \overrightarrow{v}) = T(\overrightarrow{u}) - T(\overrightarrow{v})\)
+\end{itemize}
+\end{itemize}
+
+\begin{examples}
+\begin{enumerate}
+\item For \(T:P_n(\mathbb{R}) \rightarrow P_{n-1}(\mathbb{R})\) where \(T(f) = f'\) for \(f \in P_n(\mathbb{R})\).  Show \(T\) is linear.
+
+Let \(a,b \in \mathbb{R}\), \(f,g \in P_n(\mathbb{R})\).
+
+\(T(af + bg) = (af + bg)' = af' + bg' = aT(f) + bT(g)\)
+\end{enumerate}
+\end{examples}
+
+\begin{definition}
+\textbf{Identity Transformation}
+
+A mapping \(T:v \rightarrow W\) such that \(T(\overrightarrow{v} = \overrightarrow{v}\) for \(\overrightarrow{v} \in V\)
+\#end\(_{\text{definition}}\)
+
+\#+begin\(_{\text{definition}}\)
+\textbf{Zero Transformation}
+
+A mapping \(T:V \rightarrow W\) such that \(T(\overrightarrow{v}) = \overrightarrow{0}\) for \(\overrightarrow{v} in V\)
+\end{definition}
+
+\section{Kernel and Image}
+\label{sec:orgheadline13}
+\begin{definition}
+\textbf{Kernel}
+
+The kernel (\(\ker(T)\) or \(N(T)\)) of a transformation \(T:V \rightarrow W\) is the set of vectors in \(V\) that map to \(\overrightarrow{0}\) in \(W\)
+
+\includegraphics[width=.9\linewidth]{./kernel.png}
+\end{definition}
+
+\begin{definition}
+\textbf{Image}
+
+The image (\(\ima(T)\) or \(R(T)\)) of a transformation \(T:V \rightarrow W\) is the set of vectors in \(W\) mapped to by vecotrs in \(V\).
+
+\includegraphics[width=.9\linewidth]{./image.png}
+\end{definition}
+
+\begin{examples}
+\begin{enumerate}
+\item Prove the kernel of \(T\) is a subspace of \(V\). (show \(0 \in \ker(T)\), \(\ker(T)\) closed for addition, \(\ker(T)\) closed for scalar multiplication
+\begin{enumerate}
+\item By definition \(T(0) = 0\), so \(0 \in \ker(T)\)
+\item For \(\overrightarrow{u}, \overrightarrow{v} \in \ker(T)\), we have \(T(\overrightarrow{u}) = T(\overrightarrow{v}) = 0\)
+
+\(T(\overrightarrow{u} + \overrightarrow{v}) = T(\overrightarrow{u}) + T(\overrightarrow{v}) = 0\)
+
+so \(\overrightarrow{u} + \overrightarrow{v} \in \ker(T)\)
+\item For \(a \in R\), \(v \in \ker(T)\)  we have \(T(\overrightarrow{v}) = 0\)
+
+\(T(a\overrightarrow{v}) = aT(\overrightarrow{v}) = 0\), so \(a \overrightarrow{v} \in \ker(T)\)
+\end{enumerate}
+\item Let \(T:\mathbb{R}_3 \to \mathbb{R}_2\), where \(T \left( \begin{matrix} a\\b\\c \end{matrix} \right) = \left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right)\). Find the kernel of \(T\)
+
+\(\ker(T) = \Set{\left( \begin{matrix} a\\b\\c \end{matrix} \right) | T \left( \begin{matrix} a\\b\\c \end{matrix} \right) = 0 }\)
+
+\(\left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right) = 0\), so \(a = b\) and \(c = 0\)
+
+\(\ker(T) = \Set{\left( \begin{matrix} a\\a\\0 \end{matrix} \right) | a \in \mathbb{R} }\)
+\item Find the image of \(T\).
+
+\(\ima(T) = \Set{ T(\overrightarrow{v}) | \overrightarrow{v} \in \mathbb{R}_3 } = \Set{ \left( \begin{matrix} a-b \\ 0 \\ 2c \end{matrix} \right) | a,b,c \in \mathbb{R} } = \Set{ \left( \begin{matrix} a\\ 0 \\ b \end{matrix} \right) | a,b \in \mathbb{R} }\)
+\end{enumerate}
+\end{examples}
+\end{document}
