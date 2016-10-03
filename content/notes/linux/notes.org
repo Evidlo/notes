@@ -287,11 +287,20 @@ Auto FS + SSHFS allows the system to mount ssh filesystems on access and then au
 */etc/auto.master* or */etc/auto.master.d/foobar.autofs* or */etc/autofs/auto.master*
 #+begin_src bash
 # mounts all the entries listed in /etc/auto.sshfs in /mnt/ with the given options
-/mnt /etc/auto.sshfs --timeout=180 --ghost --verbose
+# add the --verbose option here to debug mounting issues
+# set --timeout to control when sshfs mount is automatically unmounted
+/mnt /etc/auto.sshfs --timeout=180 --ghost
 #+end_src
 
 */etc/auto.sshfs*
 #+begin_src bash
 # make a mount to be used by auto.master
 foobar -fstype=fuse,rw,IdentityFile=/home/evan/.ssh/foobar,port=22,allow_other :sshfs\#foo@example.org\:
+#+end_src
+
+AutoFS runs as root, so ensure that the host fingerprint has been added to */root/.ssh/known_hosts*.  You can add this easily by attempting to ssh login to foo@example.org from root.
+#+begin_src bash
+su -
+ssh foo@example.org
+# enter yes
 #+end_src

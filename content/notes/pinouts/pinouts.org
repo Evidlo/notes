@@ -11,10 +11,15 @@
 [[./04.png]]
 ** 74HC08 - AND
 [[./08.png]]
+** 74HC10 - Triple Input NAND
+[[./10.jpg]]
 ** 74HC14 - Inverter (Schmidt)
 [[./14.png]]
 ** 74HC86 - XOR
 [[./86.png]]
+
+** F1144E - 10MHz crystal
+[[./F1144E.png]]
 
 * Microcontrollers
 ** ATTiny85/84
