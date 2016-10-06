@@ -1,0 +1,19 @@
+#+title: MA425 - Complex Analysis
+
+* Basic Operations with Complex Numbers
+#+begin_theorem
+$|z_1 z_2| = r_1 r_2$
+
+$\langle z_1 z_2 = \theta_1 + \theta_2$
+#+end_theorem
+
+#+begin_proof
+\begin{eqnarray}
+z_1 = r_1(\cos(\theta_1) + i \sin(\theta_1))\\
+z_2 = r_2(\cos(\theta_2) + i \sin(\theta_2))
+\end{eqnarray}
+$$\begin{alignat}
+z_1 z_2 = &[ r_1 r_2 \cos(\theta_1) \cos(\theta_2) + \sin(\theta_1) \sin(\theta_2) \\
+&+ i(\cos(\theta_1) \sin(\theta_2) + \cos(\theta_2) \sin(\theta_1)) ]  \\
+&= r_1 r_2 [ \cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2) ] \end{alignat}$$
+#+end_proof
