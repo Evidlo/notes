@@ -304,3 +304,17 @@ su -
 ssh foo@example.org
 # enter yes
 #+end_src
+
+* Resizing LUKS encrypted LVM
+#+begin_src bash
+# expand the block device with fdisk, if necessary
+
+# resize physical volume
+pvresize --setphysicalvolumesize 111.8G /dev/sdb2
+# be careful about using `-l +100%FREE`.  this broke /home until I manually shrank fedora--vg-home by a few GB
+lvextend -l 80G /dev/mapper/fedora--vg-home
+resize2fs /dev/mapper/fedora--vg-home
+#+end_src
+
+* Fixing Nodejs
+https://bugzilla.redhat.com/show_bug.cgi?id=1125868
