@@ -63,15 +63,6 @@ p {
     white-space: pre-wrap;
 }
 
-/*override default in fancy.css*/
-h1 {
-    color: black;
-}
-
-/*set document header to white*/
-h1.title {
-    color: white;
-}
 
 strong {
     font-weight: bold;
@@ -105,21 +96,34 @@ img{
 
 /* ----------- headlines ------------- */
 h1 {
+    color: black;
     text-align:center;
     border-bottom: 2px black solid;
+    font-weight:unset;
 }
+
+/*set document header to white*/
+h1.title {
+    color: white;
+}
+
 h2 {
     text-decoration: underline;
+    font-weight:unset;
 }
 h3 {
     text-decoration: underline;
+    font-weight:unset;
 }
 h4 {
     text-decoration: underline;
+    font-weight:unset;
 }
 h5 {
     text-decoration: underline;
+    font-weight:unset;
 }
 h6 {
     text-decoration: underline;
+    font-weight:unset;
 }
