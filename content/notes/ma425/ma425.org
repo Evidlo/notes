@@ -17,3 +17,18 @@ z_1 z_2 = &[ r_1 r_2 \cos(\theta_1) \cos(\theta_2) + \sin(\theta_1) \sin(\theta_
 &+ i(\cos(\theta_1) \sin(\theta_2) + \cos(\theta_2) \sin(\theta_1)) ]  \\
 &= r_1 r_2 [ \cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2) ] \end{alignat}$$
 #+end_proof
+
+18:32 <Evidlo> In my book, I'm finding the maximum of f(z) = |z^2 + 3z - 1| within the disk |z| < 1.  I understand that analytic functions only have extrema on the boundary, but how are you sure f is analytic?  Isn't there a cusp at z = 0?
+18:33 <Z-module> every polynomial is an entire function: analytic on the whole plane
+18:33 <Z-module> (and your "every" should be "every  nonconstant")
+18:34 <Z-module> Evidlo:  z^2 + 3z - 1  is an analytic _complex_ function.  |that| is not analytic (in the complex sense).
+18:35 <Z-module> but: if f is a complex function that is: nonconstant, and is analytic in some open disk D, and continuous on the boundary circle of D, then all maxima of the real function |f| occur on that boundary.
+18:36 <Z-module> and further, if f is nonzero in the open disk, then all minima of |f| also occur on that boundary.
+18:37 <Z-module> (but you do need f nonzero in the open disk for that, as you see by taking f(z) = z  on an origin-centered disk)
+18:38 <Z-module> Hmm, maybe you're not actually dealing with complex functions and the maximum modulus theorem here?
+18:38 <Evidlo> do you really mean nonzero, and not nonconstant?
+18:38 <Z-module> yes, nonzero
+18:38 <Z-module> look at my f(z) = z  example, in the unit disk centered at the origin
+18:40 <Z-module> but if f is nonzero and nonconstant in the open disk D, *then* either f is 0 somewhere on the boundary in which case min |f| = 0 is only on the boundary, or else f is nonzero on the whole boundary too in which case the function 1/f is nonconstant and is analytic on the open D too, and we now apply the first theorem. (a max of |1/f| is a min of |f| )
+18:40 <Z-module> (when f is nonzero everywhere in question)
+18:41 <Z-module> I should have said: in that last case, 1/f is also continuous on the boundary

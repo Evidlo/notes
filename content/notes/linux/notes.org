@@ -67,7 +67,38 @@ iptables -L -n -v
 # (fedora) save iptables rules and remember to disable firewalld
 iptables-save > /etc/sysconfig/iptables
 #+end_src
+
+** Examples
+#+begin_src bash
+# allow ssh
+# must allow incoming connection and response
+
+# append rule to input (-A INPUT) on input interface enp6s0f0 (-i enp6s0f0) 
+# with destination port 22 (--dport 22).  use 'state' module (-m state)
+# and allow new and established connections (--state NEW,ESTABLISHED)
+# jump to target ACCEPT (-j ACCEPT)
+iptables -A INPUT -i enp6s0f0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# append rule to output (-A OUTPUT) on output interface enp6s0f0 (-o enp6s0f0) 
+# with source port 22 (--sport 22).  use 'state' module (-m state)
+# and allow established connections (--state ESTABLISHED)
+# jump to target ACCEPT (-j ACCEPT)
+iptables -A OUTPUT -o enp6s0f0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+#+end_src
+
+#+begin_src bash
+# filter table: flush all chains, and delete all user added chains
+iptables -F
+iptables -X
+# nat table: flush all chains, and delete all user added chains
+iptables -t nat -F
+iptables -t nat -X
+#+end_src
+
 * LXC
+
+[[https://www.flockport.com/enable-lxc-networking-in-debian-jessie-fedora-and-others/]]
+
 ** Config examples
 */etc/lxc/lxc.conf* - set path for containers to be stored (default /var/lib/lxc)
 #+begin_src bash
@@ -260,6 +291,39 @@ virsh net-edit default
 virsh -c lxc:/// net-define /etc/libvirt/qemu/networks/default.xml
 virsh -c lsc:/// net-start default
 virsh -c lsc:/// net-autostart default
+#+end_src
+
+#+begin_bash
+# after editing lxc network configs/creating containers, libvirt needs to be restarted
+systemctl restart libvirtd.service
+#+end_src
+
+** New Container Setup
+New LXC containers are very barebones and need a bit of setup to be useful.  Here is an overview of steps for various distros.
+*** Debian
+Setup PATH
+#+begin_src bash
+# add /bin, /sbin to path
+echo 'PATH=$PATH:/bin:/sbin'>>.bashrc
+#+end_src
+
+Install packages
+#+begin_src bash
+# core commands
+apt-get install apt-utils vim man tar less iputils-ping
+
+# extra commands
+apt-get install git zip autojump wget htop ncdu nload
+#+end_src
+
+*** Fedora
+Install packages
+#+begin_src bash
+# core commands
+dnf install vim man
+
+# core commands
+dnf install git zip autojump wget htop ncdu nload
 #+end_src
 
 * Weechat
