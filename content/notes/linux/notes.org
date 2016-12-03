@@ -332,19 +332,81 @@ dnf install git zip autojump wget htop ncdu nload
 /buffer set highlight_regex .\ast{}.*
 #+end_src
 * MDADM
+** Checking state and simulating failure
+ #+begin_src bash
+  # check RAID state
+  cat /proc/mdstat  # look for failure, (F), after the drive name: sda1[0](F)
+
+  # simulate a failed drive
+  mdadm --manage --set-faulty /dev/md/pv00 /dev/sda1
+
+  # remove faulty state by removing and readding
+  mdadm --remove /dev/md/pv00 /dev/sda1
+  mdadm --add /dev/md/pv00 /dev/sda1
+ #+end_src
+** Replacing a failed drive (sdc)
 #+begin_src bash
-# check RAID state
-cat /proc/mdstat  # look for failure, (F), after the drive name: sda1[0](F)
+# set hard drive as failed
+# mark as failed and remove
+mdadm --manage /dev/md127 --fail /dev/sdc1
+mdadm --manage /dev/md127 --remove /dev/sdc1
 
-# simulate a failed drive
-mdadm --manage --set-faulty /dev/md/pv00 /dev/sda1
+# write down serial number of failed drive
+hdparm -i /dev/sdc1 | grep -i serial
+shutdown -h now
+# remove broken harddrive, insert the new hardddrive
 
-# remove faulty state by removing and readding
-mdadm --remove /dev/md/pv00 /dev/sda1
-mdadm --add /dev/md/pv00 /dev/sda1
+# copy partition scheme from working harddrive to new harddrive
+sfdisk -d /dev/sda | sfdisk /dev/sdc
+
+# add new harddrive
+mdadm --manage /dev/md127 --add /dev/sdc1
+
+# verify that array is recovering
+cat /proc/mdstat
 #+end_src
 
+** Notifying on harddrive failure (gmail)
+   */etc/exim/exim.conf*
+   #+begin_src python
+   # add this after `begin routers` in router config section
+    send_via_gmail:
+        driver = manualroute
+        domains = ! +local_domains
+        transport = gmail_smtp
+        route_list = * gmail-smtp.l.google.com
+   # add this after `begin transports` in transports config section
+    gmail_smtp:
+        driver = smtp
+        port = 587
+        hosts_require_auth = gmail-smtp.l.google.com
+        hosts_require_tls = gmail-smtp.l.google.com
+   # add this after `begin authenaticators` in authentication config section
+    gmail_login:
+        driver = plaintext
+        public_name = LOGIN
+        client_send = : sender_email@gmail.com : password_in_plaintext_here
+   #+end_src
+   */etc/mdadm.conf*
+   #+begin_src text
+   MAILADDR destination_email@example.com
+   AUTO +imsm +1.x -all
+   ARRAY /dev/md/pv00 level=raid5 num-devices=4 UUID=1327a02b:b19f6696:0e3f8ac7:9615591c
+   #+end_src
+** Growing RAID size
+   This is useful if the RAID array needs to be grown by using up more free space (no added harddrive)
+   #+begin_src bash
+   umount /dev/sda
+   umount /dev/sdb
+   umount /dev/sdc
+   umount /dev/sdd
 
+   # grow RAID array to 500GB (this will take a while)
+   mdadm -G /dev/md127 -z 500G
+
+   # resize physical volume to fit new RAID partition size
+   pvresize /dev/md127
+   #+end_src
 * Auto FS
 Auto FS + SSHFS allows the system to mount ssh filesystems on access and then automatically unmount after a certain timeout.  The necessary tools are *autofs* and *sshfs*.
 
@@ -382,3 +444,10 @@ resize2fs /dev/mapper/fedora--vg-home
 
 * Fixing Nodejs
 https://bugzilla.redhat.com/show_bug.cgi?id=1125868
+* Rsync
+  #+begin_src bash
+  # Sync permissions only. (useful if you forgot `-p` option in cp)
+  # Looks at filesize differences to determine if a copy is needed rather
+  # than timestamp (which gets reset when `-p` is left out of cp.
+  rsync --archive --size-only /src/foo /dest/bar
+  #+end_src
