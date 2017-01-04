@@ -1,4 +1,55 @@
 #+options: ^:nil
+* systemd
+  */etc/systemd/system* - default location for system units
+  *~/.config/systemd/user* - default location for user units
+** Commands
+   Flags for operating on user units are given in []
+   #+begin_src bash
+   # reload units and timers
+   systemctl [--user] daemon-reload
+   # show all units (including disabled)
+   systemctl [--user] list-units -a
+   # view logs for unit
+   # also accepts:
+   #   -f               | tail the log
+   #   --user-unit foo  | target user unit instead of system
+   #   --boot=0         | show logs from current boot (-1 for previous, etc)
+   journalctl --unit foo
+   #+end_src
+   
+** Examples
+   A simple service unit
+
+   *foobar.service*
+   #+begin_src text
+    [Unit]
+    Description=example service
+
+    [Service]
+    WorkingDirectory=/path/to/dir
+    Environment="FOOBAR=foo"
+    ExecStart=foobar.sh
+
+    [Install]
+    WantedBy=multi-user.target
+   #+end_src
+
+   *foobar.timer*
+   A simple timer unit
+   #+begin_src text
+    [Unit]
+    Description=example timer
+
+    [Timer]
+    # run every 15 minutes (aligns to the hour)
+    OnCalendar=*:0/15
+    # run timer immediately if script is enabled and is past due
+    Persistent=true
+
+    [Install]
+    WantedBy=timers.target
+   #+end_src
+  
 * Basic Arch Install
 #+begin_src bash
 dhcpcd
