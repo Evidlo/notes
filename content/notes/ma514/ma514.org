@@ -1,0 +1,262 @@
+#+TITLE: MA514 - Numerical Analysis - Spring 2017
+- ascher and greif, a first course in numerical methods
+* Floating Point Arithmetic
+#+begin_definition
+Denoted as $fl(x)$
+$fl(x) = -1 (1 d_1 d_2 d_3 ...)_2 \cdot 2^{exp}$
+sign bit - binary fraction - exponent
+
+When a number is normalized, 1 is added to the binary fraction:
+$fl(x) = (-1)^{d_s} (1 + d_1 d_2 d_3 ... d_n)_2 \cdot 2^{exp}$
+#+end_definition
+
+#+begin_examples
+Let $t = 2$ be the number of digits, $[L, U] = [-2, 1]$ be the range of possible exponents.
+
+What are the possible values that can be stored in our floating point system?
+
+*Binary fractions*
+- 1.00 = 1
+- 1.01 = 1 + 1/4 = 5/4
+- 1.10 = 1 + 1/2 = 3/2
+- 1.11 = 1 + 1/2 + 1/4 = 7/4
+
+*When exponentiated*
+
+| $2^{-2}$ | $2^{-1}$ | $2^{0}$ | $2^{1}$ |
+|----------+----------+---------+---------|
+| 1/4      | 1/2      | 1       | 2       |
+| 5/16     | 5/8      | 5/4     | 5/2     |
+| 3/8      | 3/4      | 3/2     | 3       |
+| 7/16     | 7/8      | 7/4     | 7/2     |
+#+end_examples
+
+#+begin_theorem
+- Floating point systems can represent a finite number of values.
+- Floating point systems have a minimum and maximum, denoted as $realmin$ and $realmax$.
+- The spacing between consecutive numbers increases as the magnitude of the number increases.
+- The spacing between 0 and $realmin$ is larger than the space between $realmin$ and the next number.
+#+end_theorem
+
+** Double Precision Floating Point
+   *binary64* - specified by IEEE 754
+   - 1 sign bit
+   - 11 exponent bits
+   - 52 fraction bits
+
+     64 bits total
+
+     $fl(x) = (-1)^{d_s}(1 + d_1 d_2 ... d_52) \cdot 2^{exp - 1023}$
+
+     This shifted exponent is known as a *biased* exponent and gives us a range of exponents $[-1023, 1024]$.  However, we reserve -1023 and 1024 to represent NaN and Inf, respectively.
+
+     $realmin = (1.0000...0) \cdot 2^{-1022}$
+     $realmax = (1.1111...1) \cdot 2^{1023}$
+
+*** Special Numbers
+       - $1(1...1)_2 \cdot 2^{0...0} = -Inf$
+       - $0(1...1)_2 \cdot 2^{0...0} = +Inf$
+       - $0(1...1)_2 \cdot 2^{\neq 0} = +NaN$
+       - $1(1...1)_2 \cdot 2^{\neq 0} = -NaN$
+       - $0(0...0)_2 \cdot 2^{0...0} = +0$
+       - $1(1...1)_2 \cdot 2^{0...0} = -0$
+       #+end_examples
+
+       #+begin_examples
+       1. Find the value of $(7ff0\ 0000\ 0000\ 0000)_{16}$
+          0111 1111 1111 0... = +Inf
+       2. Find the value of $(4014\ 0000\ 0000\ 0000)_{16} = 0100\ 0000\ 0001\ 0100\ 0\dots$
+          $\underbrace{0}_\text{sign bit}\underbrace{100\ 0000\ 0001}_\text{exp}\ \underbrace{0100\ 0...}_\text{frac} = (1+2^{-2}) \cdot 2^{1025 - 1023} = 5$
+       #+end_examples
+
+*** TODO Subnormal numbers
+      $fl(x) = (-1)^{d_s} (0 + d_1 d_2 d_3 ... d_n)_2 \cdot 2^{exp}$
+
+      Smallest exp - -1074
+      Largest exp - 1023
+
+     
+
+#+begin_definition
+*Relative error*
+
+$\frac{|x - f(x)|}{|x|}$
+
+In floating point, the relative error is bounded by a constant $\eta$, which is given by 
+
+$\eta = 2^{-t}, if truncated, 2^{-(t+1)}, if rounded$
+
+#+end_definition
+
+#+begin_derivation
+*truncation*
+truncation: $(1.d_1\ d_2\cdots \d_t) \cdot 2^{exp}$
+
+
+$|x - f(x)| \leq (0.0 \cdots 1) \cdot 2^{exp}
+\leq 2^{-t} \cdot 2^{exp}$
+$|x - f(x)| \leq \frac{2^{-t} 2^{exp}}{(1.0 \cdots 0)_2 \cdot 2^{exp}} = 2^{-t}$
+
+*rounding*
+truncation: $(1.d_1\ d_2\cdots {d_t}{\text{+2{-t} if d_{t+1} = 1}) \cdot 2^{exp}$
+$|x - f(x)| \leq (0.0 \cdots 2^{-1(t+1)}) \cdot 2^{exp}
+\leq 2^{-t} \cdot 2^{exp}$
+$|x - f(x)| \leq \frac{2^{-(t+1)} 2^{exp}}{(1.0 \cdots 0)_2 \cdot 2^{exp}} = 2^{-(t+1)}$
+#+end_derivation
+
+In Octave, *exp()* gives the distance between a number and the next smallest floating point number.
+
+#+begin_examples
+1. x = 1
+   exp(1) = (1.0 \cdots 1)_2 \cdot 2^0 = 2^{-52}
+#+end_examples
+
+** Arithmetic Operations
+   Let $x,y \in \mathbb{R}$
+   
+*** Multiplication
+     $f(x)$ can be expressed as $x(1 + \delta)$ where $|\delta| \leq \eta$
+
+     $f(x \cdot y) = (x(1 + \delta_x) \cdot y(1 + \delta_y)){(1 + \delta_m)}{rounding after multiplication}$
+     = xy(1 + \delta_x + \delta_y + \delta_m) + {O(\eta^2)}{\leq c \cdot \eta^2}
+
+     $\frac{|x \cdot y - f(x \cdot y)|}{|x \cdot y|} = |\delta_x + \delta_y + \delta_m| + O(\eta^2) \leq 3 \eta + O(\eta^2)$
+
+*** Addition
+    $f(x + y) = \[x(1 + \delta_x) + y(1 + \delta_y)\]{(1 + \delta_a)}{\text{error after rounding addition result}}
+    &= x(1 + \delta_x)(1 + \delta_a) + y(1 + \delta_y)(1 + \delta_a) = x(1 + \delta_x + \delta_x) + y(1 + \delta_y + \delta_a) + O(\eta^2) \\
+    &= (x + y) + x(\delta_x + \delta_a) + y(\delta_y + \delta_a) + O(\eta^2)$
+
+    $|\frac{f(x + y) - (x + y)}{x + y}| \leq |\frac{x( \delta_x + \delta_a)}{x + y}| + |\frac{x( \delta_x + \delta_a)}{x + y}|$
+
+    If $x$ and $y$ have same sign, $|\frac{x}{x+y}| \leq 1$ and $|\frac{y}{x+y}| \leq 1$, 
+    then $ \leq|\delta_x + \delta_a| + |\delta_y + \delta_a| \leq 4 \eta$
+
+    But if $x$ and $y$ have different sign, then $|x - y|$, can be very small and potentialy causes the result to blow up.
+
+    We conclude that the result of any floating point arithmetic operation must be equal to the result using infinite precision then rounding to $t$ binary digits.
+
+    #+begin_examples
+    1. Let $b >> 4ac$,
+        $x_1 = \frac{-b - \sqrt{b^2 - 4ac}}{2a} \approx \frac{0}{2a}$
+        $x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a}$
+
+        To avoid cancellation, we can calculate the roots a different way:
+
+        $x_1 x_2 = \frac{c}{a} \Rightarrow x_1 = \frac{1}{x_2} \frac{c}{a}$
+
+    2. Let $x = 1.1103 \cdot 10^{-1}$, $y = 9.963 \cdot 10^{-3}$
+
+        $x - y = 1.337 \cdot 10^{-3}$
+    #+end_examples
+*** Subtraction
+
+    $100.0 - 99.99 \Rightarrow 1.000 \cdot 10^2 - 0.9999 \cdot 10^2 = 0.001 \cdot 10^2$
+
+    $fl(x-y) = .001 \cdot 10^2 = 0.1$
+    $\text{relative error} = \frac{0.1 - 0.01}{0.01} = 9$
+
+    *with guard digit*
+
+    $100.0 - 99.99 \Rightarrow 1.0000 \cdot 10^2 - 0.9999 \cdot 10^2 = 0.01 \cdot 10^2$
+
+* Condition of a problem
+  Let $x \in \mathbb{R}, y = f(x), \hat{x} = fl(x), \hat{y} = {f(\hat{x})$
+
+  relative error in input: $\frac{|x - \hat{x}|}{|x|}$
+
+  relative error in output: $\frac{|y - \hat{y}|}{|y|} = \frac{|f(x) - f(\hat{x})|}{|f(x)|} = \frac{|f(x) - f(\hat{x})|}{|x - \hat{x}|} \cdot \frac{|x - \hat{x}|}{|x|} \cdot \frac{|x|}{|f(x)|}$
+
+  $k_f(x) = |f'(x)| \frac{|x|}{|f(x)|}$
+
+  #+begin_examples
+  1. $f(x) = \tan{x}$
+
+     $k_f(x) = \frac{|\sec^2 (x)| |x|}{|\tan x|} = \frac{|{x}|}{|\sin (x)||\cos (x)|}$
+
+     As $x \rightarrow \pi/2$, $k_f(x) \rightarrow \infty$.
+
+  2. Let $y_n = \int_0^1 \frac{x^n}{x + 10} dx$
+
+     $y_n$ should monotically decrease as $n$ increases.  However, in computation we'll see that $y_n$ increases, then become negative.
+
+     $y_n = g(n) + (-10)^n y_0$
+
+     $\frac{dy_n}{dy_0} = (-10)^n$
+
+     $k_f(x) = \frac{10^n \cdot |x|}{|f(x)|} = \frac{10^n \cdot |y_0|}{|y_n|}$
+
+     $k_f(x) > 10^n$
+  #+end_examples
+
+* Stability of an Algorithm
+  So far, we've defined two types of error.  These errors require that we have the exact answer to the problem, $y$.
+  #+begin_definition
+    *forward error*
+    $\frac{|y - \hat{y}}{|y|}$
+    *absolute forward error*
+    $|y - \hat{y}$
+  #+end_definition
+
+  For some problems, we don't have access to the exact answer, so we instead compute a different kind of error.
+  #+begin_definition
+  *backward error*
+  $\frac{|x - \bar{x}|}{|x|}$
+  #+end_definition
+
+  #+begin_examples
+  1. $fl(x_1 + x_2) = \[x_1(1 + \delta_1) + x_2(1 + \delta_2)\](1 + \delta_3) \\
+      &= x_1(1 + \delta_1)(1 + \delta_3) + x_2(1 + \delta_2)(1 + \delta_3) = \bar{x_1} + \bar{x_2}$
+     $\bar{x_1} = x_1(1 + \delta_1)(1 + \delta_3) = x_1 + x_1(\delta_1 + \delta_3) + O(\delta^2) \rightarrow \frac{|\bar{x_1} - x_1|}{x_1} \leq |\delta_1 + \delta_3| = 2 \eta$
+  2. Let $y = fl(x_1, x_2) = x_1^2 - x_2^2$ using decimal arith. to 3 digits.  Find the backwards error
+
+     #+begin_src octave
+      x1 = 12.5
+      x2 = 0.333
+
+      y1 = x1^2
+      y2 = x2^2
+      y1h = 156 ## round y1 to 3 dig
+      y2h = .111 ## round y2 to 3 dig
+
+      y = y1 - y2
+      yh = 156 ## round y to 3 dig
+
+      # find d: x1^2 * (1 + d)^2 - x2^2 = yh
+      format longe
+      y1hat = 156
+      y2hat = 1.11e-1
+      yhat = y1hat - y2hat
+     #+end_src
+
+     #+RESULTS:
+  #+end_examples
+
+  #+begin_definition
+  *backwards stability*
+  An algorithm is backwards stable if the computed $\hat{y}$ satisfies
+
+  $\hat{y} = f(x + \delta)$ where $|\delta| \leq \varepsilon |x|$
+
+  for any $x$ and a sufficiently small $\varepsilon$
+  #+end_definition
+
+  #+begin_examples
+  
+  #+end_examples
+
+  $y_n = \int_0^1 \frac{x^n}{x + 10} dx$ - the thing were trying to calculate
+
+  $y_n + 10y_{n-1} = \frac{1}{n}, n \geq 1$ - the problem
+  $y_0 = \ln(11) - \ln(10)$
+  
+  when we calculate $y_n$ using floating point arithmetic, this is the algorithm
+
+  #+begin_examples
+  1.
+    #+begin_src octave
+    y = zeros(20,1)
+    y(1) = ln(11) - ln(10)
+    for i=2:20, y(i) = 1/i - 10*y(i-1); end
+    #+end_src
+  #+end_examples
