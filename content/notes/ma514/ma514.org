@@ -127,8 +127,8 @@ What are the possible values that can be stored in our floating point system?
      $\frac{|x \cdot y - f(x \cdot y)|}{|x \cdot y|} = |\delta_x + \delta_y + \delta_m| + O(\eta^2) \leq 3 \eta + O(\eta^2)$
 
 *** Addition
-    $f(x + y) = \[x(1 + \delta_x) + y(1 + \delta_y)\]{(1 + \delta_a)}{\text{error after rounding addition result}}
-    &= x(1 + \delta_x)(1 + \delta_a) + y(1 + \delta_y)(1 + \delta_a) = x(1 + \delta_x + \delta_x) + y(1 + \delta_y + \delta_a) + O(\eta^2) \\
+    $f(x + y) = \[x(1 + \delta_x) + y(1 + \delta_y)\]\underbrace{(1 + \delta_a)}_{\text{error after rounding addition result}}
+    &= x(1 + \delta_x)(1 + \delta_a) + y(1 + \delta_y)(1 + \delta_a) = x(1 + \delta_x + \delta_a) + y(1 + \delta_y + \delta_a) + O(\eta^2) \\
     &= (x + y) + x(\delta_x + \delta_a) + y(\delta_y + \delta_a) + O(\eta^2)$
 
     $|\frac{f(x + y) - (x + y)}{x + y}| \leq |\frac{x( \delta_x + \delta_a)}{x + y}| + |\frac{x( \delta_x + \delta_a)}{x + y}|$
@@ -571,8 +571,72 @@ What are the possible values that can be stored in our floating point system?
 
     $p = (v - u)^2(f(w) - f(v) - (v - w)^2(f(u) - f(v))$
 
-    $q
 
+* Interpolation
+  Interpolation allows us to:
+  - data fitting - if we only have a limited number of sample points, we can find a function that fits the data
+  - approximate functions that are difficult to compute - we can compute a function at a handful of points then interpolate to fill in the gaps
+
+** Power basis
+   Given a set of coordinates $(x_i, y_i), \cdots, (x_n, y_n)$, find a function that interpolates the values.  We limit the the function to a polynomial of $n$ degrees to keep the function simple.
+
+   Let $P_n(x) = a_1 x^n + \cdots a_n x + a_{n+1}$ be an nth degree polynomial.
+
+   $$\left[ \begin{matrix} x_1^n & \cdots & x_1 & 1 \\ x_2^n & \cdots & x_2 & 1 \\ \vdots  & \vdots & \vdots & \vdots \\ x_{n+1}^n & \cdots & x_{n+1} & 1 \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_{n+1}\end{matrix} \right]$$
+
+   If $x_i \neq x_ x_j$, then $Va = y$ has a unique solution.  $a$ contains the coefficients of the interpolation polynomial.
+
+   The basis here is ${x^n, x^{n-1}, \cdots, x, 1}$ and is known as a power basis.
+
+   #+begin_examples
+   1. (1,16), (3,21), (5,15), (15,12).  Fit to a 3rd degree polynomial: $P_3(x) = a_1 x^3 + a_2 x^2 + a_3 x + a_4$
+
+      $$\left[ \begin{matrix} 1 & 1 & 1 & 1 \\ 27 & 9 & 3 & 1 \\ 125 & 25 & 5 & 1 \\ 216 & 36 * 6 & 1 \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} 16 \\ 21 \\ 15 \\ 12\end{matrix} \right]$$
+
+      $V$ is the Vander Monde matrix, and if $x_i \neq x_j$, then $V$ is non-singular
+   #+end_exapmles
+
+   However Vander Monde matrices are known for being ill-conditioned, so this is not a good method for computing interpolating polynomials.
+
+
+** General matrix form
+   Let the basis functions be $\phi_1 (x), \phi_2 (x), \cdots, \phi_{n+1} (x)$
+
+   $y = c_1 \phi_1 (x) \cdot + \phi_{n+1} (x)$
+
+   $$\left[ \begin{matrix} \phi_1 (x_1) & \cdots & \phi_n (x_1) & \phi_{n+1} (x_1) \\ \phi_1 (x_2) & \cdots & \phi_n (x_2) & \phi_{n+1} (x_2) \\ \vdots  & \vdots & \vdots & \vdots \\ \phi_1 (x_{n+1}) & \cdots & \phi_n (x_{n+1) & \phi_{n+1} (x_{n+1}) \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_{n+1}\end{matrix} \right]$$
+
+** Lagrange basis
+   $$L_i(x) = \frac{(x - x_1)(x - x_2) \cdot (x - x_{i-1}) (x - x_{i+1}) \cdot (x - x_{n+1})}{(x_i - x_1) (x_i - x_2) \cdots (x_i - x_{i-1}) (x_i - x_{i+1}) \cdots (x_1 - x_{n+1})}$$
+
+   $L_i$ has the property that $$L_i(x_j) = \begin{cases} 1 & i = j \\ 0 & i \neq j \end{cases}$$
+
+   $L(x) = y_1 L_1 (x) + y_2 L_2 (x) + \cdots + y_{n+1} L_{n+1} (x)$
+
+   Each $L_i (x)$ is an nth degree polynomial.
+
+   
+   $$L(x) = \sum_1^{n+1} y_i L_i (x)$$
+
+   Where $$L_i(x) = \frac{\prod_1^{n+1} (x - x_i)}{\prod_1^{n+1} (x - x_j)}$$
+
+   Let $\psi(x) = \prod_{j = 1}^{n + 1} ( x - x_j)$
+
+   $w_i = \frac{1}{\prod ^{j = 1,\ j = \neq i}$
+
+   $Li(x) = \frac{\psi(x)}{x - x}
+
+   $$L = \sum_i=1^{n+1} y_i \frac{\phi (x)}{x - x} \cdot w_ifdA
+
+   $$L9x) \phi(x) \
+
+   $L(x) = \frac{\sum_{i=1}^{n+1} \frac{z_i x - x_i}}$
+
+   #+begin_examples
+   1. 
+   #+end_examples
+
+* Newton Form Interpolating Polynomial
    
 * todo
   - algo vs problem
@@ -585,3 +649,5 @@ What are the possible values that can be stored in our floating point system?
     - forbinius
     - 3.5
   - hessian matrix
+  - read chapter 10
+  - review parabolic interpolation

@@ -1,13 +1,13 @@
 #+TITLE: SPANISH
 
 * Future Tense
-  | Subjetivo |       |
-  |-----------+-------|
-  | yo        | -é    |
-  | tu        | -ás   |
-  | el        | -á    |
-  | nos.      | -emos |
-  | ellos     | -án   |
+  | Subjetivo |             |
+  |-----------+-------------|
+  | yo        | *inf* -é    |
+  | tu        | *inf* -ás   |
+  | el        | *inf* -á    |
+  | nos.      | *inf* -emos |
+  | ellos     | *inf* -án   |
 
   #+begin_examples
   1. Marco *will walk* to the park.
@@ -49,32 +49,57 @@
 
 * Conditional
 
-  | Subjetivo |        |
-  |-----------+--------|
-  | yo        | ía     |
-  | tu        | -ís    |
-  | el        | -ía    |
-  | nos.      | -íamos |
-  | ellos     | -ían   |
+  | Subjetivo |              |
+  |-----------+--------------|
+  | yo        | *inf* -ía    |
+  | tu        | *inf* -ís    |
+  | el        | *inf* -ía    |
+  | nos.      | *inf* -íamos |
+  | ellos     | *inf*  -ían  |
 
-  #+begin_exapmle
-  1. Marco said that he *would have walked* to the park.
 
-     *Marco dijo que el *caminaría* al parque.
+  #+begin_examples
+  1. Marco said he *would walk* to the park.
+
+     *Marco dijo que el caminaría
   #+end_examples
 
-* Irregulars
+  Excluding perfect tenses, there is always only one conjugation of *haber*.  For example, *hay* in present tense.
+  In the conditional tense, *haber* always has the form *habría*
 
-  | Verb   | Stem   |
-  |--------+--------|
-  | caber  | cabr-  |
-  | poner  | pondr- |
-  | salir  | saldr- |
-  | hacer  | har-   |
-  | poder  | podr-  |
-  | tener  | tendr- |
-  | querer | querr- |
-  | valer  | valdr- |
-  | saber  | sabr-  |
-  | venir  | vendr- |
+  #+begin_examples
+  Marco said there would be dogs in the park.
+
+  *Marco dijo que habría perros en el parque.*
+  #+end_examples
+
+** Irregulars
+
+   | Verb   | Stem   |
+   |--------+--------|
+   | caber  | cabr-  |
+   | poner  | pondr- |
+   | salir  | saldr- |
+   | hacer  | har-   |
+   | poder  | podr-  |
+   | tener  | tendr- |
+   | querer | querr- |
+   | valer  | valdr- |
+   | saber  | sabr-  |
+   | venir  | vendr- |
     
+* Conditional Perfect
+
+  | Subjetivo |           |
+  |-----------+-----------|
+  | yo        | habría    |
+  | tu        | habrías   |
+  | el        | habría    |
+  | nos.      | habríamos |
+  | ellos     | habrían   |
+
+  #+begin_examples
+  1. Marco said that he *would have walked* to the park.
+
+     *Marco dijo que el habría caminado al parque.*
+  #+end_examples
