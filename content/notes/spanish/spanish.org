@@ -1,0 +1,80 @@
+#+TITLE: SPANISH
+
+* Future Tense
+  | Subjetivo |       |
+  |-----------+-------|
+  | yo        | -é    |
+  | tu        | -ás   |
+  | el        | -á    |
+  | nos.      | -emos |
+  | ellos     | -án   |
+
+  #+begin_examples
+  1. Marco *will walk* to the park.
+
+    *Marco caminará al parque.*
+  #+end_examples
+
+** Irregulars
+
+    | Verb   | Stem   |
+    |--------+--------|
+    | caber  | cabr-  |
+    | poner  | pondr- |
+    | haber  | habr-  |
+    | salir  | saldr- |
+    | hacer  | har-   |
+    | poder  | podr-  |
+    | tener  | tendr- |
+    | querer | querr- |
+    | valer  | valdr- |
+    | saber  | sabr-  |
+    | venir  | vendr- |
+    
+* Future Perfect
+  
+  | Subjetivo |          |
+  |-----------+----------|
+  | yo        | habré    |
+  | tu        | habrás   |
+  | el        | habrá    |
+  | nos.      | habremos |
+  | ellos     | habrán   | 
+
+  #+begin_examples
+  1. Marco *will have walked* to the park.
+     
+     *Marco habrá caminado al parque.*
+  #+end_examples
+
+* Conditional
+
+  | Subjetivo |        |
+  |-----------+--------|
+  | yo        | ía     |
+  | tu        | -ís    |
+  | el        | -ía    |
+  | nos.      | -íamos |
+  | ellos     | -ían   |
+
+  #+begin_exapmle
+  1. Marco said that he *would have walked* to the park.
+
+     *Marco dijo que el *caminaría* al parque.
+  #+end_examples
+
+* Irregulars
+
+  | Verb   | Stem   |
+  |--------+--------|
+  | caber  | cabr-  |
+  | poner  | pondr- |
+  | salir  | saldr- |
+  | hacer  | har-   |
+  | poder  | podr-  |
+  | tener  | tendr- |
+  | querer | querr- |
+  | valer  | valdr- |
+  | saber  | sabr-  |
+  | venir  | vendr- |
+    
