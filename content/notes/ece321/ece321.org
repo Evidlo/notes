@@ -1,0 +1,119 @@
+#+TITLE: ECE321 - Electromechanical Devices
+
+* Review of Symbols
+- *i* - current in amperes
+- *H* - magnetic field intensity (amperes/meter = Tesla)
+- *B* - magnetic flux density (amperes/meter = Tesla)
+- *F* - magneto-motive force (amperes)
+- *R* - reluctance (1/henries)
+- *$\lambda$* - flux linkage in volt-seconds
+- $\phi$ - flux in webers
+
+* Flux and Flux Density
+
+  $$\phi = \int_S B \cdot \overrightarrow{dS}$$
+
+  #+begin_examples
+  Let a uniform flux density flow through some surface $S_m$ at various angles.  Find the flux.
+  a) $$\int_{S_m} B \cdot \overrightarrow{dS} = (B \hat{a_y}\ \text{T})(S_m \hat{a_y}\ \text{m}^2) = BS_m\ \text{Wb}$$
+  b) $$\int_{S_m} B \cdot \overrightarrow{dS} = (B \hat{a_y}\ \text{T})(S_m \frac{\hat{a_y} + \hat{a_z}}{\sqrt{2}}\ \text{m}^2) = \frac{BA}{\sqrt{2}}\ \text{Wb}$$
+  c) $$\int_{S_m} B \cdot \overrightarrow{dS} = (B \hat{a_y}\ \text{T})(S_m \hat{a_z}\ \text{m}^2) = 0\ \text{Wb}$$
+  #+end_examples
+  [[./flux.png]]
+
+* Gauss's Law and Kirchoff's Flux Law
+
+  Since there are no magnetic monopoles, we have $$\oint B \cdot \overrightarrow{dS} = 0$$ (Gauss's Law)
+
+  Written another way, using the relation from before: $\sum \phi = 0$ (Kirchoff's Flux Law)
+
+* Relation to Ohm's Law
+
+  $F = \phi \underbrace{R}_\text{reluctance}$
+
+* DC Machines
+  Some DC machines have two separate electrical systems.
+
+  [[./dc_motor.png]]
+
+** Field Winding
+** Armature Winding
+   The voltage across the armature winding can be given by 
+
+   #+begin_proof
+   $$v_a = i_a r_a + \text{coil EMF} = i_a r_a + \frac{d}{dt} \lambda_{aa}$$
+
+   where $\lambda_{aa} = L_{aa} i_a + L_{af} i_f$
+  
+   so $v_a = r_a i_a + L_{aa}$
+   #+end_proof
+
+** Separately Excited Machine
+   [[./dc_separated.png]]
+   #+begin_definition
+   $$v_a = r_a i_a + L_{AF} i_f \omega_r + \underbrace{L_{AA} \frac{d}{dt} i_a}_0$$
+
+   $$T_e = L_{AF} i_a i_f$$
+
+   $$P_{out} = T_e \omega_r$$
+
+   $$P_{in} = v_a i_a + v_f i_f
+   #+end_definition
+** Shunt Connected Machine
+   [[./dc_shunt.png]]
+   In a shunt connected machine, $v_t = v_a = v_f$, and $i_t = i_a + i_f$.
+   #+begin_definition
+   $$T_e = L_{AF} \frac{V_t}{r_f}(1 - L_{AF}\ \omega_r / r_f)$$
+
+   Stall torque: $L_{AF} \frac{V_t^2}{r_f r_a}$
+   No load speed: $\frac{r_f}{L_{AF}}}$
+
+   $$P_{out} = T_e \omega_r$$
+
+   $$P_{in} = v_a i_a + v_f i_f
+   #+end_definition
+** Series Connected Machine
+   [[./dc_series.png]]
+   In a series connected machine, $v_t = v_a + v_f$ and $i_t = i_a = i_f$.
+
+   #+begin_definition
+   $$v_t = r_a i_t + L_{AF} \omega_r i_t + r_f i_t$$
+
+   $$T_e = L_{AF} i_t^2$$
+   #+end_definition
+
+** Permanent Magnet Machine
+   #+begin_definition
+   $v_a = r_a i_a + \underbrace{L_{AF} i_f}_{k_v} \omega_r + \underbrace{L_{AA} \frac{d}{dt} i_a}_0$
+
+   $T_e = \underbrace{L_{AF} i_f}_{k_v} i_a$
+   #+end_definition
+* Field Energy and Coenergy
+* Force
+  force: $f_e = - \frac{dW_f(\lambda, x)}{dx}$
+
+  force: $f_e = \frac{dW_c(\i, x)}{dx}$
+
+* Useful Relations
+
+  *reluctance* : $R = \frac{l}{A \mu}\ \text{H}^{-1}$, where $l$ is length, $A$ is area, and $\mu$ is permittivity
+    note that $\mu$ is not always constant and can depend on conductor current
+
+  *flux* : $$\phi = \frac{Ni}{R} = \int_A \overrightarrow{B} \cdot d \overrightarrow{S}$$, where $N$ is the number of loops, $i$ is the current, $R$ is reluctance, $B$ is the flux density, and $A$ is the cross sectional area
+
+  *flux linkage* : $\lambda = N \phi = Li$, where $N$ is the number of loops
+
+  *MMF drop* : $$F = Ni = \phi R = \oint \overrightarrow{H} \cdot d \overrightarrow{l}$$
+
+  $V = \frac{d \lambda}{dt}$
+
+  *co energy* : $$W_c = \left[ \int_{0}^{i_{1,f}} \lambda_1 di_1 \right]_{\substack{i_2 = 0 \\ ...}} + \dots + \left[ \int_{0}^{i_{n,f}} \lambda_n di_n \right]_{\substack{\dots \\ i_{n-1} = i_{n-1,f}}} = \frac{1}{2} i^T L i$$
+
+  *conservative system* : $$\left[ \begin{matrix} \lambda_1 \\ \vdots \\ \lambda_n \end{matrix} \right] = \underbrace{\left[ \begin{matrix} L_{11} & \dots & L_{1n} \\ \vdots & \ddots & \vdots \\ L_{n1} & \dots & L_{nn} \end{matrix} \right]}_{\text{inductance matrix}} \left[ \begin{matrix} i_1 \\ \vdots \\ i_n \end{matrix} \right]$$
+
+  if the inductance matrix is diagonally symmetric, then the system is conservative because $$\frac{d \lambda_j}{d i_k} = \frac{d \lambda_k}{d i_j}$$
+
+  *force* : $$f_e = \frac{1}{2} \frac{dL}{dx} i^2$$
+  *torque* : $$T_e = \frac{1}{2} \frac{d \lambda}{d \theta_r} i^2$$
+
+  nick north : $$\frac{(\overrightarrow{H} \times \overrightarrow{C}) \times \hat{z}}{\left|(\overrightarrow{H} \times \overrightarrow{C}) \times \hat{z}\right|}$$
