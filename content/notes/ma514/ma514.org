@@ -582,7 +582,7 @@ What are the possible values that can be stored in our floating point system?
 
    Let $P_n(x) = a_1 x^n + \cdots a_n x + a_{n+1}$ be an nth degree polynomial.
 
-   $$\left[ \begin{matrix} x_1^n & \cdots & x_1 & 1 \\ x_2^n & \cdots & x_2 & 1 \\ \vdots  & \vdots & \vdots & \vdots \\ x_{n+1}^n & \cdots & x_{n+1} & 1 \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_{n+1}\end{matrix} \right]$$
+   $$\underbrace{\left[ \begin{matrix} x_1^n & \cdots & x_1 & 1 \\ x_2^n & \cdots & x_2 & 1 \\ \vdots  & \vdots & \vdots & \vdots \\ x_{n+1}^n & \cdots & x_{n+1} & 1 \end{matrix} \right]}_{V} \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_{n+1}\end{matrix} \right]$$
 
    If $x_i \neq x_ x_j$, then $Va = y$ has a unique solution.  $a$ contains the coefficients of the interpolation polynomial.
 
@@ -591,7 +591,7 @@ What are the possible values that can be stored in our floating point system?
    #+begin_examples
    1. (1,16), (3,21), (5,15), (15,12).  Fit to a 3rd degree polynomial: $P_3(x) = a_1 x^3 + a_2 x^2 + a_3 x + a_4$
 
-      $$\left[ \begin{matrix} 1 & 1 & 1 & 1 \\ 27 & 9 & 3 & 1 \\ 125 & 25 & 5 & 1 \\ 216 & 36 * 6 & 1 \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} 16 \\ 21 \\ 15 \\ 12\end{matrix} \right]$$
+      $$\left[ \begin{matrix} 1 & 1 & 1 & 1 \\ 27 & 9 & 3 & 1 \\ 125 & 25 & 5 & 1 \\ 216 & 36 & 6 & 1 \end{matrix} \right] \left[ \begin{matrix} a_1 \\ a_2 \\ a_3 \\ a_3 \end{matrix} \right] = \left[ \begin{matrix} 16 \\ 21 \\ 15 \\ 12\end{matrix} \right]$$
 
       $V$ is the Vander Monde matrix, and if $x_i \neq x_j$, then $V$ is non-singular
    #+end_exapmles
@@ -620,9 +620,9 @@ What are the possible values that can be stored in our floating point system?
 
    Where $$L_i(x) = \frac{\prod_1^{n+1} (x - x_i)}{\prod_1^{n+1} (x - x_j)}$$
 
-   Let $\psi(x) = \prod_{j = 1}^{n + 1} ( x - x_j)$
+   Let $\psi(x) = \prod_{j = 1}^{n + 1} \frac{f(x_i)}{ x - x_j} w_i$
 
-   $w_i = \frac{1}{\prod ^{j = 1,\ j = \neq i}$
+   $$w_i = \frac{1}{\prod_{j = 1,\ j \neq i}^{n+1} (x_i - x_j)}$$
 
    $Li(x) = \frac{\psi(x)}{x - x}
 
@@ -637,7 +637,111 @@ What are the possible values that can be stored in our floating point system?
    #+end_examples
 
 * Newton Form Interpolating Polynomial
+  #+begin_definition
+  $P_n(x)  = f[x_1] + \underbrace{f[x_1, x_2]}_{\text{divided difference}}(x - x_1) + \dots + f[x_1, x_2, \dots, x_n](x - x_1) \dots (x - x_n)$
+
+  $$P_n(x) = \sum_{i=1}^n+1} \left[ f[x_1, \cdots, x_i] \prod_{j=1}^{i=1} (x - x_j) \right]$$
+
+  #+end_definition
+
+
+** Divided difference
+   $f[x_1] = f(x_1)$
+
+   $f[x_1, x_2] = \frac{f(x_2) - f(x_1)}{x_2 - x_2}$
+
+   $f[x_1, \dots, x_n] = \frac{f[x_2, \dots x_{k+1}] - f[x_1, \dots x_k]}{x_{k+1} - x_1}$
+
+** Interpolation with Derivatives
+   $$f[x_1, x_2] = \frac{f[x_2] - f[x_1]}{x_2 - x_1}$$
+
+   $$\lim_{x_2 \rightarrow x_1} f'(x_2)$$
+
+   so define $f[x_1, x_1] = f'(x_1)$,$\underbrace{f[x_1, x_1,\dots , x_1]}_{\text{k+1 times}} = \frac{f^{(k)}}(x_1){k!}$
+
+
+   #+begin_definition
+   Given the points $t_1, t_2, \cdots, t_q$ and multiplicities $m_1, m_2, \cdots, m_q$
+
+   we can find an inteprolating polynomial such that $p^{(k)}(x_i) = f^{(k)}(x_i)$, for $k \in [0,m_i]$
+
+   We have $\sum_{i=1}^q (m_i + 1) = \sum_{i= 1}^q (m_i + q)$ constraints.
+
+   #+end_definition
+
+   #+begin_examples
+   1. Assume we want to find a polynomial that interpolates the points, $f(0) = 1$, $f'(x) = -1$, $f(1) = 1$
+
+      | $x_i$     | $f(x_i)$ |                                                       |                                                                     |
+      | $x_0 = 0$ |        1 |                                                       |                                                                     |
+      | $x_0 = 0$ |        1 | $f[x_0, x_0] = f'(x_0) = -1$                          |                                                                     |
+      | $x_1 = 1$ |        1 | $f[x_0, x_1] = \frac{f[x_1] - f[x_0]}{x_1 - x_0} = 0$ | $f[x_0, x_0, x_1 = \frac{f[x_0, x_1] - f[x_0, x_0]}{x_1 - x_0} = 0$ |
+
+      Interpolating polynomial: $1 - 1 \cdot(x-0) + 1 \cdot(x - 0)^2$ = x^2 - x + 1$
+
+   2. Find a polynomial such that $f(0) = -1, f'(0) = 1, f(1) = 0, f'(1) = 2$
+
+      | $x_i$     | $f[x]$ | $f[x, x]$                                     | $f[x, x, x]$                                                         | $f[x, x, x, x]$                                                                     |
+      |-----------+--------+-----------------------------------------------+----------------------------------------------------------------------+-------------------------------------------------------------------------------------|
+      | $t_1 = 0$ |     -1 |                                               |                                                                      |                                                                                     |
+      | $t_1 = 0$ |     -1 | f[t_1, t_2] = f'(t_1) = -1$                   |                                                                      |                                                                                     |
+      | $t_2 = 1$ |      0 | $f[t_1, t_2] = \frac{f[1] - f[0]}{1 - 0} = 1$ | $f[t_1, t_1, t_2] = \frac{1 - 1}{1 - 0} = 0$                         |                                                                                     |
+      |           |        | $f[t_2, t_2] = f'(t_2) = 2$                   | $f[t_1, t_2, t_2] = \frac{f[t_2, t_2] - f[t_1, t_2]}{t_2 - t_1} = 1$ |                                                                                     |
+      |           |        |                                               |                                                                      | $f[t_1, t_1, t_2, t_2] = \frac{f[t_1, t_2, t_2] - f[t_1, t_1, t_2]}{t_2 - t_1} = 1$ |
+      $P_3(x) = - 1+ 1 \cdot(x - 0) + (x - 0)^2 + 1 \cdot (x - 0)^2 (x - 1) = x^3 - x^2 + x - 1$
+      $P_3'(x) = 3x^2 - 2x + 1$
+
+      We can verify this polynomial at various values
+      | x | $P_3(x)$ | $P_3'(x)$ |
+      |---+----------+-----------|
+      | 0 |       -1 |         1 |
+      | 1 |        0 |         2 | 
+
+      So this meets the original constraints.
+   #+end_examples
    
+** Error
+   $$e_n(x) = |f(x) - P_n(x)| = \frac{f^{(n+1)}(\zeta) }{(n+1)!} \phi(x)$$, 
+   where $\phi(x) = (x - x_1) \cdots (x - x_{n+1})$ and $\frac{f^{(n+1)}(\zeta)}{(n+1)!} = f[x_1, x_2, \cdots, x_{n+1}, x]$
+
+   for $n=1$, $P_1(x) = f[x_1] + f[x_1, x_2](x - x_1)$.
+   #+begin_examples
+   1. $$e_1(x) = |f(x) - P_1(x)| = |\frac{f''(\zeta)}{2}| \cdot |(x - x_1)(x - x_2)| \leq \frac{1}{2} \text{max} |f''(\zeta)| \cdot \text{max}_{x \in[x_1, x_2]} | (x - x_1)(x - x_2)|$$
+
+      where the max of $(x - x_1)(x - x_2)$ is $x = \frac{x_1 + x_2}{2}$ which evaluates to $\frac{(x_2 - x_1)^2}{4}$
+
+      so $e_1(x) \leq \frac{1}{2} \cdot \frac{(x_2 - x_1)^2}{4} \cdot \text{max}_{\zeta \in [x_2, x_2]} f''(\zeta)$
+   #+end_examples
+
+   Error in the polynomial is driven by two terms:
+   
+   - the derivative of f
+   - placement of interpolated points - equally spaced points usually drive this term high and lead to a large error.  See *chebyshev polynomial* for information about ideal point placement.
+
+** Horner's Method
+   $P = c_{n+1} (x - x_n)$
+
+   $P = \left[ P + c_n \right] (x - x_{n-1})$
+
+   $P = \left[ P + c_{n-1} \right] (x - x_{n-2}) 
+
+   jth iteration
+
+   $P = \left[ P + c_j \right] (x - x_{j-1}$
+
+   *Pseudo code*
+   #+begin_src octave
+   #+end_src
+
+   
+   
+
+* Chebyshev Interpolating points.
+   #+begin_definition
+   $n \theta = (2k - 1) \frac{\pi}{2}, for $k \in [1, \cdots, n]$
+
+   $\theta = \frac{2k - 1}{2n} \pi$
+   #+end_definition
 * todo
   - algo vs problem
   - problem conditioning
