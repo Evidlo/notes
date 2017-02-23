@@ -94,6 +94,85 @@
 
   force: $f_e = \frac{dW_c(\i, x)}{dx}$
 
+* AC Machines
+  In an AC machine, the poles on the stator rotate (via switching) and the poles on the rotor follow them. Teeth in AC machines are designed to allow flux flow in one direction and current flow orthogonally.
+
+  For a given frequency, each additional pole reduces the machine speed by $p/2$, i.e. $\omega_{rm} = \frac{2}{p} w_e$
+
+** Mechanical Position
+   $\theta_{rm}$ - measures rotor position relative to stator - counterclockwise
+   $\phi_{rm}$ - an arbitrary position relative to rotor - counterclockwise
+   $\phi_{sm}$ - an arbitrary position relative to stator - counterclockwise
+** Electrical Position
+   $\phi_s = \phi_{sm} \frac{p}{2}$
+   $\phi_r = \phi_{rm} \frac{p}{2}$
+   $\theta_r = \theta_{rm} \frac{p}{2}$
+** Distributed Winding
+   There are two ways to represent windings.
+** Discrete Winding
+   $$N_{x,i}$$ is the number of conductors of an `x` phase winding in the `i`th slot.
+
+   [slot and tooth locations]
+   where $y$ is either $r$ for stator or $r$ for rotor
+
+   slot locations:$\phi_{ys,i} = 2 \pi(i - 1)/S_y +phi_{ys,1}$
+   tooth locations: $\phi_{yt,i} = 2 \pi(i - 1/2)/ S_y +phi_{ys,1}$
+
+   Conductors coming out of the page are positive, and going in are negative.
+
+   Summing the number of conductors in every slot should yield zero:
+   $$\sum_{i=1}^{S_y} N_{x,i} = 0$$
+** Continuous Winding
+   $n_x(\phi_{ym}$ is the conductor density
+   - $x$ is the winding phase - 'a', 'b', 'c', ...
+   - $y$ is the location - 's' for stator
+
+   *conductor density example*
+   
+   *total conductors*
+
+** Symmetry
+   Due to the construction of the machine, the following statements are always true.
+   #+begin_definition
+   *Machine Symmetry*
+   $N_{x,i + 2 S_y / p} = N_{x,i}$ - regions that are two steps apart behave identically
+   
+   $N_{x,i + S_y/p = -N_{x,i}$ - regions that are one step apart behave oppositely
+
+   The same concept applies to discrete windings.
+   $n_x(\phi_m + 4 \pi / p) = n_x(\phi_m)$
+
+   $n_x(\phi_m + 2 \pi / p) = -n_x(\phi_m)$
+   #+end_definition
+
+   Where moving one pole means $\frac{2 \pi}{p}$ radians, $\frac{S_y}{p}$ slots
+
+** Winding Arrangement Notation
+   [[./winding_arrangement.png]]
+
+   $$N_{as} \right_{1-18} = N [ 0 0 0 1 2 2 1 0 0 0 0 0 -1 -2 -2 -1 0 0]$$
+
+   $p = 4$
+   $S_s = 36$
+
+** Winding Types
+   The following windings have the same number of conductors in the slots, but they differ in terms of loss, amount of copper, and difficulty to wind.
+
+   [[./winding_types.png]]
+
+** Winding Function
+   For DC machines, MMF drop was defined as $F = iN$, where $i$ is the current and $N$ is the number of windings.
+
+   For AC machines, we define the MMF drop in a similar way.
+
+   #+begin_definition
+   $F = iW$
+
+   where $W$ is the winding function
+
+   $$W = $$
+   #+end_definition
+
 * Useful Relations
 
   *reluctance* : $R = \frac{l}{A \mu}\ \text{H}^{-1}$, where $l$ is length, $A$ is area, and $\mu$ is permittivity
