@@ -103,3 +103,37 @@
 
      *Marco dijo que el habría caminado al parque.*
   #+end_examples
+
+* Comparisons
+  | más/menos    | facil como               |
+  | más/menos de | mas menos de dinero como |
+  | tan          | tan intersante que       |
+  | tanto        | tanto cinco personas     |
+
+  #+begin_examples
+  1. Marco is as handsome than Bob.
+     Marco es *tan* guapo *que* Bob.
+
+  2. Marco walks as fast as Bob.
+     Marco camina tan rapido como Bob.
+  #+end_examplesa
+
+* Informal Commands (tu)
+** Affirmative
+
+   Use the *usted* form of the verb in the present tense.
+
+   #+begin_examples
+   1. 
+   #+end_examples
+   | Verb  | Stem   |
+   |-------+--------|
+   | decir | di     |
+   | hacer | haz    |
+   | ir    | ve     |
+   | poner | pon    |
+   | salir | sal    |
+   | tener | ten    |
+   | venir | ven    |
+   
+  
