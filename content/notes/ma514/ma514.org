@@ -397,7 +397,7 @@ What are the possible values that can be stored in our floating point system?
    #+begin_proof
    *absolute condition number*
    $$|y - \hat{y}| = k_a(x) |x - \hat{x}|$$
-   $$\hat{y} = f(\hat{x}) = f(x) + (x - \hat{x}) f'(\psi)$$ where $psi \in [x, \hat{x}]$
+   $$\hat{y} = f(\hat{x}) = f(x) + (x - \hat{x}) f'(\psi)$$ where $\psi \in [x, \hat{x}]$
    $$y - \hat{x} = f(x) - f(x) - (x - \hat{x}) f'(\psi)$$
    $$|y - \hat{y}| = |(x - \hat{x}) f'(\psi)| \approx |f'(x)| \cdot |x - \hat{x}|$$
    $k_a(x) = |f'(x)|$
@@ -409,7 +409,7 @@ What are the possible values that can be stored in our floating point system?
 
    When finding roots, we find $x$ given $y$, so $x = f^{-1}(y) \rightarrow k_r = \frac{|y| \cdot |f^{-1}'(y)|}{ |f^{-1}(y)| }$.
 
-   $f^{-1}'(y) = \frac{d}{dy} f^{-1} f(y) = \frac{dx}{dy} = \frac{1}{dy/dx} = \frac{1}{f'(x)}$
+   $f^{-1}'(y) = \frac{d}{dy} f^{-1} (y) = \frac{dx}{dy} = \frac{1}{dy/dx} = \frac{1}{f'(x)}$
 
    $k_{r,f^{-1}} = \frac{|f(x)|}{|x| \cdot |f'(x)|}$
 
@@ -632,26 +632,33 @@ What are the possible values that can be stored in our floating point system?
 
    $L(x) = \frac{\sum_{i=1}^{n+1} \frac{z_i x - x_i}}$
 
-   #+begin_examples
-   1. 
-   #+end_examples
-
 * Newton Form Interpolating Polynomial
   #+begin_definition
   $P_n(x)  = f[x_1] + \underbrace{f[x_1, x_2]}_{\text{divided difference}}(x - x_1) + \dots + f[x_1, x_2, \dots, x_n](x - x_1) \dots (x - x_n)$
 
-  $$P_n(x) = \sum_{i=1}^n+1} \left[ f[x_1, \cdots, x_i] \prod_{j=1}^{i=1} (x - x_j) \right]$$
-
+  $$P_n(x) = \sum_{i=1}^{n+1} \left[ f[x_1, \cdots, x_i] \prod_{j=1}^{i=1} (x - x_j) \right]$$
   #+end_definition
 
+  The divided difference approaches the derivative if all $x_i$ begin to approach the same point:
+  $$\lim_{(x_0, \cdots, x_n) \rightarrow (x, \cdots, x)} f[x_0, \cdots, x_n] = f^{(n)}(x)$$
+
+  So the Newton form polynomial is equivalent to a Taylor polynomial if all $x_i$ begin to approach the same point:
+  $$\lim_{(x_0, \cdots, x_n) \rightarrow (x, \cdots, x)} f[x_1] + f[x_1, x_2](x - x_1) + \dots + f[x_1, x_2, \dots, x_n](x - x_1) \dots (x - x_n) = f(x) + (\varepsilon - x) f'(x) + (\varepsilon - x)^2 \frac{f(x)}{2!} + \cdots + (\varepsilon - x)^n \frac{f(x)^(n)}{(n!)}$$
 
 ** Divided difference
-   $f[x_1] = f(x_1)$
+   #+begin_definition
+   $$f[x_0, \cdots, x_n] = \frac{f[x_1, \cdots, x_n] - f[x_0, \cdots, x_{n-1}]}{x_n - x_0}$$
 
-   $f[x_1, x_2] = \frac{f(x_2) - f(x_1)}{x_2 - x_2}$
+   where
 
-   $f[x_1, \dots, x_n] = \frac{f[x_2, \dots x_{k+1}] - f[x_1, \dots x_k]}{x_{k+1} - x_1}$
+   $$f[x_0, x_1] = \frac{f[x_1] - f[x_0]}{x_1 - x_0}$$
 
+   $$f[x_1, x_2] = \frac{f[x_2] - f[x_1]}{x_2 - x_1}$$
+
+   $$f[x_0, x_1, x_2] = \frac{f[x_1, x_2] - f[x_0, x_1]}{x_2 - x_0}$$
+
+   $$\cdots$$
+   #+end_definition
 ** Interpolation with Derivatives
    $$f[x_1, x_2] = \frac{f[x_2] - f[x_1]}{x_2 - x_1}$$
 
@@ -672,10 +679,11 @@ What are the possible values that can be stored in our floating point system?
    #+begin_examples
    1. Assume we want to find a polynomial that interpolates the points, $f(0) = 1$, $f'(x) = -1$, $f(1) = 1$
 
-      | $x_i$     | $f(x_i)$ |                                                       |                                                                     |
-      | $x_0 = 0$ |        1 |                                                       |                                                                     |
-      | $x_0 = 0$ |        1 | $f[x_0, x_0] = f'(x_0) = -1$                          |                                                                     |
-      | $x_1 = 1$ |        1 | $f[x_0, x_1] = \frac{f[x_1] - f[x_0]}{x_1 - x_0} = 0$ | $f[x_0, x_0, x_1 = \frac{f[x_0, x_1] - f[x_0, x_0]}{x_1 - x_0} = 0$ |
+      | $x_i$     | $f[x]$ | $f[x,x]$                                              | $f[x,x,x]$                                                          |
+      |-----------+--------+-------------------------------------------------------+---------------------------------------------------------------------|
+      | $x_0 = 0$ |      1 |                                                       |                                                                     |
+      | $x_0 = 0$ |      1 | $f[x_0, x_0] = f'(x_0) = -1$                          |                                                                     |
+      | $x_1 = 1$ |      1 | $f[x_0, x_1] = \frac{f[x_1] - f[x_0]}{x_1 - x_0} = 0$ | $f[x_0, x_0, x_1 = \frac{f[x_0, x_1] - f[x_0, x_0]}{x_1 - x_0} = 0$ |
 
       Interpolating polynomial: $1 - 1 \cdot(x-0) + 1 \cdot(x - 0)^2$ = x^2 - x + 1$
 
@@ -727,21 +735,219 @@ What are the possible values that can be stored in our floating point system?
 
    jth iteration
 
-   $P = \left[ P + c_j \right] (x - x_{j-1}$
+   $P = \left[ P + c_j \right] (x - x_{j-1})$
 
    *Pseudo code*
    #+begin_src octave
    #+end_src
 
-   
-   
-
 * Chebyshev Interpolating points.
+  [[./chebyshev.png]]
    #+begin_definition
-   $n \theta = (2k - 1) \frac{\pi}{2}, for $k \in [1, \cdots, n]$
+   $n \theta = (2k - 1) \frac{\pi}{2}$, for $k \in [1, \cdots, n]$
 
    $\theta = \frac{2k - 1}{2n} \pi$
-   #+end_definition
+  #+end_definition
+
+* Piecewise Interpolation
+** Hermite Interpolation
+
+   Assume we are interpolating a function $f(x)$.  We can perform nth degree Hermite interpolation at $(x_1, x_2, \cdots, x_n)$ if we know $f(x_i), f'(x_i), \cdots, f^{(n)}(x_i)$.
+* Numerical Integration
+  Suppose we want to integrate 
+
+  $$I = \int_a^b f(x) dx$$
+
+  We can replace $f(x)$ by an interpolating polynomial and solve numerically.
+
+  $$Q = \int_a^b P_n(x) dx$$
+
+  where the error is $$E = \int_a^b f(x) - P_n(x) dx$$
+* Midpoint Method
+  Let $[a, b]$ be a small interval.
+
+  Approximate $f$ over $[a,b]$ with $f(\frac{a+b}{2})$.
+
+  $Q = \int_a^b f\left( \frac{a+b}{2} \right) dx = f \left(\frac{a+b}{2} \right) (b - a)$
+
+  This is equivalent to using an interpolating polynomial of degree 0.
+
+  *midpoint method drawing*
+
+** Error
+   $f(x) = f(m) + f'(\varepsilon) \cdot (x - m) + \frac{f''(\varepsilon)}{2!}(x - m)^2$, where $\varepsilon \in [a,b]$
+
+   The first part of the error term is 
+
+   $\int_a^b f'(m) (x - m) dx = 0$
+
+   The second part of the error term is
+
+   $\text{error} = \frac{1}{2} \int_a^b f''(\varepsilon) (x - m)^2 dx$
+
+   Since $(x-m)^2$ doesn't change sign, we can use the mean value theorem for integrals to conclude,
+
+   $\text{error} = f''(\eta) \frac{1}{2} \int_a^b (x-m)^2 dx = \frac{f''(\eta) (b-a)^2}{24}$, for $\eta \in [a,b]$
+
+*** MVT for Integrals
+
+    Assume $g(x) \in C[a,b]$.  $\phi(x)$ is integrable that is nonnegative or nonpositive on $[a,b]$.  Then there is a point $\eta \in [a,b]$ such that $\int_a^b g(x) \phi(x) dx = g(\eta) \inta^b \phi(x) dx$
+
+* Trapezoidal Method
+  Let $[a, b]$ be a small interval.
+
+  Approximate $f$ over $[a,b]$ with $f(a) + f[a,b](x - a)$.
+
+  $$\begin{aligned} Q &= \int_a^b \left[ f(a) + f[a,b] (x - a) \right] dx \\
+  &= f(a)(b - a) + f[a,b] \frac{(x - a)^2}{2}_\eval{a,b} \\
+  &= \frac{b-a}{2} \cdot \left[ f(a) + f(b) \right] \end{aligned}$$
+
+  *trapezoidal method drawing*
+  
+** Error
+   $f(x) = f(a) + f[a,b](x - a) + \frac{f''(\varepsilon)}{2} (x-a)(x -b)$
+
+   $\text{error} = \int_a^b \frac{f''(\varepsilon)}{2} \underbrace{(x - a)}_{\geq 0}\underbrace{((x - b)}_{\leq 0}$, where $(x - a)(x - b)$
+
+   Since $(x - a)(x - b)$ is nonpositive,
+
+   $$\text{error} = \frac{f''(\eta)}{2} \int_a^b (x - a)(x - b) dx = -f''(\eta)}\frac{(b - a)^3}{12}$$
+* Simpson's Method
+
+  Replace $f(x)$ by a 2nd order polynomial in Lagrange form.
+
+  $$Q = \int_a^b P_2(x) dx = \frac{h}{6} \left[ f(a) + 4 f(m) + f(b) \right]$$
+
+** Error
+
+   $\text{error} = \frac{f^{(4)}(\eta) (b - a)^5}{90 \cdot 2^5}$
+
+* Degree of Precision
+  The degree of precision
+* Composite Midpoint Rule
+  #+begin_definition
+  *Sum*
+
+  $$M = \frac{b - a}{n} \sum_{i=1}^n f \left( \frac{ x_i + x_{i+1}}{2} \right)$$
+  #+end_definition
+  #+begin_proof
+  Break the polynomial into $n$ equal intervals with endpoints, $[x_1, \cdots, x_{n+1}]$
+
+  Perform midpoint rule on each interval.
+
+  Assuming interval spacing of $h$:
+
+  $$M = \frac{h}{n} \sum_{i=1}^n f \left( \frac{ x_i + x_{i+1}}{2} \right)$$
+
+  #+end_proof
+
+  #+begin_definition
+  *Error*
+
+  $$\text{error} = \frac{h^2}{24}(b - a) \cdot f''(\eta)$$
+  
+  for $a \leq \eta \leq b$
+  #+end_definition
+  #+begin_proof
+  From a previous section, the error in the midpoint rule is $\text{error} = \frac{f''(\eta)}{24} (b - a)^3$
+
+  The error in each interval sums, so the error of the composite midpoint rule is
+
+  $$\text{error} = \left(\frac{b - a}{n} \right)^3 \sum_{i=1}^n f''(\eta)/24$$
+
+  Using intermediate value theorem on $f''(x)$,
+
+  $$\text{error} = \left(\frac{(b - a)^3}{n^2} \right)^3 \sum_{i=1}^n \frac{f''(\eta)/24}{n} = \left(\frac{(b - a)^3}{n^2} \right)^3 \sum_{i=1}^n \frac{f''(\psi)/24}{n}$$
+
+  where $a \leq \psi \leq b$
+
+  So we have bounded the error.
+  #+end_proof
+
+* Composite Trapezoidal Rule
+
+  #+begin_definition
+  *Sum*
+
+  $$Q = \frac{h}{2} \left[ f(a) + 2 \sum_{i=1}^n f(x_i) + f(b) \right]$$
+  #+end_definition
+  #+begin_proof
+  Break the polynomial into $n$ intervals with endpoints, $[x_1, \cdots, x_{n+1}]$
+
+  Perform trapezoidal rule on each interval.
+
+  From a previous section $Q = (b - a) \frac{f(a) + f(b)}{2}$
+
+  Assuming equal interval spacing, $h = (b - a)/n$
+
+  $$Q = \frac{h}{2} \left[ \sum_{i=1}^n f(x_i) + f(x_{i+1}) \right] = \frac{h}{2} \left[ f(a) + 2 \sum_{i=1}^n f(x_i) + f(b) \right]$$
+  #+end_proof
+
+  #+begin_definition
+  *Error*
+
+  $\text{error} = \frac{-h^2}{12}(b-a) f''(n)}$
+
+  where $a \leq \eta \leq b$
+  #+end_definition
+  #+begin_proof
+  The error was previously defined as $\text{error} = \frac{-f''(\eta)}{12} (b -a)^3$
+
+  Assuming equal interval spacing, $(b - a) = h$
+
+  $$\text{error} = \frac{-h^3}{12} \sum_{i=1}^{n} f''(n_i) = \frac{-h^2}{12}(b-a) \underbrace{\frac{1}{n} \sum_{i=1}^{n} f''(n_i)}_{\text{IVT}} = \frac{-h^2}{12}(b-a) f''(n)}$$
+
+  where $a \leq \eta \leq b$
+  #+end_proof
+
+* Composite Simpson's Rule
+
+  #+begin_definition
+  *Sum*
+
+  Assume equal subintervals with endpoints $[x_1, \cdots, x_{n+1}]$
+
+  $$S = \frac{h}{3} \left[ f(x_1) + 4 \sum_{i=2,4, ...}^n f(x_i) + 2 \sum_{i=3,5, ...}^n f(x_i) + f(x_{n+1}) \right]$$
+  #+end_definition
+  #+begin_proof
+  We had previously $S = \frac{h}{b} \left[ f(a) + 4 f(m) + f(b) \right]$
+
+  Since each interval contains 3 points, the interval is twice as long as before: $2h$
+
+  $$\begin{aligned}S &= \frac{2h}{6} \left[ f(x_1) + 4 f(x_2) + f(x_3) + f(x_3) + 4 f(x_4) + f(x_5) + \cdots + f(x_{n-1}) + 4 f(x_n) + f(x_{n+1}) \right] \\
+  &= \frac{h}{3} \left[ f(x_1) + 4 \sum_{i=2,4, ...}^n f(x_i) + 2 \sum_{i=3,5, ...}^n f(x_i) + f(x_{n+1}) \right] \end{aligned}$$
+  #+end_proof
+
+  #+begin_definition
+  *Error*
+
+  $$\text{error} = \frac{h^4}{180}(b - a) f^{(4)}(\psi)$$
+
+
+  where $a \leq \psi \leq b$
+  #+end_definition
+  #+begin_proof
+  Previously, the error was $\text{error} = \left( \frac{b - a}{2} \right)^5 \frac{f^{(4)}(\eta)}{90}$
+
+  Since the interval is now twice as large, $(b - a) = 2h$, the error for a single interval is
+
+  $\text{error} = h^5 \frac{f^{(4)}(\eta)}{90}$
+
+  Since the error sums, 
+
+  $\text{error} = \frac{h^5}{90} \sum_{i=1}^{n/2} f^{(4)}(\eta_i)$
+
+  Using intermediate value theorem
+
+  $$\text{error} = \frac{h^4}{90}(b - a) \frac{1}{2} \underbrace{\frac{1}{n/2} \sum_{i=1}^{n/2} f^{(4)}(\eta_i)}_\text{IVT} = \frac{h^4}{180}(b - a) f^{(4)}(\psi)$$
+
+  where $a \leq \psi \leq b$
+  #+end_proof
+
+* Gaussian Quadrature
+
+  
+  
 * todo
   - algo vs problem
   - problem conditioning
@@ -755,3 +961,6 @@ What are the possible values that can be stored in our floating point system?
   - hessian matrix
   - read chapter 10
   - review parabolic interpolation
+  - piecewise polynomial interpolation
+
+  - everything up to piecewise polynomial interpolation
