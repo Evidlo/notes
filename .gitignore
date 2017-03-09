@@ -4,4 +4,10 @@
 out/*
 **/ltximg*
 **/ltxpng*
-*.tex
+**/*.tex
+**/*.aux
+**/*.log
+**/*.out
+**/*.toc
+**/*.pyg
+**/octave-workspace
