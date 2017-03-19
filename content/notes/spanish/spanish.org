@@ -118,22 +118,34 @@
      Marco camina tan rapido como Bob.
   #+end_examplesa
 
-* Informal Commands (tu)
+* Informal Commands (tú)
 ** Affirmative
 
    Use the *usted* form of the verb in the present tense.
 
    #+begin_examples
-   1. 
+   1. Marco, camina en el parque.
+
+      *Marco, walk in the park.*
    #+end_examples
-   | Verb  | Stem   |
-   |-------+--------|
-   | decir | di     |
-   | hacer | haz    |
-   | ir    | ve     |
-   | poner | pon    |
-   | salir | sal    |
-   | tener | ten    |
-   | venir | ven    |
+*** Irregulars
+     | Verb  | Stem   |
+     |-------+--------|
+     | decir | di     |
+     | hacer | haz    |
+     | ir    | ve     |
+     | poner | pon    |
+     | salir | sal    |
+     | tener | ten    |
+     | venir | ven    |
+** Negative
+   
+   Use the *tú* form of the present subjunctive.
+
+   #+begin_examples
+   1. Marco, no camines en el parque.
+
+      *Marco, don't walk in the park.*
+   #+end_examples
    
   
