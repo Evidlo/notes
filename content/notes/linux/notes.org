@@ -458,6 +458,25 @@ cat /proc/mdstat
    # resize physical volume to fit new RAID partition size
    pvresize /dev/md127
    #+end_src
+** Accessing via Live CD
+   If the array gets screwed up somehow, you can try mounting it on a livecd.
+
+   #+begin_src bash
+   apt install mdadm
+
+   # assemble array from block devices
+   mdadm --assemble --scan
+
+   # mount array (assuming lvm)
+   apt install lvm2
+   
+   # see if lv's are intact
+   lvscan
+
+   # mount lv
+   mount /dev/[vgname]/[lvname] /mnt/foo
+   #+end_src
+   
 * Auto FS
 Auto FS + SSHFS allows the system to mount ssh filesystems on access and then automatically unmount after a certain timeout.  The necessary tools are *autofs* and *sshfs*.
 
