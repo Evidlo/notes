@@ -146,6 +146,16 @@ iptables -t nat -F
 iptables -t nat -X
 #+end_src
 
+* LVM
+** Adding
+   #+begin_src bash
+   # create new lv `foo` in group `foo_group`
+   lvcreate -L 10G foo_group -n foo
+   #+end_src
+** Deleting
+   #+begin_src bash
+   lvremove /dev/[vgname]/[lvname]
+   #+end_src
 * LXC
 
 [[https://www.flockport.com/enable-lxc-networking-in-debian-jessie-fedora-and-others/]]
@@ -475,6 +485,26 @@ cat /proc/mdstat
 
    # mount lv
    mount /dev/[vgname]/[lvname] /mnt/foo
+   #+end_src
+** Installing GRUB on a Live CD Mounted System
+   #+begin_src bash
+   # mount root lv
+   mount /dev/[vgname]/root /mnt/root
+
+   # mount live CD directories inside mounted lv
+   for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt/root$i; done
+
+   # chroot into root lv
+   chroot /mnt/root
+
+   # install grub to each device in array
+   grub2-install /dev/sda
+   grub2-install /dev/sdb
+   grub2-install /dev/sdc
+   grub2-install /dev/sdd
+
+   # update grub config
+   grub2-mkconfig -o /boot/grub2/grub.cfg
    #+end_src
    
 * Auto FS
