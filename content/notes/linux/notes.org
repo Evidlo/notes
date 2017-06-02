@@ -551,3 +551,57 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
   # than timestamp (which gets reset when `-p` is left out of cp.
   rsync --archive --size-only /src/foo /dest/bar
   #+end_src
+* DNS Tunneling with iodine
+** Domain Setup
+   On a domain you own (e.g. example.com), create an A record server.example.com pointing to the ip of a server you own and an NS record tunnel.example.com pointing to server.example.com.
+
+   To verify the setup is working, you can do:
+
+   #+begin_src bash
+   # on the server
+   sudo nc -u -l -p 53
+
+   # on another device
+   dig +trace tunnel.example.com
+   # you should see some stuff printed out in the console on the server
+   #+end_src
+
+** Server Setup
+   #+begin_src bash
+   # install iodine
+   dnf install iodine
+
+   # run iodine (as root in a screen session)
+   #  `password` is the password to use the tunnel
+   #  `192.168.99.1` is the ip of the server on the tunnel network
+   iodined -c -P password -f 192.168.99.1 tunnel.example.com
+   
+   # enable ip forwarding on the server
+   #  unnecessary if you want to use `ssh -D 1234` for dynamic port forwarding 
+   #  on the client (as opposed to setting default routes)
+   echo 1 > /proc/sys/net/ipv4/ip_forward
+   #+end_src
+
+** Client Setup
+   #+begin_src bash
+   # launch iodine client and wait for a 'Connection setup complete' message
+   sudo iodine -f tunnel.example.com
+
+   # either use SSH for dynamic forwarding (one application at a time)  or set up routes
+
+   # ssh
+   ssh -D 1234 tunnel.example.com
+   # set Firefox to use socks proxy localhost on port 1234
+
+   # set up routes
+   # get the current gateway ip
+   ip route
+   # get the tunnel server ip
+   host server.example.com
+   # add a route for iodine to communicate with the outside world
+   sudo ip route add [server.example.com IP] via [current gateway IP]
+   # delete the default route for traffic
+   sudo ip route delete default
+   # add a default route so that all traffic is tunneled
+   sudo ip route add default via 192.168.99.1
+   #+end_src

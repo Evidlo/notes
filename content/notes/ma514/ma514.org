@@ -1075,7 +1075,7 @@ What are the possible values that can be stored in our floating point system?
   #+end_examples
 
 ** Properties of Norms
-   1. $|| g || \geq 0$, $||g|| = 0$ \Rightarrow $g(x) = 0$ on $[a,b]$
+   1. $|| g || \geq 0$, $||g|| = 0 \Rightarrow g(x) = 0$ on $[a,b]$
 
    2. $||\alpha g|| = |\alpha|||g||$
 
