@@ -552,6 +552,8 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
   rsync --archive --size-only /src/foo /dest/bar
   #+end_src
 * DNS Tunneling with iodine
+
+  Most of this was taken from [[http://dev.kryo.se/iodine/wiki/HowtoSetup]]
 ** Domain Setup
    On a domain you own (e.g. example.com), create an A record server.example.com pointing to the ip of a server you own and an NS record tunnel.example.com pointing to server.example.com.
 
@@ -575,6 +577,11 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
    #  `password` is the password to use the tunnel
    #  `192.168.99.1` is the ip of the server on the tunnel network
    iodined -c -P password -f 192.168.99.1 tunnel.example.com
+
+   # set iptables rules
+   iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+   iptables -A FORWARD -i eth0 -o dns0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+   iptables -A FORWARD -i dns0 -o eth0 -j ACCEPT
    
    # enable ip forwarding on the server
    #  unnecessary if you want to use `ssh -D 1234` for dynamic port forwarding 
@@ -583,6 +590,7 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
    #+end_src
 
 ** Client Setup
+   Alternatively, you can download a script that does this part from [[http://www.doeshosting.com/code/NStun.sh]].
    #+begin_src bash
    # launch iodine client and wait for a 'Connection setup complete' message
    sudo iodine -f tunnel.example.com
