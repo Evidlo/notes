@@ -156,6 +156,15 @@ iptables -t nat -X
    #+begin_src bash
    lvremove /dev/[vgname]/[lvname]
    #+end_src
+* BTRFS
+  #+begin_src bash
+  # add all devices to filesystem
+  btrfs device add /dev/sdb2 /dev/sdc2 /dev/sdd2 /
+  # convert system to raid10
+  btrfs balance start -dconvert=raid10 -mconvert=raid10 /
+  # check balance progress
+  btrfs balance status /
+  #+end_src
 * LXC
 
 [[https://www.flockport.com/enable-lxc-networking-in-debian-jessie-fedora-and-others/]]
@@ -166,173 +175,98 @@ iptables -t nat -X
 lxc.lxcpath = "/lxc"
 #+end_src
 
-*/lxc/container_name/config*
+*/etc/lxc/default.conf* - config options for all newly created containers to inherit
 #+begin_src bash
 lxc.network.type = veth
-lxc.network.link = virbr0
-lxc.network.hwaddr = fe:0e:86:4b:b4:c0
+lxc.network.link = lxcbr0
 lxc.network.flags = up
-lxc.rootfs = /dev/fedora/container_name
-lxc.rootfs.backend = lvm
+lxc.network.hwaddr = 00:16:3e:xx:xx:xx
+lxc.start.auto = 1
 
-# Include common configuration
-lxc.include = /usr/share/lxc/config/fedora.common.conf
+# address
+#lxc.network.ipv4 = 192.168.1.1xx
+lxc.network.ipv4.gateway = 192.168.1.1
 
-lxc.arch = x86_64
-lxc.utsname = container_name
+# memory
+lxc.cgroup.memory.limit_in_bytes = 512M
+
+# memory + swap
+lxc.cgroup.memory.memsw.limit_in_bytes = 1G
+#+end_src
+
+*/etc/default/lxc-net* - it may be necessary to add /etc/lxc/dnsasq.conf to the apparmor profile (/etc/apparmor.d/*dnsmasq*) with read privileges
+#+begin_src bash
+USE_LXC_BRIDGE="true"
+LXC_BRIDGE="lxcbr0"
+LXC_ADDR="192.168.1.1"
+LXC_NETMASK="255.255.255.0"
+LXC_NETWORK="192.168.1.0/24"
+LXC_DHCP_RANGE="192.168.1.100,192.168.1.199"
+LXC_DHCP_MAX="100"
+LXC_DHCP_CONFILE="/etc/lxc/dnsmasq.conf"
+LXC_DOMAIN=""
+#+end_src
+
+*/etc/lxc/dnsmasq.conf*
+#+begin_src bash
+dhcp-host=evan,192.168.1.102
 #+end_src
 
 *iptables config*
 #+begin_src bash
-sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
-iptables -t nat -A POSTROUTING -o enp6s0f0 -j MASQUERADE
+#!/bin/bash
+## Evan Widloski - 2016-11-11
+# Diode iptables rules
 
-### PLUG ###
-iptables -I FORWARD -m state -d 192.168.1.100/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT
-#webserver
-iptables -t nat -I PREROUTING -p tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
-#ssh
-iptables -t nat -I PREROUTING -p tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
-#irc
-iptables -t nat -I PREROUTING -p tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
-#minetest
-iptables -t nat -I PREROUTING -p udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
-#poop
-iptables -t nat -I PREROUTING -p udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
-iptables -t nat -I PREROUTING -p udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
-iptables -t nat -I PREROUTING -p udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
+# filter table: flush all chains, and delete all user added chains
+iptables -F
+iptables -X
+# nat table: flush all chains, and delete all user added chains
+iptables -t nat -F
+iptables -t nat -X
 
-### John ###
+# set default policies to DROP packets
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
 
-iptables -I FORWARD -m state -d 192.168.1.101/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT
-#webserver
-iptables -t nat -I PREROUTING -p tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
-#ssh
-iptables -t nat -I PREROUTING -p tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
-#mosh
-iptables -t nat -I PREROUTING -p udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
-iptables -t nat -I PREROUTING -p tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
+# allow inbound outbound traffic on host 
+iptables -A OUTPUT -o enp6s0f0 -d 0.0.0.0/0 -j ACCEPT 
+iptables -A INPUT -i enp6s0f0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-### cannon ###
-iptables -I FORWARD -m state -d 192.168.1.103/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT
-#ssh
-iptables -t nat -I PREROUTING -p tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
+# set up chain for sshguard
+iptables -N sshguard
+iptables -A INPUT -p tcp --dport 22 -j sshguard
 
-### evan ###
-iptables -I FORWARD -m state -d 192.168.1.104/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT
-#ssh
-iptables -t nat -I PREROUTING -p tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
-iptables -t nat -I PREROUTING -p tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
+# allow ssh
+iptables -A INPUT -i enp6s0f0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o enp6s0f0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 
-### epics ###
-iptables -I FORWARD -m state -d 192.168.1.105/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT
-#ssh
-iptables -t nat -I PREROUTING -p tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
+# allow mosh
+iptables -A INPUT -i enp6s0f0 -p udp --dport 60000:61000 -j ACCEPT
+iptables -A OUTPUT -o enp6s0f0 -p udp --sport 60000:61000 -j ACCEPT
+
+# allow connections to varnish service
+#iptables -A INPUT -i enp6s0f0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+#iptables -A OUTPUT -o enp6s0f0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+# allow host to access LXC targets via network
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -s 192.168.1.0/24 -j ACCEPT
+
+# allow outbound traffic for lxc containers
+iptables -A FORWARD -i lxcbr0 -j ACCEPT
+iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j MASQUERADE
+
+# after incoming packets have been NAT'ed (see below), allow them to pass through
+# the forward chain to their intended LXC target
+iptables -A FORWARD -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
+##------------ evan --------------
+## ssh
+iptables -t nat -A PREROUTING -p tcp --dport 20022 -j DNAT --to-destination 192.168.1.102:22
 #+end_src
 
-*/etc/sysconfig/iptables* (generated by iptables-save)
-#+begin_src bash
-# Generated by iptables-save v1.4.21 on Thu Sep  1 13:36:16 2016
-*nat
-:PREROUTING ACCEPT [8:799]
-:INPUT ACCEPT [6:679]
-:OUTPUT ACCEPT [1:56]
-:POSTROUTING ACCEPT [1:60]
--A PREROUTING -p tcp -m tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
--A PREROUTING -p tcp -m tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
--A PREROUTING -p tcp -m tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
--A PREROUTING -p tcp -m tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
--A PREROUTING -p tcp -m tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p udp -m udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p tcp -m tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
--A PREROUTING -p tcp -m tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
--A PREROUTING -p udp -m udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
--A PREROUTING -p udp -m udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
--A PREROUTING -p udp -m udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
--A PREROUTING -p udp -m udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
--A PREROUTING -p tcp -m tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
--A PREROUTING -p tcp -m tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
--A PREROUTING -p tcp -m tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
--A PREROUTING -p tcp -m tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
--A PREROUTING -p tcp -m tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
--A PREROUTING -p tcp -m tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
--A PREROUTING -p tcp -m tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
--A PREROUTING -p tcp -m tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p udp -m udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p tcp -m tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
--A PREROUTING -p tcp -m tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
--A PREROUTING -p udp -m udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
--A PREROUTING -p udp -m udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
--A PREROUTING -p udp -m udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
--A PREROUTING -p udp -m udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
--A PREROUTING -p tcp -m tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
--A PREROUTING -p tcp -m tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
--A PREROUTING -p tcp -m tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
--A PREROUTING -p tcp -m tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
--A PREROUTING -p tcp -m tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
--A PREROUTING -p tcp -m tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
--A PREROUTING -p tcp -m tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
--A PREROUTING -p tcp -m tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p udp -m udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p tcp -m tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
--A PREROUTING -p tcp -m tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
--A PREROUTING -p udp -m udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
--A PREROUTING -p udp -m udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
--A PREROUTING -p udp -m udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
--A PREROUTING -p udp -m udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
--A PREROUTING -p tcp -m tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
--A PREROUTING -p tcp -m tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
--A PREROUTING -p tcp -m tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
--A PREROUTING -p tcp -m tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
--A PREROUTING -p tcp -m tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
--A PREROUTING -p tcp -m tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
--A PREROUTING -p tcp -m tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
--A PREROUTING -p tcp -m tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p udp -m udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p tcp -m tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
--A PREROUTING -p tcp -m tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
--A PREROUTING -p udp -m udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
--A PREROUTING -p udp -m udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
--A PREROUTING -p udp -m udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
--A PREROUTING -p udp -m udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
--A PREROUTING -p tcp -m tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
--A PREROUTING -p tcp -m tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
--A PREROUTING -p tcp -m tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
--A PREROUTING -p tcp -m tcp --dport 10522 -j DNAT --to-destination 192.168.1.105:22
--A PREROUTING -p tcp -m tcp --dport 64738 -j DNAT --to-destination 192.168.1.104:64738
--A PREROUTING -p tcp -m tcp --dport 10422 -j DNAT --to-destination 192.168.1.104:22
--A PREROUTING -p tcp -m tcp --dport 10322 -j DNAT --to-destination 192.168.1.103:22
--A PREROUTING -p tcp -m tcp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p udp -m udp --dport 60001 -j DNAT --to-destination 192.168.1.101:60001
--A PREROUTING -p tcp -m tcp --dport 10122 -j DNAT --to-destination 192.168.1.101:22
--A PREROUTING -p tcp -m tcp --dport 10180 -j DNAT --to-destination 192.168.1.101:80
--A PREROUTING -p udp -m udp --dport 23682 -j DNAT --to-destination 192.168.1.100:23682
--A PREROUTING -p udp -m udp --dport 2303 -j DNAT --to-destination 192.168.1.100:2303
--A PREROUTING -p udp -m udp --dport 2301 -j DNAT --to-destination 192.168.1.100:2301
--A PREROUTING -p udp -m udp --dport 30000 -j DNAT --to-destination 192.168.1.100:30000
--A PREROUTING -p tcp -m tcp --dport 8001 -j DNAT --to-destination 192.168.1.100:8001
--A PREROUTING -p tcp -m tcp --dport 10022 -j DNAT --to-destination 192.168.1.100:22
--A PREROUTING -p tcp -m tcp --dport 10080 -j DNAT --to-destination 192.168.1.100:80
--A POSTROUTING -o enp6s0f0 -j MASQUERADE
--A POSTROUTING -o enp6s0f0 -j MASQUERADE
--A POSTROUTING -o enp6s0f0 -j MASQUERADE
-COMMIT
-# Completed on Thu Sep  1 13:36:16 2016
-# Generated by iptables-save v1.4.21 on Thu Sep  1 13:36:16 2016
-*filter
-:INPUT ACCEPT [93:6878]
-:FORWARD ACCEPT [42:5487]
-:OUTPUT ACCEPT [57:7040]
--A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
--A FORWARD -d 192.168.1.0/24 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -d 192.168.1.0/24 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -d 192.168.1.0/24 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -d 192.168.1.0/24 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -d 192.168.1.0/24 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
-COMMIT
-# Completed on Thu Sep  1 13:36:16 2016
- 
-#+end_src
 ** Commands
 #+begin_src bash
 # list container statuses and ip addresses (fancy mode)
@@ -344,19 +278,6 @@ brctl show
 brctl delbr virbr0
 brctl addbr virbr0
 ip link set virbr0 down
-#+end_src
-
-#+begin_src bash
-# set libvirtd ip range
-virsh net-edit default
-virsh -c lxc:/// net-define /etc/libvirt/qemu/networks/default.xml
-virsh -c lsc:/// net-start default
-virsh -c lsc:/// net-autostart default
-#+end_src
-
-#+begin_bash
-# after editing lxc network configs/creating containers, libvirt needs to be restarted
-systemctl restart libvirtd.service
 #+end_src
 
 ** New Container Setup
@@ -612,4 +533,84 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
    sudo ip route delete default
    # add a default route so that all traffic is tunneled
    sudo ip route add default via 192.168.99.1
+   #+end_src
+
+* Booting
+
+  #+begin_definitions
+  *block* - smallest addressable unit of storage 
+
+  Block size is defined in the hardware of a hard drive, but the OS can define a virtual block size which chains multiple blocks together.
+  #+end_definitions
+  There are three primary boot options involving UEFI and BIOS firmwares
+
+  - UEFI-GPT
+    - required if dualbooting windows
+  - BIOS-GPT
+  - BIOS-MBR
+    - max addressable disk space is 2^32 * 512 = 2 TiB on a system with 512 byte blocks.
+
+** GPT - GUID Partition Table
+   #+begin_definitions
+   *protective mbr* - a small partition at the beginning of the GPT disk (where the MBR would normally be) that prevents older MBR tools from damaging the GPT formatting
+
+   This partition contains a fake partition record which spans the entirety of the disk.  MBR programs will see that there is a partition of unknown type that spans the entire disk and will refuse to operate.
+   #+end_definitions
+
+   A GPT disk is formatted like so:
+
+   | Protective MBR         | 512B |
+   | GPT Header             | 512B |
+   | GPT Partition Table    | 16KB |
+   | *** Partitions *** |      |
+   | Backup Partition Table | 16KB |
+   | Backup Header          | 512B |
+
+   So there should be 17KB and 16.5KB of free space at the beginning and end of a GPT disk.
+
+** Random facts
+   - grub2-install invokes efibootmgr to install (aka register) entries in the nvram
+   - these nvram entries point to .efi executables on the ESP
+   - the harddrive UEFI menu entries are for legacy booting these devices
+   - efi/boot/bootx64.efi is the .efi executable location for removable devices and doesn't require any nvram registration
+   - 
+* Network interfaces and bridging
+** Simulating network disconnect
+   #+begin_src bash
+   # add network namespaces (for network isolation)
+   sudo ip netns add client-ns
+   sudo ip netns add server-ns
+
+   # create pairs of virtual interfaces
+   sudo ip link add client type veth peer name client-bridge
+   sudo ip link add server type veth peer name server-bridge
+   # add virtual interfaces to namespace
+   sudo ip link set client netns client-ns
+   sudo ip link set server netns server-ns
+   # give addresses to each virtual interface
+   sudo ip netns exec client-ns ip addr add 10.0.0.2/24 dev client
+   sudo ip netns exec server-ns ip addr add 10.0.0.1/24 dev server
+   # set virtual interfaces up
+   sudo ip netns exec client-ns ip link set client up
+   sudo ip netns exec server-ns ip link set server up
+   sudo ip link set client-bridge up
+   sudo ip link set server-bridge up
+
+   # add bridge interface
+   sudo brctl addbr bridge0
+   # link virtual interfaces to bridge
+   sudo brctl add if bridge0 client-bridge
+   sudo brctl add if bridge0 server-bridge
+   # set bridge up
+   sudo ip link set bridge0 up
+
+   # (in a new terminal) do stuff on the virtual interface
+   sudo ip netns exec client-ns ping 10.0.0.1
+
+   # set bridge down (simulate network offline)
+   sudo ip link set bridge0 down
+
+   # sometimes you might need to use the loopback interface
+   sudo ip netns exec client-ns ip link set lo up
+   sudo ip netns exec server-ns ip link set lo up
    #+end_src
