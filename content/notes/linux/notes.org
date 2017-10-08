@@ -91,6 +91,8 @@ mkinitcpio -p linux
 
 passwd
 
+pacman -S grub
+
 grub-install --target=i386-pc --recheck --debug /dev/sda
 
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -99,7 +101,7 @@ exit
 
 reboot
 
-pacman -S vim htop git
+pacman -S vim htop git openssh wget
 
 pacman -S xorg-server xf86-video-ati xorg-xinit
 #+end_src
@@ -164,6 +166,8 @@ iptables -t nat -X
   btrfs balance start -dconvert=raid10 -mconvert=raid10 /
   # check balance progress
   btrfs balance status /
+  # get rid of single chunks to get another shot at degraded,rw mount
+  btrfs balance start -dconvert=raid10,soft -mconvert=raid10,soft  /mount
   #+end_src
 * LXC
 
@@ -574,6 +578,14 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1125868
    - the harddrive UEFI menu entries are for legacy booting these devices
    - efi/boot/bootx64.efi is the .efi executable location for removable devices and doesn't require any nvram registration
    - 
+* SMART Status
+  #+begin_definitions
+  # print SMART info
+  smartctl -a /dev/sdX
+  # run a short test
+  smartctl -t short /dev/sdX
+  #+end_definitions
+
 * Network interfaces and bridging
 ** Simulating network disconnect
    #+begin_src bash
