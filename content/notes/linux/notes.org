@@ -112,6 +112,19 @@ pacman -S xorg-server xf86-video-ati xorg-xinit
 dd if=foobar.iso if=/dev/sdX status=progress && sync
 #+end_src
 
+* udev
+  #+begin_src bash
+  # show device connect/disconnects and fired rules
+  udevadm monitor
+  # list all attributes for a particular device (and parents)
+  udevadm info --attribute-walk --path=/devices/...
+  #+end_src
+  
+  #+begin_src bash
+  # simple vendorid, productid example
+  # note SYMLINK is only for block devices (I think, look it up yourself)
+  SUBSYSTEMS=="usb", ATTRS{idProduct}=="3300", ATTRS{idVendor}=="1e10", MODE="0666", SYMLINK+="foobar"
+  #+end_src
 * iptables
 ** Commands
 #+begin_src bash
@@ -432,6 +445,27 @@ cat /proc/mdstat
    grub2-mkconfig -o /boot/grub2/grub.cfg
    #+end_src
    
+* Mounting Images
+  #+begin_src bash
+  # list the partitions on the image file
+  fdisk -l /tmp/sdcard.img 
+  #+end_src
+  #+begin_src
+  Disk /tmp/sdcard.img: 162 MiB, 169869824 bytes, 331777 sectors
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: dos
+  Disk identifier: 0x00000000
+
+  Device           Boot Start    End Sectors  Size Id Type
+  /tmp/sdcard.img1 *        1  65536   65536   32M  c W95 FAT32 (LBA)
+  /tmp/sdcard.img2      65537 331776  266240  130M 83 Linux
+  #+end_src
+  #+begin_src bash
+  # use the sector size and the partition start sector to calculate offset (512 * 65537)
+  sudo mount -o loop,offset=33554944 /tmp/sdcard.img /mnt/tmp
+  #+end_src
 * Auto FS
 Auto FS + SSHFS allows the system to mount ssh filesystems on access and then automatically unmount after a certain timeout.  The necessary tools are *autofs* and *sshfs*.
 
